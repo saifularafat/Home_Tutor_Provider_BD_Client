@@ -1,0 +1,12 @@
+.footerBg {
+  background-repeat: repeat;
+  background-color: #d16060;
+  background-image: linear-gradient(
+      to bottom,
+      transparent,
+      transparent 16.6667%,
+      #fff 16.6667%
+    ),
+    linear-gradient(to right, #ccc, #ccc 16.6667%, #fff 16.6667%);
+  background-size: 6px 6px;
+}
