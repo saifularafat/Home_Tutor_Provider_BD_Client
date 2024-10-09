@@ -6,25 +6,22 @@ const FooterSecondPart = () => {
             <h2 className="text-2xl font-semibold text-slate-900">Quick Links</h2>
             <div className="pt-6 space-y-2">
                 <div>
-                    <Link to="tuition-jobs" className="text-[18px] font-medium text-orange-600 hover:underline">Tuitions Jobs</Link>
+                    <Link to="tutor-profile" className="text-base font-medium text-orange-600 hover:underline">Hire Tutor</Link>
                 </div>
                 <div>
-                    <Link to="tutor-profile" className="text-[17px] font-medium text-orange-600 hover:underline">Hire Tutor</Link>
+                    <Link to="login" className="text-base font-medium text-orange-600 hover:underline">Login</Link>
                 </div>
                 <div>
-                    <Link to="login" className="text-[17px] font-medium text-orange-600 hover:underline">Loin</Link>
+                    <Link to="registration" className="text-base font-medium text-orange-600 hover:underline">Registration</Link>
                 </div>
                 <div>
-                    <Link to="registration" className="text-[17px] font-medium text-orange-600 hover:underline">Registration</Link>
+                    <Link to="about-us" className="text-base font-medium text-orange-600 hover:underline">About us</Link>
                 </div>
                 <div>
-                    <Link to="contact-us" className="text-[17px] font-medium text-orange-600 hover:underline">Contact us</Link>
+                    <Link to="#" className="text-base font-medium text-orange-600 hover:underline">Terms of User</Link>
                 </div>
                 <div>
-                    <Link to="#" className="text-[17px] font-medium text-orange-600 hover:underline">Terms of User</Link>
-                </div>
-                <div>
-                    <Link to="#" className="text-[17px] font-medium text-orange-600 hover:underline">Join Our Team</Link>
+                    <Link to="#" className="text-base font-medium text-orange-600 hover:underline">Join Our Team</Link>
                 </div>
             </div>
         </div>
