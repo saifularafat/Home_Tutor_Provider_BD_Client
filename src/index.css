@@ -13,4 +13,9 @@
    after:right-0 after:top-0 after:h-full after:-z-10 after:duration-300 after:bg-orange-700 after:absolute relative inline-block after:rounded-md before:rounded-md
 }
 
+/* .login_input{
+  @apply 
+} */
+
+
 /* @apply text-base font-medium py-2 px-3 border-2 border-orange-500 hover:bg-orange-500 hover:text-white rounded-md transition-all duration-200 */
