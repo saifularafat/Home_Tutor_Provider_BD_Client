@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Lottie from "lottie-react";
 import loginLottie from "./../../assets/Animation/login.json";
@@ -89,7 +89,7 @@ const Login = () => {
                             <div className="text-center my-5">
                                 <div className="divider divide-red-50"></div>
                                 <p className="text-center text-sm font-semibold">
-                                    Not a tutor yet? 
+                                    Not a tutor yet?
                                     <Link className="text-base font-bold text-red-600 tracking-wider" to="/registration"> Register Here
                                     </Link>
                                 </p>

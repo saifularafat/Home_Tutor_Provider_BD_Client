@@ -8,6 +8,7 @@ import TuitionJobs from "../pages/TuitionJobs/TuitionJobs";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 import About from "../pages/About/About";
+import RegistrationView from "../pages/RegistrationView/RegistrationView";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
                 path: "/about-us",
                 element: <About />,
             },
+            {
+                path: "/registrationview",
+                element: <RegistrationView />
+            }
         ]
     },
     {
@@ -42,8 +47,17 @@ const router = createBrowserRouter([
         element: <Login />
     },
     {
-        path:"/registration",
-        element:<Registration />
-    }
+        path: "/parent/registration",
+        element: <Registration />
+    },
+    {
+        path: "/tutor/registration",
+        element: <Registration />
+    },
+    {
+        path: "/coaching/registration",
+        element: <Registration />
+    },
+
 ]);
 export default router;

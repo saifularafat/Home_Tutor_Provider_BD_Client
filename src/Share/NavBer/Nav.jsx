@@ -41,7 +41,7 @@ const Nav = () => {
                 </li>
                 <li>
                     <NavLink
-                        to="registration"
+                        to="registrationView"
                         className={({ isActive }) => (isActive ? "regisLogin" : "regisLogin")}>
                         Registration
                     </NavLink>
