@@ -90,7 +90,7 @@ const Login = () => {
                                 <div className="divider divide-red-50"></div>
                                 <p className="text-center text-sm font-semibold">
                                     Not a tutor yet?
-                                    <Link className="text-base font-bold text-red-600 tracking-wider" to="/registration"> Register Here
+                                    <Link className="text-base font-bold text-red-600 tracking-wider" to="/registrationview"> Register Here
                                     </Link>
                                 </p>
                                 {/* <p className="mt-1 text-center text-red-400">{msg}</p> */}

@@ -12,7 +12,7 @@ const RegistrationView = () => {
         setSelectedOption(event.target.value)
     }
     return (
-        <div className="container mx-auto py-6">
+        <div className="container mx-auto py-12">
             <h3 className="text-4xl font-extrabold tracking-wider text-slate-800 text-center">Join Us Today</h3>
             <div className='grid grid-cols-3 gap-5 items-center py-12'>
                 <label
@@ -88,9 +88,14 @@ const RegistrationView = () => {
                 </label>
             </div>
             <div className="text-center text-lg ">
-                <Link to={`/${selectedOption}/registration`}>
-                    <button className="group relative z-50 h-14 w-32 overflow-hidden border-y-4 border-sky-950 bg-sky-700 text-xl text-white duration-500"><span className="uppercase">{selectedOption ? selectedOption :"User"}</span><span className="absolute inset-0 z-10 flex items-center justify-center text-white opacity-0 duration-100 ease-out group-hover:opacity-100 group-hover:duration-1000">Register</span><span className="absolute inset-0 -translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span><span className="absolute inset-0 -translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span></button>
-                </Link>
+                {
+                    selectedOption? 
+                    <Link to={`/${selectedOption}/registration`}>
+                        <button className="group relative z-50 h-14 w-32 overflow-hidden border-y-4 border-sky-950 bg-sky-700 text-xl text-white duration-500"><span className="uppercase">{selectedOption ? selectedOption : "User"}</span><span className="absolute inset-0 z-10 flex items-center justify-center text-white opacity-0 duration-100 ease-out group-hover:opacity-100 group-hover:duration-1000">Register</span><span className="absolute inset-0 -translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span><span className="absolute inset-0 -translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span></button>
+                    </Link>
+                    :
+                    <button disabled className="group relative z-50 h-14 w-32 overflow-hidden border-y-4 border-sky-950 bg-sky-700 text-xl text-white duration-500"><span className="uppercase">{selectedOption ? selectedOption : "User"}</span><span className="absolute inset-0 z-10 flex items-center justify-center text-white opacity-0 duration-100 ease-out group-hover:opacity-100 group-hover:duration-1000">Register</span><span className="absolute inset-0 -translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span><span className="absolute inset-0 -translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span></button>
+                }
             </div>
         </div>
     );

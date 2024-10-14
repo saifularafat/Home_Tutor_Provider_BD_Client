@@ -12,7 +12,7 @@ const FooterSecondPart = () => {
                     <Link to="login" className="text-base font-medium text-orange-600 hover:underline">Login</Link>
                 </div>
                 <div>
-                    <Link to="registration" className="text-base font-medium text-orange-600 hover:underline">Registration</Link>
+                    <Link to="registrationview" className="text-base font-medium text-orange-600 hover:underline">Registration</Link>
                 </div>
                 <div>
                     <Link to="about-us" className="text-base font-medium text-orange-600 hover:underline">About us</Link>
