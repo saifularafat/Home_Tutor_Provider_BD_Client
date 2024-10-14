@@ -21,7 +21,7 @@ const FooterSecondPart = () => {
                     <Link to="#" className="text-base font-medium text-orange-600 hover:underline">Terms of User</Link>
                 </div>
                 <div>
-                    <Link to="#" className="text-base font-medium text-orange-600 hover:underline">Join Our Team</Link>
+                    <Link to="registrationview" className="text-base font-medium text-orange-600 hover:underline">Join Our Team</Link>
                 </div>
             </div>
         </div>
