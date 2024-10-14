@@ -1,13 +1,38 @@
-import { FaCalendarAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaFilter } from "react-icons/fa";
 import { FaMedal, FaMedium, FaMoneyBillWave } from "react-icons/fa6";
 import { IoDuplicateSharp } from "react-icons/io5";
 import { TbGenderAndrogyne } from "react-icons/tb";
 import TuitionJobTabla from "./TuitionJobTabla";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const TuitionJobCard = () => {
+    const [searchText, setSearchText] = useState("");
+
+    const handlerSearch = () => {
+        console.log(searchText);
+    }
     return (
         <>
+            <div className="py-10">
+                <div className="flex items-center justify-between rounded-lg bg-orange-300 py-6 pl-4 w-full">
+                    <div className=" flex items-center gap-2">
+                        <input
+                            onChange={(e) => setSearchText(e.target.value)}
+                            type="text"
+                            placeholder="Search Your Tuition Code"
+                            className=" px-6 py-3 rounded-tl-md rounded-bl-md" />
+                        <button
+                            onClick={handlerSearch}
+                            className=" py-2 px-3 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider">
+                            Search
+                        </button>
+                    </div>
+                    <div className=" flex items-center gap-2 bg-white py-6 px-8 mr-6">
+                        <FaFilter />
+                    </div>
+                </div>
+            </div>
             <div className="grid grid-cols-4 gap-5 py-12">
                 <div className="col-span-2 max-h-[500px] shadow-md hover:shadow-xl hover:shadow-sky-100 border border-slate-100 rounded-md p-5">
                     <h5 className="text-lg font-semibold pb-3">Banasree, Rampura, Dhaka, Dhaka</h5>
@@ -82,9 +107,9 @@ const TuitionJobCard = () => {
                             <span className="font-normal">Comment:</span> <span className="font-medium text-slate-700 italic">Public Versity</span></p>
                     </div>
                     <div className="flex justify-end">
-                    <Link to="">
-                        <button className="group relative z-20 h-10 w-32 rounded-lg overflow-hidden border-y-4 border-sky-950 bg-sky-700 text-xl text-white duration-500"><span className="">View Detail</span><span className="absolute inset-0 z-10 flex items-center justify-center text-white opacity-0 duration-100 ease-out group-hover:opacity-100 group-hover:duration-1000 ">Job Detail</span><span className="absolute inset-0 -translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span><span className="absolute inset-0 -translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span></button>
-                    </Link>
+                        <Link to="">
+                            <button className="group relative z-20 h-10 w-32 rounded-lg overflow-hidden border-y-4 border-sky-950 bg-sky-700 text-xl text-white duration-500"><span className="">View Detail</span><span className="absolute inset-0 z-10 flex items-center justify-center text-white opacity-0 duration-100 ease-out group-hover:opacity-100 group-hover:duration-1000 ">Job Detail</span><span className="absolute inset-0 -translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span><span className="absolute inset-0 -translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span></button>
+                        </Link>
                     </div>
                 </div>
                 <div className="col-span-2 max-h-[500px] shadow-md hover:shadow-xl hover:shadow-sky-100 border border-slate-100 rounded-md p-5">
@@ -160,12 +185,12 @@ const TuitionJobCard = () => {
                             <span className="font-normal">Comment:</span> <span className="font-medium text-slate-700 italic">Public Versity</span></p>
                     </div>
                     <div className="flex justify-end">
-                    <Link to="">
-                        <button className="group relative z-20 h-10 w-32 rounded-lg overflow-hidden border-y-4 border-sky-950 bg-sky-700 text-xl text-white duration-500"><span className="">View Detail</span><span className="absolute inset-0 z-10 flex items-center justify-center text-white opacity-0 duration-100 ease-out group-hover:opacity-100 group-hover:duration-1000 ">Job Detail</span><span className="absolute inset-0 -translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span><span className="absolute inset-0 -translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span></button>
-                    </Link>
+                        <Link to="">
+                            <button className="group relative z-20 h-10 w-32 rounded-lg overflow-hidden border-y-4 border-sky-950 bg-sky-700 text-xl text-white duration-500"><span className="">View Detail</span><span className="absolute inset-0 z-10 flex items-center justify-center text-white opacity-0 duration-100 ease-out group-hover:opacity-100 group-hover:duration-1000 ">Job Detail</span><span className="absolute inset-0 -translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span><span className="absolute inset-0 -translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span></button>
+                        </Link>
                     </div>
                 </div>
-            </div>Medium
+            </div>
         </>
     );
 };
