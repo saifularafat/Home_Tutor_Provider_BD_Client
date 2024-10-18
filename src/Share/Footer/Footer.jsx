@@ -9,7 +9,7 @@ const Footer = () => {
         <div>
             <div className="footerBg w-full border-t-2">
                 <div className="w-10/12 mx-auto pt-12">
-                    <div className="grid grid-cols-6 gap-8">
+                    <div className="grid md:grid-cols-6 grid-cols-2 md:gap-8 g gap-4 ">
                        <FooterFistPart />
                         <FooterSecondPart />
                         <FooterThirdPart />

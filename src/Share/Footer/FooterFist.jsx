@@ -9,15 +9,15 @@ import {
 } from "react-icons/fa6";
 const FooterFistPart = () => {
     return (
-        <div className="col-span-2">
-            <div>
+        <div className="md:col-span-2 col-span-2 w-full">
+            <Link to="/">
                 <img src={logo} alt="logo" className="w-9/12" />
-            </div>
-            <p className="text-[14px] text-justify py-4 font-sans"><span className="text-[18px] font-medium"> &quot;Home Tutor Provider BD&ldquo;</span> is an innovative educational platform in Bangladesh dedicated to providing comprehensive learning solutions.
+            </Link>
+            <p className="md:text-[14px] text-sm text-justify py-4 font-sans"><span className="md:text-[18px] text-base font-medium"> &quot;Home Tutor Provider BD&ldquo;</span> is an innovative educational platform in Bangladesh dedicated to providing comprehensive learning solutions.
                 We offer a wide range of academic and extracurricular tutoring options, including home-based, online, batch, and crash courses. Our experienced tutors are passionate about making learning engaging,
                 effective, and tailored to each student&apos;s needs. At Tutor Provider BD, we strive to enhance your child&apos;s educational journey with personalized support and expert guidance, ensuring a fun and enriching learning experience.
             </p>
-            <div className="flex items-center justify-center gap-3 py-6">
+            <div className="flex items-center justify-center gap-3 md:py-6 py-3">
                 <Link to="#">
                     <FaSquareFacebook className="hover:text-[#106AFF] text-4xl text-slate-700" />
                 </Link>
