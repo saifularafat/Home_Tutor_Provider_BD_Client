@@ -1,10 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Lottie from "lottie-react";
 import loginLottie from "./../../assets/Animation/login.json";
 import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
+
 const Registration = () => {
+
+    const location = useLocation();
+    const { role } = location.state || {};
+    console.log(role);
+
+
     const [passShow, setPassShow] = useState(false);
     const {
         register,
