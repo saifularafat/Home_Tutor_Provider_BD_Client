@@ -9,8 +9,8 @@ import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 import About from "../pages/About/About";
 import RegistrationView from "../pages/RegistrationView/RegistrationView";
-import TutorDetails from "../pages/TutorDetails/TutorDetails";
 import TuitionDetails from "../pages/TuitionDetails/TuitionDetails";
+import TutorProfileDetails from "../pages/TutorProfileDetails/TutorProfileDetails";
 
 const router = createBrowserRouter([
     {
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/tutor-details/:id",
-                element: <TutorDetails />,
+                element: <TutorProfileDetails />,
             },
             {
                 path: "/contact-us",

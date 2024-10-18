@@ -57,20 +57,20 @@ const ContactUs = () => {
 
                         <div className='md:absolute left-9 -top-20 grid md:grid-cols-3 grid-cols-1 md:gap-4 gap-3 md:pt-0 pt-8'>
                             <div className='md:col-span-1 text-center w-full mx-auto bg-white rounded-lg shadow-xl py-6 px-2'>
-                                <Link to="#" className=''>
+                                <Link to="http://wa.me/+8801829537621" className=''>
                                     <FaWhatsapp className="text-[#25D147] w-8 h-12 mx-auto" />
                                     <span className='font-medium text-sm'>+088 01222 234 66</span>
                                 </Link>
                             </div>
                             <div className='md:col-span-1 text-center w-full mx-auto bg-white rounded-lg shadow-xl py-6 px-2'>
-                                <Link to="#" className=''>
-                                    <FaPhoneVolume className="text-[#25D147] w-8 h-12 mx-auto -rotate-45" />
+                                <Link to="tel:+8801829537621" className=''>
+                                    <FaPhoneVolume className="text-[#0369A1] w-8 h-12 mx-auto -rotate-45" />
                                     <span className='font-medium text-sm'>+088 01222 234 66</span>
                                 </Link>
                             </div>
                             <div className='md:col-span-1 text-center w-full mx-auto bg-white rounded-lg shadow-xl py-6 px-2'>
-                                <Link to="#" className=''>
-                                    <MdEmail className="text-[#25D147] w-8 h-12 mx-auto" />
+                                <Link to="mailto:htprovider.info@gmail.com" className=''>
+                                    <MdEmail className="text-[#EA4335] w-8 h-12 mx-auto" />
                                     <span className='font-medium text-xs'>htprovider@gmail.com</span>
                                 </Link>
                             </div>
