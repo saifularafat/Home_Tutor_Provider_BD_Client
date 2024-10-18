@@ -3,10 +3,11 @@ import { FaMedal, FaMedium, FaMoneyBillWave } from "react-icons/fa6";
 import { IoDuplicateSharp } from "react-icons/io5";
 import { TbGenderAndrogyne } from "react-icons/tb";
 import TuitionJobTabla from "./TuitionJobTabla";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 
 const TuitionJobCard = () => {
+    const {id} = useParams();
     const [searchText, setSearchText] = useState("");
 
     const handlerSearch = () => {
@@ -15,6 +16,7 @@ const TuitionJobCard = () => {
     return (
         <>
             <div className="py-10">
+                {/* search and filter section */}
                 <div className="flex items-center justify-between rounded-lg bg-orange-300 py-6 pl-4 w-full">
                     <div className=" flex items-center gap-2">
                         <input
@@ -106,8 +108,9 @@ const TuitionJobCard = () => {
                             <br />
                             <span className="font-normal">Comment:</span> <span className="font-medium text-slate-700 italic">Public Versity</span></p>
                     </div>
+                    {/* link button */}
                     <div className="flex justify-end">
-                        <Link to="">
+                        <Link to={`/tuition-job-details/${id}`}>
                             <button className="group relative z-20 h-10 w-32 rounded-lg overflow-hidden border-y-4 border-sky-950 bg-sky-700 text-xl text-white duration-500"><span className="">View Detail</span><span className="absolute inset-0 z-10 flex items-center justify-center text-white opacity-0 duration-100 ease-out group-hover:opacity-100 group-hover:duration-1000 ">Job Detail</span><span className="absolute inset-0 -translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span><span className="absolute inset-0 -translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span></button>
                         </Link>
                     </div>
@@ -185,7 +188,7 @@ const TuitionJobCard = () => {
                             <span className="font-normal">Comment:</span> <span className="font-medium text-slate-700 italic">Public Versity</span></p>
                     </div>
                     <div className="flex justify-end">
-                        <Link to="">
+                        <Link to={`/tuition-job-details/${id}`}>
                             <button className="group relative z-20 h-10 w-32 rounded-lg overflow-hidden border-y-4 border-sky-950 bg-sky-700 text-xl text-white duration-500"><span className="">View Detail</span><span className="absolute inset-0 z-10 flex items-center justify-center text-white opacity-0 duration-100 ease-out group-hover:opacity-100 group-hover:duration-1000 ">Job Detail</span><span className="absolute inset-0 -translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-y-full bg-sky-950 group-hover:translate-y-0 group-hover:duration-1000"></span><span className="absolute inset-0 translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span><span className="absolute inset-0 -translate-x-full bg-sky-950 delay-100 duration-1000 group-hover:translate-x-0 group-hover:delay-300"></span></button>
                         </Link>
                     </div>

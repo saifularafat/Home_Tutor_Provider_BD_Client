@@ -1,7 +1,9 @@
 import { FaLocationDot } from "react-icons/fa6";
 import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
+import { Link, useParams } from "react-router-dom";
 
 const TutorProfile = () => {
+    const {id} = useParams();
     return (
         <>
         <PageTitleShow currentPage="Tutor Profile"/>
@@ -23,7 +25,7 @@ const TutorProfile = () => {
                         </div>
                         {/* bio  */}
                         <p className="pb-2 text-center text-sm text-gray-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                        <button className="w-full rounded-full py-2 text-[12px] font-semibold text-sky-700 ring-1 ring-sky-700 hover:bg-sky-700 hover:text-white sm:text-sm md:text-base">View Profile</button>
+                        <Link to={`/tutor-details/${id}`} className="w-full text-center rounded-full py-2 text-[12px] font-semibold text-sky-700 ring-1 ring-sky-700 hover:bg-sky-700 hover:text-white sm:text-sm md:text-base">View Profile</Link>
                     </div>
                 </div>
             </div>
