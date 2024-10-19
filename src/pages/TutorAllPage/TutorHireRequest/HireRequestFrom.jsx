@@ -119,7 +119,7 @@ const HireRequestFrom = () => {
                                 </textarea>
                             </div>
                         </div>
-
+                        {/* modal */}
                         <PageModel openModal={openModal} setOpenModal={setOpenModal} />
                     </div>
                 </form>
