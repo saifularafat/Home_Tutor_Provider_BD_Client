@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 const TutorProfileCard = () => {
     const { id } = useParams();
     return (
-        <div className="col-span-2 max-w-[300px] space-y-5 rounded-2xl bg-slate-100 px-8 py-5 shadow-md dark:bg-[#18181B] md:max-w-[350px]">
+        <div className="col-span-2 max-w-[320px] h-96 space-y-5 rounded-2xl bg-slate-100 p-5 shadow-md dark:bg-[#18181B] md:max-w-[350px]">
             {/* profile image & bg  */}
             <div className="">
                 <img width={110} height={110} className="h-[120px] w-[120px] mx-auto rounded-full bg-slate-500 object-cover" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop" alt="tutor profile" />
