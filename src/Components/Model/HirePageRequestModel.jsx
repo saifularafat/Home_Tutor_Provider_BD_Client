@@ -1,5 +1,5 @@
 
-const PageModel = ({ openModal, setOpenModal }) => {
+const HirePageRequestModel = ({ openModal, setOpenModal }) => {
     return (
         <div className=" max-w-2xl mx-auto flex items-center justify-center pt-6">
             <button onClick={() => setOpenModal(true)} className="rounded-md bg-indigo-600 px-4 py-[6px] text-white">
@@ -63,4 +63,4 @@ const PageModel = ({ openModal, setOpenModal }) => {
     );
 };
 
-export default PageModel;
+export default HirePageRequestModel;

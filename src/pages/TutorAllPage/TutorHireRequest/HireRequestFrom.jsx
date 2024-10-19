@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import PageModel from "../../../Components/Model/PageModel";
+import HirePageRequestModel from "../../../Components/Model/HirePageRequestModel";
 const HireRequestFrom = () => {
     const [openModal, setOpenModal] = useState(false);
 
@@ -120,7 +120,7 @@ const HireRequestFrom = () => {
                             </div>
                         </div>
                         {/* modal */}
-                        <PageModel openModal={openModal} setOpenModal={setOpenModal} />
+                        <HirePageRequestModel openModal={openModal} setOpenModal={setOpenModal} />
                     </div>
                 </form>
             </div>
