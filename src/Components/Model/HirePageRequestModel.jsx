@@ -1,9 +1,9 @@
 
-const HirePageRequestModel = ({ openModal, setOpenModal }) => {
+const HirePageRequestModel = ({ openModal, setOpenModal, actionBtn }) => {
     return (
         <div className=" max-w-2xl mx-auto flex items-center justify-center pt-6">
-            <button onClick={() => setOpenModal(true)} className="rounded-md bg-indigo-600 px-4 py-[6px] text-white">
-                Attention!
+            <button onClick={() => setOpenModal(true)} className="rounded-md bg-blue-500 hover:bg-blue-600 transition-all duration-200 px-4 py-[6px] text-white">
+                {actionBtn}
             </button>
             <div onClick={() => setOpenModal(false)} className={`fixed z-[100] flex items-center justify-center ${openModal ? 'opacity-1 visible' : 'invisible opacity-0'} inset-0 bg-black/20 backdrop-blur-sm duration-100`}>
                 <div onClick={(e_) => e_.stopPropagation()} className={`absolute max-w-3xl h-[470px] overflow-y-scroll scroll-smooth  rounded-lg bg-white  p-6 text-center drop-shadow-2xl dark:bg-gray-800 dark:text-white ${openModal ? 'opacity-1 translate-y-0 duration-300' : 'translate-y-20 opacity-0 duration-150'}`}>
