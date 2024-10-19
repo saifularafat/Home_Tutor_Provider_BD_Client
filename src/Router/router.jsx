@@ -11,6 +11,7 @@ import About from "../pages/About/About";
 import RegistrationView from "../pages/RegistrationView/RegistrationView";
 import TuitionDetails from "../pages/TuitionJobsAllPage/TuitionDetails/TuitionDetails";
 import TutorProfileDetails from "../pages/TutorAllPage/TutorProfileDetails/TutorProfileDetails";
+import TutorHireRequest from "../pages/TutorAllPage/TutorHireRequest/TutorHireRequest";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: "/tutor-details/:id",
                 element: <TutorProfileDetails />,
+            },
+            {
+                path: "/tutor-hire-request/:id",
+                element: <TutorHireRequest />,
             },
             {
                 path: "/contact-us",
