@@ -1,12 +1,12 @@
 import { FaLocationDot } from "react-icons/fa6";
-import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
+import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
 import { Link, useParams } from "react-router-dom";
 
 const TutorProfile = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     return (
         <>
-        <PageTitleShow currentPage="Tutor Profile"/>
+            <PageTitleShow currentPage="Tutor Profile" />
             <div className="md:max-w-5xl mx-auto md:py-12 py-6">
                 <div className="grid md:grid-cols-6 grid-cols-1 md:gap-8 gap-5 mx-3 md:mx-0">
                     {/* 1st profile */}

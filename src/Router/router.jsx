@@ -3,14 +3,14 @@ import Main from "../Layouts/Main";
 import Error from "../pages/Error/Error";
 import Home from "../pages/Home/Home/Home";
 import ContactUs from "../pages/ContactUs/ContactUs";
-import TutorProfile from "../pages/TutorProfile/TutorProfile";
-import TuitionJobs from "../pages/TuitionJobs/TuitionJobs";
+import TutorProfile from "../pages/TutorAllPage/TutorProfile/TutorProfile";
+import TuitionJobs from "../pages/TuitionJobsAllPage/TuitionJobs/TuitionJobs";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 import About from "../pages/About/About";
 import RegistrationView from "../pages/RegistrationView/RegistrationView";
-import TuitionDetails from "../pages/TuitionDetails/TuitionDetails";
-import TutorProfileDetails from "../pages/TutorProfileDetails/TutorProfileDetails";
+import TuitionDetails from "../pages/TuitionJobsAllPage/TuitionDetails/TuitionDetails";
+import TutorProfileDetails from "../pages/TutorAllPage/TutorProfileDetails/TutorProfileDetails";
 
 const router = createBrowserRouter([
     {

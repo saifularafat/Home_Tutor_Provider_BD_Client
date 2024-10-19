@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
+import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
 import EducationalInformation from "./EducationalInformation";
 import PersonalInformation from "./PersonalInformation";
 import PreferredTutoringClasses_Courses from "./PreferredTutoringClasses_Courses";
@@ -7,7 +7,7 @@ import TutoringInformation from "./TutoringInformation";
 
 const TutorProfileDetails = () => {
     return (
-        <div className="bg-slate-400 py-10">
+        <div className="bg-blue-100 py-10">
             <PageTitleShow currentPage="Tutor Details" />
             {/* tutor details tutor info */}
             <div className="max-w-4xl mx-auto px-8 pt-10 pb-4 bg-white rounded-xl">

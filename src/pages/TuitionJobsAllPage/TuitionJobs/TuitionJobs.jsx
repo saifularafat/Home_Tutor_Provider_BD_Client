@@ -1,4 +1,4 @@
-import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
+import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
 import TuitionJobCard from "./TuitionJobCard";
 
 const TuitionJobs = () => {
