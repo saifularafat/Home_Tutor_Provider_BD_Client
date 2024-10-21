@@ -4,11 +4,14 @@ import HirePageRequestModel from "../../../Components/Model/HirePageRequestModel
 const HireRequestFrom = () => {
     const [openModal, setOpenModal] = useState(false);
 
+    const [districts, setDistricts] = useState();
+    const [cityAreas, setCityAreas] = useState([]);
+
     const { register,
         formState: { errors },
         handleSubmit } = useForm();
 
-
+    // location data
     const BdDistricts = [
         {
             stateName: "Dhaka", stateAreas: [
@@ -59,15 +62,13 @@ const HireRequestFrom = () => {
         }
     ]
 
-    const [districts, setDistricts] = useState();
-    const [cityAreas, setCityAreas] = useState([]);
-
-
+    // LOCATION CLICK show sub location
     const handleDistricts = (e) => {
         setDistricts(e.target.value)
         setCityAreas(BdDistricts.find(areas => areas.stateName === e.target.value).stateAreas)
     }
 
+    // all from is submit from
     const onSubmit = (data) => {
         console.log("first data", data);
 
