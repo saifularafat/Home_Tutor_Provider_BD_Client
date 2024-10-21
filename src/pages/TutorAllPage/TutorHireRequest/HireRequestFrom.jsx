@@ -13,6 +13,58 @@ const HireRequestFrom = () => {
 
     }
 
+    const BdCites = [
+        {
+            stateName: "Dhaka", stateAreas: [
+                { name: "Mirpur-1", },
+                { name: "Kajipara", },
+                { name: "Shahabag", },
+                { name: "Bonosri", },
+                { name: "Shaidabad", },
+                { name: "New Market", },
+                { name: "Dhaka University", },
+                { name: "Baridara", },
+                { name: "Kowran-Bazar", },
+                { name: "Mirpur-10", },
+                { name: "Mirpur-11", },
+                { name: "Mirpur-12", },
+                { name: "Danmondi", },
+                { name: "Jatrabari", },
+                { name: "Gulistan", },
+                { name: "Uttora", },
+            ]
+        },
+        {
+            stateName: "Cumilla", stateAreas: [
+                { name: "Kandirpar", },
+                { name: "Jowtala", },
+                { name: "Rajgonju", },
+                { name: "Ranir-Bazar", },
+                { name: "Shahsongasa", },
+                { name: "polis line", },
+                { name: "Chok-Bazar", },
+                { name: "Bibir-Bazar", },
+                { name: "Burisong", },
+                { name: "B-Para", },
+                { name: "Mirpur", },
+                { name: "Canterman", },
+                { name: "Laksam", },
+            ]
+        },
+        {
+            stateName: "Syhlet", stateAreas: [
+                { name: "Syhlet", },
+                { name: "Sunamgong", },
+                { name: "Hobigong", },
+                { name: "Mahdubpur", },
+                { name: "Molebi-Bazar", },
+                { name: "Srimongol", }
+            ]
+        }
+    ]
+
+    const
+
     return (
         <>
             <div>
@@ -42,11 +94,16 @@ const HireRequestFrom = () => {
                                 <select {...register("location")}
                                     className="select input input-bordered w-full focus:border-blue-400 text-base font-normal">
                                     <option value="" selected>-- select -- </option>
-                                    <option value="Online">Online</option>
-                                    <option value="StudentsHome">Students Home</option>
-                                    <option value="TeachersHome">Teachers Home</option>
-                                    <option value="CoachingCenter">Coaching Center</option>
-                                    <option value="School">School</option>
+                                    <option value="dhaka">Dhaka</option>
+                                    <option value="chittagong">Chittagong</option>
+                                    <option value="cumilla">Cumilla</option>
+                                    <option value="barisal"> Barisal</option>
+                                    <option value="khulna">Khulna</option>
+                                    <option value="sylhet">Sylhet</option>
+                                    <option value="Rangpur">Rangpur</option>
+                                    <option value="mymensingh">Mymensingh</option>
+                                    <option value="rajshahi">Rajshahi</option>
+                                    <option value="rajshahi">Rajshahi</option>
                                 </select>
                                 {errors.location?.type === "required" && (
                                     <p className="text-red-600 text-sm">Location is required</p>
@@ -60,11 +117,16 @@ const HireRequestFrom = () => {
                                 <select {...register("subLocation")}
                                     className="select input input-bordered w-full focus:border-blue-400 text-base font-normal">
                                     <option selected>-- select --</option>
-                                    <option value="Online" >sub location</option>
-                                    <option value="StudentsHome">Students Home</option>
-                                    <option value="TeachersHome">Teachers Home</option>
-                                    <option value="CoachingCenter">Coaching Center</option>
-                                    <option value="School">School</option>
+                                    <option value="dhaka">Dhaka</option>
+                                    <option value="chittagong">Chittagong</option>
+                                    <option value="cumilla">Cumilla</option>
+                                    <option value="barisal"> Barisal</option>
+                                    <option value="khulna">Khulna</option>
+                                    <option value="sylhet">Sylhet</option>
+                                    <option value="Rangpur">Rangpur</option>
+                                    <option value="mymensingh">Mymensingh</option>
+                                    <option value="rajshahi">Rajshahi</option>
+                                    <option value="rajshahi">Rajshahi</option>
                                 </select>
                                 {errors.subLocation?.type === "required" && (
                                     <p className="text-red-600 text-sm">Sub Location is required</p>
@@ -79,7 +141,7 @@ const HireRequestFrom = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder="yourAddress"
+                                    placeholder="Your Address"
                                     {...register("yourAddress", { required: true, maxLength: 120 })}
                                     className="input input-bordered w-full text-base"
                                 />
@@ -93,7 +155,7 @@ const HireRequestFrom = () => {
                                 </label>
                                 <input
                                     type="number"
-                                    placeholder="phoneNumber"
+                                    placeholder="Phone Number"
                                     {...register("phoneNumber", { required: true, maxLength: 120 })}
                                     className="input input-bordered w-full text-base"
                                 />
