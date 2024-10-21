@@ -8,10 +8,6 @@ const HireRequestFrom = () => {
         formState: { errors },
         handleSubmit } = useForm();
 
-    const onSubmit = (data) => {
-        console.log("first data", data);
-
-    }
 
     const BdDistricts = [
         {
@@ -66,11 +62,14 @@ const HireRequestFrom = () => {
     const [districts, setDistricts] = useState();
     const [cityAreas, setCityAreas] = useState([]);
 
+
     const handleDistricts = (e) => {
         setDistricts(e.target.value)
         setCityAreas(BdDistricts.find(areas => areas.stateName === e.target.value).stateAreas)
-        // const clickValue = setDistricts(e.target.value)
-        // console.log(clickValue, "djasu hfaedhf oa ----->", e);
+    }
+
+    const onSubmit = (data) => {
+        console.log("first data", data);
 
     }
 
@@ -114,16 +113,6 @@ const HireRequestFrom = () => {
                                             </option>
                                         ))
                                     }
-                                    {/* <option value="dhaka">Dhaka</option>
-                                    <option value="chittagong">Chittagong</option>
-                                    <option value="cumilla">Cumilla</option>
-                                    <option value="barisal"> Barisal</option>
-                                    <option value="khulna">Khulna</option>
-                                    <option value="sylhet">Sylhet</option>
-                                    <option value="Rangpur">Rangpur</option>
-                                    <option value="mymensingh">Mymensingh</option>
-                                    <option value="rajshahi">Rajshahi</option>
-                                    <option value="rajshahi">Rajshahi</option> */}
                                 </select>
                                 {errors.location?.type === "required" && (
                                     <p className="text-red-600 text-sm">Location is required</p>
@@ -138,19 +127,10 @@ const HireRequestFrom = () => {
                                     className="select input input-bordered w-full focus:border-blue-400 text-base font-normal">
                                     <option selected>-- select --</option>
                                     {cityAreas.map(city => (
-                                        <option 
-                                        key={city?.name}
-                                        value={city.name}>{city?.name}</option>
+                                        <option
+                                            key={city?.name}
+                                            value={city.name}>{city?.name}</option>
                                     ))}
-                                    {/* <option value="dhaka">Dhaka</option>
-                                    <option value="chittagong">Chittagong</option>
-                                    <option value="barisal"> Barisal</option>
-                                    <option value="khulna">Khulna</option>
-                                    <option value="sylhet">Sylhet</option>
-                                    <option value="Rangpur">Rangpur</option>
-                                    <option value="mymensingh">Mymensingh</option>
-                                    <option value="rajshahi">Rajshahi</option>
-                                    <option value="rajshahi">Rajshahi</option> */}
                                 </select>
                                 {errors.subLocation?.type === "required" && (
                                     <p className="text-red-600 text-sm">Sub Location is required</p>
