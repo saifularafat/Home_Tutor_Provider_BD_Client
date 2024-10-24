@@ -62,7 +62,7 @@ const PremiumCourseCard = () => {
                 >
                     <p className="my-2 text-lg font-bold">{price.name}</p>
                     <h3 className="text-xl">${price.packageAmount}</h3>
-                    <div className="flex flex-col divider divide-purple-950 h-fit">
+                    <div className="md:flex flex-col divider divide-purple-950 h-fit">
                         {price.features?.map((feature, index) => (
                             <p
                                 key={index}

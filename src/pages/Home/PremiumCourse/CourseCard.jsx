@@ -66,15 +66,9 @@ const CourseCard = () => {
             </div> */}
 
 
-
-
-
-
-
-
             <h3 className="text-center text-3xl font-bold py-6">Premium Course</h3>
-            <div className="container mx-auto py-10">
-                <div className="grid grid-cols-4 gap-4">
+            <div className="container md:mx-auto mx-4 py-10">
+                <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
                     <div className="max-w-[320px] space-y-2 rounded-lg border-b-[3px] border-l border-r-2 border-t hover:border-b-[#0084ff] hover:border-l-[#005eb6] hover:border-r-[#0084ff] hover:border-t-[#005eb6] bg-white py-4 pl-4 shadow-sm hover:shadow-2xl transition-all duration-200 dark:bg-[#18181B]">
                         <div className="flex items-center justify-between">
                             <h1 className="w-[55%] text-2xl font-bold tracking-wider text-sky-900 dark:text-[#6aa4d3] md:text-3xl"><sup className="text-2xl font-extrabold">৳</sup>২০০</h1>

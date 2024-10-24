@@ -27,7 +27,7 @@ const Accordion = () => {
     };
 
     return (
-        <div className="container mx-auto bg-black/5 flex items-center justify-between my-12">
+        <div className="container md:mx-auto bg-black/5 md:flex items-center justify-between my-12 mx-4">
             {/* FAQ */}
             <div className="w-full">
                 <Lottie
