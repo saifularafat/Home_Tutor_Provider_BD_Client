@@ -15,7 +15,7 @@ const BannerContent = () => {
         data-aos-duration="2500"
         className="md:mb-7 font-semibold  text-2xl  md:text-7xl"
       >
-        H-TutorProvider<sub>BD</sub>
+        H-TutorProvider<sup className="text-green-400">B<span className="text-red-400">D</span></sup>
       </h1>
       <p className=" text-md mx-5 ">
         Exercise your brain with these interesting quizzes and puzzles &
@@ -24,9 +24,9 @@ const BannerContent = () => {
 
       <Link
         to="/allSubjects"
-        className="mt-4 btn-sm md:btn-md md:mt-6 md:text-lg btn-primary btn rounded-full text-md  border-none px-8"
+        className="mt-4 btn-sm md:btn-md md:mt-6 md:text-lg text-white btn-secondary btn rounded-full text-md  border-none px-8"
       >
-        Explore Exams
+       Tutor Profile
       </Link>
     </div>
   );

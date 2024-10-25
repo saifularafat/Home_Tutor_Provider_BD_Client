@@ -4,6 +4,7 @@ import Banner from "./Banner/Banner";
 import TeamCard from "./TeamCard/TeamCard";
 import Testimonial from "./Testimonial/Testimonial";
 import TutorCard from "./TutorCard/TutorCard";
+import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 
 const Home = () => {
     return (
@@ -12,7 +13,7 @@ const Home = () => {
             {/* Banner Card section*/}
             <Banner />
             {/* Why Choose Us Card section*/}
-
+            <WhyChooseUs />
             {/* Tutor Card section*/}
             <TutorCard />
             {/* Premium Course section*/}
