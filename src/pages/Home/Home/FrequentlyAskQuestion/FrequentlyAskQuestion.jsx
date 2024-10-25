@@ -1,9 +1,10 @@
 import { useState } from "react";
 import FAQLottie from "../../../../assets/Animation/faq.json";
 import Lottie from "lottie-react";
+import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 
 
-const Accordion = () => {
+const FrequentlyAskQuestion = () => {
     const dataArr = [
         {
             title: 'How do I create an account?',
@@ -28,7 +29,7 @@ const Accordion = () => {
 
     return (
         <>
-            <h2 className="text-3xl font-semibold text-center text-slate-800 ">Frequently Ask Question</h2>
+            <SectionTitle sectionName="Frequently Ask Question" />
             <div className="container md:mx-auto bg-black/5 md:flex items-center justify-between my-12 mx-4">
                 {/* FAQ */}
                 <div className="w-full">
@@ -73,4 +74,4 @@ const Accordion = () => {
     );
 };
 
-export default Accordion;
+export default FrequentlyAskQuestion;

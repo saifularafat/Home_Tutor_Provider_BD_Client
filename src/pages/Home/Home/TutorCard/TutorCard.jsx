@@ -12,9 +12,9 @@ import SectionTitle from '../../../../Components/SectionTitle/SectionTitle'
 const TutorCard = () => {
     const { id } = useParams()
     return (
-        <div className='container mx-auto'>
-            <div className='p-5 my-10 '>
-                <SectionTitle sectionName="All Tutors" />
+        <div className='container mx-auto  my-16'>
+            <SectionTitle sectionName="All Tutors" />
+            <div className='p-5 pt-9'>
                 <Swiper
                     freeMode={true}
                     slidesPerView={1}
@@ -43,29 +43,6 @@ const TutorCard = () => {
                     modules={[FreeMode, Pagination]}
                     className='mySwiper'
                 >
-                    {/* <SwiperSlide>
-                    <div className="shadow-xl border  card w-96 -z-10 h-80 mb-7">
-                        <figure className="pt-5 pb-2">
-                            <img
-                                className='mx-auto -z-10'
-                                style={{ height: '150px', width: '150px', objectFit: 'cover', borderRadius: '30%' }}
-                                src={user1}
-                                alt="tutor photo" />
-                        </figure>
-                        <div className='items-center text-center -z-10 px-10'>
-                            <p className='py-2 text-2xl font-bold'>Md Saikot</p>
-                            <div className='flex items-center gap-2 justify-center'>
-                                <FaLocationDot className='text-slate-500' />
-                                <p className='text-base font-medium text-slate-600'>Dhaka</p>
-                            </div>
-                            <div className='py-4'>
-                                <Link to={`/tutor-details/${id}`}
-                                    className='py-2 px-4 tracking-wide font-medium text-white text-[14px] capitalize rounded-2xl bg-blue-500'>view Profile</Link>
-                            </div>
-                        </div>
-                    </div>
-                </SwiperSlide> */}
-
                     <SwiperSlide>
                         <div className="shadow-lg border border-slate-200 hover:shadow-2xl hover:shadow-slate-300 rounded-xl flex flex-col space-y-2 w-96 h-80 mb-7 p-5">
                             <div className="flex justify-center">
@@ -217,6 +194,11 @@ const TutorCard = () => {
                         </div>
                     </SwiperSlide>
                 </Swiper>
+                <div className='flex items-end justify-end py-1'>
+                    <Link to="/tutor-profile" className='text-sm font-medium tracking-wide capitalize py-1 px-3 bg-blue-500 text-white rounded-lg'>
+                        see more
+                    </Link>
+                </div>
             </div>
         </div>
     );

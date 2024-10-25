@@ -1,10 +1,10 @@
-import PremiumCourse from "../PremiumCourse/PremiumCourse";
-import Accordion from "./Accordion/Accordion";
 import Banner from "./Banner/Banner";
-import TeamCard from "./TeamCard/TeamCard";
-import Testimonial from "./Testimonial/Testimonial";
-import TutorCard from "./TutorCard/TutorCard";
 import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
+import TutorCard from "./TutorCard/TutorCard";
+import PremiumCourse from "../PremiumCourse/PremiumCourse";
+import Testimonial from "./Testimonial/Testimonial";
+import FrequentlyAskQuestion from "./FrequentlyAskQuestion/FrequentlyAskQuestion";
+import TeamCard from "./TeamCard/TeamCard";
 
 const Home = () => {
     return (
@@ -21,7 +21,7 @@ const Home = () => {
             {/* Testimonial section */}
             <Testimonial />
             {/* Accordion section */}
-            <Accordion />
+            <FrequentlyAskQuestion />
             {/* Team card section */}
             <TeamCard />
         </div>
