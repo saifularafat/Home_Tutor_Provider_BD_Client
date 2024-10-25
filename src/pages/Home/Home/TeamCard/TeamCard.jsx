@@ -7,7 +7,7 @@ const TeamCard = () => {
     return (
         <div className="max-w-6xl mx-auto my-16">
             <SectionTitle sectionName="Meet Our Tea" />
-            
+
             <div className="grid grid-cols-3 gap-5">
                 <div className="max-w-[350px] space-y-3 rounded-lg bg-white p-6 shadow-md hover:shadow-xl hover:shadow-sky-200 transition-all duration-300 md:w-[350px] dark:bg-[#18181B]">
                     <img width={400} height={400} className="h-[220px] w-[300px] rounded-lg object-cover" src={ceo} alt="CEO Photo" />
@@ -37,7 +37,7 @@ const TeamCard = () => {
                         <h1 className="text-2xl font-bold text-slate-800 capitalize">Md Habibur Rahman</h1>
                         <h1 className="text-sm font-medium text-slate-600 uppercase pt-2">Customer Care Executive</h1>
                         <p className="text-base text-gray-700 font-medium leading-6 text-justify py-3 dark:text-white/60">
-                            Md Habibur Rahman is dedicated to providing outstanding customer service, ensuring that our clients' needs are met with care and efficiency.
+                            Md Habibur Rahman is dedicated to providing outstanding customer service, ensuring that our clients needs are met with care and efficiency.
                         </p>
                     </div>
                 </div>

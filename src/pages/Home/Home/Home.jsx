@@ -1,5 +1,6 @@
 import PremiumCourse from "../PremiumCourse/PremiumCourse";
 import Accordion from "./Accordion/Accordion";
+import Banner from "./Banner/Banner";
 import TeamCard from "./TeamCard/TeamCard";
 import Testimonial from "./Testimonial/Testimonial";
 import TutorCard from "./TutorCard/TutorCard";
@@ -7,7 +8,10 @@ import TutorCard from "./TutorCard/TutorCard";
 const Home = () => {
     return (
         <div>
-            This is a Home Page
+
+            {/* Banner Card section*/}
+            <Banner />
+            {/* Why Choose Us Card section*/}
 
             {/* Tutor Card section*/}
             <TutorCard />
