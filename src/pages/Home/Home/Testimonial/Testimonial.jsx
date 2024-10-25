@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 
 const Testimonial = () => {
     const array = [
@@ -50,8 +51,8 @@ const Testimonial = () => {
     const isSmallScreen = window.innerWidth <= 768;
     return (
         <>
-            <h3 className="text-4xl font-semibold text-center">Users Testimonial</h3>
-            <div className="container min-w-[350px]  mx-auto h-[400px] flex flex-row items-center overflow-hidden gap-5 lg:gap-10 px-8 md:px-6 lg:px-5">
+            <SectionTitle sectionName="Testimonial" />
+            <div className="container min-w-[350px]  mx-auto h-[340px] flex flex-row items-center overflow-hidden gap-5 lg:gap-10 px-8 md:px-6 lg:px-5 md:pb-16 pb-7">
                 <div className="relative overflow-hidden">
                     <div className="absolute w-full h-full flex items-center justify-between z-50 px-5">
                         {/* arrow left */}

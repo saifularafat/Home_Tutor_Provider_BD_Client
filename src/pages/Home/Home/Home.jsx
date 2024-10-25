@@ -1,6 +1,7 @@
 import PremiumCourse from "../PremiumCourse/PremiumCourse";
-import Accordion from "./Accordion";
-import Testimonial from "./Testimonial";
+import Accordion from "./Accordion/Accordion";
+import TeamCard from "./TeamCard/TeamCard";
+import Testimonial from "./Testimonial/Testimonial";
 import TutorCard from "./TutorCard/TutorCard";
 
 const Home = () => {
@@ -12,9 +13,12 @@ const Home = () => {
             <TutorCard />
             {/* Premium Course section*/}
             <PremiumCourse />
-            {/* last section */}
+            {/* Testimonial section */}
             <Testimonial />
+            {/* Accordion section */}
             <Accordion />
+            {/* Team card section */}
+            <TeamCard />
         </div>
     );
 };

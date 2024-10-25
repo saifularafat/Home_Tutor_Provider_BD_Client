@@ -7,13 +7,14 @@ import user1 from "./../../../../assets/premium/tutor1.jpg"
 import './tutorCard.css'
 import { FaLocationDot } from 'react-icons/fa6'
 import { Link, useParams } from 'react-router-dom'
+import SectionTitle from '../../../../Components/SectionTitle/SectionTitle'
 
 const TutorCard = () => {
     const { id } = useParams()
     return (
         <div className='container mx-auto'>
             <div className='p-5 my-10 '>
-                <h2 className='text-3xl font-bold text-slate-700 text-center pb-12'>All Tutors</h2>
+                <SectionTitle sectionName="All Tutors" />
                 <Swiper
                     freeMode={true}
                     slidesPerView={1}
