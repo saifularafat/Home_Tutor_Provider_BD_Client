@@ -14,7 +14,9 @@ const Home = () => {
                 {/* Banner Card section*/}
                 <Banner />
                 {/* Why Choose Us Card section*/}
-                <WhyChooseUs />
+                <div className="md:-mt-28">
+                    <WhyChooseUs />
+                </div>
                 {/* Tutor Card section*/}
                 <TutorCard />
                 {/* Premium Course section*/}
@@ -22,7 +24,9 @@ const Home = () => {
                 {/* Testimonial section */}
                 <Testimonial />
                 {/* Accordion section */}
-                {/* <FrequentlyAskQuestion /> */}
+                <div className="mx-4">
+                    <FrequentlyAskQuestion />
+                </div>
                 {/* Team card section */}
                 <TeamCard />
             </div>

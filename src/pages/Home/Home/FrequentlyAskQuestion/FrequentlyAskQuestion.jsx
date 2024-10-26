@@ -30,7 +30,7 @@ const FrequentlyAskQuestion = () => {
     return (
         <>
             <SectionTitle sectionName="Frequently Ask Question" />
-            <div className="container md:mx-auto bg-black/5 md:flex items-center justify-between my-12 mx-4">
+            <div className="container md:mx-auto bg-black/5 md:flex items-center justify-between my-12 ">
                 {/* FAQ */}
                 <div className="w-full">
                     <Lottie
