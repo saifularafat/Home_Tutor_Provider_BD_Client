@@ -5,6 +5,7 @@ import PremiumCourse from "../PremiumCourse/PremiumCourse";
 import Testimonial from "./Testimonial/Testimonial";
 import FrequentlyAskQuestion from "./FrequentlyAskQuestion/FrequentlyAskQuestion";
 import TeamCard from "./TeamCard/TeamCard";
+import WhatsAppChat from "../../../Components/WhatsAppChat/WhatsAppChat";
 
 const Home = () => {
     return (
@@ -30,6 +31,7 @@ const Home = () => {
                 {/* Team card section */}
                 <TeamCard />
             </div>
+            <WhatsAppChat />
         </div>
     );
 };
