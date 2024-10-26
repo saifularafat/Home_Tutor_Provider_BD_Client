@@ -5,10 +5,12 @@ const PremiumCourse = () => {
 
     return (
         <>
-            <div className='grid grid-cols-1 gap-1 pt-6 mx-auto md:grid-cols-3 w-fit py-12' >
+            <div className='grid md:grid-cols-3 grid-cols-1 md:mx-auto mx-5 gap-1 md:pt-6 pt-4 w-fit md:py-12 py-6' >
                 <PremiumCourseCard />
             </div>
-            <CourseCard />
+            <div className="mx-4">
+                <CourseCard />
+            </div>
         </>
     );
 };

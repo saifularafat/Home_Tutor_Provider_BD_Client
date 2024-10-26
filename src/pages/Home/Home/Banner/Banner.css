@@ -5,13 +5,14 @@
 }
 
 .awssld__content {
-  height: 90%;
+  height: 80%;
 }
 
 .awssld__next,
 .awssld__prev {
   opacity: 0;
   transition: opacity 0.3s ease;
+  height: 50%;
 }
 
 .awssld__controls:hover .awssld__next,
