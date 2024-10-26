@@ -12,7 +12,7 @@ import SectionTitle from '../../../../Components/SectionTitle/SectionTitle'
 const TutorCard = () => {
     const { id } = useParams()
     return (
-        <div className='container mx-auto  my-16'>
+        <div className='container mx-auto  my-6'>
             <SectionTitle sectionName="All Tutors" />
             <div className='p-5 pt-9'>
                 <Swiper

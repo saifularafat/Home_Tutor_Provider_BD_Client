@@ -1,6 +1,6 @@
 const SectionTitle = ({ sectionName }) => {
     return (
-        <h2 className="text-3xl font-bold text-center text-slate-800 py-5">{sectionName}</h2>
+        <h2 className="md:text-3xl text-2xl font-bold text-center text-slate-800 md:py-5 py-4">{sectionName}</h2>
     );
 };
 

@@ -1,7 +1,7 @@
 
 import Lottie from "lottie-react";
 import aboutLottie from "./../../assets/Animation/about.json"
-import WhyChooseUs from "./WhyChooseUs";
+import WhyChooseUs from "../Home/Home/WhyChooseUs/WhyChooseUs";
 const About = () => {
     return (
         <>
