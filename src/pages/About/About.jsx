@@ -7,7 +7,7 @@ const About = () => {
         <div className='container px-6 mx-auto'>
             <PageTitleShow currentPage="About us" />
 
-            <div className='overflow-x-hidden items-center justify-between py-20 text-center md:flex md:gap-20 md:text-left'>
+            <div className='overflow-x-hidden items-center justify-between md:py-12 py-8 text-center md:flex md:gap-6 gap-2 md:text-left'>
                 <div className=' md:w-1/2'>
                     <h2
                         data-aos='zoom-in'
@@ -21,10 +21,10 @@ const About = () => {
                         data-aos-easing='ease-in-sine'
                         className='pb-5'
                     >
-                        <h2 className='pb-3 text-4xl font-bold tracking-wide xl:text-7xl'>
+                        <h2 className='pb-3 md:text-4xl text-2xl font-bold tracking-wide xl:text-7xl'>
                             Reach your peak.
                         </h2>
-                        <h2 className='text-4xl font-bold tracking-wide xl:text-7xl'>
+                        <h2 className='md:text-4xl text-2xl font-bold tracking-wide xl:text-7xl'>
                             We'll help you get there.
                         </h2>
                     </div>
@@ -32,7 +32,7 @@ const About = () => {
                     <p
                         data-aos='fade-right'
                         data-aos-easing='ease-in-sine'
-                        className='pb-5 text-lg  '
+                        className='md:pb-5 pb-3 text-lg  '
                     >
                         We recognize the importance of seamless and efficient examination
                         processes, and that's why we have created a cutting-edge solution
@@ -44,7 +44,7 @@ const About = () => {
                         data-aos='fade-down'
                         data-aos-duration='1000'
                         to='/contact'
-                        className='  border-none shadow-md btn btn-primary'
+                        className='  border-none shadow-md btn bg-blue-500 hover:bg-blue-600 text-white transition-all duration-200'
                     >
                         Contact Us
                     </Link>
@@ -56,16 +56,65 @@ const About = () => {
                     className='md:w-1/2'
                 >
                     <img
-                        className='w-2/3 mx-auto mt-10'
+                        className='w-2/3 mx-auto md:mt-10 mt-4'
                         src='https://i.ibb.co/sPdHD97/45397-removebg.png'
                         alt=''
                     />
                 </div>
             </div>
+            {/* second part */}
+            <div className="pb-10">
+                <div
+                    data-aos='fade-up'
+                    data-aos-duration='1500'
+                    className='container md:mt-3 md:my-0 my-3 md:mb-4 '
+                >
+                    <p className='w-full mx-auto text-center md:w-1/2 '>
+                        Our commitment extends beyond convenience. We strive to create an
+                        inclusive platform that accommodates various subjects, disciplines,
+                        and formats, providing an expansive repository of resources for
+                        comprehensive preparation. We take pride in supporting the educational
+                        ecosystem by partnering with schools, colleges, universities, and
+                        educators to facilitate a new era of examination that aligns with the
+                        digital age.
+                    </p>
+                </div>
 
-            
+                <div className='items-center justify-center gap-20 mt-20 md:flex'>
+                    <div
+                        data-aos='fade-left'
+                        data-aos-easing='ease-in-sine'
+                        className='w-1/2 mx-auto mb-7 '
+                    >
+                        <img
+                            className='md:w-2/4 md:mt-20 mt-4 md:mx-auto'
+                            src='https://i.ibb.co/bPGHBsD/tswv-dzjb-230710.png'
+                            alt=''
+                        />
+                    </div>
 
-          
+                    <div
+                        data-aos='fade-right'
+                        data-aos-easing='ease-in-sine'
+                        className='px-5 text-center md:w-1/2 md:mt-10 mt-5 md:text-left'
+                    >
+                        <h1 className='w-full md:text-3xl text-xl font-bold xl:text-5xl '>
+                            E-ExamPro plays a huge role <br /> by providing unique, <br />
+                            authentic peer advice in <br /> study field.
+                        </h1>
+                        <p className='mt-5   m'>
+                            Our commitment extends beyond convenience. We strive to create an
+                            inclusive platform that accommodates various subjects, disciplines,
+                            and formats, providing an expansive repository of resources for
+                            comprehensive preparation. We take pride in supporting the
+                            educational ecosystem by partnering with schools, colleges,
+                            universities, and educators to facilitate a new era of examination
+                            that aligns with the digital age.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     )
 }
