@@ -115,48 +115,123 @@ const About = () => {
                 </div>
             </div>
 
+            {/* Team Member list and information */}
+            <div className='py-4 md:mt-2'>
+                <div className='container flex flex-col items-center justify-center p-2 mx-auto sm:p-10'>
+                    <p
+                        data-aos='fade-down'
+                        data-aos-duration='700'
+                        className='text-lg  font-medium text-center uppercase tracking'
+                    >
+                        Meet Our team
+                    </p>
+                    <h1
+                        data-aos="fade-down"
+                        data-aos-duration="1500"
+                        className="md:text-4xl font-bold leading text-center text-2xl">The Website People Behind the Scenes Member</h1>
+                    <div className="flex flex-row flex-wrap-reverse justify-center md:mt-8 mt-4">
+                        <div
+                            className="flex flex-col justify-center w-full mx-6 my-7 text-center rounded-md md:w-96 lg:w-80 xl:w-64  border hover: ag-white/30 shadow-md dark: ">
+                            <div className=" avatar md:-mt-10 -mt-7">
+                                <div className="w-24 rounded-full mx-auto  " >
+                                    <img src="https://i.ibb.co/19jFGZY/saiful-img1.png" />
+                                </div>
+                            </div>
+                            <div className="flex-1 md:my-4 my-3">
+                                <p className="text-xl font-semibold leading">Saiful Arafat</p>
+                                <p className='tracking-wide uppercase'>IT Specialist</p>
+                            </div>
+
+                            <div className='flex mx-auto gap-5 text-xl pb-3'>
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=saifularafat.info@gmail.com" target="_blank">
+                                    <FaEnvelope />
+                                </a>
+                                <a href="https://www.linkedin.com/in/saiful-islam-60158b257/" target='_blank'><FaLinkedin /></a>
+
+                                <a href="https://twitter.com/saifularafat69" target='_blank'><FaTwitter /></a>
+
+                                <a href="https://github.com/saifularafat" target='_blank'><FaGithub /></a>
+                            </div>
+
+                        </div>
+                        <div
+                            className="flex flex-col justify-center w-full mx-6 my-7 text-center rounded-md md:w-96 lg:w-80 xl:w-64  border hover: ag-white/30 shadow-md dark: ">
+                            <div className=" avatar md:-mt-10 -mt-7">
+                                <div className="w-24 rounded-full mx-auto  " >
+                                    <img src="https://i.ibb.co.com/cgcVsqg/user1.jpg" />
+                                </div>
+                            </div>
+                            <div className="flex-1 md:my-4 my-3">
+                                <p className="text-xl font-semibold leading">Atiqur Rahman</p>
+                                <p className='tracking-wide uppercase'>Helper</p>
+                            </div>
+
+                            <div className='flex mx-auto gap-5 text-xl pb-3'>
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=saifularafat.info@gmail.com" target="_blank">
+                                    <FaEnvelope />
+                                </a>
+                                <a href="https://www.linkedin.com/in/saiful-islam-60158b257/" target='_blank'><FaLinkedin /></a>
+
+                                <a href="https://twitter.com/saifularafat69" target='_blank'><FaTwitter /></a>
+
+                                <a href="https://github.com/saifularafat" target='_blank'><FaGithub /></a>
+                            </div>
+
+                        </div>
+                        <div
+                            className="flex flex-col justify-center w-full mx-6 my-7 text-center rounded-md md:w-96 lg:w-80 xl:w-64  border hover: ag-white/30 shadow-md dark: ">
+                            <div className=" avatar md:-mt-10 -mt-7">
+                                <div className="w-24 rounded-full mx-auto  " >
+                                    <img src="https://i.ibb.co.com/jzfkpmD/alices-table.webp" />
+                                </div>
+                            </div>
+                            <div className="flex-1 md:my-4 my-3">
+                                <p className="text-xl font-semibold leading">Alices Sultan</p>
+                                <p className='tracking-wide uppercase'>call center</p>
+                            </div>
+
+                            <div className='flex mx-auto gap-5 text-xl pb-3'>
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=saifularafat.info@gmail.com" target="_blank">
+                                    <FaEnvelope />
+                                </a>
+                                <a href="https://www.linkedin.com/in/saiful-islam-60158b257/" target='_blank'><FaLinkedin /></a>
+
+                                <a href="https://twitter.com/saifularafat69" target='_blank'><FaTwitter /></a>
+
+                                <a href="https://github.com/saifularafat" target='_blank'><FaGithub /></a>
+                            </div>
+
+                        </div>
+                        <div
+                            className="flex flex-col justify-center w-full mx-6 my-7 text-center rounded-md md:w-96 lg:w-80 xl:w-64  border hover: ag-white/30 shadow-md dark: ">
+                            <div className=" avatar md:-mt-10 -mt-7">
+                                <div className="w-24 rounded-full mx-auto  " >
+                                    <img src="https://i.ibb.co.com/jzQrwjM/ceo-2.jpg" />
+                                </div>
+                            </div>
+                            <div className="flex-1 md:my-4 my-3">
+                                <p className="text-xl font-semibold leading">Md Mohibur Rahman</p>
+                                <p className='tracking-wide uppercase'>CEO</p>
+                            </div>
+
+                            <div className='flex mx-auto gap-5 text-xl pb-3'>
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=saifularafat.info@gmail.com" target="_blank">
+                                    <FaEnvelope />
+                                </a>
+                                <a href="https://www.linkedin.com/in/saiful-islam-60158b257/" target='_blank'><FaLinkedin /></a>
+
+                                <a href="https://twitter.com/saifularafat69" target='_blank'><FaTwitter /></a>
+
+                                <a href="https://github.com/saifularafat" target='_blank'><FaGithub /></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     )
 }
 
 export default About;
-
-
-
-
-
-// import Lottie from "lottie-react";
-// import aboutLottie from "./../../assets/Animation/about.json"
-// const About = () => {
-//     return (
-//         <>
-//             <div className=" footerBg ">
-//                 <div className="grid grid-cols-4 gap-5 w-10/12 mx-auto py-10 ">
-//                     <div className="col-span-2 w-full p-5 hover:shadow-lg rounded-md transition-all duration-200">
-//                         <Lottie
-//                             animationData={aboutLottie}
-//                             loop={true} className="" />
-//                     </div>
-//                     <div className="col-span-2 hover:shadow-lg hover:rounded-md transition-all duration-200 p-5">
-//                         <h3 className="text-3xl font-semibold text-slate-800 pb-4">About Us</h3>
-//                         <p className="text-justify text-[18px] text-slate-700">
-//                             At <span className="text-lg font-semibold text-orange-600">Home Tutor Provider BD</span>, we are dedicated to revolutionizing education through personalized learning experiences.
-//                             Our mission is to connect students with exceptional tutors who can guide them towards achieving their academic goals and unlocking their full potential.
-//                         </p>
-//                         <p className="text-justify  text-[18px] text-slate-700 py-5">
-//                             With a team of passionate educators and a commitment to excellence, we strive to create a supportive and engaging learning environment.
-//                             Our platform offers a range of flexible options to meet the diverse needs of learners, ensuring that every student receives the attention and resources they need to succeed.
-//                         </p>
-//                         <p className="text-justify  text-[18px] text-slate-700">
-//                             Join us on our journey to make quality education accessible to all. Together, we can make a difference in the lives
-//                             of students and shape the future of education.
-//                         </p>
-//                     </div>
-
-//                 </div>
-//             </div>
-//         </>
-//     );
-// };
-
-// export default About;
