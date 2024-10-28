@@ -18,7 +18,7 @@ const FooterSecondPart = () => {
                     <Link to="about-us" className="md:text-base md:font-medium text-sm font-normal text-orange-600 hover:underline">About us</Link>
                 </div>
                 <div>
-                    <Link to="#" className="md:text-base md:font-medium text-sm font-normal text-orange-600 hover:underline">Terms of User</Link>
+                    <Link to="terms-condition" className="md:text-base md:font-medium text-sm font-normal text-orange-600 hover:underline">Terms of User</Link>
                 </div>
                 <div>
                     <Link to="registrationview" className="md:text-base md:font-medium text-sm font-normal text-orange-600 hover:underline">Join Our Team</Link>

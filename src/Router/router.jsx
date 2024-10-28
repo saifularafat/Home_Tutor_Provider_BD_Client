@@ -12,6 +12,7 @@ import RegistrationView from "../pages/RegistrationView/RegistrationView";
 import TuitionDetails from "../pages/TuitionJobsAllPage/TuitionDetails/TuitionDetails";
 import TutorProfileDetails from "../pages/TutorAllPage/TutorProfileDetails/TutorProfileDetails";
 import TutorHireRequest from "../pages/TutorAllPage/TutorHireRequest/TutorHireRequest";
+import TermsOfUser from "../pages/TermsOfUser/TermsOfUser";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: "/registrationview",
                 element: <RegistrationView />
+            },
+            {
+                path: "/terms-condition",
+                element: <TermsOfUser />
             }
         ]
     },

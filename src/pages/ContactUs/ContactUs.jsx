@@ -5,11 +5,11 @@ import { FaPhoneVolume, FaWhatsapp } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 const ContactUs = () => {
     return (
-        <div className='bg-sky-100'>
-            <div className="container mx-auto md:py-12 py-7">
+        <div className=''>
+            <div className="container mx-auto md:py-16 py-7">
                 <PageTitleShow currentPage="Contact Us" />
                 <div className='md:flex items-center justify-center md:gap-8 gap-4 px-3'>
-                    <div className="w-full max-w-lg md:relative rounded-3xl md:px-10 px-5 pb-10 pt-8 mt-16 shadow-md dark:bg-zinc-900 border-sky-200 border-y">
+                    <div className="w-full max-w-lg shadow-2xl shadow-blue-300 md:relative rounded-3xl md:px-10 px-5 pb-10 pt-8 mt-16 dark:bg-zinc-900 border-sky-200 border-y">
                         <div className="md:my-6">
                             <h2 className="text-center text-3xl font-semibold tracking-tight">Contact Us</h2>
                             <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p>

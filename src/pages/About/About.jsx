@@ -43,7 +43,7 @@ const About = () => {
                     <Link
                         data-aos='fade-down'
                         data-aos-duration='1000'
-                        to='/contact'
+                        to='/contact-us'
                         className='  border-none shadow-md btn bg-blue-500 hover:bg-blue-600 text-white transition-all duration-200'
                     >
                         Contact Us
