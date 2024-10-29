@@ -8,8 +8,8 @@ import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
 const Registration = () => {
 
     const location = useLocation();
-    const { role } = location.state || {};
-    console.log(role);
+    const { registerRole } = location.state || {};
+    console.log(registerRole);
 
 
     const [passShow, setPassShow] = useState(false);
@@ -37,16 +37,16 @@ const Registration = () => {
                     </div>
                     <div className="flex-shrink-0 w-full border-[.5px] border-sky-100 rounded-lg shadow-lg shadow-sky-200 bg-transparent md:w-1/2 card backdrop-blur-sm">
                         <div className="text-center ">
-                            <h1 className="my-2 text-3xl font-bold font-mono">Registration</h1>
+                            <h1 className="md:pb-2 md:pt-4 md:py-0 py-3 md:text-3xl text-2xl font-bold md:font-extrabold tracking-wider"><span className="capitalize text-blue-500">{registerRole}</span> Registration</h1>
                         </div>
                         <div className="p-6">
                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                                 <div className=" space-y-1">
                                     <label className="block text-slate-700  font-medium">
-                                        <span className="font-bold text-slate-500 tracking-wider">Name </span>
+                                        <span className="font-bold text-slate-500 tracking-wider">Name*</span>
                                     </label>
                                     <input
-                                        {...register("email", { required: true })}
+                                        {...register("name", { required: true })}
                                         type="text"
                                         placeholder="Enter Your Name"
                                         className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
@@ -59,7 +59,7 @@ const Registration = () => {
                                 </div>
                                 <div className=" space-y-1">
                                     <label className="block text-slate-700  font-medium">
-                                        <span className="font-bold text-slate-500 tracking-wider">Email </span>
+                                        <span className="font-bold text-slate-500 tracking-wider">Email* </span>
                                     </label>
                                     <input
                                         {...register("email", { required: true })}
@@ -75,7 +75,7 @@ const Registration = () => {
                                 </div>
                                 <div className=" space-y-1">
                                     <label className="block text-slate-700  font-medium">
-                                        <span className="font-bold text-slate-500 tracking-wider">Phone </span>
+                                        <span className="font-bold text-slate-500 tracking-wider">Phone* </span>
                                     </label>
                                     <input
                                         {...register("phone", { required: true })}
@@ -86,6 +86,22 @@ const Registration = () => {
                                     {errors.phone && (
                                         <span className="mt-1 text-red-500">
                                             Phone field is required
+                                        </span>
+                                    )}
+                                </div>
+                                <div className=" space-y-1">
+                                    <label className="block text-slate-700  font-medium">
+                                        <span className="font-bold text-slate-500 tracking-wider">Address* </span>
+                                    </label>
+                                    <input
+                                        {...register("address", { required: true })}
+                                        type="text"
+                                        placeholder="Enter Your Address"
+                                        className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
+                                    />
+                                    {errors.phone && (
+                                        <span className="mt-1 text-red-500">
+                                            Address field is required
                                         </span>
                                     )}
                                 </div>

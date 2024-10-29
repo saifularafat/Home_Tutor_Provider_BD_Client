@@ -28,9 +28,9 @@ const FrequentlyAskQuestion = () => {
     };
 
     return (
-        <>
+        <div className="md:pt-12 pt-6">
             <SectionTitle sectionName="Frequently Ask Question" />
-            <div className="container md:mx-auto bg-black/5 md:flex items-center justify-between my-12 ">
+            <div className="container md:mx-auto bg-slate-50 md:flex items-center justify-between md:my-8 my-4">
                 {/* FAQ */}
                 <div className="w-full">
                     <Lottie
@@ -47,10 +47,10 @@ const FrequentlyAskQuestion = () => {
                             </div>
 
                             <div className="relative h-[2px] w-10 bg-zinc-700">
-                                <span className="absolute -left-2 -top-[5px] z-40 h-3 w-3 rounded-full border-2 border-zinc-700 bg-white"></span>
+                                <span className="absolute -left-2 -top-[5px] z-20 h-3 w-3 rounded-full border-2 border-zinc-700 bg-white"></span>
                                 <span className="h-1 w-10 bg-zinc-700"></span>
                                 <span
-                                    className={`absolute -right-2 -top-[5px] z-40 h-3 w-3 rounded-full border-2 ${isOpen === idx ? 'border-zinc-700 bg-white delay-100' : 'border-transparent'}`}
+                                    className={`absolute -right-2 -top-[5px] z-20 h-3 w-3 rounded-full border-2 ${isOpen === idx ? 'border-zinc-700 bg-white delay-100' : 'border-transparent'}`}
                                 ></span>
                             </div>
 
@@ -70,7 +70,7 @@ const FrequentlyAskQuestion = () => {
                     ))}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
