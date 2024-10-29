@@ -1,7 +1,51 @@
 import { useState } from "react";
 
 const ReviewsCard = () => {
+    const [expandedReview, setExpandedReview] = useState(null); // Track which review is expanded
 
+    // Review data for five users (mix of men and women)
+    const reviews = [
+        {
+            id: 1,
+            name: "Saiful Islam",
+            guardianId: "HTPBDG101",
+            reviewText: "Absolutely fantastic! The tutor we found has been a perfect fit for our child’s needs. They have shown exceptional dedication, and my child has improved dramatically since their lessons began. Highly recommended! We couldn't have asked for a better experience."
+        },
+        {
+            id: 2,
+            name: "Amina Khan",
+            guardianId: "HTPBDG102",
+            reviewText: "The tutor has been great at helping our child with their studies. They’ve built a great rapport and the improvements are noticeable. We’re really happy with the service provided."
+        },
+        {
+            id: 3,
+            name: "John Doe",
+            guardianId: "HTPBDG103",
+            reviewText: "We’ve been very satisfied with the tutor’s approach and how well they have connected with our child. The tutor has been patient and effective."
+        },
+        {
+            id: 4,
+            name: "Sarah Ali",
+            guardianId: "HTPBDG104",
+            reviewText: "Our child has made tremendous progress thanks to the dedicated tutoring. The tutor has gone above and beyond to ensure success."
+        },
+        {
+            id: 5,
+            name: "David Williams",
+            guardianId: "HTPBDG105",
+            reviewText: "The experience with this tutor has been incredible. Our child has gained a lot of confidence in their studies and is performing much better in school."
+        },
+        {
+            id: 6,
+            name: "Mohibur Rahman",
+            guardianId: "HTPBDG105",
+            reviewText: "Good experience overall, but I wish there were more subject options available, and the quality is exceptional. Very satisfied with the service."
+        }
+    ];
+
+    const handleToggle = (id) => {
+        setExpandedReview((prevExpandedReview) => (prevExpandedReview === id ? null : id));
+    };
 
     return (
         <div className="flex flex-wrap justify-center gap-7 pb-10">
