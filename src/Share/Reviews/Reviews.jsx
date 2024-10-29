@@ -1,6 +1,8 @@
+import ReviewsCard from "./ReviewsCard";
+
 const Reviews = () => {
     return (
-        <div className="max-w-5xl mx-auto mb-10 bg-white">
+        <div className="max-w-5xl mx-auto md:pb-10 pb-5 md:px-10 px-4 shadow-lg rounded-lg bg-white">
             <div className="divider"><span className="text-xl font-semibold text-slate-500">Ratings and Reviews</span></div>
             <div className="grid grid-cols-6 gap-5">
                 <div className="col-span-2 bg-blue-100 w-full py-8 rounded-lg text-center space-y-3">
@@ -52,6 +54,10 @@ const Reviews = () => {
                         <input type="range" min={0} max="100" value="10" className="range range-xs [--range-shdw:#FB923C]" />
                     </div>
                 </div>
+            </div>
+
+            <div className="py-6 ">
+                <ReviewsCard />
             </div>
         </div>
     );
