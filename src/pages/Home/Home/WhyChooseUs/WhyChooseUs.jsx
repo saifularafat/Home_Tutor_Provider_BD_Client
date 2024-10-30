@@ -4,12 +4,15 @@ import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 
 const WhyChooseUs = () => {
     return (
-        <div className="md:py-4 bg-[#fafcff]">
+        <div className="md:py-4 bg-[#fafcff] overflow-x-hidden">
             <div className="text-center">
                 <SectionTitle sectionName="Why Choose Us?" />
                 <p className="md:text-base text-slate-700 md:px-0 px-2">Discover the exceptional benefits and unique features that set us apart in providing top-notch tutoring services.</p>
             </div>
-            <div className="grid md:grid-cols-6 grid-cols-1 md:gap-5 gap-4 w-9/12 mx-auto md:py-12 py-6">
+            <div
+                data-aos="zoom-in"
+                
+                className="grid md:grid-cols-6 grid-cols-1 md:gap-5 gap-4 w-9/12 mx-auto md:py-12 py-6">
                 <div className="md:col-span-2 bg-white h-72 duration-200 rounded-lg text-center shadow-md hover:shadow-2xl hover:shadow-blue-300 transition-all " >
                     <FaChalkboardUser className="w-[70px] h-[70px] mx-auto pt-8 text-blue-300" />
 

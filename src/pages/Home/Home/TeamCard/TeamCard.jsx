@@ -8,7 +8,11 @@ const TeamCard = () => {
         <div className="md:max-w-6xl mx-auto md:my-16 my-8">
             <SectionTitle sectionName="Meet Our Team" />
 
-            <div className="grid md:grid-cols-3 md:gap-5 gap-3 mx-4">
+            <div
+                data-aos="fade-up"
+                data-aos-anchor-placement="center-bottom"
+                 data-aos-duration="2000"
+                className="grid md:grid-cols-3 md:gap-5 gap-3 mx-4">
                 <div className="md:max-w-[350px] w-full md:space-y-3 space-y-2 rounded-lg bg-white md:p-6 p-3 shadow-md hover:shadow-xl hover:shadow-sky-200 transition-all duration-300 dark:bg-[#18181B]">
                     <img width={400} height={400} className="md:h-[220px] h-[200px] md:w-[300px] w-full rounded-lg object-cover" src={ceo} alt="CEO Photo" />
                     <div className="text-center">

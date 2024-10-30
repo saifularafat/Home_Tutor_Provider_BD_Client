@@ -22,7 +22,7 @@ const WhatsAppChat = () => {
                             <p>Welcome to </p>
                             <h1 className="md:mb-2 mb-1 md:text-2xl text-xl font-semibold">H-TutorProvider<sup className="text-green-400">B<span className="text-red-400">D</span></sup></h1>
                             <p className="md:mb-5 mb-3 text-sm opacity-80">Elevate your React projects with beautifully crafted components designed for TailwindCSS.</p>
-                            <Link to="">
+                            <Link to="http://wa.me/+0881829537621">
                                 <FaWhatsapp
                                     className='transition-all w-8 h-8 md:h-16 md:w-16 text-[#25D147]'
                                     alt=''
