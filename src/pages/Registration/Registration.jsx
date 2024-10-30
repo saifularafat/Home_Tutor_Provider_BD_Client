@@ -139,13 +139,71 @@ const Registration = () => {
                                         <a href="#" className="text-sm font-bold text-sky-600 hover:underline">Forgot password?</a>
                                     </div>
                                 </div>
+                                {/* Photo section */}
+                                <div className="grid md:grid-cols-5 grid-cols-1 gap-5">
+                                    <div className="md:col-span-2 col-span-1">
+
+                                        <label htmlFor='userImage' className='block text-slate-700 font-medium pb-1'>
+                                            <span className="font-bold text-slate-500 tracking-wider">Upload Your Photo</span>
+                                        </label>
+                                        <label htmlFor="userImage">
+                                            <input
+                                                required
+                                                type='file'
+                                                id='userImage'
+                                                name='userImage'
+                                                className=""
+                                                hidden
+                                                {...register("userImage", { required: true })}
+                                            />
+                                            <div className='bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider cursor-pointer'>
+                                                upload your avatar
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div className="md:col-span-2 col-span-1">
+                                        <label htmlFor='nidImage' className='block text-slate-700 font-medium pb-1'>
+                                            <span className="font-bold text-slate-500 tracking-wider">Upload Your NID</span>
+                                        </label>
+                                        <label htmlFor="nidImage">
+                                            <input
+                                                required
+                                                type='file'
+                                                id='nidImage'
+                                                name='nidImage'
+                                                hidden
+                                                {...register("nidImage", { required: true })}
+                                            />
+                                            <div className='bg-transparent cursor-pointer input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider'>
+                                                upload your NID cart
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div className="col-span-1">
+                                        <label htmlFor='image' className='block text-slate-700 font-medium pb-1'>
+                                            <span className="font-bold text-slate-500 tracking-wider">Gender</span>
+                                        </label>
+                                        <select {...register("gender")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
+                                            <option value="male">male</option>
+                                            <option value="female">female</option>
+                                            <option value="other">other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <label className=" inline-flex mt-2">
+                                    <input
+                                        type="checkbox"
+                                        name="checkbox"
+                                        {...register("checkbox")}
+                                        required
+                                        className="w-4 h-4 rounded-full" />
+                                    <p className='md:pl-3 pl-1 text-sm font-open'>Accept
+                                        <Link to='/terms-condition' className='text-blue-600 text-sm underline md:pl-2'>Terms and Condition
+                                        </Link>
+                                    </p>
+                                </label>
                                 <div className="my-5 text-center">
-                                    {/* <input
-                                        className="relative inline-block h-14 w-40 overflow-hidden border-sky-500 px-5 py-2 text-sky-500 shadow-lg before:absolute before:inset-0 before:-z-10 before:block before:translate-x-[90%] before:rounded-s-full before:bg-sky-600 before:duration-200 after:absolute after:inset-0 after:-z-10 after:block after:-translate-x-[90%] after:rounded-e-full after:bg-sky-600 after:duration-500 hover:text-white before:hover:translate-x-0 after:hover:translate-x-0"
-                                        type="submit"
-                                        value={"Submit"}
-                                    /> */}
-                                    <button type="submit" className="relative inline-block h-14 w-40 overflow-hidden border-sky-500 px-5 py-2 
+                                    <button type="submit" className="relative inline-block h-14 w-40 text-lg font-medium overflow-hidden border-sky-500 px-5 py-2 
                                     text-sky-500 shadow-lg before:absolute before:inset-0 before:-z-10 before:block before:translate-x-[90%] 
                                     before:rounded-s-full before:bg-sky-600 before:duration-200 after:absolute after:inset-0 after:-z-10 after:block after:-translate-x-[90%] after:rounded-e-full 
                                     after:bg-sky-600 tracking-wider after:duration-500  hover:text-white before:hover:translate-x-0 after:hover:translate-x-0">Submit</button>
