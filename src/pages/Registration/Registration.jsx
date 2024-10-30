@@ -11,17 +11,38 @@ const Registration = () => {
     const { registerRole } = location.state || {};
     console.log(registerRole);
 
-
     const [passShow, setPassShow] = useState(false);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
+
     const onSubmit = (data) => {
+
+        const formData = new FormData()
+
+        // Append the files, checking if they exist
+        // userImage info
+        if (data.parentImage && data.parentImage[0]) {
+            formData.append("parentImage", data.parentImage[0]);
+        }
+        if (data.parentNIDCart && data.parentNIDCart[0]) {
+            formData.append("parentNIDCart", data.parentNIDCart[0]);
+        }
+        if (data.coachingLogoImage && data.coachingLogoImage[0]) {
+            formData.append("coachingLogoImage", data.coachingLogoImage[0]);
+        }
+        if (data.coachingTedLicense && data.coachingTedLicense[0]) {
+            formData.append("coachingTedLicense", data.coachingTedLicense[0]);
+        }
         console.log(data);
+
     };
+
+
     return (
         <div className=" footerBg h-screen">
             <PageTitleShow currentPage="Registration" />
@@ -139,57 +160,184 @@ const Registration = () => {
                                         <a href="#" className="text-sm font-bold text-sky-600 hover:underline">Forgot password?</a>
                                     </div>
                                 </div>
-                                {/* Photo section */}
-                                <div className="grid md:grid-cols-5 grid-cols-1 gap-5">
-                                    <div className="md:col-span-2 col-span-1">
 
-                                        <label htmlFor='userImage' className='block text-slate-700 font-medium pb-1'>
-                                            <span className="font-bold text-slate-500 tracking-wider">Upload Your Photo</span>
-                                        </label>
-                                        <label htmlFor="userImage">
-                                            <input
-                                                required
-                                                type='file'
-                                                id='userImage'
-                                                name='userImage'
-                                                className=""
-                                                hidden
-                                                {...register("userImage", { required: true })}
-                                            />
-                                            <div className='bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider cursor-pointer'>
-                                                upload your avatar
+                                {/* Photo section */}
+                                {
+                                    registerRole === "coaching" ?
+                                        (
+                                            <div className="grid md:grid-cols-4 grid-cols-1 gap-5">
+                                                {/* coaching Logo Image File */}
+                                                <div className="md:col-span-2 col-span-1">
+                                                    <label htmlFor="coachingLogoImage" className="block text-slate-700 font-medium pb-1">
+                                                        <span className="font-bold text-slate-500 tracking-wider">Coaching Center Logo</span>
+                                                    </label>
+                                                    <div className='form-control rounded-lg border-2   items-center '>
+                                                        <input
+                                                            {...register('coachingLogoImage', { required: true })}
+                                                            name='coachingLogoImage'
+                                                            type='file'
+                                                            className='file-input file-input-bordered file-input-md w-full max-w-md'
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                {/* coaching Ted License file */}
+                                                <div className="md:col-span-2 col-span-1">
+                                                    <label htmlFor="coachingTedLicense" className="block text-slate-700 font-medium pb-1">
+                                                        <span className="font-bold text-slate-500 tracking-wider">Coaching TED License</span>
+                                                    </label>
+                                                    <div className='form-control rounded-lg border-2   items-center '>
+                                                        <input
+                                                            {...register('coachingTedLicense', { required: true })}
+                                                            name='coachingTedLicense'
+                                                            type='file'
+                                                            className='file-input file-input-bordered file-input-md w-full max-w-md'
+                                                        />
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </label>
-                                    </div>
-                                    <div className="md:col-span-2 col-span-1">
-                                        <label htmlFor='nidImage' className='block text-slate-700 font-medium pb-1'>
-                                            <span className="font-bold text-slate-500 tracking-wider">Upload Your NID</span>
-                                        </label>
-                                        <label htmlFor="nidImage">
-                                            <input
-                                                required
-                                                type='file'
-                                                id='nidImage'
-                                                name='nidImage'
-                                                hidden
-                                                {...register("nidImage", { required: true })}
-                                            />
-                                            <div className='bg-transparent cursor-pointer input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider'>
-                                                upload your NID cart
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div className="col-span-1">
-                                        <label htmlFor='image' className='block text-slate-700 font-medium pb-1'>
-                                            <span className="font-bold text-slate-500 tracking-wider">Gender</span>
-                                        </label>
-                                        <select {...register("gender")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
-                                            <option value="male">male</option>
-                                            <option value="female">female</option>
-                                            <option value="other">other</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                        )
+                                        :
+                                        <>
+                                            {
+                                                registerRole === "parent" ?
+                                                    (
+                                                        <div className="grid md:grid-cols-5 grid-cols-1 gap-5">
+                                                            {/* parent Image File */}
+                                                            <div className="md:col-span-2 col-span-1">
+                                                                <label htmlFor="coachingTedLicense" className="block text-slate-700 font-medium pb-1">
+                                                                    <span className="font-bold text-slate-500 tracking-wider">Coaching TED License</span>
+                                                                </label>
+                                                                <div className='form-control rounded-lg border-2   items-center '>
+                                                                    <input
+                                                                        {...register('coachingTedLicense', { required: true })}
+                                                                        name='coachingTedLicense'
+                                                                        type='file'
+                                                                        className='file-input file-input-bordered file-input-md w-full max-w-md'
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            {/* NID Image file */}
+
+                                                            <div className="md:col-span-2 col-span-1">
+                                                                <label htmlFor='parentImage' className='block text-slate-700 font-medium pb-1'>
+                                                                    <span className="font-bold text-slate-500 tracking-wider">Upload Your NID</span>
+                                                                </label>
+                                                                <label htmlFor="parentNIDCart">
+                                                                    <input
+                                                                        type='file'
+                                                                        id='parentNIDCart'
+                                                                        name='parentNIDCart'
+                                                                        hidden
+                                                                        {...register("parentNIDCart", { required: true })}
+                                                                    />
+                                                                    <div className='bg-transparent cursor-pointer input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider'>
+                                                                        {""}
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div className="md:col-span-2 col-span-1">
+                                                                <label htmlFor='parentImage' className='block text-slate-700 font-medium pb-1'>
+                                                                    <span className="font-bold text-slate-500 tracking-wider">Upload Student ID</span>
+                                                                </label>
+                                                                <label htmlFor="parentNIDCart">
+                                                                    <input
+                                                                        type='file'
+                                                                        id='parentNIDCart'
+                                                                        name='parentNIDCart'
+                                                                        hidden
+                                                                        {...register("parentNIDCart", { required: true })}
+                                                                    // onChange={(e) => handleFileChange(e, setParentNIDCart)}
+                                                                    />
+                                                                    <div className='bg-transparent cursor-pointer input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider'>
+                                                                        {""}
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div className="col-span-1">
+                                                                <label htmlFor='image' className='block text-slate-700 font-medium pb-1'>
+                                                                    <span className="font-bold text-slate-500 tracking-wider">Gender</span>
+                                                                </label>
+                                                                <select {...register("gender")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
+                                                                    <option value="male">male</option>
+                                                                    <option value="female">female</option>
+                                                                    <option value="other">other</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    ) :
+                                                    (
+                                                        (
+                                                            <div className="grid md:grid-cols-5 grid-cols-1 gap-5">
+                                                                {/* parent Image File */}
+                                                                <div className="md:col-span-2 col-span-1">
+                                                                    <label htmlFor="coachingTedLicense" className="block text-slate-700 font-medium pb-1">
+                                                                        <span className="font-bold text-slate-500 tracking-wider">Coaching TED License</span>
+                                                                    </label>
+                                                                    <div className='form-control rounded-lg border-2   items-center '>
+                                                                        <input
+                                                                            {...register('coachingTedLicense', { required: true })}
+                                                                            name='coachingTedLicense'
+                                                                            type='file'
+                                                                            className='file-input file-input-bordered file-input-md w-full max-w-md'
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                {/* NID Image file */}
+
+                                                                <div className="md:col-span-2 col-span-1">
+                                                                    <label htmlFor='parentImage' className='block text-slate-700 font-medium pb-1'>
+                                                                        <span className="font-bold text-slate-500 tracking-wider">Upload Your NID</span>
+                                                                    </label>
+                                                                    <label htmlFor="parentNIDCart">
+                                                                        <input
+                                                                            type='file'
+                                                                            id='parentNIDCart'
+                                                                            name='parentNIDCart'
+                                                                            hidden
+                                                                            {...register("parentNIDCart", { required: true })}
+                                                                        />
+                                                                        <div className='bg-transparent cursor-pointer input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider'>
+                                                                            {""}
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                                <div className="md:col-span-2 col-span-1">
+                                                                    <label htmlFor='parentImage' className='block text-slate-700 font-medium pb-1'>
+                                                                        <span className="font-bold text-slate-500 tracking-wider">Upload Student ID</span>
+                                                                    </label>
+                                                                    <label htmlFor="parentNIDCart">
+                                                                        <input
+                                                                            type='file'
+                                                                            id='parentNIDCart'
+                                                                            name='parentNIDCart'
+                                                                            hidden
+                                                                            {...register("parentNIDCart", { required: true })}
+                                                                        // onChange={(e) => handleFileChange(e, setParentNIDCart)}
+                                                                        />
+                                                                        <div className='bg-transparent cursor-pointer input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider'>
+                                                                            {""}
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                                <div className="col-span-1">
+                                                                    <label htmlFor='image' className='block text-slate-700 font-medium pb-1'>
+                                                                        <span className="font-bold text-slate-500 tracking-wider">Gender</span>
+                                                                    </label>
+                                                                    <select {...register("gender")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
+                                                                        <option value="male">male</option>
+                                                                        <option value="female">female</option>
+                                                                        <option value="other">other</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    )
+
+                                            }
+                                        </>
+
+                                }
                                 <label className=" inline-flex mt-2">
                                     <input
                                         type="checkbox"
