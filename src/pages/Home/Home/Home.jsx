@@ -6,12 +6,39 @@ import Testimonial from "./Testimonial/Testimonial";
 import FrequentlyAskQuestion from "./FrequentlyAskQuestion/FrequentlyAskQuestion";
 import TeamCard from "./TeamCard/TeamCard";
 import WhatsAppChat from "../../../Components/WhatsAppChat/WhatsAppChat";
+import { useEffect, useState } from "react";
 
 const Home = () => {
+    const [showMainContent, setShowMainContent] = useState(
+        window.localStorage.getItem('showMainContent') === null ? false : true
+    )
+
+    const handleScroll = () => {
+        if (window.scrollY > 0) {
+            setShowMainContent(true)
+            window.localStorage.setItem('showMainContent', 'true')
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
+    if (showMainContent) {
+        const a = () => {
+            window.scrollTo(0, 0)
+        }
+        a()
+    }
     return (
         <div>
             <div
-                className="" >
+                className={`md:-mt-24 transition-opacity duration-700 ${showMainContent ? '  opacity-100' : 'opacity-0'
+                    } primary-bg2 `}
+            >
                 {/* Banner Card section*/}
                 <Banner />
                 {/* Why Choose Us Card section*/}
@@ -32,7 +59,7 @@ const Home = () => {
                 <TeamCard />
             </div>
             <WhatsAppChat />
-        </div>
+        </div >
     );
 };
 

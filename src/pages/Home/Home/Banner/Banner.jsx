@@ -18,7 +18,7 @@ const Banner = () => {
     >
       
       {/* slide-2 */}
-      <div id="slide2" className="relative w-full carousel-item">
+      <div id="slide2" className="relative w-full carousel-item -mt-12">
         <img
           src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           className="w-full h-full object-cover"
