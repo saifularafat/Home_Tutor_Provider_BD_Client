@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 .defaultNav {
-  @apply text-base font-medium font-sans border rounded-2xl py-2 px-3 border-[#0369A1] hover:bg-[#0369A1] hover:text-white overflow-hidden transition-all duration-300;
+  @apply text-base font-medium font-sans rounded-xl py-2 px-3 hover:bg-[#0f0f0f68] hover:text-white overflow-hidden transition-all duration-300;
 }
 .activeNav {
-  @apply text-base font-medium font-sans border rounded-2xl py-2 px-3 border-[#0369A1] bg-[#0369A1] text-white;
+  @apply text-base font-medium font-sans rounded-xl py-2 px-3 bg-[#131b1e89] text-white;
 }
 .regisLogin{
   @apply text-xl py-2 px-3 before:absolute before:block before:inset-0 before:-z-10 before:bg-[#0677b4] text-white after:block hover:after:w-full after:w-0 after:hover:left-0

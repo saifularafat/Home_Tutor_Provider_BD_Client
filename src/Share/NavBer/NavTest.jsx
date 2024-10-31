@@ -1,10 +1,11 @@
 import './Navbar.css'
 import { AiFillBell } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import logo from '../../assets/leaf.jpg'
 import Headroom from 'react-headroom'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
+import Logo from './Logo'
 
 const NavTest = () => {
     const dark = localStorage.getItem('customDarkTheme')
@@ -69,7 +70,7 @@ const NavTest = () => {
             }}
         >
             <nav className='z-50 text-white backdrop-blur-lg bg-black/40'>
-                <div className='navbar z-[40]  container mx-auto  sticky top-0'>
+                <div className='navbar z-[40] container mx-auto  sticky top-0'>
                     <div className='navbar-start'>
                         <div className='dropdown'>
                             <label tabIndex={0} className='btn btn-ghost lg:hidden'>
@@ -90,60 +91,77 @@ const NavTest = () => {
                             </label>
                             <ul
                                 tabIndex={0}
-                                className='z-50 p-2 shadow dropdown-content rounded-box bg-black/80 md:bg-black/40 backdrop-blur'
+                                className='z-50 shadow dropdown-content rounded-box bg-black/80 md:bg-black/40 backdrop-blur'
                             >
                                 <li>
-                                    <Link to='/'>Home</Link>
+                                    <NavLink to='/'
+                                        className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                        Home
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link to='/instructors'>Instructors</Link>
+                                    <NavLink to="tuition-jobs"
+                                        className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                        Tuition Jobs
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link to='/blog'>Blog</Link>
+                                    <NavLink to='/tutor-profile'
+                                        className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                        Tutor Profile
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link to='/about'>About us</Link>
-                                </li>
-                                <li>
-                                    <Link to='/forum'>Forum</Link>
+                                    <NavLink to='/contact-us'
+                                        className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                        Contact Us
+                                    </NavLink>
                                 </li>
                                 {user && (
                                     <li>
                                         {isAdmin ? (
                                             ''
                                         ) : isInstructor ? (
-                                            <Link to='/createLiveExam'>Create Live Exam</Link>
+                                            <Link to='/createParentMeeting'>Create Parent Meet</Link>
                                         ) : (
-                                            <Link to='/joinLiveExam'>Join Live Exam</Link>
+                                            <Link to='/joinTutorMeeting'>Join Meeting</Link>
                                         )}
                                     </li>
                                 )}
                             </ul>
                         </div>
-                        <Link to='/'>
-                            <img
-                                className='w-[200px] h-16 hover:-translate-y-0.5 duration-200'
-                                src={logo}
-                                alt=''
-                            />
-                        </Link>
+
+
+                        {/* Logo Component */}
+                        <Logo />
+
+
                     </div>
                     <div className='hidden navbar-center lg:flex'>
-                        <ul className='px-1 menu menu-horizontal'>
+                        <ul className=' flex items-center gap-x-1 tracking-wide'>
                             <li>
-                                <Link to='/'>Home</Link>
+                                <NavLink to='/'
+                                    className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                    Home
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to="tuition-jobs">Tuition Jobs</Link>
+                                <NavLink to="tuition-jobs"
+                                    className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                    Tuition Jobs
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to='/tutor-profile'>Tutor Profile</Link>
+                                <NavLink to='/tutor-profile'
+                                    className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                    Tutor Profile
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to='/about-us'>About us</Link>
-                            </li>
-                            <li>
-                                <Link to='/contact-us'>Contact Us</Link>
+                                <NavLink to='/contact-us'
+                                    className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                    Contact Us
+                                </NavLink>
                             </li>
                             {user && (
                                 <li>

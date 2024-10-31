@@ -11,8 +11,8 @@ const NavBer = () => {
         //         <NavTest />
         //     </div>
         // </div>
+        
         <>
-
             <NavTest />
         </>
     );

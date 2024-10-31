@@ -36,7 +36,7 @@ const Home = () => {
     return (
         <div>
             <div
-                className={`md:-mt-24 transition-opacity duration-700 ${showMainContent ? '  opacity-100' : 'opacity-0'
+                className={`md:-mt-24 transition-colors duration-700 ${showMainContent ? '  opacity-100' : 'opacity-0'
                     } primary-bg2 `}
             >
                 {/* Banner Card section*/}

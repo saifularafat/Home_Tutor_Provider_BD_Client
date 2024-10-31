@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import logo from "./../../assets/Home_Tutor_Provider_BD.jpg"
-import { Helmet } from "react-helmet-async";
+import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
 const Logo = () => {
     return (
-        <Link to="/" className="">
-            <Helmet>
-                <title>Home Tutor Provider BD</title>
-            </Helmet>
-            <img src={logo} alt="" className="md:w-full w-1/2 mx-auto object-cover" />
+        <Link to='/'>
+            <PageTitleShow currentPage="Home" />
+            <img
+                className='w-[350px] '
+                src={logo}
+                alt=''
+            />
         </Link>
     );
 };
