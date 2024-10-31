@@ -9,7 +9,7 @@
   @apply text-base font-medium font-sans rounded-xl py-2 px-3 bg-[#131b1e89] text-white;
 }
 .regisLogin{
-  @apply text-xl py-2 px-3 before:absolute before:block before:inset-0 before:-z-10 before:bg-[#0677b4] text-white after:block hover:after:w-full after:w-0 after:hover:left-0
+  @apply text-xl py-[6px] px-3 before:absolute before:block before:inset-0 before:-z-10 before:bg-[#0677b4] text-white after:block hover:after:w-full after:w-0 after:hover:left-0
    after:right-0 after:top-0 after:h-full after:-z-10 after:duration-300 after:bg-[#054161] after:absolute relative inline-block after:rounded-md before:rounded-md
 }
 

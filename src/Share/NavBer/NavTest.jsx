@@ -35,8 +35,9 @@ const NavTest = () => {
 
 
     // Temporary variables for testing
-    const user = { displayName: "Test User" };
-    const isAdmin = true; // Change to true/false to test admin
+    // const user = { displayName: "Test User" };
+    const user = false;
+    const isAdmin = false; // Change to true/false to test admin
     const isInstructor = false; // Change to true/false to test instructor
     const notices = [1, 2, 3]; // Example notice array for badge count
 
@@ -218,7 +219,7 @@ const NavTest = () => {
                                                 to='/leaderboard'
                                                 className='justify-between w-full'
                                             >
-                                                LeaderBoard
+                                                Leader Board
                                             </Link>
                                         </li>
                                         {/* Navigate to different dashboard route based on user role */}
@@ -245,12 +246,20 @@ const NavTest = () => {
                                 </div>
                             </div>
                         ) : (
-                            <Link
-                                to='/login'
-                                className='border-none shadow-md btn btn-sm btn-primary'
-                            >
-                                Login
-                            </Link>
+                            <>
+                                <div className=''>
+                                    <NavLink
+                                        to="login"
+                                        className={({ isActive }) => (isActive ? "regisLogin" : "regisLogin")}>
+                                        Login
+                                    </NavLink>
+                                    <NavLink
+                                        to="registrationView"
+                                        className={({ isActive }) => (isActive ? "regisLogin ml-2" : "regisLogin ml-2")}>
+                                        Registration
+                                    </NavLink>
+                                </div>
+                            </>
                         )}
                         <div>
                             <button onClick={toggleDarkMode} className='mx-3 text-lg'>

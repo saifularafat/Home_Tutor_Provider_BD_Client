@@ -9,7 +9,7 @@ const TeamCard = () => {
             <SectionTitle sectionName="Meet Our Team" />
 
             <div
-                data-aos="fade-up"
+                data-aos="fade-down"
                 data-aos-anchor-placement="center-bottom"
                  data-aos-duration="2000"
                 className="grid md:grid-cols-3 md:gap-5 gap-3 mx-4">
