@@ -1,0 +1,9 @@
+.scroll-tars-container ul {
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scroll-tars-container ul::-webkit-scrollbar{
+    display: none;
+}

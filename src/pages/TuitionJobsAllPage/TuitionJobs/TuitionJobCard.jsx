@@ -1,13 +1,14 @@
-import { FaCalendarAlt, FaFilter } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
 import { FaMedal, FaMedium, FaMoneyBillWave } from "react-icons/fa6";
 import { IoDuplicateSharp } from "react-icons/io5";
 import { TbGenderAndrogyne } from "react-icons/tb";
 import TuitionJobTabla from "./TuitionJobTabla";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
+import JobCategorySliderTabs from "./JobCategorySliderTabs";
 
 const TuitionJobCard = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const [searchText, setSearchText] = useState("");
 
     const handlerSearch = () => {
@@ -18,22 +19,22 @@ const TuitionJobCard = () => {
             <div className="py-10">
                 {/* search and filter section */}
                 <div className="grid md:grid-cols-6 grid-cols-1 gap-5 rounded-lg bg-black/10 py-6 pl-4 ">
-                    <div className="md:col-span-2 col-span-1 rounded-xl bg-black/10 flex items-center gap-2">
+                    <div className="md:col-span-2 col-span-1 px-6 rounded-xl bg-black/10 flex items-center gap-2">
                         <input
                             onChange={(e) => setSearchText(e.target.value)}
                             type="text"
                             placeholder="Search Your Tuition Code"
-                            className=" px-6 py-3 rounded-tl-md rounded-bl-md" />
+                            className=" px-9 py-3 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400" />
                         <button
                             onClick={handlerSearch}
-                            className=" py-2 px-3 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider">
+                            className=" py-[9px] px-3 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider">
                             Search
                         </button>
                     </div>
-                    <div className="md:col-span-4 col-span-1 rounded-xl bg-black/5 flex items-center gap-2  py-6 px-8 mr-6">
-                     <div>
-                        Lorem ipsum dolor sit amet.
-                     </div>
+
+                    {/* Job Category Slider Tabs section */}
+                    <div className="md:col-span-4 col-span-1  shadow-xl rounded-xl bg-black/5 flex items-center gap-2  py-6 px-8 mr-6">
+                        <JobCategorySliderTabs />
                     </div>
                 </div>
             </div>
