@@ -17,8 +17,8 @@ const TuitionJobCard = () => {
         <>
             <div className="py-10">
                 {/* search and filter section */}
-                <div className="flex items-center justify-between rounded-lg bg-orange-300 py-6 pl-4 w-full">
-                    <div className=" flex items-center gap-2">
+                <div className="grid md:grid-cols-6 grid-cols-1 gap-5 rounded-lg bg-black/10 py-6 pl-4 ">
+                    <div className="md:col-span-2 col-span-1 rounded-xl bg-black/10 flex items-center gap-2">
                         <input
                             onChange={(e) => setSearchText(e.target.value)}
                             type="text"
@@ -30,8 +30,10 @@ const TuitionJobCard = () => {
                             Search
                         </button>
                     </div>
-                    <div className=" flex items-center gap-2 bg-white py-6 px-8 mr-6">
-                        <FaFilter />
+                    <div className="md:col-span-4 col-span-1 rounded-xl bg-black/5 flex items-center gap-2  py-6 px-8 mr-6">
+                     <div>
+                        Lorem ipsum dolor sit amet.
+                     </div>
                     </div>
                 </div>
             </div>

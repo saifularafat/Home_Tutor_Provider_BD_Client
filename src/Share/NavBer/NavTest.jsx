@@ -39,7 +39,7 @@ const NavTest = () => {
     const user = false;
     const isAdmin = false; // Change to true/false to test admin
     const isInstructor = false; // Change to true/false to test instructor
-    const notices = [1, 2, 3]; // Example notice array for badge count
+    const notices = [1, 2, 3, 4,]; // Example notice array for badge count
 
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode)
@@ -178,9 +178,9 @@ const NavTest = () => {
                         </ul>
                     </div>
                     <div className='navbar-end '>
-                        <div className='indicator me-6'>
+                        <div className='indicator me-5'>
                             <span
-                                className={`${notices?.length > 0 && 'indicator-item badge badge-warning'
+                                className={`${notices?.length > 0 && 'absolute -right-1 -top-3 flex size-5 items-center justify-center rounded-full bg-red-500 text-center text-[13px] text-white'
                                     } `}
                             >
                                 {notices ? notices?.length : ''}
@@ -251,12 +251,12 @@ const NavTest = () => {
                                     <NavLink
                                         to="login"
                                         className={({ isActive }) => (isActive ? "regisLogin" : "regisLogin")}>
-                                        Login
+                                        Sign In
                                     </NavLink>
                                     <NavLink
                                         to="registrationView"
                                         className={({ isActive }) => (isActive ? "regisLogin ml-2" : "regisLogin ml-2")}>
-                                        Registration
+                                        Sign Up
                                     </NavLink>
                                 </div>
                             </>

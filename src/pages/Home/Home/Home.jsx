@@ -42,7 +42,7 @@ const Home = () => {
                 {/* Banner Card section*/}
                 <Banner />
                 {/* Why Choose Us Card section*/}
-                <div className="md:-mt-28">
+                <div className="">
                     <WhyChooseUs />
                 </div>
                 {/* Tutor Card section*/}
