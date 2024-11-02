@@ -33,7 +33,7 @@ const TuitionJobCard = () => {
                     </div>
 
                     {/* Job Category Slider Tabs section */}
-                    <div className="md:col-span-4 col-span-1  shadow-xl rounded-xl bg-black/5 flex items-center gap-2  py-6 px-8 mr-6">
+                    <div className="md:col-span-4 col-span-1  shadow-xl rounded-xl flex items-center gap-2  py-6 px-8 mr-6">
                         <JobCategorySliderTabs />
                     </div>
                 </div>

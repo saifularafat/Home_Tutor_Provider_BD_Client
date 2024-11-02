@@ -1,79 +1,98 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import "./jobCategorySliderTabs.css"
+import { useRef, useState, useEffect } from "react";
+import "./jobCategorySliderTabs.css";
 
 const JobCategorySliderTabs = () => {
+    const tabsBoxRef = useRef(null); 
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [maxScrollWidth, setMaxScrollWidth] = useState(0);
 
-    const tabsBox = document.querySelector(".tabs-box")
-    let isDragging = true;
+    const cities = [
+        { name: "Dhaka", bgColor: "bg-blue-400" },
+        { name: "Chittagong", bgColor: "bg-orange-400" },
+        { name: "Barisal", bgColor: "bg-red-500" },
+        { name: "Khulna", bgColor: "bg-sky-500" },
+        { name: "Syhlet", bgColor: "bg-lime-400" },
+        { name: "Rangpur", bgColor: "bg-green-500" },
+        { name: "Rashahi", bgColor: "bg-teal-600" },
+        { name: "Cumilla", bgColor: "bg-cyan-600" },
+        { name: "Maimonsing", bgColor: "bg-pink-400" },
+    ];
 
-    const dragging = (e) => {
-        if (!isDragging) return;
-        tabsBox.scrollLeft -= e.movementX;
-    }
+    useEffect(() => {
+        const tabsBox = tabsBoxRef.current;
+        if (tabsBox) {
+            setMaxScrollWidth(tabsBox.scrollWidth - tabsBox.clientWidth);
+        }
 
-    const dragStop = () => {
-        isDragging = false;
-    }
+        const handleMouseMove = (e) => {
+            if (!isDragging) return;
+            tabsBox.scrollLeft -= e.movementX;
+            setScrollPosition(tabsBox.scrollLeft);
+        };
 
-    tabsBox.addEventListener("mousedown", () => isDragging = true)
-    tabsBox.addEventListener("mousemove", dragging)
-    document.addEventListener("mouseup", dragStop)
+        const handleMouseUp = () => setIsDragging(false);
+
+        // Event listeners for dragging
+        tabsBox.addEventListener("mousemove", handleMouseMove);
+        document.addEventListener("mouseup", handleMouseUp);
+
+        return () => {
+            tabsBox.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
+        };
+    }, [isDragging]);
+
+    const handleScroll = (direction) => {
+        const tabsBox = tabsBoxRef.current;
+        const scrollAmount = direction === "left" ? -350 : 350;
+        tabsBox.scrollTo({
+            left: tabsBox.scrollLeft + scrollAmount,
+            behavior: "smooth",
+        });
+        setScrollPosition(tabsBox.scrollLeft + scrollAmount);
+    };
+
+    const handleMouseDown = () => setIsDragging(true);
+
+    const isAtStart = scrollPosition <= 0;
+    const isAtEnd = scrollPosition >= maxScrollWidth;
 
     return (
-        <div className="flex items-center justify-between w-full  scroll-tars-container overflow-hidden">
-            <div className="left-arrow bg-sky-600 p-2 rounded-full text-white hover:bg-blue-700 transition-all duration-200 hover:translate-y-0.5">
-                <FaChevronLeft className="text-2xl" id="left" />
+        <div className="flex items-center justify-between w-full scroll-tars-container overflow-hidden">
+            {/* Left Arrow */}
+            <div
+                className="left-arrow icon bg-sky-600 p-2 ml-5 rounded-full text-white hover:bg-blue-700 transition-all duration-200 hover:translate-y-0.5"
+                onClick={() => handleScroll("left")}
+                style={{ display: isAtStart ? "none" : "flex" }}
+            >
+                <FaChevronLeft className="text-2xl " />
             </div>
-            <ul className="flex items-center gap-7 px-4 py-4 mx-10 tabs-box">
-                <li>
-                    <Link to="" className="bg-blue-400 py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide">
-                        Dhaka
-                    </Link>
-                </li>
-                <li>
-                    <Link to="" className="bg-orange-400 py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide">
-                        Chittagong
-                    </Link>
-                </li>
-                <li>
-                    <Link to="" className="bg-red-500 py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide">
-                        Barisal
-                    </Link>
-                </li>
-                <li>
-                    <Link to="" className="bg-sky-500 py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide">
-                        Khulna
-                    </Link>
-                </li>
-                <li>
-                    <Link to="" className="bg-lime-400 py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide">
-                        Syhlet
-                    </Link>
-                </li>
-                <li>
-                    <Link to="" className="bg-green-500 py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide">
-                        Rangpur
-                    </Link>
-                </li>
-                <li>
-                    <Link to="" className="bg-teal-600 py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide">
-                        Rashahi
-                    </Link>
-                </li>
-                <li>
-                    <Link to="" className="bg-cyan-600 py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide">
-                        Cumilla
-                    </Link>
-                </li>
-                <li>
-                    <Link to="" className="bg-pink-400 py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide">
-                        Maimonsing
-                    </Link>
-                </li>
+            
+            {/* Tabs List */}
+            <ul
+                className="flex items-center gap-7 px-4 py-4 mx-10 tabs-box scroll-smooth"
+                ref={tabsBoxRef}
+                onMouseDown={handleMouseDown}
+            >
+                {cities.map((city, index) => (
+                    <li key={index}>
+                        <Link to="" className={`${city.bgColor} py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide`}>
+                            {city.name}
+                        </Link>
+                    </li>
+                ))}
             </ul>
-            <div className="right-arrow bg-sky-600 p-2 rounded-full text-white hover:bg-blue-700 transition-all duration-200 hover:translate-y-0.5">
-                <FaChevronRight className="text-2xl" id="right" />
+            
+            {/* Right Arrow */}
+            <div
+                className="right-arrow icon bg-sky-600 p-2 mr-5 rounded-full text-white hover:bg-blue-700 transition-all duration-200 hover:translate-y-0.5"
+                onClick={() => handleScroll("right")}
+                style={{ display: isAtEnd ? "none" : "flex" }}
+            >
+                <FaChevronRight className="text-2xl" />
             </div>
         </div>
     );
