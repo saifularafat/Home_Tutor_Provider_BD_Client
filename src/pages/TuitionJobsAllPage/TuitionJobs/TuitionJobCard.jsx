@@ -16,15 +16,15 @@ const TuitionJobCard = () => {
     }
     return (
         <>
-            <div className="py-10">
+            <div className="py-3">
                 {/* search and filter section */}
-                <div className="grid md:grid-cols-6 grid-cols-1 gap-5 rounded-lg bg-black/10 py-6 pl-4 ">
-                    <div className="md:col-span-2 col-span-1 px-6 rounded-xl bg-black/10 flex items-center gap-2">
+                <div className="grid md:grid-cols-6 grid-cols-1 gap-5 rounded-lg py-6 pl-4 ">
+                    <div className="md:col-span-2 col-span-1 px-6 rounded-xl shadow-xl flex items-center gap-2">
                         <input
                             onChange={(e) => setSearchText(e.target.value)}
                             type="text"
                             placeholder="Search Your Tuition Code"
-                            className=" px-9 py-3 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400" />
+                            className=" px-9 py-[10px] placeholder:text-slate-300 text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400 focus:outline-double" />
                         <button
                             onClick={handlerSearch}
                             className=" py-[9px] px-3 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider">
