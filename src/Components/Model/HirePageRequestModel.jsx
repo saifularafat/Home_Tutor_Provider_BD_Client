@@ -1,14 +1,14 @@
 
 const HirePageRequestModel = ({ openModal, setOpenModal, actionBtn }) => {
     return (
-        <div className=" max-w-2xl mx-auto flex items-center justify-center pt-6">
+        <div className="md:max-w-2xl mx-auto flex items-center justify-center md:pt-6 pt-5">
             <button onClick={() => setOpenModal(true)} className="rounded-md bg-blue-500 hover:bg-blue-600 transition-all duration-200 px-4 py-[6px] text-white">
                 {actionBtn}
             </button>
             <div onClick={() => setOpenModal(false)} className={`fixed z-[100] flex items-center justify-center ${openModal ? 'opacity-1 visible' : 'invisible opacity-0'} inset-0 bg-black/20 backdrop-blur-sm duration-100`}>
-                <div onClick={(e_) => e_.stopPropagation()} className={`absolute max-w-3xl h-[470px] overflow-y-scroll scroll-smooth  rounded-lg bg-white  p-6 text-center drop-shadow-2xl dark:bg-gray-800 dark:text-white ${openModal ? 'opacity-1 translate-y-0 duration-300' : 'translate-y-20 opacity-0 duration-150'}`}>
+                <div onClick={(e_) => e_.stopPropagation()} className={`absolute max-w-3xl h-[470px] overflow-y-scroll scroll-smooth  rounded-lg bg-white md:p-6 p-3 text-center drop-shadow-2xl dark:bg-gray-800 dark:text-white ${openModal ? 'opacity-1 translate-y-0 duration-300' : 'translate-y-20 opacity-0 duration-150'}`}>
                     <div className="flex flex-col items-center justify-center space-y-4">
-                        <h6 className="text-center text-2xl font-bold text-slate-900 pb-3">Terms and Conditions </h6>
+                        <h6 className="text-center text-2xl font-bold text-slate-900 md:pb-3 pb-0 md:pt-0 pt-7">Terms and Conditions </h6>
 
                         <div className="text-left">
                             <h4 className="text-lg font-semibold"> সার্ভিস চার্জ প্রদান:</h4>
@@ -44,7 +44,7 @@ const HirePageRequestModel = ({ openModal, setOpenModal, actionBtn }) => {
                             <h4 className="text-lg font-semibold">ডেমো ক্লাসের ফলাফল:</h4>
                             <p>গার্ডিয়ান এবং ছাত্র-ছাত্রীর পছন্দ অনুযায়ী ডেমো ক্লাস হলে টিউটরকে পড়ানোর জন্য নিশ্চিত করা হবে। অন্যথায়, ২টি ডেমো ক্লাস নেওয়ার পর টিউশন কনফর্ম না হলে, এর জন্য কোন টাকা দাবি করা যাবে না।</p>
                         </div>
-                        <div className='flex items-end justify-end w-full mt-2 gap-2'>
+                        <div className='flex items-end justify-end w-full mt-2 gap-2 md:pb-2 pb-8'>
                             <div>
                                 <button onClick={() => setOpenModal(false)} className="rounded-md border border-rose-600 px-6 py-2 text-sm text-rose-600 hover:bg-rose-600 hover:text-white">
                                     No
