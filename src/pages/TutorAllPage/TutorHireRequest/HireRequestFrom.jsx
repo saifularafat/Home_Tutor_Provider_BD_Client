@@ -139,7 +139,7 @@ const HireRequestFrom = () => {
                             </div>
 
                         </div>
-                        <div className="md:flex items-center mt-3 space-x-3">
+                        <div className="md:flex items-center mt-3 md:space-x-3">
                             <div className="md:w-1/2 w-full">
                                 <label className="label ">
                                     <span className="label-text md:text-xl text-xl font-semibold">Address *</span>

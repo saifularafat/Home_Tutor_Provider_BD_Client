@@ -53,7 +53,7 @@ const ReviewsCard = () => {
 
     return (
         <>
-            <div className="flex flex-wrap justify-center gap-7 pb-10">
+            <div className="flex flex-wrap justify-center gap-7 md:pb-10 pb-1">
                 {reviews.map((review) => {
                     const words = review.reviewText.split(" ");
                     const shortText = words.slice(0, 17).join(" ");

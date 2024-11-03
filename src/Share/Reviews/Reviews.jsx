@@ -4,8 +4,8 @@ const Reviews = () => {
     return (
         <div className="max-w-5xl mx-auto md:pb-10 pb-5 md:px-10 px-4 shadow-lg rounded-lg bg-white">
             <div className="divider"><span className="text-xl font-semibold text-slate-500">Ratings and Reviews</span></div>
-            <div className="grid grid-cols-6 gap-5">
-                <div className="col-span-2 bg-blue-100 w-full py-8 rounded-lg text-center space-y-3">
+            <div className="grid md:grid-cols-6 grid-cols-1 gap-5">
+                <div className="md:col-span-2 col-span-1 bg-blue-100 w-full py-8 rounded-lg text-center space-y-3">
                     <h6 className="text-4xl font-bold text-slate-700">4.50</h6>
                     <div>
                         <div className="rating rating-md">
@@ -32,7 +32,7 @@ const Reviews = () => {
                     </div>
                     <p className="text-base font-medium">365 Reviews</p>
                 </div>
-                <div className="col-span-4  w-full rounded-lg text-center space-y-3">
+                <div className="md:col-span-4 col-span-1 w-full rounded-lg text-center space-y-3">
                     <div className="flex items-center gap-3">
                         <p className="text-lg font-medium text-slate-600">5</p>
                         <input type="range" min={0} max="100" value="80" className="range range-md [--range-shdw:#FB923C]" />
@@ -56,7 +56,7 @@ const Reviews = () => {
                 </div>
             </div>
 
-            <div className="py-6 ">
+            <div className="md:py-6 py-3">
                 <ReviewsCard />
             </div>
         </div>

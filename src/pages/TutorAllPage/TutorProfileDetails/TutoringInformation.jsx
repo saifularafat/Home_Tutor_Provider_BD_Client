@@ -1,10 +1,10 @@
 
 const TutoringInformation = () => {
     return (
-        <div className="py-8">
+        <div className="md:py-8 py-4">
             <h3 className="text-2xl font-bold text-[#165b81]">Tutoring Information</h3>
-            <div className="flex justify-between gap-5">
-                <div className="w-1/2 pt-4">
+            <div className="md:flex justify-between md:gap-5">
+                <div className="md:w-1/2 w-full md:pt-4 pt-2">
                     <p className="text-base font-normal"><span className="text-base font-medium text-slate-700">Preferred Tutoring Location:</span> Shewrapara, Kafrul, Pallabi, Mirpur-14, Bonani, kakoali, Vasantake,
                         Matikata, Tejgaon, Dhaka সেনানিবাস,
                     </p>

@@ -253,15 +253,11 @@ const NavTest = () => {
                                         className={({ isActive }) => (isActive ? "regisLogin" : "regisLogin")}>
                                         Sign In
                                     </NavLink>
-                                    <NavLink
-                                        to="registrationView"
-                                        className={({ isActive }) => (isActive ? "regisLogin ml-2" : "regisLogin ml-2")}>
-                                        Sign Up
-                                    </NavLink>
+
                                 </div>
                             </>
                         )}
-                        <div>
+                        {/* <div>
                             <button onClick={toggleDarkMode} className='mx-3 text-lg'>
                                 {isDarkMode == true ? (
                                     <FaSun className=''></FaSun>
@@ -269,7 +265,7 @@ const NavTest = () => {
                                     <FaMoon></FaMoon>
                                 )}
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </nav>
