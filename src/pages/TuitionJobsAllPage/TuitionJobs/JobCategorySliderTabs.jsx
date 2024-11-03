@@ -65,23 +65,23 @@ const JobCategorySliderTabs = () => {
         <div className="flex items-center justify-between w-full scroll-tars-container overflow-hidden">
             {/* Left Arrow */}
             <div
-                className="left-arrow icon bg-sky-600  p-2 ml-5 rounded-full text-white hover:bg-blue-700 transition-all duration-200 hover:translate-y-0.5"
+                className="left-arrow icon bg-sky-600 md:p-2 p-1 md:ml-5 ml-2 rounded-full text-white hover:bg-blue-700 transition-all duration-200 hover:translate-y-0.5"
                 onClick={() => handleScroll("left")}
                 style={{ display: isAtStart ? "none" : "flex" }}
             >
-                <FaChevronLeft className="text-2xl " />
+                <FaChevronLeft className="md:text-2xl text-lg " />
             </div>
 
             {/* Tabs List */}
             <ul
-                className="flex items-center gap-7 px-4 py-4 mx-10 tabs-box scroll-smooth"
+                className="flex items-center md:gap-7 gap-2 md:px-4 px-1 py-4 md:mx-10 tabs-box scroll-smooth"
                 ref={tabsBoxRef}
                 onMouseDown={handleMouseDown}
             >
                 {cities.map((city, index) => (
                     <li key={index}>
-                        <Link to="" className={`${city.bgColor} py-2 px-3 text-lg font-medium text-white rounded-2xl tracking-wide flex gap-2 items-center`}>
-                            {city.name} <span className="text-sm font-normal text-white">({city.number})</span>
+                        <Link to="" className={`${city.bgColor} md:py-2 py-[5px] md:px-3 px-2 text-lg font-medium text-white rounded-2xl tracking-wide flex items-center md:gap-2 gap-1`}>
+                            {city.name} <span className="md:text-sm font-normal text-white">({city.number})</span>
                         </Link>
                     </li>
                 ))}
@@ -89,11 +89,11 @@ const JobCategorySliderTabs = () => {
 
             {/* Right Arrow */}
             <div
-                className="right-arrow icon bg-sky-600 p-2 mr-5 rounded-full text-white hover:bg-blue-700 transition-all duration-200 hover:translate-y-0.5"
+                className="right-arrow icon bg-sky-600 md:p-2 p-1 md:ml-5 ml-2 rounded-full text-white hover:bg-blue-700 transition-all duration-200 hover:translate-y-0.5"
                 onClick={() => handleScroll("right")}
                 style={{ display: isAtEnd ? "none" : "flex" }}
             >
-                <FaChevronRight className="text-2xl" />
+                <FaChevronRight className="md:text-2xl text-lg" />
             </div>
         </div>
     );
