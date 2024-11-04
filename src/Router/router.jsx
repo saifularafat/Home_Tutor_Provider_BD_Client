@@ -13,6 +13,7 @@ import TuitionDetails from "../pages/TuitionJobsAllPage/TuitionDetails/TuitionDe
 import TutorProfileDetails from "../pages/TutorAllPage/TutorProfileDetails/TutorProfileDetails";
 import TutorHireRequest from "../pages/TutorAllPage/TutorHireRequest/TutorHireRequest";
 import TermsOfUser from "../pages/TermsOfUser/TermsOfUser";
+import Dashboard from "../Layouts/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -78,6 +79,26 @@ const router = createBrowserRouter([
         path: "/registration/coaching",
         element: <Registration />
     },
+
+
+
+
+    ///// DASHBOARD /////
+    {
+        path: "/dashboard",
+        element: (
+            <Dashboard />
+        ),
+        children: [
+            // Admin Dashboard Routes
+            {
+                path: "/dashboard/userHome",
+                element: (
+                        <Dashboard />
+                ),
+            },
+        ]
+    }
 
 ]);
 export default router;
