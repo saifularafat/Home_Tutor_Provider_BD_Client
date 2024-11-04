@@ -12,7 +12,7 @@ const RegistrationView = () => {
         setSelectedOption(event.target.value)
     }
     return (
-        <div className="container mx-auto py-12">
+        <div className="container mx-auto md:py-12 py-5">
             <h3 className="text-4xl font-extrabold tracking-wider text-slate-800 text-center">Join Us Today</h3>
             <div className='grid md:grid-cols-3 grid-cols-1 mx-3 md:mx-0 space-y-5 md:gap-5 items-center md:py-12 py-1'>
                 <label
@@ -62,7 +62,7 @@ const RegistrationView = () => {
                     />
                 </label>
                 <label
-                    className={`cursor-pointer grid md:grid-cols-2 grid-cols-1 hover:scale-105 transition-all duration-200 md:w-[400px] rounded-lg
+                    className={`cursor-pointer grid md:grid-cols-2 grid-cols-1 hover:scale-105 transition-all duration-200 md:w-[400px] rounded-lg mt-9
            ${selectedOption === 'coaching' ? ' bg-red-600' : 'bg-red-400'
                         }
            

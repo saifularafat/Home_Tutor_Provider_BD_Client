@@ -1,7 +1,6 @@
 import './Navbar.css'
 import { AiFillBell } from 'react-icons/ai'
 import { Link, NavLink } from 'react-router-dom'
-import logo from '../../assets/leaf.jpg'
 import Headroom from 'react-headroom'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
@@ -70,9 +69,10 @@ const NavTest = () => {
                 transition: 'all .5s ease-in-out'
             }}
         >
-            <nav className='z-50 text-white backdrop-blur-lg bg-black/40'>
-                <div className='navbar z-[40] container mx-auto  sticky top-0'>
+            <nav className='z-50 text-white backdrop-blur-lg bg-black/50'>
+                <div className='navbar z-[40] container mx-auto sticky top-0'>
                     <div className='navbar-start'>
+                        {/* mobile nav Ber section*/}
                         <div className='dropdown'>
                             <label tabIndex={0} className='btn btn-ghost lg:hidden'>
                                 <svg
@@ -92,29 +92,29 @@ const NavTest = () => {
                             </label>
                             <ul
                                 tabIndex={0}
-                                className='z-50 shadow dropdown-content rounded-box bg-black/80 md:bg-black/40 backdrop-blur'
+                                className='z-50 h-screen w-40 space-y-3 dropdown-content -left-2 p-4 top-14 bg-black/90 md:bg-black/40 backdrop-blur'
                             >
                                 <li>
                                     <NavLink to='/'
-                                        className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                        className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
                                         Home
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="tuition-jobs"
-                                        className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                        className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
                                         Tuition Jobs
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to='/tutor-profile'
-                                        className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                        className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
                                         Tutor Profile
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to='/contact-us'
-                                        className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                        className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
                                         Contact Us
                                     </NavLink>
                                 </li>
@@ -123,9 +123,15 @@ const NavTest = () => {
                                         {isAdmin ? (
                                             ''
                                         ) : isInstructor ? (
-                                            <Link to='/createParentMeeting'>Create Parent Meet</Link>
+                                            <NavLink to='/createParentMeeting'
+                                                className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
+                                                Create Parent Meet
+                                            </NavLink>
                                         ) : (
-                                            <Link to='/joinTutorMeeting'>Join Meeting</Link>
+                                            <NavLink to='/joinTutorMeeting'
+                                                className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
+                                                Join Meeting
+                                            </NavLink>
                                         )}
                                     </li>
                                 )}
@@ -135,9 +141,8 @@ const NavTest = () => {
 
                         {/* Logo Component */}
                         <Logo />
-
-
                     </div>
+                    {/* Desktop middle nav Ber*/}
                     <div className='hidden navbar-center lg:flex'>
                         <ul className=' flex items-center gap-x-1 tracking-wide'>
                             <li>
@@ -177,6 +182,8 @@ const NavTest = () => {
                             )}
                         </ul>
                     </div>
+
+                    {/* mobile right section navBer*/}
                     <div className='navbar-end '>
                         <div className='indicator me-5'>
                             <span
@@ -257,7 +264,7 @@ const NavTest = () => {
                                 </div>
                             </>
                         )}
-                        {/* <div>
+                        <div className='md:block hidden'>
                             <button onClick={toggleDarkMode} className='mx-3 text-lg'>
                                 {isDarkMode == true ? (
                                     <FaSun className=''></FaSun>
@@ -265,7 +272,7 @@ const NavTest = () => {
                                     <FaMoon></FaMoon>
                                 )}
                             </button>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </nav>
