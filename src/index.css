@@ -20,6 +20,14 @@
 }
 
 
+/* Dashboard Header CSS style  */
+.icon_style{
+  @apply text-2xl hover:text-emerald-400 font-medium duration-300 transition-all
+}
+.icon_right_style{
+  @apply text-3xl font-bold hover:text-emerald-400 duration-300 transition-all
+}
+
 
 /* modal Scroll style */
 .myScroll:hover::-webkit-scrollbar-thumb {

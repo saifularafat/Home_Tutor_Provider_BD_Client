@@ -35,7 +35,7 @@ const NavTest = () => {
 
     // Temporary variables for testing
     // const user = { displayName: "Test User" };
-    const user = false;
+    const user = true;
     const isAdmin = false; // Change to true/false to test admin
     const isInstructor = false; // Change to true/false to test instructor
     const notices = [1, 2, 3, 4,]; // Example notice array for badge count
