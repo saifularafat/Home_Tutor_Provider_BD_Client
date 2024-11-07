@@ -28,16 +28,16 @@ const NavTest = () => {
     }, [isDarkMode, dark])
     // const { user, logOut } = useContext(AuthContext)
     // const [isAdmin] = useAdmin()
-    // const [isInstructor] = useInstructor()
+    // const [isTutor] = useInstructor()
     // const [info] = useUser()
 
 
 
     // Temporary variables for testing
     // const user = { displayName: "Test User" };
-    const user = true;
+    const user = false
     const isAdmin = false; // Change to true/false to test admin
-    const isInstructor = false; // Change to true/false to test instructor
+    const isTutor = true; // Change to true/false to test instructor
     const notices = [1, 2, 3, 4,]; // Example notice array for badge count
 
     const toggleDarkMode = () => {
@@ -122,7 +122,7 @@ const NavTest = () => {
                                     <li>
                                         {isAdmin ? (
                                             ''
-                                        ) : isInstructor ? (
+                                        ) : isTutor ? (
                                             <NavLink to='/createParentMeeting'
                                                 className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
                                                 Create Parent Meet
@@ -173,7 +173,7 @@ const NavTest = () => {
                                 <li>
                                     {isAdmin ? (
                                         ''
-                                    ) : isInstructor ? (
+                                    ) : isTutor ? (
                                         <Link to='/createLiveExam'>Create Live Exam</Link>
                                     ) : (
                                         <Link to='/joinLiveExam'>Join Live Exam</Link>
@@ -199,7 +199,7 @@ const NavTest = () => {
                                 </Link>
                             </button>
                         </div>
-                        {user ? (
+                        {isTutor ? (
                             <div className='ml-5 dropdown dropdown-end'>
                                 <div
                                     className='list-none tooltip tooltip-bottom'
@@ -230,14 +230,14 @@ const NavTest = () => {
                                             </Link>
                                         </li>
                                         {/* Navigate to different dashboard route based on user role */}
-                                        {user && (
+                                        {isTutor && (
                                             <li>
                                                 {isAdmin ? (
-                                                    <Link to='/dashboard/adminHome'>Dashboard</Link>
-                                                ) : isInstructor ? (
-                                                    <Link to='/dashboard/instructorHome'>Dashboard</Link>
+                                                    <Link to='/dashboard/admin-home'>Dashboard</Link>
+                                                ) : isTutor ? (
+                                                    <Link to='/dashboard/tutor-home'>Dashboard</Link>
                                                 ) : (
-                                                    <Link to='/dashboard/userHome'>Dashboard</Link>
+                                                    <Link to='/dashboard/parent-Home'>Dashboard</Link>
                                                 )}
                                             </li>
                                         )}

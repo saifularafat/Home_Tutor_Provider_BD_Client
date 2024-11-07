@@ -14,6 +14,9 @@ import TutorProfileDetails from "../pages/TutorAllPage/TutorProfileDetails/Tutor
 import TutorHireRequest from "../pages/TutorAllPage/TutorHireRequest/TutorHireRequest";
 import TermsOfUser from "../pages/TermsOfUser/TermsOfUser";
 import Dashboard from "../Layouts/Dashboard";
+import ParentHome from "../pages/Deashboard/Parent/ParentHome/ParentHome";
+import TutorHome from "../pages/Deashboard/Tutor/TutorHome/TutorHome";
+import AdminHome from "../pages/Deashboard/Admin/AdminHome/AdminHome";
 
 const router = createBrowserRouter([
     {
@@ -92,9 +95,23 @@ const router = createBrowserRouter([
         children: [
             // Admin Dashboard Routes
             {
-                path: "/dashboard/userHome",
+                path: "/dashboard/admin-home",
                 element: (
-                        <Dashboard />
+                    // <ParentHome />
+                    <AdminHome />
+                ),
+            },
+            {
+                path: "/dashboard/tutor-home",
+                element: (
+                    // <ParentHome />
+                    <TutorHome />
+                ),
+            },
+            {
+                path: "/dashboard/parent-home",
+                element: (
+                    <ParentHome />
                 ),
             },
         ]
