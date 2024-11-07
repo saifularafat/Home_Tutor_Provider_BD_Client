@@ -9,6 +9,7 @@ import { AiFillNotification } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
 import { IconContext } from 'react-icons';
 import { Link, Outlet } from 'react-router-dom';
+import DashboardFooter from '../Share/DashboardFooter/DashboardFooter';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(true);
@@ -330,7 +331,7 @@ const Dashboard = () => {
 
             {/* Dashboard main content */}
             <div className={` ${open ? 'md:pl-10 pl-2 md:pr-5 pr-2' : 'md:pl-16 pl-2 md:pr-8 pr-2'
-                }  flex-1  overflow-y-auto duration-500 transition-all h-[100vh] scroll-smooth ${isAdmin
+                }  flex-1  overflow-y-auto duration-500 transition-all h-[100vh] scroll-smooth relative ${isAdmin
                     ? ''
                     : isTutor
                         ? ''
@@ -340,7 +341,11 @@ const Dashboard = () => {
                 <div className='w-full sticky top-0 z-50 overflow-x-hidden'>
                     <DashboardHeader open={open} setOpen={setOpen} />
                 </div>
-                <Outlet />
+                <div className="min-h-[calc(100vh-136px)]">
+                    <Outlet />
+                </div>
+
+                <DashboardFooter />
             </div>
         </div >
     );
