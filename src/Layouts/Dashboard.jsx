@@ -120,7 +120,7 @@ const Dashboard = () => {
         // Tutor router END
         {
             title: 'Tutor Home ',
-            path: '/dashboard/TutorHome',
+            path: '/dashboard/tutor-home',
             icon: iconMappings.RoleHome,
             role: 'isTutor',
             gap: true
@@ -210,11 +210,12 @@ const Dashboard = () => {
     const generalMenus = Menus.filter(menu => menu.role === 'general')
 
     return (
-        <div className="flex gap-x-5 overflow-x-hidden overflow-y-auto">
-            <div className={`${open ? 'md:w-64 p-3' : 'w-16 p-1 text-center'} duration-200 fixed transition-all bg-slate-500 relative`}>
+        <div className="flex overflow-x-hidden overflow-y-auto bg-slate-200">
+            {/* dashboard side Ber */}
+            <div className={`${open ? 'md:w-64 p-3' : 'w-16 p-1 text-center'} shadow-2xl duration-200 fixed transition-all bg-white relative`}>
                 <FaChevronRight
                     onClick={() => setOpen(!open)}
-                    className={`${open && 'rotate-180 transition-all duration-500'} absolute top-9 -right-3 md:w-8 md:h-8 w-7 h-7 bg-slate-800 text-white cursor-pointer rounded-full border-2 border-blue-200 p-1`}
+                    className={`${open && 'rotate-180 transition-all duration-500'} absolute top-9 md:-right-3 -right-[5px] md:w-8 md:h-8 w-5 h-5 bg-slate-800 text-white cursor-pointer rounded-full border-2 border-blue-200 p-1`}
                 />
 
                 <div className={`flex gap-x-4 items-center`}>
@@ -222,7 +223,7 @@ const Dashboard = () => {
                         <img src={logo} alt="" className={`${open ? 'w-16 h-16 mx-auto' : ' w-9 h-9 mx-auto'} cursor-pointer duration-500 bg-white rounded-xl`} />
                         {
                             open ? <>
-                                <h2 className={`${!open && 'scale-0'} text-white text-xl font-medium origin-left duration-300`}>Home Tutor Provider<sup>BD</sup></h2>
+                                <h2 className={`${!open && 'scale-0'} text-slate-800 text-xl md:py-2 font-medium origin-left duration-300`}>Home Tutor Provider<sup>BD</sup></h2>
                                 <Link to="/"
                                     className='text-xs text-white text-center py-[2px] px-2 hover:bg-orange-700 hover:underline transition-all duration-300 bg-orange-500 rounded-full w-1/2 mx-auto '>
                                     visit website
@@ -262,14 +263,14 @@ const Dashboard = () => {
                         : //  Instructor menus
                         isTutor
                             ? isTutorMenus.map((Menu, index) => (
-                                <Link to={Menu.path} key={index} className={`flex rounded-md p-2 cursor-pointer hover: hover:bg-primary text-sm items-center gap-x-4 ${Menu.gap ? 'mt-9' : 'mt-2'
+                                <Link to={Menu.path} key={index} className={`flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-base items-center gap-x-4 transition-all duration-200 ${Menu.gap ? 'mt-9' : 'mt-2'
                                     } ${index === 0 && ' hover:bg-primary'}`}>
                                     <li
 
                                         className='flex items-center gap-x-4'
                                     >
 
-                                        <IconContext.Provider value={{ className: 'react-icon' }}>
+                                        <IconContext.Provider value={{ className: 'react-icon text-lg' }}>
                                             <Menu.icon />
                                         </IconContext.Provider>
                                         <span
@@ -325,25 +326,23 @@ const Dashboard = () => {
                     ))}
                 </ul>
             </div>
-            <div className='px-3 flex-1 h- h-[100vh] overflow-x-hidden'>
-                <div className='w-full sticky top-0 z-50'>
+
+
+            {/* Dashboard main content */}
+            <div className={` ${open ? 'md:pl-10 pl-2 md:pr-5 pr-2' : 'md:pl-16 pl-2 md:pr-8 pr-2'
+                }  flex-1  overflow-y-auto duration-500 transition-all h-[100vh] scroll-smooth ${isAdmin
+                    ? ''
+                    : isTutor
+                        ? ''
+                        : ''
+                }`}
+            >
+                <div className='w-full sticky top-0 z-50 overflow-x-hidden'>
                     <DashboardHeader open={open} setOpen={setOpen} />
                 </div>
                 <Outlet />
             </div>
-            {/* Dashboard main content */}
-            {/* <div
-                className={` ${open ? 'pl-60 pr-4' : 'pl-16 pr-2'
-                    }  flex-1  overflow-y-auto  duration-500 transition-all h-[100vh] ${isAdmin
-                        ? ''
-                        : isTutor
-                            ? ''
-                            : ''
-                    }`}
-            >
-                <Outlet></Outlet>
-            </div> */}
-        </div>
+        </div >
     );
 };
 
