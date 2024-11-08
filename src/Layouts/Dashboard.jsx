@@ -10,6 +10,7 @@ import { BiBookAdd } from 'react-icons/bi';
 import { IconContext } from 'react-icons';
 import { Link, Outlet } from 'react-router-dom';
 import DashboardFooter from '../Share/DashboardFooter/DashboardFooter';
+import { IoBagAdd } from 'react-icons/io5';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(true);
@@ -33,7 +34,8 @@ const Dashboard = () => {
         Live: RiLiveFill,
         Blog: FaComment,
         Notice: AiFillNotification,
-        BookAdd: BiBookAdd
+        BookAdd: BiBookAdd,
+        AddJob: IoBagAdd
     }
 
     const Menus = [
@@ -129,7 +131,7 @@ const Dashboard = () => {
         {
             title: 'Apply Job',
             path: '/dashboard/applyJob',
-            icon: iconMappings.Question,
+            icon: iconMappings.AddJob,
             role: 'isTutor'
         },
         {
