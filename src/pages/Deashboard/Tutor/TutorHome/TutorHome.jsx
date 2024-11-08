@@ -37,7 +37,7 @@ const TutorHome = () => {
                 </Link>
             </div>
             <div className="pt-7">
-                <DBButton link='/dashboard/tutor-update-profile' buttonBG='bg-blue-500' title='update Profile' />
+                <DBButton link='/dashboard/tutor-update-profile' buttonBG='bg-blue-500' hoverBG='hover:bg-blue-700' title='update Profile' />
             </div>
         </div>
     );
