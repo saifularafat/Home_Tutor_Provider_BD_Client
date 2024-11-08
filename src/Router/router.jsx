@@ -17,6 +17,7 @@ import Dashboard from "../Layouts/Dashboard";
 import ParentHome from "../pages/Deashboard/Parent/ParentHome/ParentHome";
 import TutorHome from "../pages/Deashboard/Tutor/TutorHome/TutorHome";
 import AdminHome from "../pages/Deashboard/Admin/AdminHome/AdminHome";
+import TutorUpdateProfile from "../pages/Deashboard/Tutor/TutorHome/TutorUpdateProfile/TutorUpdateProfile";
 
 const router = createBrowserRouter([
     {
@@ -106,6 +107,13 @@ const router = createBrowserRouter([
                 element: (
                     // <ParentHome />
                     <TutorHome />
+                ),
+            },
+            {
+                path: "/dashboard/tutor-update-profile",
+                element: (
+                    // <ParentHome />
+                    <TutorUpdateProfile />
                 ),
             },
             {
