@@ -1,5 +1,5 @@
 
-const StepFirstUpdate = () => {
+const StepFirstFrom = () => {
     return (
         <div>
             
@@ -7,4 +7,4 @@ const StepFirstUpdate = () => {
     );
 };
 
-export default StepFirstUpdate;
+export default StepFirstFrom;
