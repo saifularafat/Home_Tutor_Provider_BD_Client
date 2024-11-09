@@ -1,11 +1,14 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 const StepSecondForm = ({ completeStep }) => {
-  const [searchTerm, setSearchTerm] = useState(''); // Holds search input
-  const [selectedValue, setSelectedValue] = useState(''); // Holds selected option
-  const [showDropdown, setShowDropdown] = useState(false); // Controls dropdown visibility
-
+  const { register, handleSubmit, watch, setValue } = useForm();
+  const searchTerm = watch('searchTerm', ''); // Watch search term input
+  const selectedValue = watch('selectedValue', ''); // Watch selected dropdown value
   const dropdownRef = useRef(null); // Ref for dropdown container
+
+  // State for dropdown visibility
+  const [showDropdown, setShowDropdown] = useState(false);
 
   // Static options for dropdown
   const options = [
@@ -23,12 +26,6 @@ const StepSecondForm = ({ completeStep }) => {
     option.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Update search term and keep dropdown open
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-    setShowDropdown(true); // Show dropdown while typing
-  };
-
   // Show dropdown on input click
   const handleInputClick = () => {
     setShowDropdown(true);
@@ -36,16 +33,16 @@ const StepSecondForm = ({ completeStep }) => {
 
   // Set selected value, clear search, and close dropdown
   const handleOptionClick = (option) => {
-    setSelectedValue(option);
-    setSearchTerm(''); // Clear the search term after selection
-    setShowDropdown(false);
+    setValue('selectedValue', option); // Update selected value in form
+    setValue('searchTerm', ''); // Clear search term
+    setShowDropdown(false); // Hide dropdown
   };
 
-  // Close dropdown when clicking outside of it
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowDropdown(false); // Close dropdown if click is outside
+        setShowDropdown(false);
       }
     };
 
@@ -55,18 +52,32 @@ const StepSecondForm = ({ completeStep }) => {
     };
   }, []);
 
-  return (
-    <div className="p-4" ref={dropdownRef}>
-      <h2 className="text-2xl mb-4">Select a Document</h2>
+  // Handle form submission
+  const onSubmit = (data) => {
+    const formData = {
+      selectedDocument: data.selectedValue,
+      classValue: data.classValue,
+      groupValue: data.groupValue,
+      resultValue: data.resultValue,
+    };
+    console.log('object -=-------;....>', data);
+    console.log('formData -=-------;.... formData>', formData);
+    completeStep(formData); // Pass form data to parent
+  };
 
-      {/* Search Input */}
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="p-4" ref={dropdownRef}>
+      <h2 className="text-2xl mb-4">Academic Information</h2>
+
+      {/* Dropdown Input */}
+      <label className="block mb-1">Select Document</label>
       <input
         type="text"
         placeholder="Start typing to search..."
+        {...register('searchTerm')}
         value={selectedValue || searchTerm}
-        onChange={handleSearchChange}
         onClick={handleInputClick}
-        className="block w-full border border-gray-300 rounded px-3 py-2"
+        className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
       />
 
       {/* Dropdown Options */}
@@ -84,12 +95,47 @@ const StepSecondForm = ({ completeStep }) => {
                 </div>
               ))
             ) : (
-              <p className="p-4 text-gray-500">No matching your University</p>
+              <p className="p-4 text-gray-500">No matching documents found</p>
             )}
           </div>
         </div>
       )}
-    </div>
+
+      {/* Class Input */}
+      <label className="block mb-1 mt-4">Class</label>
+      <input
+        type="text"
+        placeholder="Enter your class"
+        {...register('classValue')}
+        className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
+      />
+
+      {/* Group/Subject Input */}
+      <label className="block mb-1">Group/Subject</label>
+      <input
+        type="text"
+        placeholder="Enter your group/subject"
+        {...register('groupValue')}
+        className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
+      />
+
+      {/* Result Input */}
+      <label className="block mb-1">Result</label>
+      <input
+        type="text"
+        placeholder="Enter your result"
+        {...register('resultValue')}
+        className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
+      />
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+      >
+        Save and Next
+      </button>
+    </form>
   );
 };
 
