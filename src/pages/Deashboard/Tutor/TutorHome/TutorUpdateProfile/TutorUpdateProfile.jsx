@@ -91,20 +91,17 @@ const TutorUpdateProfile = () => {
         {currentStep === 1 && (
           <div className='bg-white rounded-2xl shadow-xl'>
             {/* STEP 01 */}
-            <h3 className='text-center text-2xl font-semibold pt-4'>পারসোনাল ইনফর্মেশন</h3>
             <StepFirstFrom completeStep={completeStep} />
           </div>
         )}
         {currentStep === 2 && (
           <div className='bg-white rounded-2xl shadow-xl'>
             {/* STEP 02 */}
-            <h3 className='text-center text-xl font-semibold pt-4'>একাডেমিক ইনফর্মেশন</h3>
             <StepSecondFrom completeStep={completeStep} />
           </div>)}
         {currentStep === 3 && (
           <div className='bg-white rounded-2xl shadow-xl'>
-            {/* STEP 01 */}
-            <h3 className='text-center text-2xl font-semibold pt-4'>অন্যান্য ইনফর্মেশন</h3>
+            {/* STEP 03 */}
             <StepThirdForm completeStep={completeStep} />
           </div> 
         )}

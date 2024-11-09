@@ -67,7 +67,7 @@ const StepSecondForm = ({ completeStep }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-4" ref={dropdownRef}>
-      <h2 className="text-2xl mb-4">Academic Information</h2>
+      <h3 className='text-center text-xl font-semibold pt-4'>একাডেমিক ইনফর্মেশন</h3>
 
       {/* Dropdown Input */}
       <label className="block mb-1">Select Document</label>
