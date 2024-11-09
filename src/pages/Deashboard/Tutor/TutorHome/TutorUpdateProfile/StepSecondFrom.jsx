@@ -102,31 +102,31 @@ const StepSecondForm = ({ completeStep }) => {
       )}
 
       {/* Class Input */}
-      <label className="block mb-1 mt-4">Class</label>
+      {/* <label className="block mb-1 mt-4">Class</label>
       <input
         type="text"
         placeholder="Enter your class"
         {...register('classValue')}
         className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
-      />
+      /> */}
 
       {/* Group/Subject Input */}
-      <label className="block mb-1">Group/Subject</label>
+      {/* <label className="block mb-1">Group/Subject</label>
       <input
         type="text"
         placeholder="Enter your group/subject"
         {...register('groupValue')}
         className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
-      />
+      /> */}
 
       {/* Result Input */}
-      <label className="block mb-1">Result</label>
+      {/* <label className="block mb-1">Result</label>
       <input
         type="text"
         placeholder="Enter your result"
         {...register('resultValue')}
         className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
-      />
+      /> */}
 
       {/* Submit Button */}
       <button
