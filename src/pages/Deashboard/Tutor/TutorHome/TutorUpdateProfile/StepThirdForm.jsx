@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { GiBoxUnpacking } from "react-icons/gi";
+import PreferableClassOptions from "../../../../../Helpers/PreferableClass";
+import AllSubjects from "../../../../../Helpers/subjectData";
+import SubAreaOptionsData from "../../../../../Helpers/SubAreaOptionsData";
+import DistrictAreas from "../../../../../Helpers/DistrictAreas";
 
 const StepThirdForm = ({ completeStep }) => {
     const [selectedValue, setSelectedValue] = useState("");
@@ -9,37 +13,17 @@ const StepThirdForm = ({ completeStep }) => {
     // State to store selected area and multiple selected sub-areas
     const [selectedArea, setSelectedArea] = useState("");
     const [selectedSubAreas, setSelectedSubAreas] = useState([]);
+    const [searchQuery, setSearchQuery] = useState(""); // State for search query
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Track dropdown state
 
-    // Options for the dropdown
-    const options = [
-        "Class-1", "Class-2", "Class-3", "Class-4", "Class-5",
-        "Class-6", "Class-7", "Class-8", "Class-9", "Class-10",
-        "Class-11", "Class-12", "Nine-Ten", "SSC", "HSC", "Quran",
-        "Diploma", "Honor", "Honors", "MBBS", "BDS", "BBA", "Degree",
-        "Play", "KG", "1 to 5", "1 to 8", "6 to 8", "11 to 12",
-        "BSc Engineering", "IELTS", "BCS", "Medical Admission",
-        "Engineering Admission", "Pre School", "Dakhil", "Alim",
-        "Fazil", "Kamil", "Arabic", "Job Preparation", "Bank Job Preparation",
-        "Master of Science", "Special Care", "General Knowledge"
-    ];
-    const subjects = [
-        "Mathematics", "English", "Science", "History", "Geography", "Physics", "Chemistry", "Biology",
-        "Computer Science", "Economics", "Psychology", "Art", "Physical Education", "Music",
-        "Philosophy", "Political Science", "Sociology", "Business Studies", "Accounting", "Environmental Science",
-        "Media Studies"
-    ];
 
-    // Sub-area options based on the selected area
-    const subAreaOptions = {
-        "Dhaka":
-            ["Ramna", "Bangshal", "Chawkbazar", "Jatrabari", "Lalbagh", "Motijheel", "Dhanmondi", "Uttara",
-                "Khilkhet", "Kuril", "Badda", "Baridhara", "Banani", "Gulshan", "Kamrangirchar", "Hazaribagh",
-                "Shahjahanpur", "Adabar", "Mohammadpur", "Shyamoli", "Kafrul", "Pallabi", "Mirpur", "Mouchak",
-                "Khilgaon", "Malibagh", "Rampura", "Banasree",
-            ],
-        "Chittagong": ["Ramna", "Bangshal", "Chawkbazar", "Jatrabari", "Lalbagh", "Motijheel", "Dhanmondi", "Uttara", "Khilkhet", "Kuril", "Badda", "Baridhara", "Banani", "Gulshan", "Kamrangirchar", "Hazaribagh", "Shahjahanpur", "Adabar", "Mohammadpur", "Shyamoli", "Kafrul", "Pallabi", "Mirpur", "Mouchak", "Khilgaon", "Malibagh", "Rampura", "Banasree", ""],
-        "Cumilla": ["Ramna", "Bangshal", "Chawkbazar", "Jatrabari", "Lalbagh", "Motijheel", "Dhanmondi", "Uttara", "Khilkhet", "Kuril", "Badda", "Baridhara", "Banani", "Gulshan", "Kamrangirchar", "Hazaribagh", "Shahjahanpur", "Adabar", "Mohammadpur", "Shyamoli", "Kafrul", "Pallabi", "Mirpur", "Mouchak", "Khilgaon", "Malibagh", "Rampura", "Banasree", ""],
-    };
+    const filteredAreas = DistrictAreas.filter(area =>
+        area.toLowerCase()
+            .includes(searchQuery
+                .toLowerCase())
+    );
+
+
 
     // Handle dropdown selection for preferable class
     const handleOptionClick = (option) => {
@@ -52,6 +36,11 @@ const StepThirdForm = ({ completeStep }) => {
     const handleAreaChange = (event) => {
         setSelectedArea(event.target.value);
         setSelectedSubAreas([]); // Reset sub-area when area is changed
+        setIsDropdownOpen(false); // Close dropdown on selection
+    };
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(prevState => !prevState);
     };
 
     // Handle checkbox change for multiple selections in Preferable Sub Area
@@ -118,6 +107,7 @@ const StepThirdForm = ({ completeStep }) => {
                     <GiBoxUnpacking className="text-lg text-slate-600" />
                     <h5 className="text-lg font-bold text-slate-600">Experience</h5>
                 </div>
+                {/* Your Experience fields for the form */}
                 <div className='grid md:grid-cols-2 gap-5 w-full'>
                     <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
@@ -130,6 +120,8 @@ const StepThirdForm = ({ completeStep }) => {
                             className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                         />
                     </div>
+
+                    {/* Your Expected Salary fields for the form */}
                     <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-bold text-sm text-slate-600 tracking-wider">Your Expected Salary </span>
@@ -148,6 +140,8 @@ const StepThirdForm = ({ completeStep }) => {
                     <GiBoxUnpacking className="text-lg text-slate-600" />
                     <h5 className="text-lg font-bold text-slate-600">Your Preferable Class/Subject</h5>
                 </div>
+
+                {/* Your Preferable Class/Subject */}
                 <div className='grid md:grid-cols-4 gap-5 w-full'>
                     {/* Custom dropdown */}
                     <div className="col-span-1 relative">
@@ -164,7 +158,7 @@ const StepThirdForm = ({ completeStep }) => {
 
                             {isOpen && (
                                 <div className="absolute z-10 bg-white border border-sky-300 rounded-lg mt-1 w-full max-h-40 overflow-y-auto shadow-lg">
-                                    {options.map((option, index) => (
+                                    {PreferableClassOptions.map((option, index) => (
                                         <div
                                             key={index}
                                             onClick={() => handleOptionClick(option)}
@@ -191,6 +185,7 @@ const StepThirdForm = ({ completeStep }) => {
                         </select>
                     </div>
 
+                    {/* Teacher Expected Salary fields for the form */}
                     <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-semibold text-slate-600 text-sm">T. Expected Salary </span>
@@ -203,16 +198,17 @@ const StepThirdForm = ({ completeStep }) => {
                         />
                     </div>
 
-                    <div className="col-span-1">
+                    {/* Preferable Subject fields for the form */}
+                    <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-semibold text-slate-600 text-sm">Preferable Subject</span>
                         </label>
-                        <select 
-                        {...register("preferableSubject")} 
-                        className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
-                        style={{height: 'auto',maxHeight: '100px', overflowY: 'auto'}}
+                        <select
+                            {...register("preferableSubject")}
+                            className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
+                            style={{ height: 'auto', maxHeight: '100px', overflowY: 'auto' }}
                         >
-                            {subjects.map((subject, index) => (
+                            {AllSubjects.map((subject, index) => (
                                 <option key={index} value={subject} className="h-20">
                                     {subject}
                                 </option>
@@ -239,21 +235,43 @@ const StepThirdForm = ({ completeStep }) => {
 
                 {/* Preferable Area */}
                 <div className="grid grid-cols-1 gap-5 w-full">
+                    {/* Preferable Area with search */}
                     <div className="col-span-1">
                         <label htmlFor="preferableArea" className="block text-slate-700 font-medium pb-1">
                             <span className="font-semibold text-slate-600 text-sm">Preferable Area</span>
                         </label>
-                        <select
-                            {...register("preferableArea")}
-                            value={selectedArea}
-                            onChange={handleAreaChange}
-                            className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full text-sm"
-                            aria-labelledby="preferableArea"
-                        >
-                            <option value="Dhaka">Dhaka</option>
-                            <option value="Chittagong">Chittagong</option>
-                            <option value="Cumilla">Cumilla</option>
-                        </select>
+                        <div className="relative">
+                            <div
+                                onClick={toggleDropdown} // Toggle dropdown when clicked
+                                className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full text-sm cursor-pointer"
+                            >
+                                {selectedArea || "Select Area"} {/* Display selected area or default text */}
+                            </div>
+
+                            {isDropdownOpen && (
+                                <div className="absolute z-10 bg-white border border-sky-300 rounded-lg mt-1 w-full shadow-lg">
+                                    {/* Search input inside dropdown */}
+                                    <input
+                                        type="text"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        placeholder="Search for an area"
+                                        className="bg-transparent focus:outline-none input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
+                                    />
+
+                                    {/* Dropdown list */}
+                                    <select
+                                        value={selectedArea}
+                                        onChange={handleAreaChange}
+                                        className="bg-transparent capitalize input border-0 w-full text-sm mt-1 focus:outline-none"
+                                    >
+                                        {filteredAreas.map((area, index) => (
+                                            <option key={index} value={area}>{area}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     {/* Preferable Sub Area section */}
@@ -263,7 +281,7 @@ const StepThirdForm = ({ completeStep }) => {
                                 <span className="font-semibold text-slate-600 text-sm">Preferable Sub Area</span>
                             </label>
                             <div className="grid md:grid-cols-6 lg:grid-cols-7 grid-cols-3 gap-2">
-                                {subAreaOptions[selectedArea]?.map((subArea, index) => (
+                                {SubAreaOptionsData[selectedArea]?.map((subArea, index) => (
                                     <div key={index} className="flex items-center gap-2">
                                         <input
                                             type="checkbox"
