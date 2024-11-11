@@ -18,7 +18,7 @@ const StepFirstFrom = ({ completeStep }) => {
         <div className='bg-white rounded-2xl shadow-xl'>
             <h3 className='text-center text-2xl font-semibold pt-4'>পারসোনাল ইনফর্মেশন</h3>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:px-8 px-3 py-3 md:py-5">
-                <div className='grid md:grid-cols-2 gap-5 w-full'>
+                {/* <div className='grid md:grid-cols-2 gap-5 w-full'>
                     <div className="col-span-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-bold text-slate-500 tracking-wider">Name </span>
@@ -41,9 +41,9 @@ const StepFirstFrom = ({ completeStep }) => {
                             className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                         />
                     </div>
-                </div>
+                </div> */}
 
-                <div className='grid md:grid-cols-2 gap-5 w-full'>
+                {/* <div className='grid md:grid-cols-2 gap-5 w-full'>
                     <div className="col-span-1">
                         <label htmlFor='image' className='block text-slate-700 font-medium pb-1'>
                             <span className="font-bold text-slate-500 tracking-wider">Gender</span>
@@ -65,9 +65,9 @@ const StepFirstFrom = ({ completeStep }) => {
                             className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                         />
                     </div>
-                </div>
+                </div> */}
 
-                <div className=" space-y-1">
+                {/* <div className=" space-y-1">
                     <label className="block text-slate-700  font-medium">
                         <span className="font-bold text-slate-500 tracking-wider">Address </span>
                     </label>
@@ -82,7 +82,7 @@ const StepFirstFrom = ({ completeStep }) => {
                             Address field is required
                         </span>
                     )}
-                </div>
+                </div> */}
                 <div className="text-center">
                     <button
                         type="submit"

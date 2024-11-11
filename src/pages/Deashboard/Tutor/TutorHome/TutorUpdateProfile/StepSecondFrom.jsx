@@ -1,127 +1,99 @@
-import { useRef, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import SearchDropdown from '../../../../../Components/SearchInputFuntion/SearchDropdown';
 import BangladeshAllUniversitiesName from '../../../../../Helpers/BDAllUniversityName';
+import EducationLevels from '../../../../../Helpers/EducationLevels';
+import UniversityGroupSubjects from '../../../../../Helpers/UniversityGroupSubjects';
 
 const StepSecondForm = ({ completeStep }) => {
-  const { register, handleSubmit, watch, setValue } = useForm();
-  const searchTerm = watch('searchTerm', ''); // Watch search term input
-  const selectedValue = watch('selectedValue', ''); // Watch selected dropdown value
-  const dropdownRef = useRef(null); // Ref for dropdown container
-
-  // State for dropdown visibility
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  // Filter options based on search term
-  const filteredOptions = BangladeshAllUniversitiesName.filter(option =>
-    option.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Show dropdown on input click
-  const handleInputClick = () => {
-    setShowDropdown(true);
-  };
-
-  // Set selected value, clear search, and close dropdown
-  const handleOptionClick = (option) => {
-    setValue('selectedValue', option); // Update selected value in form
-    setValue('searchTerm', ''); // Clear search term
-    setShowDropdown(false); // Hide dropdown
-  };
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowDropdown(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  const { register, handleSubmit, setValue } = useForm();
+  const [selectedUniversity, setSelectedUniversity] = useState(''); // State to store selected university
+  const [educationLevels, setEducationLevels] = useState(''); // State to store selected university
+  const [universitySubjects, setUniversitySubjects] = useState(''); // State to store selected university
 
   // Handle form submission
   const onSubmit = (data) => {
     const formData = {
-      selectedDocument: data.selectedValue,
-      classValue: data.classValue,
-      groupValue: data.groupValue,
+      universityName: selectedUniversity,
+      educationLevels: educationLevels,
+      universitySubjects: universitySubjects,
       resultValue: data.resultValue,
     };
-    console.log('object -=-------;....>', data);
-    console.log('formData -=-------;.... formData>', formData);
-    completeStep(formData);
+    console.log('Submitted Form Data:', formData);
+    // completeStep(formData);
+  };
+
+  // Function to update the selected university
+  const handleUniversitySelect = (option) => {
+    setSelectedUniversity(option);
+    setValue('selectedUniversity', option); // Optionally, update react-hook-form's value
+  };
+  // Function to update the selected Education Levels
+  const handleEducationLevels = (option) => {
+    setEducationLevels(option);
+    setValue('educationLevels', option);
+  };
+  // Function to update the selected Education Levels
+  const handleUniversitySubjects = (option) => {
+    setUniversitySubjects(option);
+    setValue('universitySubjects', option);
   };
 
   return (
     <>
-      <h3 className='text-center text-xl font-semibold pt-4'>একাডেমিক ইনফর্মেশন</h3>
-      <form onSubmit={handleSubmit(onSubmit)} className="p-4" ref={dropdownRef}>
-        <h2 className='text-lg font-bold text-slate-800'>Education</h2>
-        {/* Dropdown Input */}
-        <div>
+      <h3 className="text-center text-xl font-semibold pt-4">একাডেমিক ইনফর্মেশন</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className="p-4 space-y-5">
+        <h2 className="text-lg font-bold text-slate-800">Education</h2>
+
+        {/* University Search Dropdown */}
+        <div className="space-y-1">
           <label className="block text-slate-700 font-medium">
             <span className="font-bold text-slate-500 tracking-wider">University Name</span>
           </label>
-          <input
-            type="text"
-            placeholder="Start typing to search..."
-            {...register('searchTerm')}
-            value={selectedValue || searchTerm}
-            onClick={handleInputClick}
-            className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
+          <SearchDropdown
+            options={BangladeshAllUniversitiesName} // Pass university options
+            selectedValue={selectedUniversity}
+            onSelect={handleUniversitySelect} // Callback to handle selection
           />
-
-          {/* Dropdown Options */}
-          {showDropdown && (
-            <div className="relative mt-1">
-              <div className="absolute w-full bg-white border border-gray-300 rounded shadow-lg max-h-28 overflow-y-auto z-10">
-                {filteredOptions.length > 0 ? (
-                  filteredOptions.map((option, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleOptionClick(option)}
-                      className="px-4 py-2 cursor-pointer hover:bg-blue-100"
-                    >
-                      {option}
-                    </div>
-                  ))
-                ) : (
-                  <p className="p-4 text-gray-500">No matching documents found</p>
-                )}
-              </div>
-            </div>
-          )}
         </div>
 
-        {/* Class Input */}
-        <label className="block mb-1 mt-4">Class</label>
-        <input
-          type="text"
-          placeholder="Enter your class"
-          {...register('classValue')}
-          className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
-        />
-
-        {/* Group/Subject Input */}
-        <label className="block mb-1">Group/Subject</label>
-        <input
-          type="text"
-          placeholder="Enter your group/subject"
-          {...register('groupValue')}
-          className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
-        />
-
-        {/* Result Input */}
-        <label className="block mb-1">Result</label>
-        <input
-          type="text"
-          placeholder="Enter your result"
-          {...register('resultValue')}
-          className="block w-full border border-gray-300 rounded px-3 py-2 mb-4"
-        />
+        <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
+          {/* Class Input */}
+          <div className="col-span-1 space-y-1">
+            <label className="block text-slate-700 font-medium">
+              <span className="font-bold text-slate-500 tracking-wider">Class</span>
+            </label>
+            <SearchDropdown
+              options={EducationLevels}
+              selectedValue={educationLevels}
+              onSelect={handleEducationLevels} // Callback to handle selection
+            />
+          </div>
+          {/* Group/Subject Input */}
+          <div className="col-span-1 space-y-1">
+            <label className="block text-slate-700 font-medium">
+              <span className="font-bold text-slate-500 tracking-wider">Class</span>
+            </label>
+            <SearchDropdown
+              options={UniversityGroupSubjects}
+              selectedValue={universitySubjects}
+              onSelect={handleUniversitySubjects} // Callback to handle selection
+            />
+          </div>
+          
+          {/* Result Input */}
+          <div className="col-span-1 space-y-1">
+            <label className="block text-slate-700 font-medium">
+              <span className="font-bold text-slate-500 tracking-wider">Result</span>
+            </label>
+            <input
+              {...register("resultValue", { required: true })}
+              type="text"
+              placeholder="Enter Your Class"
+              className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
+            />
+          </div>
+        </div>
 
         {/* Submit Button */}
         <button
