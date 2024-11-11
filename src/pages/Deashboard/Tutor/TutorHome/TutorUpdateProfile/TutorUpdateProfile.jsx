@@ -2,6 +2,7 @@ import { useState } from 'react';
 import StepSecondFrom from './StepSecondFrom';
 import StepFirstFrom from './StepFirstFrom';
 import StepThirdForm from './StepThirdForm';
+import StepFourForm from './StepFourForm';
 
 const TutorUpdateProfile = () => {
   // State for the current step, progress, and message
@@ -103,18 +104,20 @@ const TutorUpdateProfile = () => {
           <div className='bg-white rounded-2xl shadow-xl'>
             {/* STEP 03 */}
             <StepThirdForm completeStep={completeStep} />
-          </div> 
+          </div>
         )}
         {currentStep === 4 && (
           <div className='bg-white rounded-2xl shadow-xl'>
-            <h3 className='text-center text-xl font-semibold pt-4'>সমাপ্তি</h3>
+            {/* STEP 03 */}
+            <StepFourForm handleFinalSubmit={handleFinalSubmit} />
+            {/* <h3 className='text-center text-xl font-semibold pt-4'>সমাপ্তি</h3>
             <p>Final review and confirmation in Step 4.</p>
             <button
               onClick={handleFinalSubmit}
               className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
             >
               Complete Update
-            </button>
+            </button> */}
           </div>
         )}
       </div>

@@ -57,22 +57,22 @@ const StepThirdForm = ({ completeStep }) => {
 
     // Function to handle form submission
     const onSubmit = async (data) => {
-        if (!selectedArea || !selectedValue) {
-            console.error("Please select an area and class.");
-            return; // Prevent submission if validation fails
-        }
+        // if (!selectedArea || !selectedValue) {
+        //     console.error("Please select an area and class.");
+        //     return; 
+        // }
 
         // Add area and class to the form data
         const formData = {
             ...data,
             preferableClass: selectedValue,
             preferableArea: selectedArea,
-            preferableSubAreas: selectedSubAreas // Include selected sub-areas
+            preferableSubAreas: selectedSubAreas 
         };
+        completeStep(formData);
 
         console.log("Form data to submit >>>>>>>>", formData);
 
-        // completeStep(formData); 
         // Proceed to next step if submission is successful
 
 
@@ -109,7 +109,7 @@ const StepThirdForm = ({ completeStep }) => {
                 </div>
                 {/* Your Experience fields for the form */}
                 <div className='grid md:grid-cols-2 gap-5 w-full'>
-                    <div className="col-span-1 space-y-1">
+                    {/* <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-bold text-sm text-slate-600 tracking-wider">Your Experience </span>
                         </label>
@@ -119,10 +119,10 @@ const StepThirdForm = ({ completeStep }) => {
                             placeholder="Enter Your Experience Year"
                             className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                         />
-                    </div>
+                    </div> */}
 
                     {/* Your Expected Salary fields for the form */}
-                    <div className="col-span-1 space-y-1">
+                    {/* <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-bold text-sm text-slate-600 tracking-wider">Your Expected Salary </span>
                         </label>
@@ -132,19 +132,19 @@ const StepThirdForm = ({ completeStep }) => {
                             placeholder="Enter Your Expected Salary"
                             className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                         />
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Preferable Class/Subject section */}
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                     <GiBoxUnpacking className="text-lg text-slate-600" />
                     <h5 className="text-lg font-bold text-slate-600">Your Preferable Class/Subject</h5>
-                </div>
+                </div> */}
 
                 {/* Your Preferable Class/Subject */}
                 <div className='grid md:grid-cols-4 gap-5 w-full'>
                     {/* Custom dropdown */}
-                    <div className="col-span-1 relative">
+                    {/* <div className="col-span-1 relative">
                         <label htmlFor="preferableClass" className="block text-slate-700 font-medium pb-1">
                             <span className="font-semibold text-slate-600 text-sm">Preferable Class</span>
                         </label>
@@ -170,10 +170,10 @@ const StepThirdForm = ({ completeStep }) => {
                                 </div>
                             )}
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Medium fields for the form */}
-                    <div className="col-span-1">
+                    {/* <div className="col-span-1">
                         <label className='block text-slate-700 font-medium pb-1'>
                             <span className="font-semibold text-slate-600 text-sm">Medium</span>
                         </label>
@@ -183,10 +183,10 @@ const StepThirdForm = ({ completeStep }) => {
                             <option value="englishVersion">English Version</option>
                             <option value="arabicMedium">Arabic Medium</option>
                         </select>
-                    </div>
+                    </div> */}
 
                     {/* Teacher Expected Salary fields for the form */}
-                    <div className="col-span-1 space-y-1">
+                    {/* <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-semibold text-slate-600 text-sm">T. Expected Salary </span>
                         </label>
@@ -196,10 +196,10 @@ const StepThirdForm = ({ completeStep }) => {
                             placeholder="Your Tuition Expected Salary"
                             className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-xs placeholder:tracking-wider text-sm"
                         />
-                    </div>
+                    </div> */}
 
                     {/* Preferable Subject fields for the form */}
-                    <div className="col-span-1 space-y-1">
+                    {/* <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-semibold text-slate-600 text-sm">Preferable Subject</span>
                         </label>
@@ -214,12 +214,12 @@ const StepThirdForm = ({ completeStep }) => {
                                 </option>
                             ))}
                         </select>
-                    </div>
+                    </div> */}
 
                 </div>
 
                 {/* Additional qualification */}
-                <div className="space-y-3">
+                {/* <div className="space-y-3">
                     <label className="block text-slate-700 space-y-1">
                         <div>
                             <span className="font-semibold text-slate-600 text-sm">Additional Qualification</span>
@@ -229,9 +229,8 @@ const StepThirdForm = ({ completeStep }) => {
                     <select {...register("additionalQualification")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
-                        {/* Add more options here */}
                     </select>
-                </div>
+                </div> */}
 
                 {/* Preferable Area */}
                 <div className="grid grid-cols-1 gap-5 w-full">
@@ -242,10 +241,10 @@ const StepThirdForm = ({ completeStep }) => {
                         </label>
                         <div className="relative">
                             <div
-                                onClick={toggleDropdown} // Toggle dropdown when clicked
+                                onClick={toggleDropdown}
                                 className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full text-sm cursor-pointer"
                             >
-                                {selectedArea || "Select Area"} {/* Display selected area or default text */}
+                                {selectedArea || "Select Area"}
                             </div>
 
                             {isDropdownOpen && (
@@ -275,7 +274,7 @@ const StepThirdForm = ({ completeStep }) => {
                     </div>
 
                     {/* Preferable Sub Area section */}
-                    {selectedArea && (
+                    {/* {selectedArea && (
                         <div className="col-span-1">
                             <label htmlFor="preferableSubArea" className="block text-slate-700 font-medium pb-1">
                                 <span className="font-semibold text-slate-600 text-sm">Preferable Sub Area</span>
@@ -299,7 +298,7 @@ const StepThirdForm = ({ completeStep }) => {
                                 ))}
                             </div>
                         </div>
-                    )}
+                    )} */}
                 </div>
 
                 {/* Submit Button */}
