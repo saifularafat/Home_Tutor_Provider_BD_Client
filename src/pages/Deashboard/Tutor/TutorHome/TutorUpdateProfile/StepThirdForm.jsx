@@ -109,7 +109,7 @@ const StepThirdForm = ({ completeStep }) => {
                 </div>
                 {/* Your Experience fields for the form */}
                 <div className='grid md:grid-cols-2 gap-5 w-full'>
-                    {/* <div className="col-span-1 space-y-1">
+                    <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-bold text-sm text-slate-600 tracking-wider">Your Experience </span>
                         </label>
@@ -119,10 +119,10 @@ const StepThirdForm = ({ completeStep }) => {
                             placeholder="Enter Your Experience Year"
                             className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                         />
-                    </div> */}
+                    </div>
 
                     {/* Your Expected Salary fields for the form */}
-                    {/* <div className="col-span-1 space-y-1">
+                    <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-bold text-sm text-slate-600 tracking-wider">Your Expected Salary </span>
                         </label>
@@ -132,19 +132,19 @@ const StepThirdForm = ({ completeStep }) => {
                             placeholder="Enter Your Expected Salary"
                             className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                         />
-                    </div> */}
+                    </div>
                 </div>
 
                 {/* Preferable Class/Subject section */}
-                {/* <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
                     <GiBoxUnpacking className="text-lg text-slate-600" />
                     <h5 className="text-lg font-bold text-slate-600">Your Preferable Class/Subject</h5>
-                </div> */}
+                </div>
 
                 {/* Your Preferable Class/Subject */}
                 <div className='grid md:grid-cols-4 gap-5 w-full'>
                     {/* Custom dropdown */}
-                    {/* <div className="col-span-1 relative">
+                    <div className="col-span-1 relative">
                         <label htmlFor="preferableClass" className="block text-slate-700 font-medium pb-1">
                             <span className="font-semibold text-slate-600 text-sm">Preferable Class</span>
                         </label>
@@ -170,10 +170,10 @@ const StepThirdForm = ({ completeStep }) => {
                                 </div>
                             )}
                         </div>
-                    </div> */}
+                    </div>
 
                     {/* Medium fields for the form */}
-                    {/* <div className="col-span-1">
+                    <div className="col-span-1">
                         <label className='block text-slate-700 font-medium pb-1'>
                             <span className="font-semibold text-slate-600 text-sm">Medium</span>
                         </label>
@@ -183,10 +183,10 @@ const StepThirdForm = ({ completeStep }) => {
                             <option value="englishVersion">English Version</option>
                             <option value="arabicMedium">Arabic Medium</option>
                         </select>
-                    </div> */}
+                    </div>
 
                     {/* Teacher Expected Salary fields for the form */}
-                    {/* <div className="col-span-1 space-y-1">
+                    <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-semibold text-slate-600 text-sm">T. Expected Salary </span>
                         </label>
@@ -196,10 +196,10 @@ const StepThirdForm = ({ completeStep }) => {
                             placeholder="Your Tuition Expected Salary"
                             className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-xs placeholder:tracking-wider text-sm"
                         />
-                    </div> */}
+                    </div>
 
                     {/* Preferable Subject fields for the form */}
-                    {/* <div className="col-span-1 space-y-1">
+                    <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
                             <span className="font-semibold text-slate-600 text-sm">Preferable Subject</span>
                         </label>
@@ -214,12 +214,12 @@ const StepThirdForm = ({ completeStep }) => {
                                 </option>
                             ))}
                         </select>
-                    </div> */}
+                    </div>
 
                 </div>
 
                 {/* Additional qualification */}
-                {/* <div className="space-y-3">
+                <div className="space-y-3">
                     <label className="block text-slate-700 space-y-1">
                         <div>
                             <span className="font-semibold text-slate-600 text-sm">Additional Qualification</span>
@@ -230,7 +230,7 @@ const StepThirdForm = ({ completeStep }) => {
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
                     </select>
-                </div> */}
+                </div>
 
                 {/* Preferable Area */}
                 <div className="grid grid-cols-1 gap-5 w-full">
@@ -274,12 +274,12 @@ const StepThirdForm = ({ completeStep }) => {
                     </div>
 
                     {/* Preferable Sub Area section */}
-                    {/* {selectedArea && (
+                    {selectedArea && (
                         <div className="col-span-1">
                             <label htmlFor="preferableSubArea" className="block text-slate-700 font-medium pb-1">
                                 <span className="font-semibold text-slate-600 text-sm">Preferable Sub Area</span>
                             </label>
-                            <div className="grid md:grid-cols-6 lg:grid-cols-7 grid-cols-3 gap-2">
+                            <div className="grid md:grid-cols-5 lg:grid-cols-6 grid-cols-3 gap-2">
                                 {SubAreaOptionsData[selectedArea]?.map((subArea, index) => (
                                     <div key={index} className="flex items-center gap-2">
                                         <input
@@ -298,7 +298,7 @@ const StepThirdForm = ({ completeStep }) => {
                                 ))}
                             </div>
                         </div>
-                    )} */}
+                    )}
                 </div>
 
                 {/* Submit Button */}
