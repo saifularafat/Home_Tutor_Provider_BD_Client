@@ -35,9 +35,10 @@ const NavTest = () => {
 
     // Temporary variables for testing
     // const user = { displayName: "Test User" };
-    const user = false
+    const user = true
     const isAdmin = false; // Change to true/false to test admin
-    const isTutor = true; // Change to true/false to test instructor
+    const isTutor = false; // Change to true/false to test instructor
+
     const notices = [1, 2, 3, 4,]; // Example notice array for badge count
 
     const toggleDarkMode = () => {
@@ -174,9 +175,9 @@ const NavTest = () => {
                                     {isAdmin ? (
                                         ''
                                     ) : isTutor ? (
-                                        <Link to='/createLiveExam'>Create Live Exam</Link>
+                                        <Link to='/createLiveExam'>Create Live Meeting</Link>
                                     ) : (
-                                        <Link to='/joinLiveExam'>Join Live Exam</Link>
+                                        <Link to='/joinLiveExam'>Join Live Meeting</Link>
                                     )}
                                 </li>
                             )}
@@ -199,71 +200,81 @@ const NavTest = () => {
                                 </Link>
                             </button>
                         </div>
-                        {isTutor ? (
-                            <div className='ml-5 dropdown dropdown-end'>
-                                <div
-                                    className='list-none tooltip tooltip-bottom'
-                                    // data-tip={info?.displayName}
-                                    data-tip={'DisplayName'}
-                                >
-                                    <label
-                                        tabIndex={0}
-                                        className='btn btn-ghost btn-circle avatar'
-                                    >
-                                        <div className='w-10 rounded-full'>
-                                            <img src={user?.photoURL} />
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <div className=''>
-                                    <ul
-                                        tabIndex={0}
-                                        className='p-2 mt-3 text-white shadow-md bg-black/80 menu menu-compact backdrop-blur-lg dropdown-content rounded-box w-52'
-                                    >
-                                        <li>
-                                            <Link
-                                                to='/'
-                                                className='justify-between w-full'
+                        {
+                            user
+                            // isTutor
+                            // isAdmin
+                                ? (
+                                    <div className='ml-5 dropdown dropdown-end'>
+                                        <div
+                                            className='list-none tooltip tooltip-bottom'
+                                            // data-tip={info?.displayName}
+                                            data-tip={'DisplayName'}
+                                        >
+                                            <label
+                                                tabIndex={0}
+                                                className='btn btn-ghost btn-circle avatar'
                                             >
-                                                Leader Board
-                                            </Link>
-                                        </li>
-                                        {/* Navigate to different dashboard route based on user role */}
-                                        {isTutor && (
-                                            <li>
-                                                {isAdmin ? (
-                                                    <Link to='/dashboard/admin-home'>Dashboard</Link>
-                                                ) : isTutor ? (
-                                                    <Link to='/dashboard/tutor-home'>Dashboard</Link>
-                                                ) : (
-                                                    <Link to='/dashboard/parent-Home'>Dashboard</Link>
-                                                )}
-                                            </li>
-                                        )}
-                                        <li>
-                                            <Link to='/dashboard/profile'>Profile</Link>
-                                        </li>
-                                        <li>
-                                            <Link className='w-full' onClick={handleLogout}>
-                                                Log Out
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        ) : (
-                            <>
-                                <div className=''>
-                                    <NavLink
-                                        to="login"
-                                        className={({ isActive }) => (isActive ? "regisLogin" : "regisLogin")}>
-                                        Sign In
-                                    </NavLink>
+                                                <div className='w-10 rounded-full'>
+                                                    <img src={user?.photoURL} />
+                                                </div>
+                                            </label>
+                                        </div>
 
-                                </div>
-                            </>
-                        )}
+                                        <div className=''>
+                                            <ul
+                                                tabIndex={0}
+                                                className='p-2 mt-3 text-white shadow-md bg-black/80 menu menu-compact backdrop-blur-lg dropdown-content rounded-box w-52'
+                                            >
+                                                {
+                                                    isTutor && <li>
+                                                        <Link
+                                                            to='/'
+                                                            className='justify-between w-full'
+                                                        >
+                                                            Leader Board
+                                                        </Link>
+                                                    </li>
+                                                }
+                                                {/* Navigate to different dashboard route based on user role */}
+                                                {
+                                                    user
+                                                    // isTutor
+                                                    // isAdmin
+                                                    && (
+                                                        <li>
+                                                            {isAdmin ? (
+                                                                <Link to='/dashboard/admin-home'>Dashboard</Link>
+                                                            ) : isTutor ? (
+                                                                <Link to='/dashboard/tutor-home'>Dashboard</Link>
+                                                            ) : (
+                                                                <Link to='/dashboard/parent-Home'>Dashboard</Link>
+                                                            )}
+                                                        </li>
+                                                    )}
+                                                <li>
+                                                    <Link to='/dashboard/profile'>Profile</Link>
+                                                </li>
+                                                <li>
+                                                    <Link className='w-full' onClick={handleLogout}>
+                                                        Log Out
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <div className=''>
+                                            <NavLink
+                                                to="login"
+                                                className={({ isActive }) => (isActive ? "regisLogin" : "regisLogin")}>
+                                                Sign In
+                                            </NavLink>
+
+                                        </div>
+                                    </>
+                                )}
                         <div className='md:block hidden'>
                             <button onClick={toggleDarkMode} className='mx-3 text-lg'>
                                 {isDarkMode == true ? (

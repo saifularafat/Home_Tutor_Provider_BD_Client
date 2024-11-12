@@ -19,8 +19,8 @@ const Dashboard = () => {
 
     // user identity
     const isAdmin = false;
-    const isTutor = true;
-    const isParent = false;
+    const isTutor = false;
+    const isParent = true;
 
     const iconMappings = {
         RoleHome: MdHomeWork,
@@ -166,7 +166,7 @@ const Dashboard = () => {
         // parent router START
         {
             title: 'Parent Home',
-            path: '/dashboard/ParentHome',
+            path: '/dashboard/parent-home',
             icon: iconMappings.RoleHome,
             role: 'isParent',
             gap: true
@@ -183,6 +183,12 @@ const Dashboard = () => {
             // path: '/dashboard/paymentHistory',
             path:"",
             icon: iconMappings.Payment,
+            role: 'isParent'
+        },
+        {
+            title: 'Profile',
+            path:"/dashboard/profile",
+            icon: iconMappings.Profile,
             role: 'isParent'
         },
         {
@@ -301,7 +307,11 @@ const Dashboard = () => {
                             ))
                             : // User menus
                             isParentMenus.map((Menu, index) => (
-                                <Link to={Menu.path} key={index} className={`flex rounded-md p-2 cursor-pointer text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                <Link 
+                                to={Menu.path} 
+                                key={index} 
+                                title={Menu.title}
+                                className={`flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
                                     } ${index === 0 && ' hover:bg-primary'}`}>
                                     <li
 
