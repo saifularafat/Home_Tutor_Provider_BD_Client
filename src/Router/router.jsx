@@ -18,7 +18,8 @@ import ParentHome from "../pages/Deashboard/Parent/ParentHome/ParentHome";
 import TutorHome from "../pages/Deashboard/Tutor/TutorHome/TutorHome";
 import AdminHome from "../pages/Deashboard/Admin/AdminHome/AdminHome";
 import TutorUpdateProfile from "../pages/Deashboard/Tutor/TutorHome/TutorUpdateProfile/TutorUpdateProfile";
-import Profile from "../pages/Deashboard/UserProfile/Profile";
+import Profile from "../pages/Deashboard/Profile/Profile";
+import Notice from "../pages/Deashboard/Notice/Notice";
 
 const router = createBrowserRouter([
     {
@@ -127,6 +128,12 @@ const router = createBrowserRouter([
                 path: "/dashboard/profile",
                 element: (
                     <Profile />
+                ),
+            },
+            {
+                path: "/dashboard/noticeBoard",
+                element: (
+                    <Notice />
                 ),
             },
         ]

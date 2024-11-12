@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { FaCalendarAlt, FaChartBar, FaChevronRight, FaCog, FaComment, FaHome, FaUser, FaWallet } from 'react-icons/fa';
 import DashboardHeader from '../Share/DashboardHeader/DashboardHeader';
 import logo from './../assets/leaf.jpg'
-import { MdHomeWork } from 'react-icons/md';
-import { FaClipboardQuestion } from 'react-icons/fa6';
+import { MdAssignmentAdd, MdHomeWork } from 'react-icons/md';
+import { FaClipboardQuestion, FaUserPen, FaUsersViewfinder } from 'react-icons/fa6';
 import { RiLiveFill } from 'react-icons/ri';
 import { AiFillNotification } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
@@ -32,10 +32,12 @@ const Dashboard = () => {
         Setting: FaCog,
         Payment: FaWallet,
         Live: RiLiveFill,
-        Blog: FaComment,
+        Blog: MdAssignmentAdd,
         Notice: AiFillNotification,
         BookAdd: BiBookAdd,
-        AddJob: IoBagAdd
+        AddJob: IoBagAdd,
+        Profile: FaUserPen,
+        Meeting: FaUsersViewfinder,
     }
 
     const Menus = [
@@ -137,19 +139,21 @@ const Dashboard = () => {
         {
             title: 'Profile',
             path: '/dashboard/profile',
-            icon: iconMappings.Live,
+            icon: iconMappings.Profile,
             role: 'isTutor'
         },
         {
             title: 'Add Blog',
-            path: '/dashboard/addBlog',
+            // path: '/dashboard/addBlog',
+            path:"",
             icon: iconMappings.Blog,
             role: 'isTutor'
         },
         {
             title: 'Join Meeting',
-            path: '/dashboard/addMeeting',
-            icon: iconMappings.Blog,
+            // path: '/dashboard/addMeeting',
+            path:"",
+            icon: iconMappings.Meeting,
             role: 'isTutor'
         },
         {
@@ -169,31 +173,36 @@ const Dashboard = () => {
         },
         {
             title: 'Job Request History',
-            path: '/dashboard/jobRequestHistory',
+            // path: '/dashboard/jobRequestHistory',
+            path:"",
             icon: iconMappings.Payment,
             role: 'isParent'
         },
         {
             title: 'Enrol Premium History',
-            path: '/dashboard/paymentHistory',
+            // path: '/dashboard/paymentHistory',
+            path:"",
             icon: iconMappings.Payment,
             role: 'isParent'
         },
         {
             title: 'Notice Board',
-            path: '/dashboard/parentNoticeBoard',
+            // path: '/dashboard/parentNoticeBoard',
+            path:"",
             icon: iconMappings.Notice,
             role: 'isParent'
         },
         {
             title: 'Add Meeting',
-            path: '/dashboard/addMeeting',
+            // path: '/dashboard/addMeeting',
+            path:"",
             icon: iconMappings.Live,
             role: 'isParent'
         },
         {
             title: 'Student Analytics',
-            path: '/dashboard/studentAnalytics',
+            // path: '/dashboard/studentAnalytics',
+            path:"",
             icon: iconMappings.Analytics,
             role: 'isParent'
         },
@@ -266,7 +275,11 @@ const Dashboard = () => {
                         : //  Instructor menus
                         isTutor
                             ? isTutorMenus.map((Menu, index) => (
-                                <Link to={Menu.path} key={index} className={`flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-base items-center gap-x-4 transition-all duration-200 ${Menu.gap ? 'mt-9' : 'mt-2'
+                                <Link 
+                                to={Menu.path} 
+                                key={index} 
+                                 title={Menu.title}
+                                className={`flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-base items-center gap-x-4 transition-all duration-200 ${Menu.gap ? 'mt-9' : 'mt-2'
                                     } ${index === 0 && ' hover:bg-primary'}`}>
                                     <li
 
