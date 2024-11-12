@@ -1,11 +1,4 @@
 const EducationLevels = [
-    // Secondary and Higher Secondary
-    "SSC (Secondary School Certificate)", "HSC (Higher Secondary Certificate)", 
-    
-    // Diploma
-    "Diploma in Engineering", "Diploma in Medical Technology", "Diploma in Nursing", 
-    "Diploma in Pharmacy", "Diploma in Textile Engineering", "Diploma in Computer Science",
-    
     // Undergraduate Degrees (Bachelor's)
     "BSc (Bachelor of Science)", "BA (Bachelor of Arts)", "BBA (Bachelor of Business Administration)",
     "BCom (Bachelor of Commerce)", "LLB (Bachelor of Laws)", "BFA (Bachelor of Fine Arts)",
