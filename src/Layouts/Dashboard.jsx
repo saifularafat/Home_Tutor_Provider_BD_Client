@@ -136,7 +136,7 @@ const Dashboard = () => {
         },
         {
             title: 'Update Profile',
-            path: '/dashboard/UpdateProfile',
+            path: '/dashboard/profile',
             icon: iconMappings.Live,
             role: 'isTutor'
         },

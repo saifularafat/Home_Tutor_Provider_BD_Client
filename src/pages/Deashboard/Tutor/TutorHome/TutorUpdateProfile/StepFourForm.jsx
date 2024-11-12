@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import AllSubjects from "../../../../../Helpers/subjectData";
+import { useNavigate } from "react-router-dom";
 
 const StepFourForm = ({ handleFinalSubmit }) => {
+    
+    const navigate = useNavigate();
 
     const {
         register,
@@ -13,6 +16,7 @@ const StepFourForm = ({ handleFinalSubmit }) => {
     const onSubmit = (data) => {
         console.log("Form data:", data);
         handleFinalSubmit(data); // Move to the next step on successful submission
+        navigate('/dashboard/profile')
     };
 
     return (
@@ -143,7 +147,7 @@ const StepFourForm = ({ handleFinalSubmit }) => {
                         type="submit"
                         className="mt-4 px-4 py-2 mx-auto bg-blue-500 text-white rounded"
                     >
-                    Complete
+                        Complete
                     </button>
                 </div>
             </form>

@@ -15,7 +15,8 @@ const TutorUpdateProfile = () => {
   const completeStep = (data) => {
     // Update form data with data from the completed step
     setFormData(prevData => ({ ...prevData, ...data }));
-
+    
+    console.log(data);
     let newProgress;
     let newMessage = '';
 

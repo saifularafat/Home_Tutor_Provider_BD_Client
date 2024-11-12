@@ -223,7 +223,7 @@ const NavTest = () => {
                                     >
                                         <li>
                                             <Link
-                                                to='/leaderboard'
+                                                to='/'
                                                 className='justify-between w-full'
                                             >
                                                 Leader Board
@@ -242,7 +242,7 @@ const NavTest = () => {
                                             </li>
                                         )}
                                         <li>
-                                            <Link to='/profile'>Profile</Link>
+                                            <Link to='/dashboard/profile'>Profile</Link>
                                         </li>
                                         <li>
                                             <Link className='w-full' onClick={handleLogout}>
