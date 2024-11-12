@@ -20,6 +20,7 @@ import AdminHome from "../pages/Deashboard/Admin/AdminHome/AdminHome";
 import TutorUpdateProfile from "../pages/Deashboard/Tutor/TutorHome/TutorUpdateProfile/TutorUpdateProfile";
 import Profile from "../pages/Deashboard/Profile/Profile";
 import Notice from "../pages/Deashboard/Notice/Notice";
+import ApplyJobs from "../pages/Deashboard/Parent/ApplyJobs/ApplyJobs";
 
 const router = createBrowserRouter([
     {
@@ -107,8 +108,13 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/tutor-home",
                 element: (
-                    // <ParentHome />
                     <TutorHome />
+                ),
+            },
+            {
+                path: "/dashboard/apply-jobs",
+                element: (
+                    <ApplyJobs />
                 ),
             },
             {

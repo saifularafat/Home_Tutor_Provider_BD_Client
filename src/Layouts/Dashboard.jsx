@@ -132,7 +132,7 @@ const Dashboard = () => {
         },
         {
             title: 'Apply Job',
-            path: '/dashboard/applyJob',
+            path: '/dashboard/apply-jobs',
             icon: iconMappings.AddJob,
             role: 'isTutor'
         },
