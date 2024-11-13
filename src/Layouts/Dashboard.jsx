@@ -193,8 +193,7 @@ const Dashboard = () => {
         },
         {
             title: 'Notice Board',
-            // path: '/dashboard/parentNoticeBoard',
-            path:"",
+            path: '/dashboard/parent-notice-board',
             icon: iconMappings.Notice,
             role: 'isParent'
         },

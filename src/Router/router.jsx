@@ -22,6 +22,7 @@ import Profile from "../pages/Deashboard/Profile/Profile";
 import Notice from "../pages/Deashboard/Notice/Notice";
 import ApplyJobs from "../pages/Deashboard/Parent/ApplyJobs/ApplyJobs";
 import ProfileUpdate from "../pages/Deashboard/Parent/ProfileUpdate/ProfileUpdate";
+import ParentNoticeBoard from "../pages/Deashboard/Parent/ParentNoiceBoard/ParentNoticeBoard";
 
 const router = createBrowserRouter([
     {
@@ -147,6 +148,12 @@ const router = createBrowserRouter([
                 path: "/dashboard/noticeBoard",
                 element: (
                     <Notice />
+                ),
+            },
+            {
+                path: "/dashboard/parent-notice-board",
+                element: (
+                    <ParentNoticeBoard />
                 ),
             },
         ]
