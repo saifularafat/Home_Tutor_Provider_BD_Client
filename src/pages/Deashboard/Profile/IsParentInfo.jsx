@@ -1,6 +1,6 @@
 const IsParentInfo = () => {
     return (
-        <div className="overflow-x-auto md:overflow-hidden mx-auto max-w-2xl bg-white shadow-lg rounded-lg p-5 space-y-4">
+        <div className="overflow-x-auto md:overflow-hidden mx-auto max-w-3xl bg-white shadow-lg rounded-lg p-5 space-y-4">
             <div className="hidden md:block">
                 <div className="grid grid-cols-3">
                     <div className="col-span-1 w-full py-2">
@@ -44,10 +44,35 @@ const IsParentInfo = () => {
 
             {/* Mobile device */}
 
-            <div className="overflow-x-auto md:hidden ">
-            
 
+            <div className="overflow-x-auto  md:hidden">
+                <table className="min-w-[90%] shadow-md border mx-auto border-gray-100 rounded-lg my-2">
+                    <thead>
+                        <tr className="bg-[#333333] text-white rounded-lg">
+                            <th className="py-3 px-6 text-left border-b">University</th>
+                            <th className="py-3 px-6 text-left border-b">Address</th>
+                            <th className="py-3 px-6 text-left border-b">Living</th>
+                            <th className="py-3 px-6  border-b text-end">Professional</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr className="hover:bg-gray-50 transition duration-300">
+                            <td className="text-sm py-4 px-6 border-b">North South University (NSU)</td>
+                            <td className=" text-sm py-4 px-6 border-b">Mirpur 15, Dhaka</td>
+                            <td className=" text-sm py-4 px-6 border-b">Mirpur 15, Dhaka</td>
+                            <td className="text-sm py-4 px-6 border-b">Teacher</td>
+                        </tr>
+                        <tr className="hover:bg-gray-50 transition duration-300">
+                            <td className="text-sm py-4 px-6 border-b">North South University (NSU)</td>
+                            <td className=" text-sm py-4 px-6 border-b">Mirpur 15, Dhaka</td>
+                            <td className=" text-sm py-4 px-6 border-b">Mirpur 15, Dhaka</td>
+                            <td className="text-sm py-4 px-6 border-b">Teacher</td>
+                        </tr>
+                      
+                    </tbody>
+                </table>
             </div>
+
 
         </div>
     )
