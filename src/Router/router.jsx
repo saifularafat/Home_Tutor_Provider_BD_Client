@@ -21,6 +21,7 @@ import TutorUpdateProfile from "../pages/Deashboard/Tutor/TutorHome/TutorUpdateP
 import Profile from "../pages/Deashboard/Profile/Profile";
 import Notice from "../pages/Deashboard/Notice/Notice";
 import ApplyJobs from "../pages/Deashboard/Parent/ApplyJobs/ApplyJobs";
+import ProfileUpdate from "../pages/Deashboard/Parent/ProfileUpdate/ProfileUpdate";
 
 const router = createBrowserRouter([
     {
@@ -134,6 +135,12 @@ const router = createBrowserRouter([
                 path: "/dashboard/profile",
                 element: (
                     <Profile />
+                ),
+            },
+            {
+                path: "/dashboard/profile-update",
+                element: (
+                    <ProfileUpdate />
                 ),
             },
             {
