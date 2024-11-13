@@ -18,7 +18,7 @@ const StepSecondForm = ({ completeStep }) => {
   // Handle form submission
   const onSubmit = (data) => {
     const formData = {
-      universityName: selectedUniversity,
+     
       universitySubjects: universitySubjects,
       educationLevels: educationLevels,
       programmingLanguages: programmingLanguages,

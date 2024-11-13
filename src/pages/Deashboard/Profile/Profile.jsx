@@ -6,7 +6,7 @@ const Profile = () => {
     const isTutor = false;
     // const isParent = true;
     return (
-        <div className="py-12">
+        <div className="md:py-12 py-5">
             <div className="md:overflow-hidden flex flex-col items-center justify-center md:flex-row">
                 <div className="group relative sm:w-[320px]">
                     <img
