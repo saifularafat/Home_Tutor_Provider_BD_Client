@@ -1,7 +1,7 @@
 import { FaBlog, FaUsers } from "react-icons/fa";
 import { FaSchoolCircleCheck } from "react-icons/fa6";
-import { MdOutlineWork, MdReduceCapacity, MdWorkHistory } from "react-icons/md";
-import { PiHandshakeDuotone, PiStudentFill } from "react-icons/pi";
+import { MdReduceCapacity, MdWorkHistory } from "react-icons/md";
+import { PiHandshakeDuotone } from "react-icons/pi";
 import { RiParentFill } from "react-icons/ri";
 import { SiFampay } from "react-icons/si";
 

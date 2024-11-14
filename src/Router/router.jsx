@@ -29,6 +29,7 @@ import AddMeeting from "../pages/Deashboard/Parent/AddMeeting/AddMeeting";
 import StudentAnalytics from "../pages/Deashboard/Parent/StudentAnalytics/StudentAnalytics";
 import AddBlog from "../pages/Deashboard/Tutor/AddBlog/AddBlog";
 import JoinMeeting from "../pages/Deashboard/Tutor/JoinMeeting/JoinMeeting";
+import AllUserManage from "../pages/Deashboard/Admin/AllUsersManage/AllUserMaage/AllUserManage";
 
 const router = createBrowserRouter([
     {
@@ -109,10 +110,17 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/admin-home",
                 element: (
-                    // <ParentHome />
                     <AdminHome />
                 ),
             },
+            {
+                path: "/dashboard/manage-all-users",
+                element: (
+                    <AllUserManage />
+                ),
+            },
+
+            // Tutor Dashboard Routes
             {
                 path: "/dashboard/tutor-home",
                 element: (
@@ -150,7 +158,7 @@ const router = createBrowserRouter([
                 ),
             },
 
-            // Parent routers
+            // Parent Dashboard Routes
             {
                 path: "/dashboard/parent-home",
                 element: (
@@ -182,7 +190,7 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "/dashboard/add-meeting",
+                path: "/dashboard/join-meeting",
                 element: (
                     <AddMeeting />
                 ),

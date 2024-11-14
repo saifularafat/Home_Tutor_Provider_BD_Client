@@ -50,7 +50,7 @@ const Dashboard = () => {
         },
         {
             title: 'Users',
-            path: '/dashboard/manageUsers',
+            path: '/dashboard/manage-all-users',
             icon: iconMappings.Users,
             role: 'admin'
         },
@@ -195,7 +195,7 @@ const Dashboard = () => {
         },
         {
             title: 'Add Meeting',
-            path: '/dashboard/add-meeting',
+            path: '/dashboard/join-meeting',
             icon: iconMappings.Live,
             role: 'isParent'
         },
@@ -270,7 +270,7 @@ const Dashboard = () => {
                                 key={index}
                                 title={Menu.title}
                                 className={({ isActive }) => (isActive ?
-                                    `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-3'
+                                    `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-2'
                                     } ${index === 0 && ' hover:bg-slate-700'}` :
                                     `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-2'
                                     } ${index === 0 && ' hover:bg-primary'}`
