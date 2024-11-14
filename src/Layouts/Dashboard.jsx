@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { FaCalendarAlt, FaChartBar, FaChevronRight, FaCog, FaComment, FaHome, FaUser, FaWallet } from 'react-icons/fa';
+import { FaBlog, FaCalendarAlt, FaChartBar, FaChevronRight, FaCog, FaComment, FaHome, FaUser, FaWallet } from 'react-icons/fa';
 import DashboardHeader from '../Share/DashboardHeader/DashboardHeader';
 import logo from './../assets/leaf.jpg'
-import { MdAssignmentAdd, MdHomeWork } from 'react-icons/md';
-import { FaClipboardQuestion, FaUserPen, FaUsersViewfinder } from 'react-icons/fa6';
+import {  MdHomeWork, MdWorkHistory } from 'react-icons/md';
+import { FaClipboardQuestion, FaPersonCircleQuestion, FaTemperatureQuarter, FaUserPen, FaUsersRays, FaUsersViewfinder } from 'react-icons/fa6';
 import { RiLiveFill } from 'react-icons/ri';
 import { AiFillNotification } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
@@ -11,6 +11,9 @@ import { IconContext } from 'react-icons';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import DashboardFooter from '../Share/DashboardFooter/DashboardFooter';
 import { IoBagAdd } from 'react-icons/io5';
+import { SiFampay } from 'react-icons/si';
+import { CiSquareQuestion } from 'react-icons/ci';
+import { PiHandshakeFill } from 'react-icons/pi';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(true);
@@ -30,14 +33,16 @@ const Dashboard = () => {
         Analytics: FaChartBar,
         Home: FaHome,
         Setting: FaCog,
-        Payment: FaWallet,
+        Payment: SiFampay,
         Live: RiLiveFill,
-        Blog: MdAssignmentAdd,
+        Blog: FaBlog,
         Notice: AiFillNotification,
         BookAdd: BiBookAdd,
         AddJob: IoBagAdd,
         Profile: FaUserPen,
         Meeting: FaUsersViewfinder,
+        ReqJob: MdWorkHistory,
+        TutorReq: PiHandshakeFill,
     }
 
     const Menus = [
@@ -56,25 +61,25 @@ const Dashboard = () => {
         },
         {
             title: 'All Payments',
-            path: '/dashboard/allPayments',
+            path: '/dashboard/all-payments',
             icon: iconMappings.Payment,
             role: 'admin'
         },
         {
             title: 'All Request Job',
-            path: '/dashboard/allRequestJob',
-            icon: iconMappings.Payment,
+            path: '/dashboard/all-request-job',
+            icon: iconMappings.ReqJob,
             role: 'admin'
         },
         {
             title: 'All Tutor Request',
-            path: '/dashboard/allTutorRequest',
-            icon: iconMappings.Payment,
+            path: '/dashboard/all-tutor-request',
+            icon: iconMappings.TutorReq,
             role: 'admin'
         },
         {
             title: 'Create Notice',
-            path: '/dashboard/createNotice',
+            path: '/dashboard/create-notice',
             icon: iconMappings.Notice,
             role: 'admin'
         },
@@ -88,6 +93,12 @@ const Dashboard = () => {
             title: 'All Tutor',
             path: '/dashboard/allTutor',
             icon: iconMappings.BookAdd,
+            role: 'admin'
+        },
+        {
+            title: 'All Blog',
+            path: '/dashboard/allTutor',
+            icon: iconMappings.Blog,
             role: 'admin'
         },
         {
@@ -109,14 +120,8 @@ const Dashboard = () => {
             role: 'admin'
         },
         {
-            title: 'Add Terms And Condition',
+            title: 'Terms And Condition',
             path: '/dashboard/addTermsAndCondition',
-            icon: iconMappings.BookAdd,
-            role: 'admin'
-        },
-        {
-            title: 'All Terms And Condition',
-            path: '/dashboard/allTermsAndCondition',
             icon: iconMappings.BookAdd,
             role: 'admin'
         },
@@ -270,9 +275,9 @@ const Dashboard = () => {
                                 key={index}
                                 title={Menu.title}
                                 className={({ isActive }) => (isActive ?
-                                    `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-2'
+                                    `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-1'
                                     } ${index === 0 && ' hover:bg-slate-700'}` :
-                                    `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-2'
+                                    `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-1'
                                     } ${index === 0 && ' hover:bg-primary'}`
                                 )}>
                                 <li
@@ -280,7 +285,7 @@ const Dashboard = () => {
                                     className='flex items-center gap-x-4'
                                 >
 
-                                    <IconContext.Provider value={{ className: 'react-icon' }}>
+                                    <IconContext.Provider value={{ className: 'react-icon text-lg' }}>
                                         <Menu.icon />
                                     </IconContext.Provider>
                                     <span

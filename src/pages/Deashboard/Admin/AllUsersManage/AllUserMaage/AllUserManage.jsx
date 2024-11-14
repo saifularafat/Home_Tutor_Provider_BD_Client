@@ -99,7 +99,7 @@ const AllUserManage = () => {
 
     return (
         <div className="bg-white py-5 px-4 rounded-lg my-6">
-            <h2 className='my-3 text-2xl'>Manage Users: {5}</h2>
+            <h2 className='text-2xl font-semibold'>Manage Users: {5}</h2>
             <div className='overflow-x-auto p-4 min-h-[80vh]'>
                 <table className='table'>
                     {/* git */}

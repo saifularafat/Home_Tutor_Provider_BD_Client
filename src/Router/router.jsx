@@ -30,6 +30,10 @@ import StudentAnalytics from "../pages/Deashboard/Parent/StudentAnalytics/Studen
 import AddBlog from "../pages/Deashboard/Tutor/AddBlog/AddBlog";
 import JoinMeeting from "../pages/Deashboard/Tutor/JoinMeeting/JoinMeeting";
 import AllUserManage from "../pages/Deashboard/Admin/AllUsersManage/AllUserMaage/AllUserManage";
+import AllPayments from "../pages/Deashboard/Admin/AllPayments/AllPayments/AllPayments";
+import AllRequestJob from "../pages/Deashboard/Admin/AllRequestJob/AllRequestJob/AllRequestJob";
+import AllTutorRequest from "../pages/Deashboard/Admin/AllTutorRequest/AllTutorRequest/AllTutorRequest";
+import CreateNotice from "../pages/Deashboard/Admin/CreateNotice/CreateNotice/CreateNotice";
 
 const router = createBrowserRouter([
     {
@@ -117,6 +121,30 @@ const router = createBrowserRouter([
                 path: "/dashboard/manage-all-users",
                 element: (
                     <AllUserManage />
+                ),
+            },
+            {
+                path: "/dashboard/all-payments",
+                element: (
+                    <AllPayments />
+                ),
+            },
+            {
+                path: "/dashboard/all-request-job",
+                element: (
+                    <AllRequestJob />
+                ),
+            },
+            {
+                path: "/dashboard/all-tutor-request",
+                element: (
+                    <AllTutorRequest />
+                ),
+            },
+            {
+                path: "/dashboard/create-notice",
+                element: (
+                    <CreateNotice />
                 ),
             },
 
