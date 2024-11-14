@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaBlog, FaCalendarAlt, FaChartBar, FaChevronRight, FaCog, FaComment, FaHome, FaUser, FaWallet } from 'react-icons/fa';
+import { FaBlog, FaCalendarAlt, FaCartArrowDown, FaChartBar, FaChevronRight, FaCog, FaComment, FaHome, FaUser, FaWallet } from 'react-icons/fa';
 import DashboardHeader from '../Share/DashboardHeader/DashboardHeader';
 import logo from './../assets/leaf.jpg'
 import {  MdHomeWork, MdWorkHistory } from 'react-icons/md';
@@ -43,6 +43,8 @@ const Dashboard = () => {
         Meeting: FaUsersViewfinder,
         ReqJob: MdWorkHistory,
         TutorReq: PiHandshakeFill,
+        JobTutor: MdHomeWork,
+        SubDownZone: FaCartArrowDown,
     }
 
     const Menus = [
@@ -85,8 +87,8 @@ const Dashboard = () => {
         },
         {
             title: 'All Job Tuition',
-            path: '/dashboard/allJobTuition',
-            icon: iconMappings.BookAdd,
+            path: '/dashboard/all-job-tuition',
+            icon: iconMappings.JobTutor,
             role: 'admin'
         },
         {
@@ -97,14 +99,14 @@ const Dashboard = () => {
         },
         {
             title: 'All Blog',
-            path: '/dashboard/allTutor',
+            path: '/dashboard/all-blog',
             icon: iconMappings.Blog,
             role: 'admin'
         },
         {
-            title: 'Post Download Zone',
-            path: '/dashboard/postDownloadZone',
-            icon: iconMappings.BookAdd,
+            title: 'Download & PDF Zone',
+            path: '/dashboard/download-and-pdf-zone',
+            icon: iconMappings.SubDownZone,
             role: 'admin'
         },
         {

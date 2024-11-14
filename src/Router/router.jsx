@@ -34,6 +34,9 @@ import AllPayments from "../pages/Deashboard/Admin/AllPayments/AllPayments/AllPa
 import AllRequestJob from "../pages/Deashboard/Admin/AllRequestJob/AllRequestJob/AllRequestJob";
 import AllTutorRequest from "../pages/Deashboard/Admin/AllTutorRequest/AllTutorRequest/AllTutorRequest";
 import CreateNotice from "../pages/Deashboard/Admin/CreateNotice/CreateNotice/CreateNotice";
+import AllJobTuition from "../pages/Deashboard/Admin/AllJobTuition/AllJobTuition/AllJobTuition";
+import AllBlog from "../pages/Deashboard/Admin/AllBlog/AllBlog/AllBlog";
+import DownloadAndPdfZone from "../pages/Deashboard/Admin/DownloadAndPdfZone/DownloadAndPdfZone/DownloadAndPdfZone";
 
 const router = createBrowserRouter([
     {
@@ -145,6 +148,24 @@ const router = createBrowserRouter([
                 path: "/dashboard/create-notice",
                 element: (
                     <CreateNotice />
+                ),
+            },
+            {
+                path: "/dashboard/all-job-tuition",
+                element: (
+                    <AllJobTuition />
+                ),
+            },
+            {
+                path: "/dashboard/all-blog",
+                element: (
+                    <AllBlog />
+                ),
+            },
+            {
+                path: "/dashboard/download-and-pdf-zone",
+                element: (
+                    <DownloadAndPdfZone />
                 ),
             },
 
