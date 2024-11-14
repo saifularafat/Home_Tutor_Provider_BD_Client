@@ -35,9 +35,9 @@ const NavTest = () => {
 
     // Temporary variables for testing
     // const user = { displayName: "Test User" };
-    const user = true
+    const user = false
     const isAdmin = false; // Change to true/false to test admin
-    const isTutor = false; // Change to true/false to test instructor
+    const isTutor = true; // Change to true/false to test instructor
 
     const notices = [1, 2, 3, 4,]; // Example notice array for badge count
 
@@ -119,7 +119,7 @@ const NavTest = () => {
                                         Contact Us
                                     </NavLink>
                                 </li>
-                                {user && (
+                                {isTutor && (
                                     <li>
                                         {isAdmin ? (
                                             ''
@@ -170,7 +170,7 @@ const NavTest = () => {
                                     Contact Us
                                 </NavLink>
                             </li>
-                            {user && (
+                            {isTutor && (
                                 <li>
                                     {isAdmin ? (
                                         ''
@@ -201,8 +201,8 @@ const NavTest = () => {
                             </button>
                         </div>
                         {
-                            user
-                            // isTutor
+                            // user
+                            isTutor
                             // isAdmin
                                 ? (
                                     <div className='ml-5 dropdown dropdown-end'>

@@ -27,6 +27,8 @@ import JobRequestHistory from "../pages/Deashboard/Parent/JobRequestHistory/JobR
 import EnrolPremiumHistory from "../pages/Deashboard/Parent/EnrolPremiumHistory/EnrolPremiumHistory";
 import AddMeeting from "../pages/Deashboard/Parent/AddMeeting/AddMeeting";
 import StudentAnalytics from "../pages/Deashboard/Parent/StudentAnalytics/StudentAnalytics";
+import AddBlog from "../pages/Deashboard/Tutor/AddBlog/AddBlog";
+import JoinMeeting from "../pages/Deashboard/Tutor/JoinMeeting/JoinMeeting";
 
 const router = createBrowserRouter([
     {
@@ -121,6 +123,18 @@ const router = createBrowserRouter([
                 path: "/dashboard/apply-jobs",
                 element: (
                     <ApplyJobs />
+                ),
+            },
+            {
+                path: "/dashboard/add-blog",
+                element: (
+                    <AddBlog />
+                ),
+            },
+            {
+                path: "/dashboard/join-meeting",
+                element: (
+                    <JoinMeeting />
                 ),
             },
             {

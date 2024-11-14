@@ -3,7 +3,7 @@ import IsTutorInfo from "./IsTutorInfo";
 import IsParentInfo from "./IsParentInfo";
 
 const Profile = () => {
-    const isTutor = false;
+    const isTutor = true;
     // const isParent = true;
     return (
         <div className="md:py-12 py-5">

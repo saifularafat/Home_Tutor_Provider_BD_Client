@@ -19,8 +19,8 @@ const Dashboard = () => {
 
     // user identity
     const isAdmin = false;
-    const isTutor = false;
-    const isParent = true;
+    const isTutor = true;
+    const isParent = false;
 
     const iconMappings = {
         RoleHome: MdHomeWork,
@@ -144,15 +144,13 @@ const Dashboard = () => {
         },
         {
             title: 'Add Blog',
-            // path: '/dashboard/addBlog',
-            path: "",
+            path: '/dashboard/add-blog',
             icon: iconMappings.Blog,
             role: 'isTutor'
         },
         {
             title: 'Join Meeting',
-            // path: '/dashboard/addMeeting',
-            path: "",
+            path: '/dashboard/join-meeting',
             icon: iconMappings.Meeting,
             role: 'isTutor'
         },
