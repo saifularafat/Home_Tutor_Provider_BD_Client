@@ -37,6 +37,8 @@ import CreateNotice from "../pages/Deashboard/Admin/CreateNotice/CreateNotice/Cr
 import AllJobTuition from "../pages/Deashboard/Admin/AllJobTuition/AllJobTuition/AllJobTuition";
 import AllBlog from "../pages/Deashboard/Admin/AllBlog/AllBlog/AllBlog";
 import DownloadAndPdfZone from "../pages/Deashboard/Admin/DownloadAndPdfZone/DownloadAndPdfZone/DownloadAndPdfZone";
+import InboxMessage from "../pages/Deashboard/Admin/InboxMessage/InboxMessage/InboxMessage";
+import TermsAndCondition from "../pages/Deashboard/Admin/TermsAndCondition/TermsAndCondition";
 
 const router = createBrowserRouter([
     {
@@ -166,6 +168,18 @@ const router = createBrowserRouter([
                 path: "/dashboard/download-and-pdf-zone",
                 element: (
                     <DownloadAndPdfZone />
+                ),
+            },
+            {
+                path: "/dashboard/admin-inbox-message",
+                element: (
+                    <InboxMessage />
+                ),
+            },
+            {
+                path: "/dashboard/terms-and-condition",
+                element: (
+                    <TermsAndCondition />
                 ),
             },
 

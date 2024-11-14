@@ -3,7 +3,7 @@ import { FaBlog, FaCalendarAlt, FaCartArrowDown, FaChartBar, FaChevronRight, FaC
 import DashboardHeader from '../Share/DashboardHeader/DashboardHeader';
 import logo from './../assets/leaf.jpg'
 import {  MdHomeWork, MdWorkHistory } from 'react-icons/md';
-import { FaClipboardQuestion, FaPersonCircleQuestion, FaTemperatureQuarter, FaUserPen, FaUsersRays, FaUsersViewfinder } from 'react-icons/fa6';
+import { FaClipboardQuestion, FaMessage, FaPersonCircleQuestion, FaTemperatureQuarter, FaUserPen, FaUsersRays, FaUsersViewfinder } from 'react-icons/fa6';
 import { RiLiveFill } from 'react-icons/ri';
 import { AiFillNotification } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
@@ -14,6 +14,7 @@ import { IoBagAdd } from 'react-icons/io5';
 import { SiFampay } from 'react-icons/si';
 import { CiSquareQuestion } from 'react-icons/ci';
 import { PiHandshakeFill } from 'react-icons/pi';
+import { TbMessage2Question } from 'react-icons/tb';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(true);
@@ -45,6 +46,8 @@ const Dashboard = () => {
         TutorReq: PiHandshakeFill,
         JobTutor: MdHomeWork,
         SubDownZone: FaCartArrowDown,
+        InboxMessage: FaMessage,
+        TermsMessage: TbMessage2Question,
     }
 
     const Menus = [
@@ -116,15 +119,15 @@ const Dashboard = () => {
             role: 'admin'
         },
         {
-            title: 'inbox',
-            path: '/dashboard/adminInbox',
-            icon: iconMappings.BookAdd,
+            title: 'Inbox',
+            path: '/dashboard/admin-inbox-message',
+            icon: iconMappings.InboxMessage,
             role: 'admin'
         },
         {
             title: 'Terms And Condition',
-            path: '/dashboard/addTermsAndCondition',
-            icon: iconMappings.BookAdd,
+            path: '/dashboard/terms-and-condition',
+            icon: iconMappings.TermsMessage,
             role: 'admin'
         },
         // Admin router END
