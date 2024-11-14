@@ -23,6 +23,10 @@ import Notice from "../pages/Deashboard/Notice/Notice";
 import ApplyJobs from "../pages/Deashboard/Parent/ApplyJobs/ApplyJobs";
 import ProfileUpdate from "../pages/Deashboard/Parent/ProfileUpdate/ProfileUpdate";
 import ParentNoticeBoard from "../pages/Deashboard/Parent/ParentNoiceBoard/ParentNoticeBoard";
+import JobRequestHistory from "../pages/Deashboard/Parent/JobRequestHistory/JobRequestHistory";
+import EnrolPremiumHistory from "../pages/Deashboard/Parent/EnrolPremiumHistory/EnrolPremiumHistory";
+import AddMeeting from "../pages/Deashboard/Parent/AddMeeting/AddMeeting";
+import StudentAnalytics from "../pages/Deashboard/Parent/StudentAnalytics/StudentAnalytics";
 
 const router = createBrowserRouter([
     {
@@ -127,15 +131,17 @@ const router = createBrowserRouter([
                 ),
             },
             {
+                path: "/dashboard/noticeBoard",
+                element: (
+                    <Notice />
+                ),
+            },
+
+            // Parent routers
+            {
                 path: "/dashboard/parent-home",
                 element: (
                     <ParentHome />
-                ),
-            },
-            {
-                path: "/dashboard/profile",
-                element: (
-                    <Profile />
                 ),
             },
             {
@@ -145,15 +151,39 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "/dashboard/noticeBoard",
-                element: (
-                    <Notice />
-                ),
-            },
-            {
                 path: "/dashboard/parent-notice-board",
                 element: (
                     <ParentNoticeBoard />
+                ),
+            },
+            {
+                path: "/dashboard/job-request-history",
+                element: (
+                    <JobRequestHistory />
+                ),
+            },
+            {
+                path: "/dashboard/payment-history",
+                element: (
+                    <EnrolPremiumHistory />
+                ),
+            },
+            {
+                path: "/dashboard/add-meeting",
+                element: (
+                    <AddMeeting />
+                ),
+            },
+            {
+                path: "/dashboard/student-analytics",
+                element: (
+                    <StudentAnalytics />
+                ),
+            },
+            {
+                path: "/dashboard/profile",
+                element: (
+                    <Profile />
                 ),
             },
         ]

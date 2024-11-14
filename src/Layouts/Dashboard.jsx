@@ -8,7 +8,7 @@ import { RiLiveFill } from 'react-icons/ri';
 import { AiFillNotification } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
 import { IconContext } from 'react-icons';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import DashboardFooter from '../Share/DashboardFooter/DashboardFooter';
 import { IoBagAdd } from 'react-icons/io5';
 
@@ -145,14 +145,14 @@ const Dashboard = () => {
         {
             title: 'Add Blog',
             // path: '/dashboard/addBlog',
-            path:"",
+            path: "",
             icon: iconMappings.Blog,
             role: 'isTutor'
         },
         {
             title: 'Join Meeting',
             // path: '/dashboard/addMeeting',
-            path:"",
+            path: "",
             icon: iconMappings.Meeting,
             role: 'isTutor'
         },
@@ -173,21 +173,19 @@ const Dashboard = () => {
         },
         {
             title: 'Job Request History',
-            // path: '/dashboard/jobRequestHistory',
-            path:"",
+            path: '/dashboard/job-request-history',
             icon: iconMappings.Payment,
             role: 'isParent'
         },
         {
             title: 'Enrol Premium History',
-            // path: '/dashboard/paymentHistory',
-            path:"",
+            path: '/dashboard/payment-history',
             icon: iconMappings.Payment,
             role: 'isParent'
         },
         {
             title: 'Profile',
-            path:"/dashboard/profile",
+            path: "/dashboard/profile",
             icon: iconMappings.Profile,
             role: 'isParent'
         },
@@ -199,15 +197,13 @@ const Dashboard = () => {
         },
         {
             title: 'Add Meeting',
-            // path: '/dashboard/addMeeting',
-            path:"",
+            path: '/dashboard/add-meeting',
             icon: iconMappings.Live,
             role: 'isParent'
         },
         {
             title: 'Student Analytics',
-            // path: '/dashboard/studentAnalytics',
-            path:"",
+            path: '/dashboard/student-analytics',
             icon: iconMappings.Analytics,
             role: 'isParent'
         },
@@ -237,7 +233,9 @@ const Dashboard = () => {
 
                 <div className={`flex gap-x-4 items-center`}>
                     <div className='text-center w-full'>
-                        <img src={logo} alt="" className={`${open ? 'w-16 h-16 mx-auto' : ' w-9 h-9 mx-auto'} cursor-pointer duration-500 bg-white rounded-xl`} />
+                        <Link to="/">
+                            <img src={logo} alt="" className={`${open ? 'w-16 h-16 mx-auto' : ' w-9 h-9 mx-auto'} cursor-pointer duration-500 bg-white rounded-xl`} />
+                        </Link>
                         {
                             open ? <>
                                 <h2 className={`${!open && 'scale-0'} text-slate-800 text-xl md:py-2 font-medium origin-left duration-300`}>Home Tutor Provider<sup>BD</sup></h2>
@@ -257,8 +255,13 @@ const Dashboard = () => {
                     className={`${open ? '' : ''}  flex flex-col text-center`}>
                     {isAdmin
                         ? isAdminMenus.map((Menu, index) => (
-                            <Link to={Menu.path} key={index} className={`flex rounded-md p-2 cursor-pointer hover: hover:bg-primary text-sm items-center gap-x-4 ${Menu.gap ? 'mt-9' : 'mt-2'
-                                } ${index === 0 && ' hover:bg-primary'}`}>
+                            <NavLink to={Menu.path} key={index}
+                                className={({ isActive }) => (isActive ?
+                                    `flex rounded-md p-2 cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                    } ${index === 0 && ' hover:bg-slate-700'}` :
+                                    `flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                    } ${index === 0 && ' hover:bg-primary'}`
+                                )}>
                                 <li
 
                                     className='flex items-center gap-x-4'
@@ -275,17 +278,21 @@ const Dashboard = () => {
                                     </span>
 
                                 </li>
-                            </Link>
+                            </NavLink>
                         ))
                         : //  Instructor menus
                         isTutor
                             ? isTutorMenus.map((Menu, index) => (
-                                <Link 
-                                to={Menu.path} 
-                                key={index} 
-                                 title={Menu.title}
-                                className={`flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-base items-center gap-x-4 transition-all duration-200 ${Menu.gap ? 'mt-9' : 'mt-2'
-                                    } ${index === 0 && ' hover:bg-primary'}`}>
+                                <NavLink
+                                    to={Menu.path}
+                                    key={index}
+                                    title={Menu.title}
+                                    className={({ isActive }) => (isActive ?
+                                        `flex rounded-md p-2 cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                        } ${index === 0 && ' hover:bg-slate-700'}` :
+                                        `flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                        } ${index === 0 && ' hover:bg-primary'}`
+                                    )}>
                                     <li
 
                                         className='flex items-center gap-x-4'
@@ -302,16 +309,20 @@ const Dashboard = () => {
                                         </span>
 
                                     </li>
-                                </Link>
+                                </NavLink>
                             ))
                             : // User menus
                             isParentMenus.map((Menu, index) => (
-                                <Link 
-                                to={Menu.path} 
-                                key={index} 
-                                title={Menu.title}
-                                className={`flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
-                                    } ${index === 0 && ' hover:bg-primary'}`}>
+                                <NavLink
+                                    to={Menu.path}
+                                    key={index}
+                                    title={Menu.title}
+                                    className={({ isActive }) => (isActive ?
+                                        `flex rounded-md p-2 cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                        } ${index === 0 && ' hover:bg-slate-700'}` :
+                                        `flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                        } ${index === 0 && ' hover:bg-primary'}`
+                                    )}>
                                     <li
 
                                         className='flex items-center gap-x-3'
@@ -328,7 +339,7 @@ const Dashboard = () => {
                                         </span>
 
                                     </li>
-                                </Link>
+                                </NavLink>
                             ))}
                     {generalMenus.map((Menu, index) => (
                         <Link to={Menu.path} key={index} className={`flex rounded-md p-2 cursor-pointer hover: hover:bg-primary text-sm items-center gap-x-4 ${Menu.gap ? 'mt-9' : 'mt-2'
