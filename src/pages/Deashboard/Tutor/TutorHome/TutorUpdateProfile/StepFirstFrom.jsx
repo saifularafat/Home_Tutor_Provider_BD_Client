@@ -77,7 +77,7 @@ const StepFirstFrom = ({ completeStep }) => {
                         placeholder="Enter Your Address"
                         className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                     />
-                    {errors.phone && (
+                    {errors.address && (
                         <span className="mt-1 text-red-500">
                             Address field is required
                         </span>

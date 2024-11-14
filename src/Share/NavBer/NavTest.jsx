@@ -238,8 +238,8 @@ const NavTest = () => {
                                                 }
                                                 {/* Navigate to different dashboard route based on user role */}
                                                 {
-                                                    user
-                                                    // isTutor
+                                                    // user
+                                                    isTutor
                                                     // isAdmin
                                                     && (
                                                         <li>

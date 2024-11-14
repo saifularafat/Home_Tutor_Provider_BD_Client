@@ -18,7 +18,7 @@ const StepSecondForm = ({ completeStep }) => {
   // Handle form submission
   const onSubmit = (data) => {
     const formData = {
-     
+
       universitySubjects: universitySubjects,
       educationLevels: educationLevels,
       programmingLanguages: programmingLanguages,
@@ -267,7 +267,7 @@ const StepSecondForm = ({ completeStep }) => {
                 <span className="font-bold text-slate-500 tracking-wider">Start Years</span>
               </label>
               <input
-                {...register("instituteStartYears", { required: true })}
+                {...register("instituteStartYears")}
                 type="number"
                 placeholder="Years"
                 className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
@@ -282,18 +282,18 @@ const StepSecondForm = ({ completeStep }) => {
               <input
                 type="file"
                 className="file-input file-input-bordered file-input-success w-full"
-                {...register("programmingCertificate", {
-                  required: "File is required",
-                  validate: {
-                    fileType: (value) =>
-                      ["image/png", "image/jpg", "image/jpeg"].includes(value[0]?.type) || "Only PNG, JPG, and JPEG files are allowed.",
-                    fileSize: (value) =>
-                      value[0]?.size <= 200 * 1024 || "File size should be less than or equal to 200KB.",
-                  },
-                })}
+                {...register("programmingCertificate",
+                  // {
+                  //   validate: {
+                  //     fileType: (value) =>
+                  //       ["image/png", "image/jpg", "image/jpeg"].includes(value[0]?.type) || "Only PNG, JPG, and JPEG files are allowed.",
+                  //     fileSize: (value) =>
+                  //       value[0]?.size <= 200 * 1024 || "File size should be less than or equal to 200KB.",
+                  //   },
+                  // }
+                )}
                 accept=".png, .jpg, .jpeg"
               />
-              {errors.studentIdCardPicture && <p className="text-red-500 text-sm">{errors.studentIdCardPicture.message}</p>}
             </div>
           </div>
         </div>

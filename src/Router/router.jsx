@@ -140,7 +140,6 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/tutor-update-profile",
                 element: (
-                    // <ParentHome />
                     <TutorUpdateProfile />
                 ),
             },

@@ -186,7 +186,6 @@ const ProfileUpdate = () => {
                                 {...register("ParentBio")}
                                 className="border border-sky-300 rounded-lg outline-sky-600 placeholder:text-sm overflow-hidden w-full p-2"
                             >
-
                             </textarea>
                         </div>
                     </div>
