@@ -36,8 +36,8 @@ const NavTest = () => {
     // Temporary variables for testing
     // const user = { displayName: "Test User" };
     const user = false
-    const isAdmin = false; // Change to true/false to test admin
-    const isTutor = true; // Change to true/false to test instructor
+    const isAdmin = true; // Change to true/false to test admin
+    const isTutor = false; // Change to true/false to test instructor
 
     const notices = [1, 2, 3, 4,]; // Example notice array for badge count
 
@@ -119,7 +119,7 @@ const NavTest = () => {
                                         Contact Us
                                     </NavLink>
                                 </li>
-                                {isTutor && (
+                                {isAdmin && (
                                     <li>
                                         {isAdmin ? (
                                             ''
@@ -170,7 +170,7 @@ const NavTest = () => {
                                     Contact Us
                                 </NavLink>
                             </li>
-                            {isTutor && (
+                            {isAdmin && (
                                 <li>
                                     {isAdmin ? (
                                         ''
@@ -202,8 +202,8 @@ const NavTest = () => {
                         </div>
                         {
                             // user
-                            isTutor
-                            // isAdmin
+                            // isTutor
+                            isAdmin
                                 ? (
                                     <div className='ml-5 dropdown dropdown-end'>
                                         <div
@@ -239,8 +239,8 @@ const NavTest = () => {
                                                 {/* Navigate to different dashboard route based on user role */}
                                                 {
                                                     // user
-                                                    isTutor
-                                                    // isAdmin
+                                                    // isTutor
+                                                    isAdmin
                                                     && (
                                                         <li>
                                                             {isAdmin ? (

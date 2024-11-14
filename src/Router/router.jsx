@@ -16,7 +16,7 @@ import TermsOfUser from "../pages/TermsOfUser/TermsOfUser";
 import Dashboard from "../Layouts/Dashboard";
 import ParentHome from "../pages/Deashboard/Parent/ParentHome/ParentHome";
 import TutorHome from "../pages/Deashboard/Tutor/TutorHome/TutorHome";
-import AdminHome from "../pages/Deashboard/Admin/AdminHome/AdminHome";
+import AdminHome from "../pages/Deashboard/Admin/AdminHome/AdminHome/AdminHome";
 import TutorUpdateProfile from "../pages/Deashboard/Tutor/TutorHome/TutorUpdateProfile/TutorUpdateProfile";
 import Profile from "../pages/Deashboard/Profile/Profile";
 import Notice from "../pages/Deashboard/Notice/Notice";

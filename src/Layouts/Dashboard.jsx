@@ -18,8 +18,8 @@ const Dashboard = () => {
 
 
     // user identity
-    const isAdmin = false;
-    const isTutor = true;
+    const isAdmin = true;
+    const isTutor = false;
     const isParent = false;
 
     const iconMappings = {
@@ -43,7 +43,7 @@ const Dashboard = () => {
     const Menus = [
         {
             title: 'Admin Home',
-            path: '/dashboard/adminHome',
+            path: '/dashboard/admin-home',
             icon: iconMappings.RoleHome,
             role: 'admin',
             gap: true
@@ -229,35 +229,50 @@ const Dashboard = () => {
                     className={`${open && 'rotate-180 transition-all duration-500'} absolute top-9 md:-right-3 -right-[5px] md:w-8 md:h-8 w-5 h-5 bg-slate-800 text-white cursor-pointer rounded-full border-2 border-blue-200 p-1`}
                 />
 
-                <div className={`flex gap-x-4 items-center`}>
-                    <div className='text-center w-full'>
-                        <Link to="/">
-                            <img src={logo} alt="" className={`${open ? 'w-16 h-16 mx-auto' : ' w-9 h-9 mx-auto'} cursor-pointer duration-500 bg-white rounded-xl`} />
-                        </Link>
-                        {
-                            open ? <>
-                                <h2 className={`${!open && 'scale-0'} text-slate-800 text-xl md:py-2 font-medium origin-left duration-300`}>Home Tutor Provider<sup>BD</sup></h2>
-                                <Link to="/"
-                                    className='text-xs text-white text-center py-[2px] px-2 hover:bg-orange-700 hover:underline transition-all duration-300 bg-orange-500 rounded-full w-1/2 mx-auto '>
-                                    visit website
-                                </Link>
-                            </>
-                                :
-                                ''
-                        }
+                {
+                    isTutor && isParent &&
+                    <div className={`flex gap-x-4 items-center`}>
+                        <div className='text-center w-full'>
+                            <Link to="/">
+                                <img src={logo} alt="" className={`${open ? 'w-16 h-16 mx-auto' : ' w-9 h-9 mx-auto'} cursor-pointer duration-500 bg-white rounded-xl`} />
+                            </Link>
+                            {
+                                open ? <>
+                                    <h2 className={`${!open && 'scale-0'} text-slate-800 text-xl md:py-2 font-medium origin-left duration-300`}>Home Tutor Provider<sup>BD</sup></h2>
+                                    <Link to="/"
+                                        className='text-xs text-white text-center py-[2px] px-2 hover:bg-orange-700 hover:underline transition-all duration-300 bg-orange-500 rounded-full w-1/2 mx-auto '>
+                                        visit website
+                                    </Link>
+                                </>
+                                    :
+                                    ''
+                            }
+                        </div>
                     </div>
-                </div>
+                }
+                {isAdmin &&
+                    <div className={`flex gap-x-4 items-center ${open ? 'mb-0' : 'mb-5'}`}>
+                        <div className='text-center w-full'>
+                            <Link to="/">
+                                <img src={logo} alt="" className={`${open ? 'w-12 h-12 mx-auto' : ' w-9 h-9 mx-auto'} cursor-pointer duration-500 bg-white rounded-xl`} />
+                            </Link>
+                        </div>
+                    </div>
+                }
 
                 {/* dashboard Nav Ber */}
                 <ul
                     className={`${open ? '' : ''}  flex flex-col text-center`}>
                     {isAdmin
                         ? isAdminMenus.map((Menu, index) => (
-                            <NavLink to={Menu.path} key={index}
+                            <NavLink
+                                to={Menu.path}
+                                key={index}
+                                title={Menu.title}
                                 className={({ isActive }) => (isActive ?
-                                    `flex rounded-md p-2 cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                    `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-3'
                                     } ${index === 0 && ' hover:bg-slate-700'}` :
-                                    `flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                    `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-2'
                                     } ${index === 0 && ' hover:bg-primary'}`
                                 )}>
                                 <li
@@ -340,8 +355,12 @@ const Dashboard = () => {
                                 </NavLink>
                             ))}
                     {generalMenus.map((Menu, index) => (
-                        <Link to={Menu.path} key={index} className={`flex rounded-md p-2 cursor-pointer hover: hover:bg-primary text-sm items-center gap-x-4 ${Menu.gap ? 'mt-9' : 'mt-2'
-                            } ${index === 0 && ' hover:bg-blue-500'}`}>
+                        <Link 
+                        to={Menu.path} 
+                        key={index}
+                        title={Menu.title}
+                         className={`flex rounded-md ${isAdmin ? 'py-[2px] px-2' : 'p-2'} ${open ? '' : 'mx-auto mt-16'} cursor-pointer hover: hover:bg-primary text-sm items-center gap-x-4 ${Menu.gap ? `${isAdmin ? 'mt-4' : 'mt-5'}` : 'mt-2'
+                            } ${index === 0 && ' hover:bg-blue-500 hover:text-white'}`}>
                             <li
 
                                 className='flex items-center gap-x-4'
@@ -363,7 +382,7 @@ const Dashboard = () => {
 
 
             {/* Dashboard main content */}
-            <div className={` ${open ? 'md:pl-10 pl-2 md:pr-5 pr-2' : 'md:pl-16 pl-2 md:pr-8 pr-2'
+            <div className={` ${open ? 'md:pl-10 pl-2 md:pr-5 pr-2' : `md:pl-16 pl-2 md:pr-8 pr-2`
                 }  flex-1  overflow-y-auto duration-500 transition-all h-[100vh] scroll-smooth relative ${isAdmin
                     ? ''
                     : isTutor
