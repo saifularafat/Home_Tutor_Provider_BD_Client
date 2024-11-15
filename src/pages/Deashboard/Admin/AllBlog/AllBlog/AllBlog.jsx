@@ -2,7 +2,7 @@ const AllBlog = () => {
     return (
         <div className="py-6">
             <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
-                <div className="w-80 bg-white rounded-xl shadow-xl">
+                <div className="w-full bg-white rounded-xl shadow-xl">
                     <div>
                         <img
                             className="h-[250px] w-full rounded-t-lg object-cover"
@@ -22,7 +22,7 @@ const AllBlog = () => {
                         <button className="text-sm font-medium px-3 py-1 bg-red-400 hover:bg-red-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg">Delete</button>
                     </div>
                 </div>
-                <div className="w-80 bg-white rounded-xl shadow-xl">
+                <div className="w-full bg-white rounded-xl shadow-xl">
                     <div>
                         <img
                             className="h-[250px] w-full rounded-t-lg object-cover"
@@ -42,7 +42,7 @@ const AllBlog = () => {
                         <button className="text-sm font-medium px-3 py-1 bg-red-400 hover:bg-red-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg">Delete</button>
                     </div>
                 </div>
-                <div className="w-80 bg-white rounded-xl shadow-xl">
+                <div className="w-full bg-white rounded-xl shadow-xl">
                     <div>
                         <img
                             className="h-[250px] w-full rounded-t-lg object-cover"
@@ -62,7 +62,7 @@ const AllBlog = () => {
                         <button className="text-sm font-medium px-3 py-1 bg-red-400 hover:bg-red-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg">Delete</button>
                     </div>
                 </div>
-                <div className="w-80 bg-white rounded-xl shadow-xl">
+                <div className="w-full bg-white rounded-xl shadow-xl">
                     <div>
                         <img
                             className="h-[250px] w-full rounded-t-lg object-cover"
@@ -82,7 +82,7 @@ const AllBlog = () => {
                         <button className="text-sm font-medium px-3 py-1 bg-red-400 hover:bg-red-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg">Delete</button>
                     </div>
                 </div>
-                <div className="w-80 bg-white rounded-xl shadow-xl">
+                <div className="w-full bg-white rounded-xl shadow-xl">
                     <div>
                         <img
                             className="h-[250px] w-full rounded-t-lg object-cover"
