@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaBlog, FaCalendarAlt, FaCartArrowDown, FaChartBar, FaChevronRight, FaCog, FaComment, FaHome, FaUser, FaWallet } from 'react-icons/fa';
 import DashboardHeader from '../Share/DashboardHeader/DashboardHeader';
 import logo from './../assets/leaf.jpg'
-import {  MdHomeWork, MdWorkHistory } from 'react-icons/md';
+import {  MdCastForEducation, MdHomeWork, MdWorkHistory } from 'react-icons/md';
 import { FaClipboardQuestion, FaMessage, FaPersonCircleQuestion, FaTemperatureQuarter, FaUserPen, FaUsersRays, FaUsersViewfinder } from 'react-icons/fa6';
 import { RiLiveFill } from 'react-icons/ri';
 import { AiFillNotification } from 'react-icons/ai';
@@ -48,6 +48,7 @@ const Dashboard = () => {
         SubDownZone: FaCartArrowDown,
         InboxMessage: FaMessage,
         TermsMessage: TbMessage2Question,
+        AllTutor: MdCastForEducation,
     }
 
     const Menus = [
@@ -71,7 +72,7 @@ const Dashboard = () => {
             role: 'admin'
         },
         {
-            title: 'All Request Job',
+            title: 'All Request-Approve',
             path: '/dashboard/all-request-job',
             icon: iconMappings.ReqJob,
             role: 'admin'
@@ -96,8 +97,8 @@ const Dashboard = () => {
         },
         {
             title: 'All Tutor',
-            path: '/dashboard/allTutor',
-            icon: iconMappings.BookAdd,
+            path: '/dashboard/all-tutor',
+            icon: iconMappings.AllTutor,
             role: 'admin'
         },
         {
@@ -114,7 +115,7 @@ const Dashboard = () => {
         },
         {
             title: 'All Download Zone',
-            path: '/dashboard/allDownloadZone',
+            path: '/dashboard/admin-home',
             icon: iconMappings.BookAdd,
             role: 'admin'
         },

@@ -39,6 +39,7 @@ import AllBlog from "../pages/Deashboard/Admin/AllBlog/AllBlog/AllBlog";
 import DownloadAndPdfZone from "../pages/Deashboard/Admin/DownloadAndPdfZone/DownloadAndPdfZone/DownloadAndPdfZone";
 import InboxMessage from "../pages/Deashboard/Admin/InboxMessage/InboxMessage/InboxMessage";
 import TermsAndCondition from "../pages/Deashboard/Admin/TermsAndCondition/TermsAndCondition";
+import AllTutor from "../pages/Deashboard/Admin/AllTutor/AllTutor/AllTutor";
 
 const router = createBrowserRouter([
     {
@@ -156,6 +157,12 @@ const router = createBrowserRouter([
                 path: "/dashboard/all-job-tuition",
                 element: (
                     <AllJobTuition />
+                ),
+            },
+            {
+                path: "/dashboard/all-tutor",
+                element: (
+                    <AllTutor />
                 ),
             },
             {
