@@ -72,14 +72,14 @@ const Dashboard = () => {
             role: 'admin'
         },
         {
-            title: 'All Request-Approve',
-            path: '/dashboard/all-request-job',
+            title: 'All Request&Approve',
+            path: '/dashboard/all-request-approve-jobs',
             icon: iconMappings.ReqJob,
             role: 'admin'
         },
         {
-            title: 'All Tutor Request',
-            path: '/dashboard/all-tutor-request',
+            title: 'Tutor Jobs Request',
+            path: '/dashboard/tutor-jobs-request',
             icon: iconMappings.TutorReq,
             role: 'admin'
         },

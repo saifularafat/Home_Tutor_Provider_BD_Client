@@ -1,25 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main";
 import Error from "../pages/Error/Error";
+
 import Home from "../pages/Home/Home/Home";
-import ContactUs from "../pages/ContactUs/ContactUs";
-import TutorProfile from "../pages/TutorAllPage/TutorProfile/TutorProfile";
 import TuitionJobs from "../pages/TuitionJobsAllPage/TuitionJobs/TuitionJobs";
+import TutorProfile from "../pages/TutorAllPage/TutorProfile/TutorProfile";
+import ContactUs from "../pages/ContactUs/ContactUs";
+import About from "../pages/About/About";
+import TermsOfUser from "../pages/TermsOfUser/TermsOfUser";
+
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
-import About from "../pages/About/About";
 import RegistrationView from "../pages/RegistrationView/RegistrationView";
+
 import TuitionDetails from "../pages/TuitionJobsAllPage/TuitionDetails/TuitionDetails";
 import TutorProfileDetails from "../pages/TutorAllPage/TutorProfileDetails/TutorProfileDetails";
 import TutorHireRequest from "../pages/TutorAllPage/TutorHireRequest/TutorHireRequest";
-import TermsOfUser from "../pages/TermsOfUser/TermsOfUser";
+
 import Dashboard from "../Layouts/Dashboard";
-import ParentHome from "../pages/Deashboard/Parent/ParentHome/ParentHome";
-import TutorHome from "../pages/Deashboard/Tutor/TutorHome/TutorHome";
-import AdminHome from "../pages/Deashboard/Admin/AdminHome/AdminHome/AdminHome";
-import TutorUpdateProfile from "../pages/Deashboard/Tutor/TutorHome/TutorUpdateProfile/TutorUpdateProfile";
 import Profile from "../pages/Deashboard/Profile/Profile";
 import Notice from "../pages/Deashboard/Notice/Notice";
+
+import ParentHome from "../pages/Deashboard/Parent/ParentHome/ParentHome";
 import ApplyJobs from "../pages/Deashboard/Parent/ApplyJobs/ApplyJobs";
 import ProfileUpdate from "../pages/Deashboard/Parent/ProfileUpdate/ProfileUpdate";
 import ParentNoticeBoard from "../pages/Deashboard/Parent/ParentNoiceBoard/ParentNoticeBoard";
@@ -27,19 +29,24 @@ import JobRequestHistory from "../pages/Deashboard/Parent/JobRequestHistory/JobR
 import EnrolPremiumHistory from "../pages/Deashboard/Parent/EnrolPremiumHistory/EnrolPremiumHistory";
 import AddMeeting from "../pages/Deashboard/Parent/AddMeeting/AddMeeting";
 import StudentAnalytics from "../pages/Deashboard/Parent/StudentAnalytics/StudentAnalytics";
+
+import TutorHome from "../pages/Deashboard/Tutor/TutorHome/TutorHome";
 import AddBlog from "../pages/Deashboard/Tutor/AddBlog/AddBlog";
 import JoinMeeting from "../pages/Deashboard/Tutor/JoinMeeting/JoinMeeting";
+import TutorUpdateProfile from "../pages/Deashboard/Tutor/TutorHome/TutorUpdateProfile/TutorUpdateProfile";
+
+import AdminHome from "../pages/Deashboard/Admin/AdminHome/AdminHome/AdminHome";
 import AllUserManage from "../pages/Deashboard/Admin/AllUsersManage/AllUserMaage/AllUserManage";
 import AllPayments from "../pages/Deashboard/Admin/AllPayments/AllPayments/AllPayments";
-import AllRequestJob from "../pages/Deashboard/Admin/AllRequestJob/AllRequestJob/AllRequestJob";
-import AllTutorRequest from "../pages/Deashboard/Admin/AllTutorRequest/AllTutorRequest/AllTutorRequest";
+import TermsAndCondition from "../pages/Deashboard/Admin/TermsAndCondition/TermsAndCondition";
+import AllTutor from "../pages/Deashboard/Admin/AllTutor/AllTutor/AllTutor";
+import AllRequestApprove from "../pages/Deashboard/Admin/AllRequest&Approve/AllRequest&Approve/AllRequestApprove";
+import TutorJobsRequest from "../pages/Deashboard/Admin/TutorJobsRequest/TutorJobsRequest/TutorJobsRequest";
 import CreateNotice from "../pages/Deashboard/Admin/CreateNotice/CreateNotice/CreateNotice";
 import AllJobTuition from "../pages/Deashboard/Admin/AllJobTuition/AllJobTuition/AllJobTuition";
 import AllBlog from "../pages/Deashboard/Admin/AllBlog/AllBlog/AllBlog";
 import DownloadAndPdfZone from "../pages/Deashboard/Admin/DownloadAndPdfZone/DownloadAndPdfZone/DownloadAndPdfZone";
 import InboxMessage from "../pages/Deashboard/Admin/InboxMessage/InboxMessage/InboxMessage";
-import TermsAndCondition from "../pages/Deashboard/Admin/TermsAndCondition/TermsAndCondition";
-import AllTutor from "../pages/Deashboard/Admin/AllTutor/AllTutor/AllTutor";
 
 const router = createBrowserRouter([
     {
@@ -136,15 +143,15 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "/dashboard/all-request-job",
+                path: "/dashboard/all-request-approve-jobs",
                 element: (
-                    <AllRequestJob />
+                    <AllRequestApprove />
                 ),
             },
             {
-                path: "/dashboard/all-tutor-request",
+                path: "/dashboard/tutor-jobs-request",
                 element: (
-                    <AllTutorRequest />
+                    <TutorJobsRequest />
                 ),
             },
             {

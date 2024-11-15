@@ -72,11 +72,12 @@ const AllJobTuition = () => {
 
     return (
 
-        <div className="overflow-x-auto my-10 px-4 py-6 rounded-lg bg-slate-100">
+        <div className="overflow-x-auto my-10 px-4 py-6 rounded-lg bg-white">
             <h2 className="text-2xl font-semibold text-slate-700">Total Tuition Job = <span className="text-blue-500 text-3xl font-bold">({JobInfo.length})</span></h2>
             <table className="min-w-[100%] shadow-md border mx-auto border-gray-100 my-6">
                 <thead>
                     <tr className="bg-[#0095FF] text-white">
+                        <th className="py-2 px-2 text-sm text-left border-b"></th>
                         <th className="py-2 px-2 text-sm text-left border-b">Address</th>
                         <th className="py-2 px-2 text-sm text-left border-b">Salary</th>
                         <th className="py-2 px-2 text-sm text-left border-b">Per week</th>
@@ -91,8 +92,9 @@ const AllJobTuition = () => {
                 </thead>
                 <tbody className="">
                     {
-                        JobInfo.map((jobSub) =>
-                            <tr key={jobSub.tuiCode} className="hover:bg-white border-b transition duration-300">
+                        JobInfo.map((jobSub, index) =>
+                            <tr key={jobSub.tuiCode} className="hover:bg-slate-200 border-b transition duration-300">
+                                <td className="px-1 border-b text-sm font-normal">{index + 1}</td>
                                 <td className="py-1 px-2 border-b text-sm font-normal">{jobSub?.address}</td>
                                 <td className="py-1 px-2 border-b text-sm font-normal">{jobSub?.salary}k</td>
                                 <td className="py-1 px-2 border-b text-sm font-normal">{jobSub?.parWeek} days</td>
@@ -101,7 +103,7 @@ const AllJobTuition = () => {
                                 <td className="py-1 px-2 border-b text-sm font-normal">{jobSub?.tuiCode}</td>
                                 <td className="py-1 px-2 border-b text-sm font-normal">{jobSub?.gender}</td>
                                 <td className="py-1 px-2 border-b text-sm font-normal">{jobSub?.medium}</td>
-                                <td className={`py-1 px-2 border-b text-sm font-normal text-center ${jobSub?.category === 'Home' ? 'bg-sky-400' : "bg-orange-400" }`}>{jobSub?.category}</td>
+                                <td className={`py-1 px-2 border-b text-sm font-normal text-center ${jobSub?.category === 'Home' ? 'bg-sky-400' : "bg-orange-400"}`}>{jobSub?.category}</td>
                                 <td className="py-1 px-2 border-b text-end">
                                     <button className="bg-red-400 hover:bg-red-500 transition-all duration-200 text-white py-1 px-2 rounded-md">Details</button>
                                 </td>
