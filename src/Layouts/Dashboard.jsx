@@ -3,7 +3,7 @@ import { FaBlog, FaCalendarAlt, FaCartArrowDown, FaChartBar, FaChevronRight, FaC
 import DashboardHeader from '../Share/DashboardHeader/DashboardHeader';
 import logo from './../assets/leaf.jpg'
 import {  MdCastForEducation, MdHomeWork, MdWorkHistory } from 'react-icons/md';
-import { FaClipboardQuestion, FaMessage, FaPersonCircleQuestion, FaTemperatureQuarter, FaUserPen, FaUsersRays, FaUsersViewfinder } from 'react-icons/fa6';
+import { FaClipboardQuestion, FaMessage, FaPersonCircleQuestion, FaSchoolCircleCheck, FaTemperatureQuarter, FaUserPen, FaUsersRays, FaUsersViewfinder } from 'react-icons/fa6';
 import { RiLiveFill } from 'react-icons/ri';
 import { AiFillNotification } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
@@ -49,6 +49,7 @@ const Dashboard = () => {
         InboxMessage: FaMessage,
         TermsMessage: TbMessage2Question,
         AllTutor: MdCastForEducation,
+        CoachingCenter: FaSchoolCircleCheck,
     }
 
     const Menus = [
@@ -102,6 +103,12 @@ const Dashboard = () => {
             role: 'admin'
         },
         {
+            title: 'Coaching Center',
+            path: '/dashboard/coaching-center',
+            icon: iconMappings.CoachingCenter,
+            role: 'admin'
+        },
+        {
             title: 'All Blog',
             path: '/dashboard/all-blog',
             icon: iconMappings.Blog,
@@ -111,12 +118,6 @@ const Dashboard = () => {
             title: 'Download & PDF Zone',
             path: '/dashboard/download-and-pdf-zone',
             icon: iconMappings.SubDownZone,
-            role: 'admin'
-        },
-        {
-            title: 'All Download Zone',
-            path: '/dashboard/admin-home',
-            icon: iconMappings.BookAdd,
             role: 'admin'
         },
         {

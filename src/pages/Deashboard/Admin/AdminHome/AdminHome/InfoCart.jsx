@@ -4,12 +4,13 @@ import { MdReduceCapacity, MdWorkHistory } from "react-icons/md";
 import { PiHandshakeDuotone } from "react-icons/pi";
 import { RiParentFill } from "react-icons/ri";
 import { SiFampay } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 const InfoCart = () => {
     return (
         <div className="grid md:grid-cols-4 grid-cols-1 gap-5 mx-4">
             {/* All Users */}
-            <div className="hover:scale-105 shadow-lg border-l-2 border-r-2 border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+            <Link to="/dashboard/manage-all-users" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-slate-400 bg-white rounded-md hover:border-r-blue-500 hover:border-l-blue-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">All Users</h4>
@@ -17,9 +18,9 @@ const InfoCart = () => {
                     </div>
                     <FaUsers className="md:text-3xl text-xl" />
                 </div>
-            </div>
+            </Link>
             {/* All Tutors */}
-            <div className="hover:scale-105 shadow-lg border-l-2 border-r-2 border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+            <Link to="/dashboard/all-tutor" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-green-400 hover:text-white border-slate-400 bg-white rounded-md hover:border-r-green-600 hover:border-l-green-600 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">All Tutors</h4>
@@ -27,19 +28,19 @@ const InfoCart = () => {
                     </div>
                     <MdReduceCapacity className="md:text-3xl text-xl" />
                 </div>
-            </div>
+            </Link>
             {/* Coaching Center */}
-            <div className="hover:scale-105 shadow-lg border-l-2 border-r-2 border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+            <Link to="/dashboard/coaching-center" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Coaching Center</h4>
-                        <p className="text-center">9</p>
+                        <p className="text-center">09</p>
                     </div>
                     <FaSchoolCircleCheck className="md:text-3xl text-xl" />
                 </div>
-            </div>
+            </Link>
             {/* Total Parent */}
-            <div className="hover:scale-105 shadow-lg border-l-2 border-r-2 border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+            <div className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Total Parent</h4>
@@ -49,7 +50,7 @@ const InfoCart = () => {
                 </div>
             </div>
             {/* All Users */}
-            <div className="hover:scale-105 shadow-lg border-l-2 border-r-2 border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+            <Link to="/dashboard/all-payments" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Total Payment</h4>
@@ -57,8 +58,8 @@ const InfoCart = () => {
                     </div>
                     <SiFampay className="md:text-3xl text-xl" />
                 </div>
-            </div>
-            <div className="hover:scale-105 shadow-lg border-l-2 border-r-2 border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+            </Link>
+            <Link to="/dashboard/all-request-approve-jobs" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Request Jobs</h4>
@@ -66,8 +67,8 @@ const InfoCart = () => {
                     </div>
                     <MdWorkHistory className="md:text-3xl text-xl" />
                 </div>
-            </div>
-            <div className="hover:scale-105 shadow-lg border-l-2 border-r-2 border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+            </Link>
+            <Link to="/dashboard/tutor-jobs-request" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Request Tutor</h4>
@@ -75,8 +76,8 @@ const InfoCart = () => {
                     </div>
                     <PiHandshakeDuotone className="md:text-3xl text-xl" />
                 </div>
-            </div>
-            <div className="hover:scale-105 shadow-lg border-l-2 border-r-2 border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+            </Link>
+            <Link to="/dashboard/all-blog" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Total Blog</h4>
@@ -84,7 +85,7 @@ const InfoCart = () => {
                     </div>
                     <FaBlog className="md:text-3xl text-xl" />
                 </div>
-            </div>
+            </Link>
         </div>
     );
 };

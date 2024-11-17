@@ -47,6 +47,7 @@ import AllJobTuition from "../pages/Deashboard/Admin/AllJobTuition/AllJobTuition
 import AllBlog from "../pages/Deashboard/Admin/AllBlog/AllBlog/AllBlog";
 import DownloadAndPdfZone from "../pages/Deashboard/Admin/DownloadAndPdfZone/DownloadAndPdfZone/DownloadAndPdfZone";
 import InboxMessage from "../pages/Deashboard/Admin/InboxMessage/InboxMessage/InboxMessage";
+import CoachingCenterAdmin from "../pages/Deashboard/Admin/CoachingCenterAdmin/CoachingCenterAdmin/CoachingCenterAdmin";
 
 const router = createBrowserRouter([
     {
@@ -170,6 +171,12 @@ const router = createBrowserRouter([
                 path: "/dashboard/all-tutor",
                 element: (
                     <AllTutor />
+                ),
+            },
+            {
+                path: "/dashboard/coaching-center",
+                element: (
+                    <CoachingCenterAdmin />
                 ),
             },
             {
