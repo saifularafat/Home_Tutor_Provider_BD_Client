@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaBlog, FaCalendarAlt, FaCartArrowDown, FaChartBar, FaChevronRight, FaCog, FaComment, FaHome, FaUser, FaWallet } from 'react-icons/fa';
 import DashboardHeader from '../Share/DashboardHeader/DashboardHeader';
 import logo from './../assets/leaf.jpg'
-import {  MdCastForEducation, MdHomeWork, MdWorkHistory } from 'react-icons/md';
+import { MdCastForEducation, MdHomeWork, MdWorkHistory } from 'react-icons/md';
 import { FaClipboardQuestion, FaMessage, FaPersonCircleQuestion, FaSchoolCircleCheck, FaTemperatureQuarter, FaUserPen, FaUsersRays, FaUsersViewfinder } from 'react-icons/fa6';
 import { RiLiveFill } from 'react-icons/ri';
 import { AiFillNotification } from 'react-icons/ai';
@@ -235,7 +235,7 @@ const Dashboard = () => {
     return (
         <div className="flex overflow-x-hidden overflow-y-auto bg-slate-200">
             {/* dashboard side Ber */}
-            <div className={`${open ? 'md:w-64 p-3' : 'w-16 p-1 text-center'} shadow-2xl duration-200 fixed transition-all bg-white relative`}>
+            <div className={`${open ? 'md:w-64 p-3' : 'md:w-16 p-1 text-center'} shadow-2xl duration-200 fixed transition-all bg-white relative`}>
                 <FaChevronRight
                     onClick={() => setOpen(!open)}
                     className={`${open && 'rotate-180 transition-all duration-500'} absolute top-9 md:-right-3 -right-[5px] md:w-8 md:h-8 w-5 h-5 bg-slate-800 text-white cursor-pointer rounded-full border-2 border-blue-200 p-1`}
@@ -263,10 +263,10 @@ const Dashboard = () => {
                     </div>
                 }
                 {isAdmin &&
-                    <div className={`flex gap-x-4 items-center ${open ? 'mb-0' : 'mb-5'}`}>
+                    <div className={`flex gap-x-4 items-center ${open ? 'mb-0' : 'md:mb-5 mb-0'}`}>
                         <div className='text-center w-full'>
                             <Link to="/">
-                                <img src={logo} alt="" className={`${open ? 'w-12 h-12 mx-auto' : ' w-9 h-9 mx-auto'} cursor-pointer duration-500 bg-white rounded-xl`} />
+                                <img src={logo} alt="" className={`${open ? 'w-12 h-12 mx-auto' : ' md:w-9 md:h-9 w-7 h-7  mx-auto'} cursor-pointer duration-500 bg-white rounded-xl`} />
                             </Link>
                         </div>
                     </div>
@@ -282,17 +282,17 @@ const Dashboard = () => {
                                 key={index}
                                 title={Menu.title}
                                 className={({ isActive }) => (isActive ?
-                                    `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-1'
+                                    `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
                                     } ${index === 0 && ' hover:bg-slate-700'}` :
-                                    `flex rounded-md px-2 py-[6px] ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-3' : 'mt-1'
+                                    `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
                                     } ${index === 0 && ' hover:bg-primary'}`
                                 )}>
                                 <li
 
-                                    className='flex items-center gap-x-4'
+                                    className='flex items-center md:gap-x-4 gap-1'
                                 >
 
-                                    <IconContext.Provider value={{ className: 'react-icon text-lg' }}>
+                                    <IconContext.Provider value={{ className: 'react-icon md:text-lg text-sm' }}>
                                         <Menu.icon />
                                     </IconContext.Provider>
                                     <span
@@ -313,14 +313,14 @@ const Dashboard = () => {
                                     key={index}
                                     title={Menu.title}
                                     className={({ isActive }) => (isActive ?
-                                        `flex rounded-md p-2 cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                        `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
                                         } ${index === 0 && ' hover:bg-slate-700'}` :
-                                        `flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                        `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
                                         } ${index === 0 && ' hover:bg-primary'}`
                                     )}>
                                     <li
 
-                                        className='flex items-center gap-x-4'
+                                        className='flex items-center md:gap-x-4 gap-1'
                                     >
 
                                         <IconContext.Provider value={{ className: 'react-icon text-lg' }}>
@@ -343,9 +343,9 @@ const Dashboard = () => {
                                     key={index}
                                     title={Menu.title}
                                     className={({ isActive }) => (isActive ?
-                                        `flex rounded-md p-2 cursor-pointer text-white bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                        `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
                                         } ${index === 0 && ' hover:bg-slate-700'}` :
-                                        `flex rounded-md p-2 cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center gap-x-4 ${Menu.gap ? 'mt-6' : 'mt-2'
+                                        `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
                                         } ${index === 0 && ' hover:bg-primary'}`
                                     )}>
                                     <li
@@ -367,15 +367,15 @@ const Dashboard = () => {
                                 </NavLink>
                             ))}
                     {generalMenus.map((Menu, index) => (
-                        <Link 
-                        to={Menu.path} 
-                        key={index}
-                        title={Menu.title}
-                         className={`flex rounded-md ${isAdmin ? 'py-[2px] px-2' : 'p-2'} ${open ? '' : 'mx-auto mt-16'} cursor-pointer hover: hover:bg-primary text-sm items-center gap-x-4 ${Menu.gap ? `${isAdmin ? 'mt-4' : 'mt-5'}` : 'mt-2'
-                            } ${index === 0 && ' hover:bg-blue-500 hover:text-white'}`}>
+                        <Link
+                            to={Menu.path}
+                            key={index}
+                            title={Menu.title}
+                            className={`flex rounded-md ${isAdmin ? 'py-[2px] px-2' : 'p-2'} ${open ? '' : 'mx-auto mt-16'} cursor-pointer hover: hover:bg-primary text-sm items-center gap-x-4 ${Menu.gap ? `${isAdmin ? 'mt-4' : 'mt-5'}` : 'mt-2'
+                                } ${index === 0 && ' hover:bg-blue-500 hover:text-white'}`}>
                             <li
 
-                                className='flex items-center gap-x-4'
+                                className='flex items-center md:gap-x-4 gap-1'
                             >
 
                                 <IconContext.Provider value={{ className: 'react-icon text-lg' }}>
