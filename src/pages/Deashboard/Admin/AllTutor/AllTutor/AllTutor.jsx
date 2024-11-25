@@ -1,7 +1,9 @@
+import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow";
+
 const AllTutor = () => {
     return (
-
         <div className="overflow-x-auto ">
+             <PageTitleShow currentPage="All Tutor" />
             <table className="min-w-[100%] shadow-md border mx-auto bg-white border-gray-200 md:my-8 my-4">
                 <thead>
                     <tr className="bg-[#282727] text-white">

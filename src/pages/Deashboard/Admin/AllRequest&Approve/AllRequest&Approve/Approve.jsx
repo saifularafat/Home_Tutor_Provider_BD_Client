@@ -1,7 +1,6 @@
 
 const Approve = () => {
     return (
-
         <div className="overflow-x-auto">
             <table className="min-w-[100%] shadow-md border mx-auto border-gray-100">
                 <thead>
