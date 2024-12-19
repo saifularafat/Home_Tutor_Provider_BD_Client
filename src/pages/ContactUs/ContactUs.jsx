@@ -5,11 +5,11 @@ import { FaPhoneVolume, FaWhatsapp } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 const ContactUs = () => {
     return (
-        <div className=''>
+        <div className='bg-blue-100'>
             <div className="container mx-auto md:py-16 py-5">
                 <PageTitleShow currentPage="Contact Us" />
-                <div className='md:flex items-center justify-center md:gap-8 px-2'>
-                    <div className="w-full max-w-lg shadow-2xl shadow-blue-300 md:relative rounded-3xl md:px-10 px-5 md:pb-10 pb-6 md:pt-8 pt-4 md:mt-16 mt-6 dark:bg-zinc-900 border-sky-200 border-y">
+                <div className='md:flex items-center justify-center md:gap-8 px-2 '>
+                    <div className="w-full max-w-lg shadow-2xl shadow-blue-400 md:relative rounded-3xl md:px-10 px-5 md:pb-10 pb-6 md:pt-8 pt-4 md:mt-16 mt-6 dark:bg-zinc-900 border-sky-200 border-y">
                         <div className="md:my-6">
                             <h2 className="text-center text-3xl font-semibold tracking-tight">Contact Us</h2>
                             <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p>
@@ -20,7 +20,7 @@ const ContactUs = () => {
                                     Name
                                 </label>
                                 <input
-                                    className="h-10 w-full rounded-lg border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                    className="h-10 w-full bg-white rounded-lg border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                     id="name"
                                     placeholder="Your Name"
                                     name="name"
@@ -32,7 +32,7 @@ const ContactUs = () => {
                                     Email
                                 </label>
                                 <input
-                                    className="h-10 w-full rounded-lg border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                    className="h-10 w-full bg-white rounded-lg border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                     id="_email"
                                     placeholder="Your Email"
                                     name="email"
@@ -44,7 +44,7 @@ const ContactUs = () => {
                                     Message
                                 </label>
                                 <textarea
-                                    className="min-h-[80px] w-full rounded-lg border px-3 py-2 leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                    className="min-h-[80px] w-full bg-white rounded-lg border px-3 py-2 leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                     id="_message"
                                     placeholder="what's in your mind"
                                     name="message"
