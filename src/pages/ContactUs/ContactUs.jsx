@@ -8,10 +8,8 @@ import { serverApiUrl } from '../../../ApiSecret';
 const ContactUs = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const idNumber = '1024560';
-    // const serverApiUrl = import.meta.env.VITE_SERVER_API_URL || "http://localhost:5000";
 
     const onSubmit = (data) => {
-        console.log("Submitted data:", data);
         const { contactName, contactEmail, message } = data;
 
         const createContact = {
@@ -20,8 +18,6 @@ const ContactUs = () => {
             contactEmail,
             message
         };
-
-        console.log("Sending data to API:", createContact);
 
         axios.post(`${serverApiUrl}/api/contact`, createContact)
             .then(response => {
