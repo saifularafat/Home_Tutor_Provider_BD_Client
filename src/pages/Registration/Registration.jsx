@@ -72,7 +72,7 @@ const Registration = () => {
                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                                 <div className=" space-y-1">
                                     <label className="block text-slate-700  font-medium">
-                                        <span className="font-bold text-slate-500 tracking-wider">Name*</span>
+                                        <span className="font-bold text-slate-500 tracking-wider capitalize">{registerRole} Name* </span>
                                     </label>
                                     <input
                                         {...register("name", { required: true })}
@@ -197,7 +197,7 @@ const Registration = () => {
                                         (
                                             <div className="grid md:grid-cols-4 grid-cols-1 gap-5">
                                                 {/* coaching Logo Image File */}
-                                                <div className="md:col-span-2 col-span-1">
+                                                <div className="md:col-span-3 col-span-1">
                                                     <label htmlFor="coachingLogoImage" className="block text-slate-700 font-medium pb-1">
                                                         <span className="font-bold text-slate-500 tracking-wider">Coaching Center Logo</span>
                                                     </label>
@@ -212,7 +212,7 @@ const Registration = () => {
                                                 </div>
 
                                                 {/* coaching Ted License file */}
-                                                <div className="md:col-span-2 col-span-1">
+                                                {/* <div className="md:col-span-1 col-span-1 ">
                                                     <label htmlFor="coachingTedLicense" className="block text-slate-700 font-medium pb-1">
                                                         <span className="font-bold text-slate-500 tracking-wider">Coaching TED License</span>
                                                     </label>
@@ -224,7 +224,7 @@ const Registration = () => {
                                                             className='file-input file-input-bordered file-input-md w-full max-w-md'
                                                         />
                                                     </div>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         )
                                         :
