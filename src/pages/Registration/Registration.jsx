@@ -145,6 +145,28 @@ const Registration = () => {
                                         className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                                     />
                                 </div>
+                                <div className="space-y-1 hidden">
+                                    <input
+                                        {...register("isAdmin")}
+                                        name="isAdmin"
+                                        defaultValue={registerRole && registerRole === 'admin'}
+                                    />
+                                    <input
+                                        {...register("isParent")}
+                                        name="isParent"
+                                        defaultValue={registerRole && registerRole === 'parent'}
+                                    />
+                                    <input
+                                        {...register("isTutor")}
+                                        name="isTutor"
+                                        defaultValue={registerRole && registerRole === 'tutor'}
+                                    />
+                                    <input
+                                        {...register("isCoaching")}
+                                        name="isCoaching"
+                                        defaultValue={registerRole && registerRole === 'coaching'}
+                                    />
+                                </div>
                                 <div className="space-y-1">
                                     <label className="block text-slate-700  font-medium">
                                         <span className="font-bold text-slate-500 tracking-wider">Confirm Password </span>
@@ -212,7 +234,7 @@ const Registration = () => {
                                                     (
                                                         <div className="grid md:grid-cols-5 grid-cols-1 gap-5">
                                                             {/* parent Image File */}
-                                                            <div className="md:col-span-2 col-span-1">
+                                                            <div className="md:col-span-3 col-span-1">
                                                                 <label htmlFor="parentImage" className="block text-slate-700 font-medium pb-1">
                                                                     <span className="font-bold text-slate-500 tracking-wider">Upload Your Photo</span>
                                                                 </label>
@@ -226,7 +248,7 @@ const Registration = () => {
                                                                 </div>
                                                             </div>
                                                             {/* parent NID Image file */}
-                                                            <div className="md:col-span-2 col-span-1">
+                                                            {/* <div className="md:col-span-2 col-span-1">
                                                                 <label htmlFor="parentNIDCart" className="block text-slate-700 font-medium pb-1">
                                                                     <span className="font-bold text-slate-500 tracking-wider">Upload Your NID Cart</span>
                                                                 </label>
@@ -238,9 +260,9 @@ const Registration = () => {
                                                                         className='file-input file-input-bordered file-input-md w-full max-w-md'
                                                                     />
                                                                 </div>
-                                                            </div>
+                                                            </div> */}
                                                             {/* gender */}
-                                                            <div className="col-span-1">
+                                                            <div className="col-span-2">
                                                                 <label htmlFor='image' className='block text-slate-700 font-medium pb-1'>
                                                                     <span className="font-bold text-slate-500 tracking-wider">Gender</span>
                                                                 </label>
@@ -270,7 +292,7 @@ const Registration = () => {
                                                                 </div>
                                                             </div>
                                                             {/* tutor Student ID Image file */}
-                                                            <div className="md:col-span-2 col-span-1">
+                                                            {/* <div className="md:col-span-2 col-span-1">
                                                                 <label htmlFor="tutorIDCart" className="block text-slate-700 font-medium pb-1">
                                                                     <span className="font-bold text-slate-500 tracking-wider">Upload Student Id Cart</span>
                                                                 </label>
@@ -282,7 +304,7 @@ const Registration = () => {
                                                                         className='file-input file-input-bordered file-input-md w-full max-w-md'
                                                                     />
                                                                 </div>
-                                                            </div>
+                                                            </div> */}
                                                             <div className="col-span-1">
                                                                 <label htmlFor='image' className='block text-slate-700 font-medium pb-1'>
                                                                     <span className="font-bold text-slate-500 tracking-wider">Gender</span>
