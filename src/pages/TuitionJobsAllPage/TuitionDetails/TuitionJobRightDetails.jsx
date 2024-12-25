@@ -2,8 +2,14 @@ import { BiSolidTimer } from "react-icons/bi";
 import { FaGenderless } from "react-icons/fa";
 import { FaSchoolFlag } from "react-icons/fa6";
 import { GiSandsOfTime } from "react-icons/gi";
+import Loading from "../../../Components/Loading/Loading";
 
-const TuitionJobRightDetails = () => {
+const TuitionJobRightDetails = (tuition, isLoading) => {
+    const { className, subject, duration, studentGender, studentSchool, fixedTime } = tuition?.tuition;
+
+    if (isLoading.isLoading) {
+        return <Loading />;
+    }
     return (
         <>
             {/* Table section */}
@@ -16,8 +22,8 @@ const TuitionJobRightDetails = () => {
                             <h6 className="md:text-xl text-base md:font-bold font-semibold tracking-wide text-slate-700 justify-start"> Subject</h6>
                         </div>
                         <div className="flex items-center justify-between border-b-[1px] px-5 border-slate-300 py-3 rounded-br-md rounded-bl-md">
-                            <h6 className="md:font-medium font-normal text-sm tracking-wide text-slate-500"> Class-12</h6>
-                            <h6 className="md:font-medium font-normal text-sm tracking-wide text-[#4B5563]"> Accounting,</h6>
+                            <h6 className="md:font-medium font-normal text-sm tracking-wide text-slate-500"> {className}</h6>
+                            <h6 className="md:font-medium font-normal text-sm tracking-wide text-[#4B5563]"> {subject}</h6>
                         </div>
                         <div className="flex items-center justify-between border-b-[1px] px-5 border-slate-300 py-3 rounded-br-md rounded-bl-md">
                             <h6 className="md:font-medium font-normal text-sm tracking-wide text-slate-500"> 1 to 5</h6>
@@ -38,7 +44,7 @@ const TuitionJobRightDetails = () => {
                                         <GiSandsOfTime className=" text-blue-500 md:text-[26px] text-xl" />
                                         <div>
                                             <span className="md:text-base text-sm md:font-semibold font-medium text-slate-800">Duration:</span>
-                                            <p className="font-normal md:text-base text-sm text-slate-700">Negotiable <span className="md:text-base text-sm md:font-semibold font-medium text-slate-700">Hour</span></p>
+                                            <p className="font-normal md:text-base text-sm text-slate-700">{duration} H</p>
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +55,7 @@ const TuitionJobRightDetails = () => {
                                         <FaGenderless className=" text-green-500 md:text-[26px] text-xl" />
                                         <div>
                                             <span className="md:text-base text-sm md:font-semibold font-medium text-slate-800">Student Gender:</span>
-                                            <p className="font-normal md:text-base text-sm text-slate-700">Female</p>
+                                            <p className="font-normal md:text-base text-sm text-slate-700">{studentGender}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +68,7 @@ const TuitionJobRightDetails = () => {
                                         <FaSchoolFlag className=" text-orange-500 md:text-[26px] text-xl" />
                                         <div>
                                             <span className="md:text-base text-sm md:font-semibold font-medium text-slate-800">Student School:</span>
-                                            <p className="font-normal md:text-base text-sm text-slate-600">N/A <span className="md:text-base text-sm md:font-semibold font-medium text-slate-700">Hour</span></p>
+                                            <p className="font-normal md:text-sm text-xs text-slate-600">{studentSchool}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -72,8 +78,8 @@ const TuitionJobRightDetails = () => {
                                     <div className="flex items-center gap-x-2">
                                         <BiSolidTimer className=" text-red-600 md:text-[26px] text-xl" />
                                         <div>
-                                            <span className="md:text-base text-sm md:font-semibold font-medium text-slate-800">Time:</span>
-                                            <p className="md:text-base text-sm md:font-semibold font-medium text-slate-700">Negotiable</p>
+                                            <span className="md:text-base text-sm md:font-semibold font-medium text-slate-800">Fixed Time:</span>
+                                            <p className="md:text-base text-sm md:font-semibold font-medium text-slate-700">{fixedTime}</p>
                                         </div>
                                     </div>
                                 </div>

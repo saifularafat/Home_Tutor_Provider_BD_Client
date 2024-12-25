@@ -7,20 +7,30 @@ import { useState } from "react";
 import { LuLink } from "react-icons/lu";
 import { FaFacebookMessenger, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import allTuitionJobs from "../../../api/jobRequest";
+import Loading from "../../../Components/Loading/Loading";
 
 const TuitionDetails = () => {
     const [openModal, setOpenModal] = useState(false);
     const [openShareModal, setOpenShareModal] = useState(false);
 
+    const { id } = useParams();
+
+    const [tuitionJobs, refetch, isLoading] = allTuitionJobs();
+    const tuition = tuitionJobs.find((job) => job?.slug === id)
+    console.log(id, '=======> ', tuition);
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div className="bg-blue-100 md:py-10 py-5">
             <PageTitleShow currentPage="Tuition Job Detail" />
             {/* tutor details tutor info */}
             <div className="md:max-w-6xl md:mx-auto mx-2 md:px-8 px-3 pt-5 md:pt-10 md:pb-4 pb-2 bg-white rounded-xl">
                 <div className="grid md:grid-cols-4 grid-cols-1 md:gap-5">
-                    <TuitionJobLeftDetails />
+                    <TuitionJobLeftDetails tuition={tuition} isLoading={isLoading}/>
                     <div className="md:col-span-2 col-span-1">
-                        <TuitionJobRightDetails />
+                        <TuitionJobRightDetails tuition={tuition} isLoading={isLoading}/>
                     </div>
                 </div>
                 <div className="md:w-1/2 w-full flex md:items-center justify-between">

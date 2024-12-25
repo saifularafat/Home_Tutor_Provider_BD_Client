@@ -5,8 +5,18 @@ import { PiHandshakeDuotone } from "react-icons/pi";
 import { RiParentFill } from "react-icons/ri";
 import { SiFampay } from "react-icons/si";
 import { Link } from "react-router-dom";
+import allUsers from "../../../../../api/allUsers";
+import Loading from "../../../../../Components/Loading/Loading";
 
 const InfoCart = () => {
+    const [users, refetch, isLoading] = allUsers();
+    const tutors = users.filter((data) => data.isTutor === true)
+    const coaching = users.filter((data) => data.isCoaching === true)
+    const parents = users.filter((data) => data.isParent === true)
+    console.log(users);
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div className="grid md:grid-cols-4 grid-cols-1 gap-5 mx-4">
             {/* All Users */}
@@ -14,7 +24,7 @@ const InfoCart = () => {
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">All Users</h4>
-                        <p className="text-center">90</p>
+                        <p className="text-center">{users?.length}</p>
                     </div>
                     <FaUsers className="md:text-3xl text-xl" />
                 </div>
@@ -24,7 +34,7 @@ const InfoCart = () => {
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">All Tutors</h4>
-                        <p className="text-center">50</p>
+                        <p className="text-center">{tutors?.length}</p>
                     </div>
                     <MdReduceCapacity className="md:text-3xl text-xl" />
                 </div>
@@ -34,7 +44,7 @@ const InfoCart = () => {
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Coaching Center</h4>
-                        <p className="text-center">09</p>
+                        <p className="text-center">{coaching?.length}</p>
                     </div>
                     <FaSchoolCircleCheck className="md:text-3xl text-xl" />
                 </div>
@@ -43,8 +53,8 @@ const InfoCart = () => {
             <div className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-slate-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                 <div className="flex items-center justify-between gap-0">
                     <div>
-                        <h4 className="text-lg font-medium">Total Parent</h4>
-                        <p className="text-center">31</p>
+                        <h4 className="text-lg font-medium">All Parent</h4>
+                        <p className="text-center">{parents?.length}</p>
                     </div>
                     <RiParentFill className="md:text-3xl text-xl" />
                 </div>

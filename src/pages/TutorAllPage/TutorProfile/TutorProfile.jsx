@@ -1,31 +1,32 @@
 import { FaLocationDot } from "react-icons/fa6";
 import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loading from "../../../Components/Loading/Loading";
 import { serverApiUrl } from "../../../../ApiSecret";
 import axios from "axios";
+import allTutor from "../../../api/allTutor";
 
 const TutorProfile = () => {
-    const { id } = useParams();
-    const [tutorData, setTutorData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [tutors, refetch, isLoading] = allTutor()
+    // const [tutorData, setTutorData] = useState([]);
+    // const [loading, setLoading] = useState(true);
+    console.log(tutors);
+    // useEffect(() => {
+    //     // Fetch data from the API
+    //     axios
+    //         .get(`${serverApiUrl}/api/users/all-tutor`)
+    //         .then((response) => {
+    //             setTutorData(response.data.payload.tutors);
+    //             setLoading(false);
+    //         }) 
+    //         .catch((error) => {
+    //             console.error("Error fetching data:", error.message);
+    //             setLoading(false);
+    //         });
+    // }, []);
 
-    useEffect(() => {
-        // Fetch data from the API
-        axios
-            .get(`${serverApiUrl}/api/users/all-tutor`)
-            .then((response) => {
-                setTutorData(response.data.payload.tutors);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Error fetching data:", error.message);
-                setLoading(false);
-            });
-    }, []);
-
-    if (loading) {
+    if (isLoading) {
         return <Loading />;
     }
 
@@ -34,12 +35,12 @@ const TutorProfile = () => {
             <PageTitleShow currentPage="Tutor Profile" />
             <div className="md:max-w-5xl mx-auto md:py-12 py-6">
                 <div className="grid md:grid-cols-3 grid-cols-1 md:gap-8 gap-5 mx-3 md:mx-0">
-                    {tutorData.map((tutor) => (
+                    {tutors.map((tutor) => (
                         <div
                             key={tutor._id}
                             className="col-span-1 flex flex-col items-center justify-center space-y-4 rounded-xl bg-white p-6 shadow-lg hover:shadow-2xl hover:shadow-sky-300 transition-all duration-200 shadow-blue-400 dark:bg-[#18181B]"
                         >
-                            <div className="group relative">
+                            <div className="group relative" title={tutor?.name}>
                                 <img
                                     width={110}
                                     height={110}
@@ -61,7 +62,6 @@ const TutorProfile = () => {
                                     </span>
                                 </div>
                             </div>
-                            {/* Bio */}
                             <p className="pb-2 text-center text-sm text-gray-500">
                                 {tutor.bio || "No bio available"}
                             </p>
