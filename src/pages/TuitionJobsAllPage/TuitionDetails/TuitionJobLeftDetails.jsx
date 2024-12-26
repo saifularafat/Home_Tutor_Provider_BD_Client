@@ -5,7 +5,7 @@ import { TbGenderAndrogyne } from "react-icons/tb";
 import Loading from "../../../Components/Loading/Loading";
 
 const TuitionJobLeftDetails = (tuition, isLoading) => {
-    const { jobLocation, tuitionCode, tutorGender, medium, perWeek, jobSalary, jobCategory, jobComment,description } = tuition?.tuition;
+    const { jobLocation, tuitionCode, tutorGender, medium, perWeek, jobSalary, jobCategory, jobComment, description } = tuition?.tuition;
 
     if (isLoading.isLoading) {
         return <Loading />;
@@ -43,8 +43,7 @@ const TuitionJobLeftDetails = (tuition, isLoading) => {
                                 <FaMedium className=" text-orange-500 text-xl" />
                                 <div>
                                     <span className="text-base font-semibold text-slate-500">Medium:</span>
-                                    <p className="font-normal text-base text-slate-600">{medium
-                                    }</p>
+                                    <p className="font-normal text-base text-slate-600">{medium}</p>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +67,7 @@ const TuitionJobLeftDetails = (tuition, isLoading) => {
                                 <FaMoneyBillWave className=" text-orange-500 text-xl" />
                                 <div>
                                     <span className="text-base font-semibold text-slate-500">Salary:</span>
-                                    <p className="font-normal text-base text-slate-600">{jobSalary}</p>
+                                    <p className="font-normal text-base text-slate-600">{jobSalary}<span className="text-2xl font-bold">৳</span></p>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +142,7 @@ const TuitionJobLeftDetails = (tuition, isLoading) => {
                                 <FaMoneyBillWave className=" text-orange-500 text-xl" />
                                 <div>
                                     <span className="text-base font-semibold text-slate-500">Salary:</span>
-                                    <p className="font-normal md:text-base text-sm text-slate-600">{jobSalary}</p>
+                                    <p className="font-normal md:text-base text-sm text-slate-600">{jobSalary}<span className="text-2xl font-bold">৳</span></p>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +162,7 @@ const TuitionJobLeftDetails = (tuition, isLoading) => {
             </div>
 
             <div className="md:py-8 py-4">
-                <p className="italic font-normal">Comment: <span className="font-semibold text-slate-700">{jobComment}                </span></p>
+                <p className="italic font-normal">Comment: <span className="font-semibold text-slate-700">{jobComment}</span></p>
             </div>
         </div>
     );

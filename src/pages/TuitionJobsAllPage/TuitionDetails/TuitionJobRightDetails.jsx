@@ -5,7 +5,7 @@ import { GiSandsOfTime } from "react-icons/gi";
 import Loading from "../../../Components/Loading/Loading";
 
 const TuitionJobRightDetails = (tuition, isLoading) => {
-    const { className, subject, duration, studentGender, studentSchool, fixedTime } = tuition?.tuition;
+    const { subject, duration, studentGender, studentSchool, fixedTime } = tuition?.tuition;
 
     if (isLoading.isLoading) {
         return <Loading />;
@@ -22,7 +22,7 @@ const TuitionJobRightDetails = (tuition, isLoading) => {
                             <h6 className="md:text-xl text-base md:font-bold font-semibold tracking-wide text-slate-700 justify-start"> Subject</h6>
                         </div>
                         <div className="flex items-center justify-between border-b-[1px] px-5 border-slate-300 py-3 rounded-br-md rounded-bl-md">
-                            <h6 className="md:font-medium font-normal text-sm tracking-wide text-slate-500"> {className}</h6>
+                            <h6 className="md:font-medium font-normal text-sm tracking-wide text-slate-500"> {tuition?.tuition?.className}</h6>
                             <h6 className="md:font-medium font-normal text-sm tracking-wide text-[#4B5563]"> {subject}</h6>
                         </div>
                         <div className="flex items-center justify-between border-b-[1px] px-5 border-slate-300 py-3 rounded-br-md rounded-bl-md">
@@ -44,7 +44,7 @@ const TuitionJobRightDetails = (tuition, isLoading) => {
                                         <GiSandsOfTime className=" text-blue-500 md:text-[26px] text-xl" />
                                         <div>
                                             <span className="md:text-base text-sm md:font-semibold font-medium text-slate-800">Duration:</span>
-                                            <p className="font-normal md:text-base text-sm text-slate-700">{duration} H</p>
+                                            <p className="font-normal md:text-base text-sm text-slate-700">{duration}</p>
                                         </div>
                                     </div>
                                 </div>

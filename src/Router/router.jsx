@@ -72,7 +72,7 @@ const router = createBrowserRouter([
                 element: <TutorProfile />,
             },
             {
-                path: "/tutor-details/:id",
+                path: "/tutor-details/:slug",
                 element: <TutorProfileDetails />,
             },
             {

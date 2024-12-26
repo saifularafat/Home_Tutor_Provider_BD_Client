@@ -2,27 +2,35 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { FaMedal, FaMedium, FaMoneyBillWave } from "react-icons/fa6";
 import { IoDuplicateSharp } from "react-icons/io5";
 import { TbGenderAndrogyne } from "react-icons/tb";
-import TuitionJobTabla from "./TuitionJobTabla";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import JobCategorySliderTabs from "./JobCategorySliderTabs";
 import allTuitionJobs from "../../../api/jobRequest";
 import Loading from "../../../Components/Loading/Loading";
+import Pagination from "../../../Components/Pagination/Pagination";
 
 const TuitionJobCard = () => {
-    const { id } = useParams();
+    const [page, setPage] = useState(1);
     const [searchText, setSearchText] = useState("");
 
-    const [tuitionJobs, refetch, isLoading] = allTuitionJobs();
+    const [tuitionJobs, refetch, isLoading] = allTuitionJobs(page, searchText);
+
+    const { tuitionJobs: jobs, pagination } = tuitionJobs || {};
+
+    const { currentPage, nextPage, previousPage, totalPage } = pagination || {};
+
+    console.log(tuitionJobs.tuitionJobs);
 
     const handlerSearch = () => {
-        console.log(searchText);
+        console.log("Searching for:", searchText);
+        refetch();
     }
 
 
     if (isLoading) {
         return <Loading />;
     }
+
     return (
         <>
             <div className="md:py-3">
@@ -30,13 +38,15 @@ const TuitionJobCard = () => {
                 <div className="grid md:grid-cols-6 grid-cols-1 contain-content gap-5 rounded-lg md:py-6 py-3 md:pl-4 px-2 ">
                     <div className="md:col-span-2 col-span-1 md:px-6 px-3 md:py-0 py-2 rounded-xl md:shadow-xl shadow-md flex items-center gap-2">
                         <input
-                            onChange={(e) => setSearchText(e.target.value)}
+                           onChange={(e) => setSearchText(e.target.value)}  // Update search text state
                             type="text"
                             placeholder="Search Your Tuition Code"
-                            className=" md:px-9 px-2 md:py-[10px] py-2 placeholder:text-slate-300 text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400 focus:outline-double" />
+                            className="md:px-9 px-2 md:py-[10px] py-2 placeholder:text-slate-300 text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400 focus:outline-double"
+                        />
                         <button
-                            onClick={handlerSearch}
-                            className=" py-[9px] md:px-3 px-2 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider">
+                            onClick={handlerSearch} // Trigger search
+                            className="py-[9px] md:px-3 px-2 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider"
+                        >
                             Search
                         </button>
                     </div>
@@ -52,7 +62,7 @@ const TuitionJobCard = () => {
             <div className="grid md:grid-cols-4 grid-cols-1 md:gap-5 md:space-y-0 space-y-5 md:mx-0 mx-2 md:py-12 py-5">
                 {/* FIRST CART job tuition cart  */}
                 {
-                    tuitionJobs.map((job) =>
+                    tuitionJobs?.tuitionJobs.map((job) =>
                         <div key={job?._id} className="md:col-span-2 col-span-1 md:max-h-[500px] shadow-md hover:shadow-xl hover:shadow-sky-100 border border-slate-100 rounded-md md:p-5 p-2">
                             <h5 className="md:text-xl text-lg font-semibold md:pb-3 pb-1">{job?.jobLocation}</h5>
                             {/* first step */}
@@ -211,6 +221,15 @@ const TuitionJobCard = () => {
                     )
                 }
             </div>
+
+
+            {/* Pagination Controls */}
+            <Pagination
+                totalPage={totalPage}
+                currentPage={currentPage}
+                nextPage={nextPage}
+                setPage={setPage}
+                previousPage={previousPage} />
         </>
     );
 };
