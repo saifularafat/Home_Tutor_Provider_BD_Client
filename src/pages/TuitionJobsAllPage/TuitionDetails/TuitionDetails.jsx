@@ -1,38 +1,33 @@
 import { Link, useParams } from "react-router-dom";
 import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
-import TuitionJobLeftDetails from "./TuitionJobLeftDetails";
-import TuitionJobRightDetails from "./TuitionJobRightDetails";
+import TuitionJobLeftDetails from "./TuitionJobLeftDetails"; // Assuming this component is defined elsewhere
+import TuitionJobRightDetails from "./TuitionJobRightDetails"; // Assuming this component is defined elsewhere
 import HirePageRequestModel from "../../../Components/Model/HirePageRequestModel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuLink } from "react-icons/lu";
 import { FaFacebookMessenger, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import allTuitionJobs from "../../../api/jobRequest";
+import { singleTuitionJobs } from "../../../api/allTuitionJobs"; // Adjust the import path as necessary
 import Loading from "../../../Components/Loading/Loading";
 
 const TuitionDetails = () => {
     const [openModal, setOpenModal] = useState(false);
     const [openShareModal, setOpenShareModal] = useState(false);
+    const { id } = useParams();
 
-    const { id } = useParams(); // Extracting the 'id' from the route parameters.
-
-    const [tuitionJobs, refetch, isLoading] = allTuitionJobs();
-    console.log(tuitionJobs);
-    // Check if tuitionJobs is defined and find the specific job.
-    const tuition = tuitionJobs?.tuitionJobs?.find((job) => job?.slug === id);
+    // Fetching tuition job details
+    const { tuitionJob, refetch, isLoading, isError } = singleTuitionJobs(id);
 
     if (isLoading) {
-        return <Loading />;
+        return <Loading />; // Show loading spinner or component
     }
 
-    // Handle cases where the tuition job is not found.
-    if (!tuition) {
-        return (
-            <div className="text-center py-10">
-                <h1 className="text-xl font-bold text-red-600">Tuition Job Not Found</h1>
-                <p>Please check the URL or try again later.</p>
-            </div>
-        );
+    if (isError) {
+        return <div>Error fetching job details.</div>; // Handle error state
+    }
+
+    if (!tuitionJob) {
+        return <div>No job found.</div>; // Handle case where job data is null
     }
 
     return (
@@ -40,9 +35,9 @@ const TuitionDetails = () => {
             <PageTitleShow currentPage="Tuition Job Detail" />
             <div className="md:max-w-6xl md:mx-auto mx-2 md:px-8 px-3 pt-5 md:pt-10 md:pb-4 pb-2 bg-white rounded-xl">
                 <div className="grid md:grid-cols-4 grid-cols-1 md:gap-5">
-                    <TuitionJobLeftDetails tuition={tuition} isLoading={isLoading} />
+                    <TuitionJobLeftDetails tuition={tuitionJob} />
                     <div className="md:col-span-2 col-span-1">
-                        <TuitionJobRightDetails tuition={tuition} isLoading={isLoading} />
+                        <TuitionJobRightDetails tuition={tuitionJob} />
                     </div>
                 </div>
                 <div className="md:w-1/2 w-full flex md:items-center justify-between">
@@ -53,19 +48,20 @@ const TuitionDetails = () => {
                         >
                             Share
                         </button>
+                        {/* Share Modal */}
                         <div
                             onClick={() => setOpenShareModal(false)}
                             className={`fixed z-[100] w-screen ${openShareModal ? "visible opacity-100" : "invisible opacity-0"
-                                } inset-0 grid place-items-center bg-black/20 backdrop-blur-sm duration-100 dark:bg-transparent`}
+                                } inset-0 grid place-items-center bg-black/20 backdrop-blur-sm duration-100`}
                         >
                             <div
-                                onClick={(e_) => e_.stopPropagation()}
-                                className={`absolute md:w-1/4 w-full md:mx-0 mx-6 space-y-3 rounded-lg bg-white md:p-6 p-4 drop-shadow-lg dark:bg-zinc-900 dark:text-white ${openShareModal ? "opacity-1 duration-300" : "scale-110 opacity-0 duration-150"
+                                onClick={(e) => e.stopPropagation()}
+                                className={`absolute md:w-1/4 w-full md:mx-0 mx-6 space-y-3 rounded-lg bg-white md:p-6 p-4 drop-shadow-lg ${openShareModal ? "opacity-1 duration-300" : "scale-110 opacity-0 duration-150"
                                     }`}
                             >
                                 <svg
                                     onClick={() => setOpenShareModal(false)}
-                                    className="absolute right-3 top-3 w-6 cursor-pointer fill-zinc-600 dark:fill-white"
+                                    className="absolute right-3 top-3 w-6 cursor-pointer fill-zinc-600"
                                     viewBox="0 0 24 24"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -100,9 +96,7 @@ const TuitionDetails = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="">
-                        <HirePageRequestModel actionBtn="Apply" openModal={openModal} setOpenModal={setOpenModal} />
-                    </div>
+                    <HirePageRequestModel actionBtn="Apply" openModal={openModal} setOpenModal={setOpenModal} />
                 </div>
             </div>
         </div>

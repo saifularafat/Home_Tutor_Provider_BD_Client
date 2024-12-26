@@ -1,13 +1,13 @@
 const Pagination = ({ totalPage, currentPage, nextPage, setPage, previousPage }) => {
     const handleNextPage = () => {
-        if (nextPage <= totalPage) {
-            setPage(nextPage);
+        if (nextPage <= totalPage && nextPage !== null) {
+            setPage(nextPage); // Move to the next page
         }
     };
 
     const handlePreviousPage = () => {
         if (previousPage > 0) {
-            setPage(previousPage);
+            setPage(previousPage); // Go to the previous page
         }
     };
 
@@ -25,7 +25,7 @@ const Pagination = ({ totalPage, currentPage, nextPage, setPage, previousPage })
             </span>
             <button
                 onClick={handleNextPage}
-                disabled={nextPage > totalPage}
+                disabled={nextPage === null || nextPage > totalPage}
                 className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 disabled:opacity-50"
             >
                 Next
