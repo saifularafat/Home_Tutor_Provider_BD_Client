@@ -8,9 +8,11 @@ import Pagination from "../../../Components/Pagination/Pagination";
 
 const TutorProfile = () => {
     const [page, setPage] = useState(1);
+    const [searchText, setSearchText] = useState("");
 
     const [tutors, refetch, isLoading] = allTutor(page, searchText);
     const { tutors: tutor, pagination } = tutors || {};
+    const { currentPage, nextPage, previousPage, totalPage } = pagination || {};
 
     useEffect(() => {
         refetch();
@@ -27,7 +29,25 @@ const TutorProfile = () => {
     return (
         <>
             <PageTitleShow currentPage="Tutor Profile" />
-           
+            <div className="md:py-3">
+                {/* Search and filter section */}
+                <div className=" contain-content mx-auto gap-5 rounded-lg md:py-2 py-3 md:pl-4 px-2">
+                    <div className="md:px-6 px-3 md:py-5 py-2 rounded-xl md:shadow-xl shadow-md flex items-center justify-center gap-2">
+                        <input
+                            onChange={(e) => setSearchText(e.target.value)}
+                            type="text"
+                            placeholder="search university name, tutor name, tutor code and location"
+                            className="md:w-1/2 w-full px-5 md:py-[10px] py-2 placeholder:text-slate-300 placeholder:text-sm text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400 focus:outline-double"
+                        />
+                        <button
+                            onClick={handlerSearch}
+                            className="py-[9px] md:px-3 px-2 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div className="md:max-w-5xl mx-auto md:py-12 py-6">
                 <div className="grid md:grid-cols-3 grid-cols-1 md:gap-8 gap-5 mx-3 md:mx-0">
                     {tutor.map((tutor) => (
@@ -70,7 +90,14 @@ const TutorProfile = () => {
                     ))}
                 </div>
             </div>
-
+            {/* Pagination Controls */}
+            <Pagination
+                totalPage={totalPage}
+                currentPage={currentPage}
+                nextPage={nextPage}
+                setPage={setPage}
+                previousPage={previousPage}
+            />
         </>
     );
 };
