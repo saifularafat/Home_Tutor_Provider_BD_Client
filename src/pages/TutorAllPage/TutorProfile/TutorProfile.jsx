@@ -29,7 +29,7 @@ const TutorProfile = () => {
     return (
         <>
             <PageTitleShow currentPage="Tutor Profile" />
-            <div className="md:py-3">
+            <div className="md:pb-3">
                 {/* Search and filter section */}
                 <div className=" contain-content mx-auto gap-5 rounded-lg md:py-2 py-3 md:pl-4 px-2">
                     <div className="md:px-6 px-3 md:py-5 py-2 rounded-xl md:shadow-xl shadow-md flex items-center justify-center gap-2">
@@ -41,7 +41,7 @@ const TutorProfile = () => {
                         />
                         <button
                             onClick={handlerSearch}
-                            className="py-[9px] md:px-3 px-2 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider"
+                            className="py-2 md:px-3 px-2 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider"
                         >
                             Search
                         </button>
@@ -60,7 +60,7 @@ const TutorProfile = () => {
                                     width={110}
                                     height={110}
                                     className="h-[110px] w-[110px] rounded-full bg-slate-500 object-cover"
-                                    src={tutor.image || "https://via.placeholder.com/110"} // Fallback if no image
+                                    src={tutor.image || "https://via.placeholder.com/110"} 
                                     alt={tutor.name || "Tutor"}
                                 />
                                 <span className="absolute bottom-3 right-0 h-5 w-5 rounded-full border-[3px] border-white bg-green-500 dark:border-[#18181B]"></span>

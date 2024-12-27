@@ -21,7 +21,7 @@ export const singleTutor = (id) => {
         queryKey: ['singleTutor', id],
         queryFn: async () => {
             if (!id) throw new Error("ID must be provided"); 
-            const res = await axios.get(`${serverApiUrl}api/users/all-tutor/${id}`);
+            const res = await axios.get(`${serverApiUrl}/api/users/all-tutor/${id}`);
             return res.data; 
         },
         keepPreviousData: true,

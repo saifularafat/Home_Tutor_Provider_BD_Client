@@ -1,13 +1,13 @@
 const Pagination = ({ totalPage, currentPage, nextPage, setPage, previousPage }) => {
     const handleNextPage = () => {
         if (nextPage <= totalPage && nextPage !== null) {
-            setPage(nextPage); // Move to the next page
+            setPage(nextPage);
         }
     };
 
     const handlePreviousPage = () => {
         if (previousPage > 0) {
-            setPage(previousPage); // Go to the previous page
+            setPage(previousPage);
         }
     };
 

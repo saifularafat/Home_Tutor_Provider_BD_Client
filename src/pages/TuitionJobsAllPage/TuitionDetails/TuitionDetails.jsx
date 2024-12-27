@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 import { LuLink } from "react-icons/lu";
 import { FaFacebookMessenger, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { singleTuitionJobs } from "../../../api/allTuitionJobs"; // Adjust the import path as necessary
+import { singleTuitionJobs } from "../../../api/allTuitionJobs";
 import Loading from "../../../Components/Loading/Loading";
+import ErrorComponent from "../../../Components/ErrorComponent/ErrorComponent";
+import NoJobFound from "../../../Components/NoFoundData/NoFoundData";
 
 const TuitionDetails = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -19,15 +21,14 @@ const TuitionDetails = () => {
     const { tuitionJob, refetch, isLoading, isError } = singleTuitionJobs(id);
 
     if (isLoading) {
-        return <Loading />; // Show loading spinner or component
+        return <Loading />; 
     }
-
     if (isError) {
-        return <div>Error fetching job details.</div>; // Handle error state
+        return <ErrorComponent message="Error fetching tutor information details." />;
     }
 
     if (!tuitionJob) {
-        return <div>No job found.</div>; // Handle case where job data is null
+        return <NoJobFound message="No tuition jobs found." />;
     }
 
     return (
