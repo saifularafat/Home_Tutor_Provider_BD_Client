@@ -3,28 +3,22 @@ import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loading from "../../../Components/Loading/Loading";
-import { serverApiUrl } from "../../../../ApiSecret";
-import axios from "axios";
-import allTutor from "../../../api/allTutor";
+import { allTutor } from "../../../api/allTutor";
+import Pagination from "../../../Components/Pagination/Pagination";
 
 const TutorProfile = () => {
-    const [tutors, refetch, isLoading] = allTutor()
-    // const [tutorData, setTutorData] = useState([]);
-    // const [loading, setLoading] = useState(true);
-    console.log(tutors);
-    // useEffect(() => {
-    //     // Fetch data from the API
-    //     axios
-    //         .get(`${serverApiUrl}/api/users/all-tutor`)
-    //         .then((response) => {
-    //             setTutorData(response.data.payload.tutors);
-    //             setLoading(false);
-    //         }) 
-    //         .catch((error) => {
-    //             console.error("Error fetching data:", error.message);
-    //             setLoading(false);
-    //         });
-    // }, []);
+    const [page, setPage] = useState(1);
+
+    const [tutors, refetch, isLoading] = allTutor(page, searchText);
+    const { tutors: tutor, pagination } = tutors || {};
+
+    useEffect(() => {
+        refetch();
+    }, [page, refetch]);
+
+    const handlerSearch = () => {
+        refetch();
+    };
 
     if (isLoading) {
         return <Loading />;
@@ -33,9 +27,10 @@ const TutorProfile = () => {
     return (
         <>
             <PageTitleShow currentPage="Tutor Profile" />
+           
             <div className="md:max-w-5xl mx-auto md:py-12 py-6">
                 <div className="grid md:grid-cols-3 grid-cols-1 md:gap-8 gap-5 mx-3 md:mx-0">
-                    {tutors.map((tutor) => (
+                    {tutor.map((tutor) => (
                         <div
                             key={tutor._id}
                             className="col-span-1 flex flex-col items-center justify-center space-y-4 rounded-xl bg-white p-6 shadow-lg hover:shadow-2xl hover:shadow-sky-300 transition-all duration-200 shadow-blue-400 dark:bg-[#18181B]"
@@ -75,6 +70,7 @@ const TutorProfile = () => {
                     ))}
                 </div>
             </div>
+
         </>
     );
 };

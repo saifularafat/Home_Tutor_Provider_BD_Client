@@ -20,7 +20,7 @@ export const singleTuitionJobs = (id) => {
         queryKey: ['singleJob', id],
         queryFn: async () => {
             if (!id) throw new Error("ID must be provided"); 
-            const res = await axios.get(`${serverApiUrl}/api/tuition-job/${id}`);
+            const res = await axios.get(`${serverApiUrl}/api//tuition-job/${id}`);
             return res.data; 
         },
         keepPreviousData: true,
