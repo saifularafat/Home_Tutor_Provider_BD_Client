@@ -29,11 +29,31 @@ const Testimonial = () => {
         return () => clearInterval(intervalId);
     }, [testimonials]);
 
+
     const isSmallScreen = window.innerWidth <= 768;
+
+
+    const renderStars = (ratingValue) => {
+        const filledStars = Math.min(Math.max(ratingValue, 0), 5); 
+        const emptyStars = 5 - filledStars; 
+
+        const filledStarIcons = [...Array(filledStars)].map((_, idx) => (
+            <svg key={`filled-${idx}`} xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-5 h-5 text-yellow-400" viewBox="0 0 24 24">
+                <path d="M12 .587l3.668 7.431 8.2 1.189-5.93 5.784 1.398 8.14-7.536-3.96-7.536 3.96 1.398-8.14-5.93-5.784 8.2-1.189z"/>
+            </svg>
+        ));
+        const emptyStarIcons = [...Array(emptyStars)].map((_, idx) => (
+            <svg key={`empty-${idx}`} xmlns="http://www.w3.org/2000/svg" fill="none" className="w-5 h-5 text-gray-300" viewBox="0 0 24 24">
+                <path d="M12 .587l3.668 7.431 8.2 1.189-5.93 5.784 1.398 8.14-7.536-3.96-7.536 3.96 1.398-8.14-5.93-5.784 8.2-1.189z"/>
+            </svg>
+        ));
+        return [...filledStarIcons, ...emptyStarIcons];
+    };
 
     if (isLoading) {
         return <Loading />;
     }
+    
     return (
         <>
             <SectionTitle sectionName="Testimonial" />
@@ -54,10 +74,10 @@ const Testimonial = () => {
                     {/* slider container */}
                     <div
                         className="ease-linear duration-300 flex"
-                        style={{ transform: `translateX(-${currentSlider * (isSmallScreen ? 100 : 50)}%)` }}>
+                        style={{ transform: `translateX(-${currentSlider * (isSmallScreen ? 100 : 50)}%)` }} >
                         {/* sliders */}
                         {testimonials.map((rating) => (
-                            <div key={rating?._id} className="md:p-3 p1 min-w-full md:min-w-[50%]">
+                            <div key={rating?._id} className="md:p-3 p-1 min-w-full md:min-w-[50%]">
                                 <div className="h-full md:p-8 p-3 rounded shadow-[0px_4px_12px_rgba(0,0,0,0.1)]">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -70,6 +90,9 @@ const Testimonial = () => {
                                     <p className="leading-relaxed md:mb-6 mb-3 text-gray-500">
                                         {rating.review || rating.testimonialDescription}
                                     </p>
+                                    <div className="flex space-x-1 mb-4">
+                                        {renderStars(rating?.rating || 0)} 
+                                    </div>
                                     <a className="inline-flex items-center">
                                         <img
                                             className="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
@@ -99,7 +122,6 @@ const Testimonial = () => {
             </div>
         </>
     );
-
 };
 
 export default Testimonial;

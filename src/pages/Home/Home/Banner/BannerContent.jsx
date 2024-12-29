@@ -23,7 +23,7 @@ const BannerContent = () => {
       </p>
 
       <Link
-        to="/allSubjects"
+        to="/tutor-profile"
         className="mt-3 btn-sm md:btn-md md:mt-6 md:text-lg text-white btn-secondary btn rounded-full text-md  border-none px-8"
       >
        Tutor Profile
