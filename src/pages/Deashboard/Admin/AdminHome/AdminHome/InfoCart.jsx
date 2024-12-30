@@ -8,15 +8,24 @@ import { Link } from "react-router-dom";
 import allUsers from "../../../../../api/allUsers";
 import Loading from "../../../../../Components/Loading/Loading";
 import { useAllBlogs } from "../../../../../api/useAllBlog";
+import { useParentRequestTutor } from "../../../../../api/useAllParentRequestToTutor";
+import { useAllRequestJobs } from "../../../../../api/useAllRequestJobs";
 
 const InfoCart = () => {
-    const [users, refetch, isLoading] = allUsers() || [[], () => {}, true];
+
+    const [users, refetch, isLoading] = allUsers() || [[], () => { }, true];
     const tutors = (users || []).filter((data) => data.isTutor === true);
     const coaching = (users || []).filter((data) => data.isCoaching === true);
     const parents = (users || []).filter((data) => data.isParent === true);
 
     const [blogs] = useAllBlogs();
     const blog = (blogs?.blogs || []).filter((data) => data);
+
+    const [payload] = useParentRequestTutor();
+    const { tutorRequest = [] } = payload || { tutorRequest: [] };
+
+    const [payloads] = useAllRequestJobs();
+    const { pagination = {} } = payloads || { tutorJobApplies: [] };
 
     if (isLoading) {
         return <Loading />;
@@ -68,7 +77,7 @@ const InfoCart = () => {
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Total Payment</h4>
-                        <p className="text-center">07</p>
+                        <p className="text-center">00</p>
                     </div>
                     <SiFampay className="md:text-3xl text-xl" />
                 </div>
@@ -77,7 +86,7 @@ const InfoCart = () => {
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Request Jobs</h4>
-                        <p className="text-center">50</p>
+                        <p className="text-center">{pagination?.totalNumberOfTuition}</p>
                     </div>
                     <MdWorkHistory className="md:text-3xl text-xl" />
                 </div>
@@ -86,7 +95,7 @@ const InfoCart = () => {
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Request Tutor</h4>
-                        <p className="text-center">15</p>
+                        <p className="text-center">{tutorRequest?.length}</p>
                     </div>
                     <PiHandshakeDuotone className="md:text-3xl text-xl" />
                 </div>
