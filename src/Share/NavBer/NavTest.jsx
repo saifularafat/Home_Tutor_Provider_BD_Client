@@ -208,8 +208,8 @@ const NavTest = () => {
                         {
                             // user
                             // isTutor
-                                // isAdmin
-                                isParent
+                                isAdmin
+                                // isParent
                                 ? (
                                     <div className='ml-5 dropdown dropdown-end'>
                                         <div
@@ -234,8 +234,8 @@ const NavTest = () => {
                                             >
                                                 {
                                                     // user
-                                                    isTutor
-                                                    // isAdmin
+                                                    // isTutor
+                                                    isAdmin
                                                     // isCoaching
                                                     && (
                                                         <li>
