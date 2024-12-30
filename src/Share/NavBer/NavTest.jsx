@@ -35,11 +35,13 @@ const NavTest = () => {
 
     // Temporary variables for testing
     // const user = { displayName: "Test User" };
-    const user = false
-    const isAdmin = true; // Change to true/false to test admin
-    const isTutor = false; // Change to true/false to test instructor
+    //user minings Coaching
+    const isAdmin = true;
+    const isTutor = false;
+    const isParent = false
+    const user = false;
 
-    const notices = [1, 2, 3, 4,]; // Example notice array for badge count
+    const notices = [1, 2, 3, 4,];
 
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode)
@@ -176,9 +178,12 @@ const NavTest = () => {
                                         ''
                                     ) : isTutor ? (
                                         <Link to='/createLiveExam'>Create Live Meeting</Link>
-                                    ) : (
+                                    ) : isParent ? (
                                         <Link to='/joinLiveExam'>Join Live Meeting</Link>
-                                    )}
+                                    ) : (
+                                        <Link to='/'>leader Board</Link>
+                                    )
+                                    }
                                 </li>
                             )}
                         </ul>
@@ -203,7 +208,8 @@ const NavTest = () => {
                         {
                             // user
                             // isTutor
-                            isAdmin
+                                // isAdmin
+                                isParent
                                 ? (
                                     <div className='ml-5 dropdown dropdown-end'>
                                         <div
@@ -224,31 +230,32 @@ const NavTest = () => {
                                         <div className=''>
                                             <ul
                                                 tabIndex={0}
-                                                className='p-2 mt-3 text-white shadow-md bg-black/80 menu menu-compact backdrop-blur-lg dropdown-content rounded-box w-52'
+                                                className='p-2 mt-[17px] text-white bg-black/80 menu menu-compact backdrop-blur-lg dropdown-content rounded-box w-52'
                                             >
                                                 {
-                                                    isTutor && <li>
-                                                        <Link
-                                                            to='/'
-                                                            className='justify-between w-full'
-                                                        >
-                                                            Leader Board
-                                                        </Link>
-                                                    </li>
-                                                }
-                                                {/* Navigate to different dashboard route based on user role */}
-                                                {
                                                     // user
-                                                    // isTutor
-                                                    isAdmin
+                                                    isTutor
+                                                    // isAdmin
+                                                    // isCoaching
                                                     && (
                                                         <li>
                                                             {isAdmin ? (
-                                                                <Link to='/dashboard/admin-home'>Dashboard</Link>
+                                                                <>
+                                                                    <Link to='/dashboard/admin-home'>Dashboard</Link>
+                                                                    <Link to='/dashboard/admin-home'>leader</Link>
+                                                                </>
                                                             ) : isTutor ? (
-                                                                <Link to='/dashboard/tutor-home'>Dashboard</Link>
-                                                            ) : (
+                                                                <>
+                                                                    <Link to='/dashboard/tutor-home'>Dashboard</Link>
+                                                                    <Link to='/dashboard/admin-home'>leader</Link>
+                                                                </>
+                                                            ) : isParent ? (
                                                                 <Link to='/dashboard/parent-Home'>Dashboard</Link>
+                                                            ) : (
+                                                                <>
+                                                                    <Link to='/dashboard/coaching-home'>Dashboard</Link>
+                                                                    <Link to='/dashboard/coaching'>Coaching</Link>
+                                                                </>
                                                             )}
                                                         </li>
                                                     )}
