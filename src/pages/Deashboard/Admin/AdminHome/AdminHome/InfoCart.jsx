@@ -7,13 +7,17 @@ import { SiFampay } from "react-icons/si";
 import { Link } from "react-router-dom";
 import allUsers from "../../../../../api/allUsers";
 import Loading from "../../../../../Components/Loading/Loading";
+import { useAllBlogs } from "../../../../../api/useAllBlog";
 
 const InfoCart = () => {
-    const [users, refetch, isLoading] = allUsers();
-    const tutors = users.filter((data) => data.isTutor === true)
-    const coaching = users.filter((data) => data.isCoaching === true)
-    const parents = users.filter((data) => data.isParent === true)
-    console.log(users);
+    const [users, refetch, isLoading] = allUsers() || [[], () => {}, true];
+    const tutors = (users || []).filter((data) => data.isTutor === true);
+    const coaching = (users || []).filter((data) => data.isCoaching === true);
+    const parents = (users || []).filter((data) => data.isParent === true);
+
+    const [blogs] = useAllBlogs();
+    const blog = (blogs?.blogs || []).filter((data) => data);
+
     if (isLoading) {
         return <Loading />;
     }
@@ -91,7 +95,7 @@ const InfoCart = () => {
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">Total Blog</h4>
-                        <p className="text-center">12</p>
+                        <p className="text-center">{blog?.length}</p>
                     </div>
                     <FaBlog className="md:text-3xl text-xl" />
                 </div>
