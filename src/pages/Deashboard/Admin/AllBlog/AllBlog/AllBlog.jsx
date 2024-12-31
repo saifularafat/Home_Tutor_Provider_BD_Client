@@ -3,7 +3,6 @@ import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow
 import ApproveBlog from "./ApproveBlog";
 import PendingBlog from "./PendingBlog";
 import { useAllBlogs } from "../../../../../api/useAllBlog";
-import Loading from "../../../../../Components/Loading/Loading";
 
 const AllBlog = () => {
     const [requestApprove, setRequestApprove] = useState(false);
@@ -17,9 +16,6 @@ const AllBlog = () => {
     const approveBlog = blogList?.filter((singleBlog) => singleBlog?.isBlog === true) || [];
     const pendingBlog = blogList?.filter((singleBlog) => singleBlog?.isBlog === false) || [];
 
-    if (isLoading) {
-        return <Loading />
-    }
     return (
         <div className="py-1">
             <div className="md:my-5 my-3 w-full max-w-full overflow-hidden rounded-lg border bg-white dark:border-zinc-700 dark:bg-zinc-900">
@@ -32,11 +28,11 @@ const AllBlog = () => {
                 <div className="w-full md:flex-col items-center overflow-hidden p-2 sm:p-5">
                     {/*Approve section */}
                     <div className={`${requestApprove ? 'h-full duration-300' : 'invisible h-0 opacity-0'}`}>
-                        <ApproveBlog approveBlog={approveBlog} />
+                        <ApproveBlog approveBlog={approveBlog} isLoading={isLoading} />
                     </div>
                     {/* Request section */}
                     <div className={`${requestApprove ? 'h-0 opacity-0' : 'h-full duration-300'}`}>
-                        <PendingBlog pendingBlog={pendingBlog} />
+                        <PendingBlog pendingBlog={pendingBlog} isLoading={isLoading} />
                     </div>
                 </div>
             </div>

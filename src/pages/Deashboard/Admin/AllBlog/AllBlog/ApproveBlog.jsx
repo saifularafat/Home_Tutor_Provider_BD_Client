@@ -1,14 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../../../../Components/Loading/Loading";
 
-const ApproveBlog = ({ approveBlog }) => {
+const ApproveBlog = ({ approveBlog, isLoading }) => {
     const [hoveredRow, setHoveredRow] = useState(null);
     const navigate = useNavigate();
+
+// TODO ACTION APPROVE AND DELETED
 
     const handleRowClick = (id) => {
         navigate(`/details/${id}`);
     };
 
+    if (isLoading) {
+        return <Loading />
+    }
     return (
         <div className="relative overflow-x-auto">
             <h2 className="text-sm font-normal text-center text-orange-500">Author All Information</h2>

@@ -1,10 +1,17 @@
-const PendingBlog = ({ pendingBlog }) => {
+import Loading from "../../../../../Components/Loading/Loading";
+
+const PendingBlog = ({ pendingBlog, isLoading }) => {
     console.log('pending Blog ====>', pendingBlog);
 
+    // TODO ACTION APPROVE AND DELETED
+
+    if (isLoading) {
+        return <Loading />
+    }
     return (
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-5 pb-5">
             {pendingBlog?.map((blog) => (
-                <div key={blog?._id} className="w-full bg-white rounded-xl shadow-xl flex flex-col">
+                <div key={blog?._id} className="w-full bg-white rounded-xl shadow-md hover:shadow-xl hover:shadow-sky-200 flex flex-col transition-all duration-300">
                     <div>
                         <img
                             className="h-[250px] w-full rounded-t-lg object-cover"
@@ -20,9 +27,9 @@ const PendingBlog = ({ pendingBlog }) => {
                         </p>
                         <p className="text-sm font-normal">
                             Time: <span className="font-normal">
-                                    {new Date(blog?.createdAt).toLocaleDateString()}{" "}
-                                   <span className="font-semibold"> {new Date(blog?.createdAt).toLocaleTimeString()}</span>
-                                </span>
+                                {new Date(blog?.createdAt).toLocaleDateString()}{" "}
+                                <span className="font-semibold"> {new Date(blog?.createdAt).toLocaleTimeString()}</span>
+                            </span>
                         </p>
                     </div>
                     <div className="flex items-center justify-between px-4 py-3 mt-auto">
