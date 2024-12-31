@@ -55,7 +55,7 @@ const AllTutor = () => {
                 <h2 className="w-2/6 text-right text-xl font-medium text-slate-700">Total Tutor = <span className="text-blue-500 text-2xl font-semibold">({totalNumberOfTuition})</span></h2>
             </div>
 
-            <table className="min-w-[100%] shadow-md border mx-auto bg-white border-gray-200 md:my-4 my-2 shadow-xl">
+            <table className="min-w-[100%] border mx-auto bg-white border-gray-200 md:my-4 my-2 shadow-xl">
                 <thead>
                     <tr className="bg-[#282727] text-white">
                         <th className="py-2 text-sm text-center border-b"></th>

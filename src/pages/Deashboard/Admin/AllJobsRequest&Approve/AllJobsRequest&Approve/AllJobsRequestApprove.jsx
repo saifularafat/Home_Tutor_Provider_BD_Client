@@ -4,7 +4,7 @@ import { useAllRequestJobs } from "../../../../../api/useAllRequestJobs";
 import ApproveJobs from "./ApproveJobs";
 import PendingJobs from "./PendingJobs";
 
-const AllRequestApprove = () => {
+const AllJobsRequestApprove = () => {
     const [requestApprove, setRequestApprove] = useState(false);
 
     const [payloads, refetch, isLoading] = useAllRequestJobs();
@@ -35,4 +35,4 @@ const AllRequestApprove = () => {
     );
 };
 
-export default AllRequestApprove;
+export default AllJobsRequestApprove;

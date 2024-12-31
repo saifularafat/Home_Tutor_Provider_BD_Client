@@ -40,7 +40,7 @@ import AllUserManage from "../pages/Deashboard/Admin/AllUsersManage/AllUserMaage
 import AllPayments from "../pages/Deashboard/Admin/AllPayments/AllPayments/AllPayments";
 import TermsAndCondition from "../pages/Deashboard/Admin/TermsAndCondition/TermsAndCondition";
 import AllTutor from "../pages/Deashboard/Admin/AllTutor/AllTutor/AllTutor";
-import AllRequestApprove from "../pages/Deashboard/Admin/AllRequest&Approve/AllRequest&Approve/AllRequestApprove";
+import AllJobsRequestApprove from "../pages/Deashboard/Admin/AllJobsRequest&Approve/AllJobsRequest&Approve/AllJobsRequestApprove";
 import TutorJobsRequest from "../pages/Deashboard/Admin/TutorJobsRequest/TutorJobsRequest/TutorJobsRequest";
 import CreateNotice from "../pages/Deashboard/Admin/CreateNotice/CreateNotice/CreateNotice";
 import AllTuitionJobs from "../pages/Deashboard/Admin/AllJobTuition/AllJobTuition/AllTuitionJobs";
@@ -144,9 +144,9 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "/dashboard/all-request-approve-jobs",
+                path: "/dashboard/all-jobs-request-approve",
                 element: (
-                    <AllRequestApprove />
+                    <AllJobsRequestApprove />
                 ),
             },
             {

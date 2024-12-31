@@ -56,7 +56,7 @@ export const Menus = [
     },
     {
         title: 'Jobs Request-Approve',
-        path: '/dashboard/all-request-approve-jobs',
+        path: '/dashboard/all-jobs-request-approve',
         icon: iconMappings.ReqJob,
         role: 'admin'
     },
