@@ -13,7 +13,6 @@ const InboxMessage = () => {
 
     const { currentPage, nextPage, previousPage, totalPage, totalNumberOfTuition } = pagination || {};
 
-    console.log('object ====>', contacts);
     if (isLoading) {
         return <Loading />
     }
