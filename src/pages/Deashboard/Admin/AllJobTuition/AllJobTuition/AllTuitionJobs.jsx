@@ -12,8 +12,7 @@ const AllTuitionJobs = () => {
 
     const [tuitionJobs, refetch, isLoading] = allTuitionJobs(page, searchText);
     const { tuitionJobs: jobs, pagination } = tuitionJobs || {};
-    const { currentPage, nextPage, previousPage, totalPage } = pagination || {};
-    console.log('jobs tuitions all data ==>>', jobs);
+    const { currentPage, nextPage, previousPage, totalPage, totalNumberOfTuition } = pagination || {};
 
     const handlerSearch = () => {
         console.log("Searching for:", searchText);
@@ -23,6 +22,10 @@ const AllTuitionJobs = () => {
     const handleRowClick = (id) => {
         navigate(`/tuition-job-details/${id}`);
     };
+
+
+    // TODO TUITION JOBS DELETED 
+
 
     if (isLoading) {
         return <Loading />;
@@ -47,7 +50,7 @@ const AllTuitionJobs = () => {
                         Search
                     </button>
                 </div>
-                <h2 className="w-2/6 text-right text-xl font-medium text-slate-700">Total Tuition Job = <span className="text-blue-500 text-2xl font-semibold">({jobs.length})</span></h2>
+                <h2 className="w-2/6 text-right text-xl font-medium text-slate-700">Total Tuition Job = <span className="text-blue-500 text-2xl font-semibold">({totalNumberOfTuition})</span></h2>
             </div>
 
             <table className="min-w-[100%] shadow-md border mx-auto border-gray-100 my-6">

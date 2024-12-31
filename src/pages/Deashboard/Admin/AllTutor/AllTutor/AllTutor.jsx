@@ -1,10 +1,61 @@
+import { useState } from "react";
 import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../../Components/Loading/Loading";
+import { allTutor } from "../../../../../api/allTutor";
+import Pagination from "../../../../../Components/Pagination/Pagination";
 
 const AllTutor = () => {
+    const [page, setPage] = useState(1);
+    const [searchText, setSearchText] = useState("");
+    const navigate = useNavigate();
+
+    const [tutors, refetch, isLoading] = allTutor(page, searchText);
+    const { tutors: tutor, pagination } = tutors || {};
+    console.log(tutor);
+    console.log(pagination);
+
+    const { currentPage, nextPage, previousPage, totalPage, totalNumberOfTuition } = pagination || {};
+
+    const handleRowClick = (id) => {
+        navigate(`/tutor-details/${id}`);
+    };
+
+    const handlerSearch = () => {
+        console.log("Searching for:", searchText);
+
+        refetch();
+    };
+
+    // TODO TUITION JOBS DELETED 
+
+
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
-        <div className="overflow-x-auto ">
-             <PageTitleShow currentPage="All Tutor" />
-            <table className="min-w-[100%] shadow-md border mx-auto bg-white border-gray-200 md:my-8 my-4">
+        <div className="overflow-x-auto">
+            <PageTitleShow currentPage="All Tutor" />
+            <div className="flex items-center justify-between md:px-6 px-3 md:pt-4 md:pb-2 py-2 rounded-xl shadow-xl mt-2 bg-white">
+                <div className="w-4/6 mb-2">
+                    <input
+                        onChange={(e) => setSearchText(e.target.value)}
+                        type="text"
+                        value={searchText}
+                        placeholder="Search Your Tuition Code"
+                        className="md:px-9 px-2 md:py-[10px] md:w-4/6 md:mr-1 py-2 placeholder:text-slate-300 text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400 focus:outline-double"
+                    />
+                    <button
+                        onClick={handlerSearch}
+                        className="py-[9px] md:px-3 px-2 md:w-1/6 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider"
+                    >
+                        Search
+                    </button>
+                </div>
+                <h2 className="w-2/6 text-right text-xl font-medium text-slate-700">Total Tutor = <span className="text-blue-500 text-2xl font-semibold">({totalNumberOfTuition})</span></h2>
+            </div>
+
+            <table className="min-w-[100%] shadow-md border mx-auto bg-white border-gray-200 md:my-4 my-2 shadow-xl">
                 <thead>
                     <tr className="bg-[#282727] text-white">
                         <th className="py-2 text-sm text-center border-b"></th>
@@ -19,41 +70,34 @@ const AllTutor = () => {
                     </tr>
                 </thead>
                 <tbody className="">
-                    <tr className={`hover:bg-gray-100 transition duration-300`} title="Shiyam Ahmed">
-                        <td className="py-1 text-sm text-center border-b">1</td>
-                        <td className="py-1 text-sm text-center border-b">Shiyam Ahmed</td>
-                        <td className="py-1 text-sm text-center border-b">Sciences</td>
-                        <td className="py-1 text-sm text-center border-b">Dhaka International University</td>
-                        <td className="py-1 text-sm text-center border-b">4 Years</td>
-                        <td className="py-1 text-sm text-center border-b">5 K</td>
-                        <td className="py-1 text-sm text-center border-b"> 4 Student</td>
-                        <td className="py-1 text-sm text-center border-b">Male</td>
-                        <td className="py-1 text-sm text-center border-b"> Kajipara, Mirpur 10, Dhaka</td>
-                    </tr>
-                    <tr className={`hover:bg-gray-100 transition duration-300`} title="Ejajur Rahman Ejaj">
-                        <td className="py-1 text-sm text-center border-b">2</td>
-                        <td className="py-1 text-sm text-center border-b">Ejajur Rahman Ejaj</td>
-                        <td className="py-1 text-sm text-center border-b">English</td>
-                        <td className="py-1 text-sm text-center border-b">Comilla International University</td>
-                        <td className="py-1 text-sm text-center border-b">1 Years</td>
-                        <td className="py-1 text-sm text-center border-b">3 K</td>
-                        <td className="py-1 text-sm text-center border-b"> 1 Student</td>
-                        <td className="py-1 text-sm text-center border-b">Male</td>
-                        <td className="py-1 text-sm text-center border-b"> Kajipara, Dhanmondi, Dhaka</td>
-                    </tr>
-                    <tr className={`hover:bg-gray-100 transition duration-300`} title="Shakib All Hasan">
-                        <td className="py-1 text-sm text-center border-b">3</td>
-                        <td className="py-1 text-sm text-center border-b">Shakib All Hasan</td>
-                        <td className="py-1 text-sm text-center border-b">Math</td>
-                        <td className="py-1 text-sm text-center border-b">Jahaggirnagor University Dhaka</td>
-                        <td className="py-1 text-sm text-center border-b">N/A</td>
-                        <td className="py-1 text-sm text-center border-b">5 K</td>
-                        <td className="py-1 text-sm text-center border-b"> 2 Student</td>
-                        <td className="py-1 text-sm text-center border-b">Male</td>
-                        <td className="py-1 text-sm text-center border-b"> Chhar rasta mur, Uttora, Dhaka</td>
-                    </tr>
+                    {
+                        tutor.map((data, index) =>
+                            <tr
+                                key={data?._id}
+                                onClick={() => handleRowClick(data?._id)}
+                                className={`hover:bg-gray-100 transition duration-300`} title={data?.name}>
+                                <td className="py-1 text-sm text-center border-b">{index + 1}</td>
+                                <td className="py-1 text-sm text-center border-b">{data?.name}</td>
+                                <td className="py-1 text-sm text-center border-b">Sciences</td>
+                                <td className="py-1 text-sm text-center border-b">Dhaka International University</td>
+                                <td className="py-1 text-sm text-center border-b">4 Years</td>
+                                <td className="py-1 text-sm text-center border-b">5 K</td>
+                                <td className="py-1 text-sm text-center border-b"> 4 Student</td>
+                                <td className="py-1 text-sm text-center border-b">{data?.gender}</td>
+                                <td className="py-1 text-sm text-center border-b">{data?.address}</td>
+                            </tr>
+                        )}
                 </tbody>
             </table>
+
+            {/* Pagination Controls */}
+            <Pagination
+                totalPage={totalPage}
+                currentPage={currentPage}
+                nextPage={nextPage}
+                setPage={setPage}
+                previousPage={previousPage}
+            />
         </div>
     );
 };
