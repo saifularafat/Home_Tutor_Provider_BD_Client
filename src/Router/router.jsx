@@ -8,19 +8,19 @@ import TutorProfile from "../pages/TutorAllPage/TutorProfile/TutorProfile";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import About from "../pages/About/About";
 import TermsOfUser from "../pages/TermsOfUser/TermsOfUser";
-
+// general
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 import RegistrationView from "../pages/RegistrationView/RegistrationView";
-
+// publish page
 import TuitionDetails from "../pages/TuitionJobsAllPage/TuitionDetails/TuitionDetails";
 import TutorProfileDetails from "../pages/TutorAllPage/TutorProfileDetails/TutorProfileDetails";
 import TutorHireRequest from "../pages/TutorAllPage/TutorHireRequest/TutorHireRequest";
-
+// secret page 
 import Dashboard from "../Layouts/Dashboard";
 import Profile from "../pages/Deashboard/Profile/Profile";
 import Notice from "../pages/Deashboard/Notice/Notice";
-
+// parent page
 import ParentHome from "../pages/Deashboard/Parent/ParentHome/ParentHome";
 import ApplyJobs from "../pages/Deashboard/Parent/ApplyJobs/ApplyJobs";
 import ProfileUpdate from "../pages/Deashboard/Parent/ProfileUpdate/ProfileUpdate";
@@ -29,12 +29,12 @@ import JobRequestHistory from "../pages/Deashboard/Parent/JobRequestHistory/JobR
 import EnrolPremiumHistory from "../pages/Deashboard/Parent/EnrolPremiumHistory/EnrolPremiumHistory";
 import AddMeeting from "../pages/Deashboard/Parent/AddMeeting/AddMeeting";
 import StudentAnalytics from "../pages/Deashboard/Parent/StudentAnalytics/StudentAnalytics";
-
+// tutor page
 import TutorHome from "../pages/Deashboard/Tutor/TutorHome/TutorHome";
 import AddBlog from "../pages/Deashboard/Tutor/AddBlog/AddBlog";
 import JoinMeeting from "../pages/Deashboard/Tutor/JoinMeeting/JoinMeeting";
 import TutorUpdateProfile from "../pages/Deashboard/Tutor/TutorHome/TutorUpdateProfile/TutorUpdateProfile";
-
+// admin page
 import AdminHome from "../pages/Deashboard/Admin/AdminHome/AdminHome/AdminHome";
 import AllUserManage from "../pages/Deashboard/Admin/AllUsersManage/AllUserMaage/AllUserManage";
 import AllPayments from "../pages/Deashboard/Admin/AllPayments/AllPayments/AllPayments";
@@ -43,7 +43,7 @@ import AllTutor from "../pages/Deashboard/Admin/AllTutor/AllTutor/AllTutor";
 import AllRequestApprove from "../pages/Deashboard/Admin/AllRequest&Approve/AllRequest&Approve/AllRequestApprove";
 import TutorJobsRequest from "../pages/Deashboard/Admin/TutorJobsRequest/TutorJobsRequest/TutorJobsRequest";
 import CreateNotice from "../pages/Deashboard/Admin/CreateNotice/CreateNotice/CreateNotice";
-import AllJobTuition from "../pages/Deashboard/Admin/AllJobTuition/AllJobTuition/AllJobTuition";
+import AllTuitionJobs from "../pages/Deashboard/Admin/AllJobTuition/AllJobTuition/AllTuitionJobs";
 import AllBlog from "../pages/Deashboard/Admin/AllBlog/AllBlog/AllBlog";
 import DownloadAndPdfZone from "../pages/Deashboard/Admin/DownloadAndPdfZone/DownloadAndPdfZone/DownloadAndPdfZone";
 import InboxMessage from "../pages/Deashboard/Admin/InboxMessage/InboxMessage/InboxMessage";
@@ -150,7 +150,7 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "/dashboard/tutor-jobs-request",
+                path: "/dashboard/hire-tutor-request-approve",
                 element: (
                     <TutorJobsRequest />
                 ),
@@ -162,9 +162,9 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "/dashboard/all-job-tuition",
+                path: "/dashboard/all-tuition-jobs",
                 element: (
-                    <AllJobTuition />
+                    <AllTuitionJobs />
                 ),
             },
             {

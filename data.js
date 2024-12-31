@@ -61,8 +61,8 @@ export const Menus = [
         role: 'admin'
     },
     {
-        title: 'Tutor Jobs Request',
-        path: '/dashboard/tutor-jobs-request',
+        title: 'Hire Tutor Request-Pending',
+        path: '/dashboard/hire-tutor-request-approve',
         icon: iconMappings.TutorReq,
         role: 'admin'
     },
@@ -73,8 +73,8 @@ export const Menus = [
         role: 'admin'
     },
     {
-        title: 'All Job Tuition',
-        path: '/dashboard/all-job-tuition',
+        title: 'All Tuition Jobs',
+        path: '/dashboard/all-tuition-jobs',
         icon: iconMappings.JobTutor,
         role: 'admin'
     },

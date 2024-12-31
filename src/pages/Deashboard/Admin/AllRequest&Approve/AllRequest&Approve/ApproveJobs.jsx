@@ -1,10 +1,18 @@
+import Loading from "../../../../../Components/Loading/Loading";
 
-const Request = () => {
+const ApproveJobs = ({ approveJob, isLoading }) => {
+
+    console.log('object approve JOb', approveJob);
+// TODO TUITION JOB IS APPROVE JOB 
+
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div className="overflow-x-auto">
-            <table className="min-w-[100%] shadow-md  border mx-auto border-gray-100">
+            <table className="min-w-[100%] shadow-md border mx-auto border-gray-100">
                 <thead>
-                    <tr className="bg-[#403f3f] text-white">
+                    <tr className="bg-blue-500 text-white">
                         <th className="py-2 pl-2 capitalize text-center border-b text-sm font-semibold">tutor name</th>
                         <th className="py-2 pl-2 capitalize text-center border-b text-sm font-semibold">T. Id</th>
                         <th className="py-2 pl-2 capitalize text-center border-b text-sm font-semibold">T. Area</th>
@@ -29,8 +37,7 @@ const Request = () => {
                         <td className="p-1 text-xs font-medium text-center border-b">4d</td>
                         <td className="p-1 text-xs font-medium border-b text-end"> Shemoley, Mirpur-10, Dhaka</td>
                         <td className="p-1 text-xs font-medium text-center border-b">
-                            <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg mr-1">Cancel</button>
-                            <button className="text-[11px] px-1 py-1 bg-blue-500 text-white rounded-lg mr-1">Approve</button>
+                            <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg">Delete</button>
                         </td>
                     </tr>
                     <tr className="hover:bg-gray-100 transition duration-300">
@@ -43,9 +50,8 @@ const Request = () => {
                         <td className="p-1 text-xs font-medium text-center border-b">4K</td>
                         <td className="p-1 text-xs font-medium text-center border-b">3d</td>
                         <td className="p-1 text-xs font-medium border-b text-end"> Uttora-2, Ges Fames, Dhaka</td>
-                         <td className="p-1 text-xs font-medium text-center border-b">
-                            <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg mr-1">Cancel</button>
-                            <button className="text-[11px] px-1 py-1 bg-blue-500 text-white rounded-lg mr-1">Approve</button>
+                        <td className="p-1 text-xs font-medium text-center border-b">
+                            <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg">Delete</button>
                         </td>
                     </tr>
                     <tr className="hover:bg-gray-100 transition duration-300">
@@ -58,16 +64,14 @@ const Request = () => {
                         <td className="p-1 text-xs font-medium text-center border-b">7K</td>
                         <td className="p-1 text-xs font-medium text-center border-b">4d</td>
                         <td className="p-1 text-xs font-medium border-b text-end"> Fukira Bazar, Mirpur-10, Dhaka</td>
-                         <td className="p-1 text-xs font-medium text-center border-b">
-                            <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg mr-1">Cancel</button>
-                            <button className="text-[11px] px-1 py-1 bg-blue-500 text-white rounded-lg mr-1">Approve</button>
+                        <td className="p-1 text-xs font-medium text-center border-b">
+                            <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg">Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
     );
 };
 
-export default Request;
+export default ApproveJobs;
