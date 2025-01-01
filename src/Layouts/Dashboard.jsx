@@ -5,18 +5,20 @@ import logo from './../assets/leaf.jpg'
 import { IconContext } from 'react-icons';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import DashboardFooter from '../Share/DashboardFooter/DashboardFooter';
-import allUsers from '../api/allUsers';
+import { useAllUsers } from '../api/useAllUsers';
 import { Menus } from '../../data';
 import DashboardLogo from '../Components/DashboardComponent/DashboardLogo';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(true);
 
-    const [users, refetch, isLoading] = allUsers();
+    const [users] = useAllUsers();
     const tutors = users.filter((data) => data.isTutor === true)
     const coaching = users.filter((data) => data.isCoaching === true)
     const parents = users.filter((data) => data.isParent === true)
-    console.log('users');
+    // console.log('tutors', tutors);
+    // console.log('coaching', coaching);
+    // console.log('parents', parents);
 
     // user identity
     const isAdmin = true;

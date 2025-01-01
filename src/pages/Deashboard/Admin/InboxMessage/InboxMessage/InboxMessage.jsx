@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Loading from "../../../../../Components/Loading/Loading";
 import { useAllContactMessage } from "../../../../../api/useAllContactMessage";
 import Pagination from "../../../../../Components/Pagination/Pagination";
+import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow";
 
 const InboxMessage = () => {
     const [page, setPage] = useState(1);
@@ -19,6 +20,7 @@ const InboxMessage = () => {
 
     return (
         <div className="py-6 text-center text-3xl font-bold">
+             <PageTitleShow currentPage="Inbox Messages" />
             <h3 className="text-xl font-medium text-left pb-2">Total Messages: {totalNumberOfTuition}</h3>
             <div className="overflow-x-auto">
                 <table className="table border border-x-white border-b-sky-400 rounded-md">

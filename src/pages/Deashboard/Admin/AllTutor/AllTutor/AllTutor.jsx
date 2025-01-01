@@ -52,7 +52,7 @@ const AllTutor = () => {
                         Search
                     </button>
                 </div>
-                <h2 className="w-2/6 text-right text-xl font-medium text-slate-700">Total Tutor = <span className="text-blue-500 text-2xl font-semibold">({totalNumberOfTuition})</span></h2>
+                <h2 className="w-2/6 text-right text-xl font-medium text-slate-700">Total Tutor = <span className="text-blue-500 text-2xl font-semibold">({tutor?.length})</span></h2>
             </div>
 
             <table className="min-w-[100%] border mx-auto bg-white border-gray-200 md:my-4 my-2 shadow-xl">

@@ -26,8 +26,6 @@ export const singleTuitionJobs = (id) => {
         keepPreviousData: true,
         enabled: !!id,
     });
-
-    // Extracting payload only if responseData is defined
     const tuitionJob = responseData ? responseData.payload : null;
 
     return { tuitionJob, refetch, isLoading, isError };

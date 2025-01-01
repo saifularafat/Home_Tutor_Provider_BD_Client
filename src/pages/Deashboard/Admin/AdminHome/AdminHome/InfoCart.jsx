@@ -5,15 +5,14 @@ import { PiHandshakeDuotone } from "react-icons/pi";
 import { RiParentFill } from "react-icons/ri";
 import { SiFampay } from "react-icons/si";
 import { Link } from "react-router-dom";
-import allUsers from "../../../../../api/allUsers";
-import Loading from "../../../../../Components/Loading/Loading";
+import { useAllUsers } from "../../../../../api/useAllUsers";
 import { useAllBlogs } from "../../../../../api/useAllBlog";
 import { useParentRequestTutor } from "../../../../../api/useAllParentRequestToTutor";
 import { useAllRequestJobs } from "../../../../../api/useAllRequestJobs";
+import Loading from "../../../../../Components/Loading/Loading";
 
 const InfoCart = () => {
-
-    const [users, refetch, isLoading] = allUsers() || [[], () => { }, true];
+    const [users, refetch, isLoading] = useAllUsers(1, '');
     const tutors = (users || []).filter((data) => data.isTutor === true);
     const coaching = (users || []).filter((data) => data.isCoaching === true);
     const parents = (users || []).filter((data) => data.isParent === true);
