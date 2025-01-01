@@ -13,9 +13,11 @@ const Dashboard = () => {
     const [open, setOpen] = useState(true);
 
     const [users] = useAllUsers();
-    const tutors = users.filter((data) => data.isTutor === true)
-    const coaching = users.filter((data) => data.isCoaching === true)
-    const parents = users.filter((data) => data.isParent === true)
+    const allUsers = users.users || []; 
+    console.log("Users ====>", users);
+    const tutors = allUsers.filter((data) => data.isTutor === true)
+    const coaching = allUsers.filter((data) => data.isCoaching === true)
+    const parents = allUsers.filter((data) => data.isParent === true)
     // console.log('tutors', tutors);
     // console.log('coaching', coaching);
     // console.log('parents', parents);

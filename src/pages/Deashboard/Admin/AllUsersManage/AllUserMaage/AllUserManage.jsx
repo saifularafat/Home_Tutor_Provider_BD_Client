@@ -1,159 +1,97 @@
+import { useState } from "react";
+import { useAllUsers } from "../../../../../api/useAllUsers";
+import Loading from "../../../../../Components/Loading/Loading";
+import Pagination from "../../../../../Components/Pagination/Pagination";
+import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow";
+
 const AllUserManage = () => {
-    const displayedData = [
-        {
-            id: '15245613545',
-            displayName: 'Pinke Akter Kutkut',     
-            email: 'pinkekterkutkut@gmail.com',     
-            role: 'tutor',     
-        },
-        {
-            id: '5221651545',
-            displayName: 'Mim Akter Dim',     
-            email: 'mimkterdim@gmail.com',     
-            role: 'parent',     
-        },
-        {
-            id: '215453fg14',
-            displayName: 'Posha DDIM',     
-            email: 'poshaterdim@gmail.com',     
-            role: 'admin',     
-        },
-        {
-            id: '215453fg14',
-            displayName: 'Saif',     
-            email: 'saif@gmail.com',     
-            role: 'tutor',     
-        },
-        {
-            id: '215453fg14',
-            displayName: 'HOME',     
-            email: 'home@gmail.com',     
-            role: 'admin',     
-        },
-    ]
+    const [page, setPage] = useState(1);
+    const [searchText, setSearchText] = useState("");
+    const [submittedSearchText, setSubmittedSearchText] = useState("");
+    const [users, refetch, isLoading] = useAllUsers(page, submittedSearchText);
 
-    const handleMakeAdmin = user => {
-        console.log("handle Delete Users", user);
-        // fetch(`https://e-exam-pro-server.vercel.app/users/admin/${user._id}`, {
-        //   method: 'PATCH'
-        // })
-        //   .then(res => res.json())
-        //   .then(data => {
-        //     refetch()
-        //     if (data.modifiedCount) {
-        //       Swal.fire({
-        //         showConfirmButton: false,
-        //         timer: 1500,
-        //         title: `${user.displayName} is admin now`,
-        //         icon: 'success'
-        //       })
-        //     }
-        //   })
-    }
+    const { users: allUsers, pagination } = users || {};
+    const { currentPage, nextPage, previousPage, totalPage, totalNumberOfUser } = pagination || {};
 
-    const handleMakeInstructor = user => {
-        console.log("handle Delete Users", user);
-        // fetch(`https://e-exam-pro-server.vercel.app/users/instructor/${user._id}`, {
-        //   method: 'PATCH'
-        // })
-        //   .then(res => res.json())
-        //   .then(data => {
-        //     //console.log(data)
-        //     refetch()
-        //     if (data.modifiedCount) {
-        //       Swal.fire({
-        //         showConfirmButton: false,
-        //         timer: 1500,
-        //         title: `${user.displayName} is Instructor now`,
-        //         icon: 'success'
-        //       })
-        //     }
-        //   })
-    }
+    const handleSearch = () => {
+        setSubmittedSearchText(searchText);
+        refetch();
+    };
 
-    const handleDeleteUser = user => {
-        console.log("handle Delete Users", user);
-        // Swal.fire({
-        //   title: 'Are you sure?',
-        //   text: "You won't be able to remove this user!",
-        //   icon: 'warning',
-        //   showCancelButton: true,
-        //   confirmButtonColor: '#3085d6',
-        //   cancelButtonColor: '#d33',
-        //   confirmButtonText: 'Yes, delete it!'
-        // }).then(result => {
-        //   if (result.isConfirmed) {
-        //     fetch(`https://e-exam-pro-server.vercel.app/users/${user._id}`, {
-        //       method: 'DELETE'
-        //     })
-        //       .then(res => res.json())
-        //       .then(data => {
-        //         refetch()
-        //         if (data.deletedCount > 0) {
-        //           Swal.fire('Deleted!', 'User has been deleted.', 'success')
-        //         }
-        //       })
-        //   }
-        // })
+    // TODO USER DELETED USER BANNED AND UNBANNED
+
+    if (isLoading) {
+        return <Loading />;
     }
 
     return (
         <div className="bg-white py-5 px-4 rounded-lg my-6">
-            <h2 className='text-2xl font-semibold'>Manage Users: {5}</h2>
-            <div className='overflow-x-auto p-4 min-h-[80vh]'>
-                <table className='table'>
-                    {/* git */}
-                    <thead className='text-sm text-info'>
+            <PageTitleShow currentPage="All Users" />
+            <div className="flex items-center justify-between md:px-6 px-3 md:pt-4 md:pb-2 py-2 rounded-xl shadow-xl mt-2 bg-white">
+                <div className="w-4/6 mb-2">
+                    <input
+                        onChange={(e) => setSearchText(e.target.value)}
+                        type="text"
+                        value={searchText}
+                        placeholder="Search Your Tuition Code"
+                        className="md:px-9 px-2 md:py-[10px] md:w-4/6 md:mr-1 py-2 placeholder:text-slate-300 text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400 focus:outline-double"
+                    />
+                    <button
+                        onClick={handleSearch}
+                        className="py-[9px] md:px-3 px-2 md:w-1/6 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider"
+                    >
+                        Search
+                    </button>
+                </div>
+                <h2 className="w-2/6 text-right text-xl font-medium text-slate-700">Total Tutor = <span className="text-blue-500 text-2xl font-semibold">({totalNumberOfUser})</span></h2>
+            </div>
+
+            <div className="overflow-x-auto p-4 min-h-[80vh]">
+                <table className="table">
+                    <thead className="text-sm text-info">
                         <tr>
                             <th>Serial</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Make Instructor</th>
-                            <th>Make Admin</th>
-                            <th>Delete user</th>
+                            <th>User Id</th>
+                            <th>Banned</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row  */}
-                        {displayedData?.map((user, index) => (
-                            <tr key={user._id}>
+                        {allUsers?.map((user, index) => (
+                            <tr key={user?._id}>
                                 <td>{index + 1}</td>
-                                <td>{user.displayName}</td>
-                                <td>{user.email}</td>
-                                <td>{user.role}</td>
-                                <td className=''>
-                                    {user.role === 'tutor' ? (
-                                        <button className='btn btn-disabled btn-xs'>
-                                            Instructor
-                                        </button>
-                                    ) : (
-                                        <button
-                                            onClick={() => handleMakeInstructor(user)}
-                                            className=' bg-secondary btn btn-ghost btn-sm'
-                                        >
-                                            Instructor
-                                        </button>
-                                    )}
-                                </td>
+                                <td>{user?.name}</td>
+                                <td>{user?.email}</td>
                                 <td>
-                                    {user.role === 'admin' ? (
-                                        <button className='btn btn-disabled btn-xs'>Admin</button>
+                                    {user?.isAdmin ? "Admin" : user?.isTutor ? "Tutor" : user?.isParent ? "Parent" : user?.isCoaching ? "Coaching" : user?.isBanned ? "Banned" : "Active"}
+                                </td>
+                                <td>{user?.userId}</td>
+                                <td>
+                                    {user.isBanned ? (
+                                        <button
+                                            // onClick={() => handleMakeAdmin(user)}
+                                            className="bg-rose-600 hover:bg-slate-300 hover:text-slate-800 font-medium text-white rounded-lg btn-sm transition duration-300"
+                                        >
+                                            UnBan
+                                        </button>
                                     ) : (
                                         <button
-                                            onClick={() => handleMakeAdmin(user)}
-                                            className=' bg-warning btn btn-ghost btn-sm'
+                                            // onClick={() => handleMakeAdmin(user)}
+                                            className="bg-warning btn btn-ghost btn-sm"
                                         >
-                                            Admin
+                                            Ban
                                         </button>
                                     )}
                                 </td>
                                 <td>
                                     <button
-                                        onClick={() => handleDeleteUser(user)}
-                                        className='text-white bg-red-700 rounded-md btn-sm'
+                                        // onClick={() => handleDeleteUser(user)}
+                                        className="text-white bg-red-700 rounded-md btn-sm"
                                     >
-                                        Banned
+                                        Delete
                                     </button>
                                 </td>
                             </tr>
@@ -162,14 +100,15 @@ const AllUserManage = () => {
                 </table>
             </div>
 
-            {/* <div className='flex justify-center my-6'>
+            <div className="flex justify-center my-6">
                 <Pagination
-                    totalPages={totalPages}
+                    totalPage={totalPage}
                     currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                ></Pagination>
-            </div> */}
-
+                    nextPage={nextPage}
+                    setPage={setPage}
+                    previousPage={previousPage}
+                />
+            </div>
         </div>
     );
 };

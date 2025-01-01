@@ -12,10 +12,12 @@ import { useAllRequestJobs } from "../../../../../api/useAllRequestJobs";
 import Loading from "../../../../../Components/Loading/Loading";
 
 const InfoCart = () => {
-    const [users, refetch, isLoading] = useAllUsers(1, '');
-    const tutors = (users || []).filter((data) => data.isTutor === true);
-    const coaching = (users || []).filter((data) => data.isCoaching === true);
-    const parents = (users || []).filter((data) => data.isParent === true);
+    const [users, refetch, isLoading] = useAllUsers();
+    const { users: allUsers, pagination: pageInfo } = users || {};
+
+    const tutors = (allUsers || []).filter((data) => data.isTutor === true);
+    const coaching = (allUsers || []).filter((data) => data.isCoaching === true);
+    const parents = (allUsers || []).filter((data) => data.isParent === true);
 
     const [blogs] = useAllBlogs();
     const blog = (blogs?.blogs || []).filter((data) => data);
@@ -36,7 +38,7 @@ const InfoCart = () => {
                 <div className="flex items-center justify-between gap-0">
                     <div>
                         <h4 className="text-lg font-medium">All Users</h4>
-                        <p className="text-center">{users?.length}</p>
+                        <p className="text-center">{pageInfo?.totalNumberOfUser}</p>
                     </div>
                     <FaUsers className="md:text-3xl text-xl" />
                 </div>

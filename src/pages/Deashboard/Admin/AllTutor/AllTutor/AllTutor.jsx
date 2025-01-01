@@ -8,22 +8,22 @@ import Pagination from "../../../../../Components/Pagination/Pagination";
 const AllTutor = () => {
     const [page, setPage] = useState(1);
     const [searchText, setSearchText] = useState("");
+    const [submittedSearchText, setSubmittedSearchText] = useState("");
     const navigate = useNavigate();
 
-    const [tutors, refetch, isLoading] = allTutor(page, searchText);
+    const [tutors, refetch, isLoading] = allTutor(page, submittedSearchText);
     const { tutors: tutor, pagination } = tutors || {};
     console.log(tutor);
     console.log(pagination);
 
-    const { currentPage, nextPage, previousPage, totalPage, totalNumberOfTuition } = pagination || {};
+    const { currentPage, nextPage, previousPage, totalPage } = pagination || {};
 
     const handleRowClick = (id) => {
         navigate(`/tutor-details/${id}`);
     };
 
     const handlerSearch = () => {
-        console.log("Searching for:", searchText);
-
+        setSubmittedSearchText(searchText)
         refetch();
     };
 

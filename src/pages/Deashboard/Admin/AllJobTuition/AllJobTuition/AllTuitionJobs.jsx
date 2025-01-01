@@ -8,14 +8,15 @@ import { useNavigate } from "react-router-dom";
 const AllTuitionJobs = () => {
     const [page, setPage] = useState(1);
     const [searchText, setSearchText] = useState("");
+    const [submittedSearchText, setSubmittedSearchText] = useState("");
     const navigate = useNavigate();
 
-    const [tuitionJobs, refetch, isLoading] = allTuitionJobs(page, searchText);
+    const [tuitionJobs, refetch, isLoading] = allTuitionJobs(page, submittedSearchText);
     const { tuitionJobs: jobs, pagination } = tuitionJobs || {};
     const { currentPage, nextPage, previousPage, totalPage, totalNumberOfTuition } = pagination || {};
 
     const handlerSearch = () => {
-        console.log("Searching for:", searchText);
+        setSubmittedSearchText(searchText);
         refetch();
     };
 
