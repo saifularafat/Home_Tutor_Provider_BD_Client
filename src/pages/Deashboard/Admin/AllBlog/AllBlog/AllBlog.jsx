@@ -16,6 +16,8 @@ const AllBlog = () => {
     const approveBlog = blogList?.filter((singleBlog) => singleBlog?.isBlog === true) || [];
     const pendingBlog = blogList?.filter((singleBlog) => singleBlog?.isBlog === false) || [];
 
+    // TODO BLOG DELETED AND APPROVE
+
     const handlerSearch = () => {
         setSubmittedSearchText(searchText)
         refetch();

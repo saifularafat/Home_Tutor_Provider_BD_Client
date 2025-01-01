@@ -34,7 +34,7 @@ const AllUserManage = () => {
                         type="text"
                         value={searchText}
                         placeholder="Search Your Tuition Code"
-                        className="md:px-9 px-2 md:py-[10px] md:w-4/6 md:mr-1 py-2 placeholder:text-slate-300 text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400 focus:outline-double"
+                        className="md:px-9 px-2 md:py-[10px] md:w-4/6 md:mr-2 mr-1 py-2 placeholder:text-slate-300 text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400 focus:outline-double"
                     />
                     <button
                         onClick={handleSearch}

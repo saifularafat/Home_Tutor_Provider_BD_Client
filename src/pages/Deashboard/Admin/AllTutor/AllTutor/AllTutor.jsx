@@ -13,8 +13,9 @@ const AllTutor = () => {
 
     const [tutors, refetch, isLoading] = allTutor(page, submittedSearchText);
     const { tutors: tutor, pagination } = tutors || {};
-    console.log(tutor);
-    console.log(pagination);
+
+    // console.log(tutor);
+    // console.log(pagination);
 
     const { currentPage, nextPage, previousPage, totalPage } = pagination || {};
 
