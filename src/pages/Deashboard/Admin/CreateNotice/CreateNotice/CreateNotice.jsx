@@ -3,6 +3,7 @@ import SearchDropdown from "../../../../../Components/SearchInputFuntion/SearchD
 import PreferableClassOptions from "../../../../../Helpers/PreferableClass";
 import { useState } from "react";
 import WeekDay from "../../../../../Helpers/WeekDay";
+import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow";
 
 const CreateNotice = () => {
     const {
@@ -41,6 +42,7 @@ const CreateNotice = () => {
     };
     return (
         <div className="mt-5">
+              <PageTitleShow currentPage="Notice Create |" />
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className='mx-auto max-w-screen-lg border-2 bg-white rounded-xl p-3 md:p-6 shadow-lg'

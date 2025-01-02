@@ -3,7 +3,7 @@ import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
 const TermsOfUser = () => {
     return (
         <div className="max-w-5xl mx-auto md:py-10 py-5">
-            <PageTitleShow currentPage="Terms and Condition" />
+            <PageTitleShow currentPage="Terms and Condition | " />
             <h3 className="text-2xl font-bold text-left pb-5">Home Tutor Provider <sup>BD</sup></h3>            <div>
                 <div className="flex flex-col space-y-4">
                     <h6 className=" text-xl font-bold text-slate-900 pb-3">Terms and Conditions </h6>

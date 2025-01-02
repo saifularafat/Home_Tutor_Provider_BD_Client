@@ -33,7 +33,7 @@ const TuitionDetails = () => {
 
     return (
         <div className="bg-blue-100 md:py-10 py-5">
-            <PageTitleShow currentPage="Tuition Job Detail" />
+            <PageTitleShow currentPage="Tuition Job Details |" />
             <div className="md:max-w-6xl md:mx-auto mx-2 md:px-8 px-3 pt-5 md:pt-10 md:pb-4 pb-2 bg-white rounded-xl">
                 <div className="grid md:grid-cols-4 grid-cols-1 md:gap-5">
                     <TuitionJobLeftDetails tuition={tuitionJob} />

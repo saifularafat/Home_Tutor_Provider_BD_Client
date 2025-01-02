@@ -36,7 +36,7 @@ const AllTutor = () => {
     }
     return (
         <div className="overflow-x-auto">
-            <PageTitleShow currentPage="All Tutor" />
+            <PageTitleShow currentPage="All Tutor |" />
             <div className="flex items-center justify-between md:px-6 px-3 md:pt-4 md:pb-2 py-2 rounded-xl shadow-xl mt-2 bg-white">
                 <div className="w-4/6 mb-2">
                     <input

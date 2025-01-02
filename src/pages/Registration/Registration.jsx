@@ -53,7 +53,7 @@ const Registration = () => {
 
     return (
         <div className=" footerBg h-screen">
-            <PageTitleShow currentPage="Registration" />
+            <PageTitleShow currentPage="Registration |" />
 
             <div className="container mx-auto">
                 <div className="items-center justify-between gap-12 p-3 md:flex">

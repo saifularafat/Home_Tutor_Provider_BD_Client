@@ -7,6 +7,7 @@ import FrequentlyAskQuestion from "./FrequentlyAskQuestion/FrequentlyAskQuestion
 import TeamCard from "./TeamCard/TeamCard";
 import WhatsAppChat from "../../../Components/WhatsAppChat/WhatsAppChat";
 import { useEffect, useState } from "react";
+import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
 
 const Home = () => {
     const [showMainContent, setShowMainContent] = useState(
@@ -35,6 +36,7 @@ const Home = () => {
     }
     return (
         <div>
+              <PageTitleShow currentPage="" />
             <div
                 className={`md:-mt-24 transition-colors duration-700 ${showMainContent ? '  opacity-100' : 'opacity-0'
                     } primary-bg2 `}

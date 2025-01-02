@@ -1,3 +1,4 @@
+import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow";
 
 const AllPayments = () => {
     const displayedData = [
@@ -29,6 +30,7 @@ const AllPayments = () => {
 
     return (
         <div className="py-5">
+             <PageTitleShow currentPage="All Payment |" />
             {/* TODO TOTAL AMOUNT */}
             <h3 className="md:text-left text-slate-600 pl-2 md:pl-8 text-lg md:text-xl font-bold md:pb-3 pb-2 uppercase">
                 {/* <span className="md:text-3xl text-2xl text-center"> */}

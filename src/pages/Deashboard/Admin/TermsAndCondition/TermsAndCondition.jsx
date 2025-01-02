@@ -3,7 +3,7 @@ import PageTitleShow from "../../../../Components/PageTitleShow/PageTitleShow";
 const TermsAndCondition = () => {
     return (
         <div className="md:my-5 my-3">
-            <PageTitleShow currentPage="Terms and Condition" />
+            <PageTitleShow currentPage="Terms and Condition |" />
             <div className="w-full rounded-lg py-5 px-4 bg-white">
                 <div>
                     <h4 className="text-2xl font-semibold text-slate-800">Terms and Condition Post And Edit Section</h4>

@@ -28,7 +28,7 @@ const TutorProfileDetails = () => {
     return (
         <div>
             <div className="bg-blue-100 md:py-10 py-5 px-2 md:px-0">
-                <PageTitleShow currentPage="Tutor Details" />
+                <PageTitleShow currentPage="Tutor Details |" />
                 {/* tutor details tutor info */}
                 <div className="md:max-w-4xl mx-auto md:px-8 px-3 md:pt-10 pt-4 pb-4 bg-white rounded-xl">
                     <div className="">

@@ -5,7 +5,7 @@ import license from './../../../../../assets/premium/tutor3.jpg'
 const CoachingCenterAdmin = () => {
     return (
         <div className="overflow-x-auto ">
-            <PageTitleShow currentPage="Coaching Center" />
+            <PageTitleShow currentPage="Coaching Center |" />
             <table className="min-w-[100%] shadow-md border mx-auto bg-white border-gray-200 md:my-8 my-4">
                 <thead>
                     <tr className="bg-[#7a0808] text-white">

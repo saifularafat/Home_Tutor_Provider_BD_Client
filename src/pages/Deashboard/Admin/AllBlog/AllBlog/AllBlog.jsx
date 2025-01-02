@@ -26,7 +26,7 @@ const AllBlog = () => {
     return (
         <div className="py-1">
             <div className="md:my-5 my-3 w-full max-w-full overflow-hidden rounded-lg border bg-white dark:border-zinc-700 dark:bg-zinc-900">
-                <PageTitleShow currentPage="Blogs" />
+                <PageTitleShow currentPage="Blogs |" />
                 {/* seacrh filte */}
                 <div className="flex items-center justify-between md:px-6 px-3 md:pt-4 md:pb-2 py-2 rounded-xl shadow-xl mt-2 bg-white">
                     <div className="w-5/6 mb-2 ">

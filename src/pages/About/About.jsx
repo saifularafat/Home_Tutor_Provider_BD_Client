@@ -5,7 +5,7 @@ import PageTitleShow from '../../Components/PageTitleShow/PageTitleShow';
 const About = () => {
     return (
         <div className='container px-6 mx-auto'>
-            <PageTitleShow currentPage="About us" />
+            <PageTitleShow currentPage="About us |" />
 
             <div className='overflow-x-hidden items-center justify-between md:py-12 py-8 text-center md:flex md:gap-6 gap-2 md:text-left'>
                 <div className=' md:w-1/2'>

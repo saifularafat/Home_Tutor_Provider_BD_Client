@@ -34,7 +34,7 @@ const AllTuitionJobs = () => {
 
     return (
         <div className="overflow-x-auto my-8 px-4 py-6 rounded-lg bg-white">
-            <PageTitleShow currentPage="All Tuition Jobs" />
+            <PageTitleShow currentPage="All Tuition Jobs |" />
             {/* searching filet */}
             <div className="flex items-center justify-between md:px-6 px-3 md:pb-4 py-2 rounded-xl md:shadow-2xl shadow-xl">
                 <div className="w-4/6">

@@ -26,7 +26,7 @@ const AllUserManage = () => {
 
     return (
         <div className="bg-white py-5 px-4 rounded-lg my-6">
-            <PageTitleShow currentPage="All Users" />
+            <PageTitleShow currentPage="All Users |" />
             <div className="flex items-center justify-between md:px-6 px-3 md:pt-4 md:pb-2 py-2 rounded-xl shadow-xl mt-2 bg-white">
                 <div className="w-4/6 mb-2">
                     <input

@@ -5,7 +5,7 @@ import InfoCart from "./InfoCart";
 const AdminHome = () => {
     return (
         <div className="py-10">
-            <PageTitleShow currentPage="Admin Home" />
+            <PageTitleShow currentPage="Admin Home |" />
             <InfoCart />
 
           <div className="mx-5">

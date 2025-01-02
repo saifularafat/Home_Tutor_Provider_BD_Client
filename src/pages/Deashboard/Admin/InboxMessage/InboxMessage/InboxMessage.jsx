@@ -33,7 +33,7 @@ const InboxMessage = () => {
 
     return (
         <div className="md:pb-6 md:pt-2 text-center">
-            <PageTitleShow currentPage="Inbox Messages" />
+            <PageTitleShow currentPage="Inbox Messages |" />
 
             {/* Search Section */}
             <div className="flex items-center md:mb-4 mb-2 justify-between md:px-6 px-3 md:pt-4 md:pb-2 py-2 rounded-xl shadow-md mt-2 bg-white">

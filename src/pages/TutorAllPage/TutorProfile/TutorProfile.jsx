@@ -28,7 +28,7 @@ const TutorProfile = () => {
 
     return (
         <>
-            <PageTitleShow currentPage="Tutor Profile" />
+            <PageTitleShow currentPage="Tutor Profile |" />
             <div className="md:pb-3">
                 {/* Search and filter section */}
                 <div className=" contain-content mx-auto gap-5 rounded-lg md:py-2 py-3 md:pl-4 px-2">
