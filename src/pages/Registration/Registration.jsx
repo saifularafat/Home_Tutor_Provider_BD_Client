@@ -6,12 +6,33 @@ import loginLottie from "./../../assets/Animation/login.json";
 import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
 
 const Registration = () => {
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [passShow, setPassShow] = useState(false);
+    const [passConShow, setPassConShow] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const onPasswordChange = (e) => {
+        setPassword(e.target.value);
+        if (e.target.value !== confirmPassword) {
+            setErrorMessage("Passwords do not match. Please try again.");
+        } else {
+            setErrorMessage("");
+        }
+    };
+
+    const onConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+        if (e.target.value !== password) {
+            setErrorMessage("Passwords do not match. Please try again.");
+        } else {
+            setErrorMessage("");
+        }
+    };
 
     const location = useLocation();
     const { registerRole } = location.state || {};
     console.log(registerRole);
-
-    const [passShow, setPassShow] = useState(false);
 
     const {
         register,
@@ -19,13 +40,10 @@ const Registration = () => {
         formState: { errors },
     } = useForm();
 
-
     const onSubmit = (data) => {
 
         const formData = new FormData()
 
-        // Append the files, checking if they exist
-        // coaching info
         if (data.coachingLogoImage && data.coachingLogoImage[0]) {
             formData.append("coachingLogoImage", data.coachingLogoImage[0]);
         }
@@ -134,70 +152,85 @@ const Registration = () => {
                                         </span>
                                     )}
                                 </div>
-                                <div className="space-y-1">
-                                    <label className="block text-slate-700  font-medium">
-                                        <span className="font-bold text-slate-500 tracking-wider">Password </span>
+
+                                {/* Password Show and Hide */}
+                                <div className="relative space-y-1">
+                                    <label className="block text-slate-700 font-medium">
+                                        <span className="font-bold text-slate-500 tracking-wider">Password</span>
                                     </label>
                                     <input
                                         {...register("password", { required: true })}
                                         type={passShow ? "text" : "password"}
-                                        placeholder="Enter Your Password"
+                                        id="password"
+                                        value={password}
+                                        onChange={onPasswordChange}
+                                        placeholder="***********"
                                         className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                                     />
+                                    <button
+                                        type="button"
+                                        onClick={() => setPassShow(!passShow)}
+                                        className="absolute top-9 right-3 text-lg cursor-pointer bg-transparent border-none"
+                                    >
+                                        {passShow ? "👁️" : "🙈"}
+                                    </button>
                                 </div>
+
+                                {/* Confirm Password Field */}
+                                <div className="relative space-y-1">
+                                    <label className="block text-slate-700 font-medium">
+                                        <span className="font-bold text-slate-500 tracking-wider">Confirm Password</span>
+                                    </label>
+                                    <input
+                                        type={passConShow ? "text" : "password"}
+                                        id="confirm-password"
+                                        value={confirmPassword}
+                                        onChange={onConfirmPasswordChange}
+                                        placeholder="***********"
+                                        className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setPassConShow(!passConShow)}
+                                        className="absolute top-9 right-3 text-lg cursor-pointer bg-transparent border-none"
+                                    >
+                                        {passConShow ? "👁️" : "🙈"}
+                                    </button>
+                                </div>
+                                {errorMessage && (
+                                    <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
+                                )}
+
                                 <div className="space-y-1 hidden">
                                     <input
                                         {...register("isAdmin")}
                                         name="isAdmin"
-                                        defaultValue={registerRole && registerRole === 'admin'}
+                                        defaultValue={registerRole === 'admin'}
                                     />
                                     <input
                                         {...register("isParent")}
                                         name="isParent"
-                                        defaultValue={registerRole && registerRole === 'parent'}
+                                        defaultValue={registerRole === 'parent'}
                                     />
                                     <input
                                         {...register("isTutor")}
                                         name="isTutor"
-                                        defaultValue={registerRole && registerRole === 'tutor'}
+                                        defaultValue={registerRole === 'tutor'}
                                     />
                                     <input
                                         {...register("isCoaching")}
                                         name="isCoaching"
-                                        defaultValue={registerRole && registerRole === 'coaching'}
+                                        defaultValue={registerRole === 'coaching'}
                                     />
-                                </div>
-                                <div className="space-y-1">
-                                    <label className="block text-slate-700  font-medium">
-                                        <span className="font-bold text-slate-500 tracking-wider">Confirm Password </span>
-                                    </label>
-                                    <input
-                                        {...register("password", { required: true })}
-                                        type={passShow ? "text" : "password"}
-                                        placeholder="Enter Your Confirm Password"
-                                        className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
-                                    />
-                                    <div className="flex justify-between mb-5 ">
-                                        <a onClick={() => setPassShow(!passShow)}>
-                                            <small>
-                                                {passShow ? (
-                                                    <span className="text-red-400 font-bold tracking-wide">Hide Pass</span>
-                                                ) : (
-                                                    <span className="text-blue-500 font-bold tracking-wide">Show Pass</span>
-                                                )}
-                                            </small>
-                                        </a>
-                                        <a href="#" className="text-sm font-bold text-sky-600 hover:underline">Forgot password?</a>
-                                    </div>
                                 </div>
 
                                 {/*  Condition Photo session section */}
                                 {
                                     registerRole === "coaching" ?
                                         (
-                                            <div className="grid md:grid-cols-4 grid-cols-1 gap-5">
+                                            <div className="flex items-center justify-between gap-5">
                                                 {/* coaching Logo Image File */}
-                                                <div className="md:col-span-3 col-span-1">
+                                                <div className="md:w-2/3 w-full">
                                                     <label htmlFor="coachingLogoImage" className="block text-slate-700 font-medium pb-1">
                                                         <span className="font-bold text-slate-500 tracking-wider">Coaching Center Logo</span>
                                                     </label>
@@ -212,7 +245,7 @@ const Registration = () => {
                                                 </div>
 
                                                 {/* coaching Ted License file */}
-                                                {/* <div className="md:col-span-1 col-span-1 ">
+                                                {/* <div className="md:1/3 w-full ">
                                                     <label htmlFor="coachingTedLicense" className="block text-slate-700 font-medium pb-1">
                                                         <span className="font-bold text-slate-500 tracking-wider">Coaching TED License</span>
                                                     </label>
@@ -232,9 +265,9 @@ const Registration = () => {
                                             {
                                                 registerRole === "parent" ?
                                                     (
-                                                        <div className="grid md:grid-cols-5 grid-cols-1 gap-5">
+                                                        <div className="md:flex items-center justify-between gap-5">
                                                             {/* parent Image File */}
-                                                            <div className="md:col-span-3 col-span-1">
+                                                            <div className="md:w-2/3 w-full">
                                                                 <label htmlFor="parentImage" className="block text-slate-700 font-medium pb-1">
                                                                     <span className="font-bold text-slate-500 tracking-wider">Upload Your Photo</span>
                                                                 </label>
@@ -262,8 +295,8 @@ const Registration = () => {
                                                                 </div>
                                                             </div> */}
                                                             {/* gender */}
-                                                            <div className="col-span-2">
-                                                                <label htmlFor='image' className='block text-slate-700 font-medium pb-1'>
+                                                            <div className="md:w-1/3 w-full">
+                                                                <label htmlFor='' className='block text-slate-700 font-medium pb-1'>
                                                                     <span className="font-bold text-slate-500 tracking-wider">Gender</span>
                                                                 </label>
                                                                 <select {...register("gender")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
@@ -276,10 +309,10 @@ const Registration = () => {
                                                     )
                                                     :
                                                     (
-                                                        <div className="grid md:grid-cols-5 grid-cols-1 gap-5">
+                                                        <div className="flex items-center justify-between gap-5">
                                                             {/* Tutor Image File */}
-                                                            <div className="md:col-span-2 col-span-1">
-                                                                <label htmlFor="tutorImage" className="block text-slate-700 font-medium pb-1">
+                                                            <div className="md:w-2/3 w-full">
+                                                                <label htmlFor="" className="block text-slate-700 font-medium pb-1">
                                                                     <span className="font-bold text-slate-500 tracking-wider">Upload Your Photo</span>
                                                                 </label>
                                                                 <div className='form-control rounded-lg border-2   items-center '>
@@ -305,8 +338,8 @@ const Registration = () => {
                                                                     />
                                                                 </div>
                                                             </div> */}
-                                                            <div className="col-span-1">
-                                                                <label htmlFor='image' className='block text-slate-700 font-medium pb-1'>
+                                                            <div className="md:w-1/3 w-full">
+                                                                <label htmlFor='' className='block text-slate-700 font-medium pb-1'>
                                                                     <span className="font-bold text-slate-500 tracking-wider">Gender</span>
                                                                 </label>
                                                                 <select {...register("gender")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
@@ -353,8 +386,8 @@ const Registration = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 
