@@ -23,8 +23,8 @@ const Dashboard = () => {
     // console.log('parents', parents);
 
     // user identity
-    const isAdmin = true;
-    const isTutor = false;
+    const isAdmin = false;
+    const isTutor = true;
     const isParent = false;
     // const isCoaching = true;
 

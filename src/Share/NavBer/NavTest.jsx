@@ -36,8 +36,8 @@ const NavTest = () => {
     // Temporary variables for testing
     // const user = { displayName: "Test User" };
     //user minings Coaching
-    const isAdmin = true;
-    const isTutor = false;
+    const isAdmin = false;
+    const isTutor = true;
     const isParent = false
     const user = false;
 
@@ -207,8 +207,8 @@ const NavTest = () => {
                         </div>
                         {
                             // user
-                            // isTutor
-                                isAdmin
+                            isTutor
+                                // isAdmin
                                 // isParent
                                 ? (
                                     <div className='ml-5 dropdown dropdown-end'>
@@ -234,8 +234,8 @@ const NavTest = () => {
                                             >
                                                 {
                                                     // user
-                                                    // isTutor
-                                                    isAdmin
+                                                    isTutor
+                                                    // isAdmin
                                                     // isCoaching
                                                     && (
                                                         <li>

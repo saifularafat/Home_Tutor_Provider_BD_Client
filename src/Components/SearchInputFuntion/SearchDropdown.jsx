@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-const SearchDropdown = ({ options, selectedValue, onSelect }) => {
+const SearchDropdown = ({ options, selectedValue, onSelect, hookPlaceholder }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
@@ -40,7 +40,7 @@ const SearchDropdown = ({ options, selectedValue, onSelect }) => {
     <div ref={dropdownRef} className="relative">
       <input
         type="text"
-        placeholder="Start typing to search..."
+        placeholder={hookPlaceholder}
         value={selectedValue || searchTerm}
         onClick={handleInputClick}
         onChange={(e) => setSearchTerm(e.target.value)}

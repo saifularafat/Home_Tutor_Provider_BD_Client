@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import loginLottie from "./../../assets/Animation/login.json";
 import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
 const Login = () => {
+    const [password, setPassword] = useState("");
     const [passShow, setPassShow] = useState(false);
     const {
         register,
@@ -51,28 +52,26 @@ const Login = () => {
                                         </span>
                                     )}
                                 </div>
-                                <div className=" space-y-1">
-                                    <label className="block text-slate-700  font-medium">
-                                        <span className="font-bold text-slate-500 tracking-wider">Password </span>
+                                <div className="relative space-y-1">
+                                    <label className="block text-slate-700 font-medium">
+                                        <span className="font-bold text-slate-500 tracking-wider">Password</span>
                                     </label>
                                     <input
                                         {...register("password", { required: true })}
                                         type={passShow ? "text" : "password"}
-                                        placeholder="Enter Your Password"
+                                        id="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)} 
+                                        placeholder="***********"
                                         className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                                     />
-                                    <div className="flex justify-between mb-5 ">
-                                        <a onClick={() => setPassShow(!passShow)}>
-                                            <small>
-                                                {passShow ? (
-                                                    <span className="text-red-400 font-bold tracking-wide">Hide Pass</span>
-                                                ) : (
-                                                    <span className="text-blue-500 font-bold tracking-wide">Show Pass</span>
-                                                )}
-                                            </small>
-                                        </a>
-                                        <a href="#" className="text-sm font-bold text-sky-600 hover:underline">Forgot password?</a>
-                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => setPassShow(!passShow)}
+                                        className="absolute top-9 right-3 text-lg cursor-pointer bg-transparent border-none"
+                                    >
+                                        {passShow ? "🙉" : "🙈"}
+                                    </button>
                                 </div>
                                 <div className="my-5 text-center">
                                     {/* <input

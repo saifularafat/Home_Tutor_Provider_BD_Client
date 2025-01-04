@@ -172,7 +172,7 @@ const Registration = () => {
                                         onClick={() => setPassShow(!passShow)}
                                         className="absolute top-9 right-3 text-lg cursor-pointer bg-transparent border-none"
                                     >
-                                        {passShow ? "👁️" : "🙈"}
+                                        {passShow ? "🙉" : "🙈"}
                                     </button>
                                 </div>
 
@@ -194,7 +194,7 @@ const Registration = () => {
                                         onClick={() => setPassConShow(!passConShow)}
                                         className="absolute top-9 right-3 text-lg cursor-pointer bg-transparent border-none"
                                     >
-                                        {passConShow ? "👁️" : "🙈"}
+                                        {passConShow ? "🙉" : "🙈"}
                                     </button>
                                 </div>
                                 {errorMessage && (
