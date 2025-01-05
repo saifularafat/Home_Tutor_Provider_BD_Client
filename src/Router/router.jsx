@@ -48,6 +48,7 @@ import AllBlog from "../pages/Deashboard/Admin/AllBlog/AllBlog/AllBlog";
 import DownloadAndPdfZone from "../pages/Deashboard/Admin/DownloadAndPdfZone/DownloadAndPdfZone/DownloadAndPdfZone";
 import InboxMessage from "../pages/Deashboard/Admin/InboxMessage/InboxMessage/InboxMessage";
 import CoachingCenterAdmin from "../pages/Deashboard/Admin/CoachingCenterAdmin/CoachingCenterAdmin/CoachingCenterAdmin";
+import ShowYourBlog from "../pages/Deashboard/Tutor/ShowYourBlog/ShowYourBlog";
 
 const router = createBrowserRouter([
     {
@@ -215,6 +216,12 @@ const router = createBrowserRouter([
                 path: "/dashboard/apply-jobs",
                 element: (
                     <ApplyJobs />
+                ),
+            },
+            {
+                path: "/dashboard/your-blog",
+                element: (
+                    <ShowYourBlog />
                 ),
             },
             {

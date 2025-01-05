@@ -3,16 +3,22 @@ import { useState } from "react";
 import SearchDropdown from "../../../../Components/SearchInputFuntion/SearchDropdown";
 import { BlogCategory, BlogMedium, StudentHelpKeywords } from "../../../../Helpers/blogAlldata";
 import AllSubjects from "../../../../Helpers/SubjectData";
+import { imageURLKey, serverApiUrl } from "../../../../../ApiSecret";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import PageTitleShow from "../../../../Components/PageTitleShow/PageTitleShow";
 
 const AddBlog = () => {
-    // const [blogCategory, setBlogCategory] = useState("");
     const [imageError, setImageError] = useState(null);
+    const navigate = useNavigate();
 
     const {
         register,
         formState: { errors },
         handleSubmit,
         setValue,
+        reset,
         watch
     } = useForm();
 
@@ -22,34 +28,84 @@ const AddBlog = () => {
     const studentHelpKey = watch("studentHelpKey");
 
 
-    const onSubmit = (data) => {
-        const imageFile = data.image[0];
-        setImageError(null);
-        if (imageFile.size > 1 * 1024 * 1024) {
-            setImageError("Image size should not exceed 1MB.");
-            return;
+    const imageURL = `https://api.imgbb.com/1/upload?key=${imageURLKey}`;
+
+    const onSubmit = async (data) => {
+        try {
+            const imageFile = data.image[0];
+            setImageError(null);
+
+            if (imageFile.size > 1 * 1024 * 1024) {
+                setImageError("Image size should not exceed 1MB.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("image", imageFile);
+
+            const imageResponse = await fetch(imageURL, {
+                method: "POST",
+                body: formData,
+            });
+            const imageData = await imageResponse.json();
+
+            if (!imageData.success) {
+                throw new Error("Failed to upload image");
+            }
+
+            const imgURL = imageData.data.display_url;
+
+            const blogInfo = {
+                image: imgURL,
+                title: data.blogTitle,
+                category: data.blogCategory,
+                medium: data.blogMedium,
+                subject: data.blogSubject,
+                studentHelp: data.studentHelpKey,
+                description: data.blogDescription,
+                authorName: "Altap",
+                authorEducationLevel: "B.Sc",
+                authorStudySubject: "Computer",
+                authorProfession: "Engineer",
+                userId: "142563",
+            };
+
+            const response = await axios.post(`${serverApiUrl}/api/blog`, blogInfo);
+            console.log("serial number is 72 ==>", response?.data?.payload)
+            if (response.status === 201) {
+                reset();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: response.data.message, 
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                navigate('/dashboard/your-blog')
+            }
+        } catch (error) {
+            if (error.response?.status === 422) {
+                // Display validation errors
+                const errorMessages = error.response.data.errors;
+                Swal.fire({
+                    title: "Validation Error",
+                    icon: "error",
+                    html: errorMessages
+                        .map((err) => `<p>${err.field}: ${err.message}</p>`)
+                        .join(""),
+                });
+            } else {
+                Swal.fire({
+                    title: "Error",
+                    text: error.message || "Something went wrong",
+                    icon: "error",
+                });
+            }
         }
-
-        const blogInfo = {
-            image: imageFile,
-            title: data.blogTitle,
-            category: data.blogCategory,
-            medium: data.blogMedium,
-            subject: data.blogSubject,
-            studentHelp: data.studentHelpKey,
-            blogDescription: data.blogDescription,
-            authorName: 'Altap',
-            authorEducationLevel: 'B.sc',
-            authorStudySubject: 'Computer',
-            authorProfession: 'Engineer',
-            userId: '142563'
-        };
-
-        console.log("Form data:", blogInfo);
-        // Proceed with form submission logic (e.g., upload to server)
     };
     return (
         <div className="pb-5">
+            <PageTitleShow currentPage="Add Blog |" />
             <div className="md:max-w-4xl w-full mx-2 md:mx-auto bg-white p-5 rounded-xl shadow-md mt-8">
                 <h2 className="py-4 text-3xl font-semibold text-slate-700 text-center">Add Blog</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="text-center">

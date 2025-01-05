@@ -136,6 +136,12 @@ export const Menus = [
         role: 'isTutor'
     },
     {
+        title: 'Your Blog',
+        path: '/dashboard/your-blog',
+        icon: iconMappings.Blog,
+        role: 'isTutor'
+    },
+    {
         title: 'Add Blog',
         path: '/dashboard/add-blog',
         icon: iconMappings.Blog,
