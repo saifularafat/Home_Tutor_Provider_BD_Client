@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useAllBlogs } from "../../../../api/useAllBlog";
 import Loading from "../../../../Components/Loading/Loading";
 import PageTitleShow from "../../../../Components/PageTitleShow/PageTitleShow";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const ShowYourBlog = () => {
     const [searchText, setSearchText] = useState("");
-    const [submittedSearchText, setSubmittedSearchText] = useState("");
 
     const blogUserId = '142563';
-    const [blogs, refetch, isLoading] = useAllBlogs(1, submittedSearchText);
+
+    const [blogs, refetch, isLoading] = useAllBlogs(1, searchText);
     const { blogs: blogList = [] } = blogs || {};
     console.log('object', blogList);
     const blogUserIdFinding = blogList?.filter((singleBlog) => singleBlog?.userId === blogUserId) || [];
@@ -17,17 +19,20 @@ const ShowYourBlog = () => {
 
     // TODO BLOG DELETED AND APPROVE
 
-    const handlerSearch = () => {
-        setSubmittedSearchText(searchText)
-        refetch();
-    };
+    const handleBlogEditById = (id) => {
+        console.log('Edit', id);
+    }
+    const handleBlogDeleteById = (id) => {
+        console.log('Delete ===>', id);
+
+    }
 
     if (isLoading) {
         return <Loading />
     }
     return (
         <div className="relative overflow-x-auto">
-            <PageTitleShow currentPage="Your Blog |" />
+            <PageTitleShow currentPage="Your Blogs |" />
             <div className="flex items-center justify-between py-5">
                 <h2 className="text-2xl font-medium text-center text-slate-900">Your All Blogs </h2>
                 <div className="flex items-center justify-end gap-3 shadow-2xl shadow-black">
@@ -59,7 +64,7 @@ const ShowYourBlog = () => {
                     {blogUserIdFinding.map((blog, index) => (
                         <tr
                             key={blog?._id}
-                            className={`${blog === true ? "bg-white-300 hover:bg-slate-200" : "bg-red-300 hover:bg-red-200"} relative cursor-pointer transition-all duration-300 `}
+                            className={`${blog?.isBlog === true ? "bg-white-300 hover:bg-slate-200" : "bg-red-300 hover:bg-red-200"} relative cursor-pointer transition-all duration-300 `}
                         // onClick={() => handleRowClick(blog?._id)}
                         >
                             <td className="border border-gray-200 px-4 py-2">{index + 1}</td>
@@ -75,13 +80,18 @@ const ShowYourBlog = () => {
                             <td className="border border-gray-200 px-4 py-2">
                                 <div className="flex gap-2">
                                     <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            alert(`Deleting ${blog?.authorName}`);
-                                        }}
-                                        className="text-red-600 hover:underline"
+                                        onClick={() => handleBlogEditById(blog?._id)}
+                                        title="Edit"
+                                        className={`${blog?.isBlog === true ? "bg-green-400 hover:bg-white hover:text-green-400 text-white" : " text-green-500 bg-white"}  py-[6px] px-[6px] rounded-xl transition-all duration-300`}
                                     >
-                                        Delete
+                                        <FaEdit className="text-lg" />
+                                    </button>
+                                    <button
+                                        onClick={() => handleBlogDeleteById(blog?._id)}
+                                        title="Delete"
+                                        className={`${blog?.isBlog === true ? "bg-red-400 hover:bg-white hover:text-red-400 text-white" : " text-red-500 bg-white"}  py-[6px] px-[6px] rounded-xl transition-all duration-300`}
+                                    >
+                                        <MdDelete className="text-lg" />
                                     </button>
                                 </div>
                             </td>
