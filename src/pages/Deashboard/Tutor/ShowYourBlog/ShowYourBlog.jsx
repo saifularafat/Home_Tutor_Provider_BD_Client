@@ -4,9 +4,12 @@ import Loading from "../../../../Components/Loading/Loading";
 import PageTitleShow from "../../../../Components/PageTitleShow/PageTitleShow";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { handleDeleteById } from "../../../../Components/DeletedItem/DeletedItem";
 
 const ShowYourBlog = () => {
     const [searchText, setSearchText] = useState("");
+    const navigate = useNavigate();
 
     const blogUserId = '142563';
 
@@ -14,18 +17,20 @@ const ShowYourBlog = () => {
     const { blogs: blogList = [] } = blogs || {};
     console.log('object', blogList);
     const blogUserIdFinding = blogList?.filter((singleBlog) => singleBlog?.userId === blogUserId) || [];
-    // const pendingBlog = blogList?.filter((singleBlog) => singleBlog?.isBlog === false) || [];
     console.log("blogUserId ===>>", blogUserIdFinding);
 
-    // TODO BLOG DELETED AND APPROVE
+    // TODO BLOG APPROVE
 
     const handleBlogEditById = (id) => {
         console.log('Edit', id);
     }
-    const handleBlogDeleteById = (id) => {
-        console.log('Delete ===>', id);
 
-    }
+    const handleBlogDeleteBlog = (blog) => {
+        const deleteOption = `api/blog/${blog?._id}`;
+        const deleteTitle = "blog";
+        const showDeleteTitle = "Your Blog";
+        handleDeleteById(deleteOption, deleteTitle, refetch, showDeleteTitle);
+    };
 
     if (isLoading) {
         return <Loading />
@@ -87,11 +92,11 @@ const ShowYourBlog = () => {
                                         <FaEdit className="text-lg" />
                                     </button>
                                     <button
-                                        onClick={() => handleBlogDeleteById(blog?._id)}
+                                        onClick={() => handleBlogDeleteBlog(blog)}
                                         title="Delete"
-                                        className={`${blog?.isBlog === true ? "bg-red-400 hover:bg-white hover:text-red-400 text-white" : " text-red-500 bg-white"}  py-[6px] px-[6px] rounded-xl transition-all duration-300`}
+                                        className="bg-red-400 hover:bg-white hover:text-red-400 text-white py-2 px-3 rounded-md"
                                     >
-                                        <MdDelete className="text-lg" />
+                                        <MdDelete />
                                     </button>
                                 </div>
                             </td>
