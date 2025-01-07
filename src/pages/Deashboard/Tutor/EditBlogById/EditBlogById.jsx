@@ -38,7 +38,55 @@ const EditBlogById = () => {
 
     const imageURL = `https://api.imgbb.com/1/upload?key=${imageURLKey}`;
 
-    
+    const handleBlogEditById = async (data) => {
+        setImageError(null);
+        let imgURL = image;
+        if (data.image && data.image[0]) {
+            const imageFile = data.image[0];
+            if (imageFile.size > 1 * 1024 * 1024) {
+                setImageError("Image size should not exceed 1MB.");
+                return;
+            }
+
+            try {
+                const formData = new FormData();
+                formData.append("image", imageFile);
+                const imageResponse = await fetch(imageURL, {
+                    method: "POST",
+                    body: formData,
+                });
+                const imageData = await imageResponse.json();
+                if (!imageData.success) {
+                    setImageError("Image upload failed. Please try again.");
+                    return;
+                }
+                imgURL = imageData.data.display_url;
+            } catch (error) {
+                setImageError("An unexpected error occurred during image upload.");
+                return;
+            }
+        }
+        const updateDetails = {
+            title: data.title || title,
+            description: data.blogDescription || description,
+            image: imgURL,
+            medium: blogMedium,
+            category: blogCategory,
+            subject: blogSubject,
+            studentHelp: studentHelpKey,
+        };
+        // console.log("EDIT BLOG Number 101 ===>>>", updateDetails);
+
+        const editOption = `api/blog/${singleBlog._id}`;
+        const updateTitle = "Blog";
+        const navigateLink = "/dashboard/your-blog";
+
+        try {
+            await handleEditById(editOption, updateDetails, refetch, updateTitle, navigate, navigateLink);
+        } catch (error) {
+            console.error("Failed to edit the blog:", error);
+        }
+    };
 
     if (isLoading) {
         return <Loading />;
