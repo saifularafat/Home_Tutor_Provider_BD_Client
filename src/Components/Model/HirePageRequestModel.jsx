@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 
-const HirePageRequestModel = ({ openModal, setOpenModal, actionBtn }) => {
+const HirePageRequestModel = ({ openModal, setOpenModal, actionBtn, subLink }) => {
     return (
         <div className="md:max-w-2xl mx-auto flex items-center justify-center md:pt-6 pt-5">
             <button onClick={() => setOpenModal(true)} className="rounded-md bg-blue-500 hover:bg-blue-600 transition-all duration-200 px-4 py-[6px] text-white">
@@ -44,16 +45,14 @@ const HirePageRequestModel = ({ openModal, setOpenModal, actionBtn }) => {
                             <h4 className="text-lg font-semibold">ডেমো ক্লাসের ফলাফল:</h4>
                             <p>গার্ডিয়ান এবং ছাত্র-ছাত্রীর পছন্দ অনুযায়ী ডেমো ক্লাস হলে টিউটরকে পড়ানোর জন্য নিশ্চিত করা হবে। অন্যথায়, ২টি ডেমো ক্লাস নেওয়ার পর টিউশন কনফর্ম না হলে, এর জন্য কোন টাকা দাবি করা যাবে না।</p>
                         </div>
-                        <div className='flex items-end justify-end w-full mt-2 gap-2 md:pb-2 pb-8'>
-                            <div>
-                                <button onClick={() => setOpenModal(false)} className="rounded-md border border-rose-600 px-6 py-2 text-sm text-rose-600 hover:bg-rose-600 hover:text-white">
+                        <div className='flex items-end justify-end w-full mt-2 gap-2 md:pb-2'>
+                            <div className="pt-0 flex gap-3">
+                                <button onClick={() => setOpenModal(false)} className="rounded-md border border-rose-600 px-6 py-3 text-sm text-rose-600 hover:bg-rose-600 hover:text-white transition-all duration-200">
                                     No
                                 </button>
-                            </div>
-                            <div>
-                                <button onClick={() => setOpenModal(false)} className="rounded-md border bg-indigo-600 px-6 py-2 text-sm text-white">
+                                <Link to={subLink} onClick={() => setOpenModal(false)} className="rounded-md border bg-indigo-600 px-6 py-3 text-sm text-white hover:bg-transparent hover:border-indigo-600 hover:text-indigo-600 transition-all duration-200">
                                     Yes
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

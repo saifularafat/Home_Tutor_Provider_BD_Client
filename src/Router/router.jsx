@@ -50,6 +50,7 @@ import InboxMessage from "../pages/Deashboard/Admin/InboxMessage/InboxMessage/In
 import CoachingCenterAdmin from "../pages/Deashboard/Admin/CoachingCenterAdmin/CoachingCenterAdmin/CoachingCenterAdmin";
 import ShowYourBlog from "../pages/Deashboard/Tutor/ShowYourBlog/ShowYourBlog";
 import EditBlogById from "../pages/Deashboard/Tutor/EditBlogById/EditBlogById";
+import ParentApply from "../pages/Deashboard/Tutor/ParentApply/ParentApply";
 
 const router = createBrowserRouter([
     {
@@ -217,6 +218,12 @@ const router = createBrowserRouter([
                 path: "/dashboard/apply-jobs",
                 element: (
                     <ApplyJobs />
+                ),
+            },
+            {
+                path: "/dashboard/parent-tutor-apply",
+                element: (
+                    <ParentApply />
                 ),
             },
             {

@@ -187,7 +187,7 @@ const EditBlogById = () => {
                                 defaultValue={description}
                                 placeholder="Blog Description"
                                 {...register("blogDescription")}
-                                className="border border-sky-300 rounded-lg outline-sky-400 placeholder:text-sm overflow-hidden w-full p-2"
+                                className="border border-sky-300 rounded-lg outline-sky-400 placeholder:text-sm overflow-hidden w-full py-2 px-4"
                             ></textarea>
                         </div>
                     </div>

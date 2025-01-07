@@ -106,7 +106,7 @@ const AddBlog = () => {
     return (
         <div className="pb-5">
             <PageTitleShow currentPage="Add Blog |" />
-            <div className="md:max-w-4xl w-full mx-2 md:mx-auto bg-white p-5 rounded-xl shadow-md mt-8">
+            <div className="md:max-w-5xl w-full mx-2 md:mx-auto bg-white p-5 rounded-xl shadow-md mt-8">
                 <h2 className="py-4 text-3xl font-semibold text-slate-700 text-center">Add Blog</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="text-center">
                     <div className="grid md:grid-cols-2 gap-5 p-5">
@@ -229,7 +229,7 @@ const AddBlog = () => {
                                 rows="3"
                                 placeholder="Blog Description"
                                 {...register("blogDescription")}
-                                className="border border-sky-300 rounded-lg outline-sky-400 placeholder:text-sm overflow-hidden w-full p-2"
+                                className="border border-sky-300 rounded-lg outline-sky-400 placeholder:text-sm overflow-hidden w-full py-2 px-4"
                             ></textarea>
                         </div>
                     </div>

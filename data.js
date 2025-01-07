@@ -1,7 +1,7 @@
 import { FaBlog, FaCalendarAlt, FaCartArrowDown, FaChartBar, FaCog, FaHome, FaUser } from 'react-icons/fa';
 import { MdCastForEducation, MdHomeWork, MdWorkHistory } from 'react-icons/md';
 import { FaClipboardQuestion, FaMessage, FaSchoolCircleCheck, FaUserPen, FaUsersViewfinder } from 'react-icons/fa6';
-import { RiLiveFill } from 'react-icons/ri';
+import { RiApps2AddFill, RiLiveFill, RiParentFill } from 'react-icons/ri';
 import { AiFillNotification } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
 import { IoBagAdd } from 'react-icons/io5';
@@ -20,6 +20,8 @@ const iconMappings = {
     Payment: SiFampay,
     Live: RiLiveFill,
     Blog: FaBlog,
+    AddBlog: RiApps2AddFill,
+    ParentApply: RiParentFill,
     Notice: AiFillNotification,
     BookAdd: BiBookAdd,
     AddJob: IoBagAdd,
@@ -124,9 +126,15 @@ export const Menus = [
         gap: true
     },
     {
-        title: 'Apply Job',
+        title: 'Apply Tuition Job',
         path: '/dashboard/apply-jobs',
         icon: iconMappings.AddJob,
+        role: 'isTutor'
+    },
+    {
+        title: 'Parent Apply',
+        path: '/dashboard/parent-tutor-apply',
+        icon: iconMappings.ParentApply,
         role: 'isTutor'
     },
     {
@@ -144,7 +152,7 @@ export const Menus = [
     {
         title: 'Add Blog',
         path: '/dashboard/add-blog',
-        icon: iconMappings.Blog,
+        icon: iconMappings.AddBlog,
         role: 'isTutor'
     },
     {

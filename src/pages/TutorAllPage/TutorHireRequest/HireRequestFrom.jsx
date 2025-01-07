@@ -187,7 +187,7 @@ const HireRequestFrom = () => {
                             </div>
                         </div>
                         {/* modal */}
-                        <HirePageRequestModel actionBtn="Submit" openModal={openModal} setOpenModal={setOpenModal} />
+                        <HirePageRequestModel actionBtn="Submit" subLink={'/dashboard/parent-tutor-apply'} openModal={openModal} setOpenModal={setOpenModal} />
                     </div>
                 </form>
             </div>
