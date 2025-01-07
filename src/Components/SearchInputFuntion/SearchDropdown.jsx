@@ -5,24 +5,20 @@ const SearchDropdown = ({ options, selectedValue, onSelect, hookPlaceholder }) =
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Filter options based on search term
   const filteredOptions = options.filter((option) =>
     option.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Show dropdown on input click
   const handleInputClick = () => {
     setShowDropdown(true);
   };
 
-  // Set selected value, clear search, and close dropdown
   const handleOptionClick = (option) => {
-    onSelect(option); // Call onSelect to update the parent component state
-    setSearchTerm(''); // Clear search term
-    setShowDropdown(false); // Hide dropdown
+    onSelect(option);
+    setSearchTerm('');
+    setShowDropdown(false); 
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {

@@ -49,6 +49,7 @@ import DownloadAndPdfZone from "../pages/Deashboard/Admin/DownloadAndPdfZone/Dow
 import InboxMessage from "../pages/Deashboard/Admin/InboxMessage/InboxMessage/InboxMessage";
 import CoachingCenterAdmin from "../pages/Deashboard/Admin/CoachingCenterAdmin/CoachingCenterAdmin/CoachingCenterAdmin";
 import ShowYourBlog from "../pages/Deashboard/Tutor/ShowYourBlog/ShowYourBlog";
+import EditBlogById from "../pages/Deashboard/Tutor/EditBlogById/EditBlogById";
 
 const router = createBrowserRouter([
     {
@@ -222,6 +223,12 @@ const router = createBrowserRouter([
                 path: "/dashboard/your-blog",
                 element: (
                     <ShowYourBlog />
+                ),
+            },
+            {
+                path: "/dashboard/edit-blog/:id",
+                element: (
+                    <EditBlogById />
                 ),
             },
             {

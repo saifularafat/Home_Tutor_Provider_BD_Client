@@ -4,13 +4,11 @@ import Loading from "../../../../Components/Loading/Loading";
 import PageTitleShow from "../../../../Components/PageTitleShow/PageTitleShow";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import { handleDeleteById } from "../../../../Components/DeletedItem/DeletedItem";
+import { Link, useNavigate } from "react-router-dom";
 
 const ShowYourBlog = () => {
     const [searchText, setSearchText] = useState("");
-    const navigate = useNavigate();
-
     const blogUserId = '142563';
 
     const [blogs, refetch, isLoading] = useAllBlogs(1, searchText);
@@ -18,12 +16,6 @@ const ShowYourBlog = () => {
     console.log('object', blogList);
     const blogUserIdFinding = blogList?.filter((singleBlog) => singleBlog?.userId === blogUserId) || [];
     console.log("blogUserId ===>>", blogUserIdFinding);
-
-    // TODO BLOG APPROVE
-
-    const handleBlogEditById = (id) => {
-        console.log('Edit', id);
-    }
 
     const handleBlogDeleteBlog = (blog) => {
         const deleteOption = `api/blog/${blog?._id}`;
@@ -84,13 +76,13 @@ const ShowYourBlog = () => {
                             <td className="border border-gray-200 px-4 py-2">{blog?.category}</td>
                             <td className="border border-gray-200 px-4 py-2">
                                 <div className="flex gap-2">
-                                    <button
-                                        onClick={() => handleBlogEditById(blog?._id)}
+                                    <Link
+                                        to={`/dashboard/edit-blog/${blog?._id}`}
                                         title="Edit"
                                         className={`${blog?.isBlog === true ? "bg-green-400 hover:bg-white hover:text-green-400 text-white" : " text-green-500 bg-white"}  py-[6px] px-[6px] rounded-xl transition-all duration-300`}
                                     >
                                         <FaEdit className="text-lg" />
-                                    </button>
+                                    </Link>
                                     <button
                                         onClick={() => handleBlogDeleteBlog(blog)}
                                         title="Delete"
