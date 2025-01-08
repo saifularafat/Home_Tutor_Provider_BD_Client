@@ -22,6 +22,7 @@ const iconMappings = {
     Blog: FaBlog,
     AddBlog: RiApps2AddFill,
     ParentApply: RiParentFill,
+    AddTuitionJob: IoBagAdd,
     Notice: AiFillNotification,
     BookAdd: BiBookAdd,
     AddJob: IoBagAdd,
@@ -66,6 +67,12 @@ export const Menus = [
         title: 'Hire Tutor Request-Pending',
         path: '/dashboard/hire-tutor-request-approve',
         icon: iconMappings.TutorReq,
+        role: 'admin'
+    },
+    {
+        title: 'Create Tuition Job',
+        path: '/dashboard/create-tuition-job',
+        icon: iconMappings.AddTuitionJob,
         role: 'admin'
     },
     {

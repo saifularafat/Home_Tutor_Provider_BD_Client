@@ -97,7 +97,7 @@ const TuitionDetails = () => {
                             </div>
                         </div>
                     </div>
-                    <HirePageRequestModel actionBtn="Apply" openModal={openModal} setOpenModal={setOpenModal} />
+                    <HirePageRequestModel actionBtn="Apply" subLink={'/dashboard/apply-jobs'} openModal={openModal} setOpenModal={setOpenModal} />
                 </div>
             </div>
         </div>

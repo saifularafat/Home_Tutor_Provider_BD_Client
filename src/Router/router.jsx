@@ -51,6 +51,7 @@ import CoachingCenterAdmin from "../pages/Deashboard/Admin/CoachingCenterAdmin/C
 import ShowYourBlog from "../pages/Deashboard/Tutor/ShowYourBlog/ShowYourBlog";
 import EditBlogById from "../pages/Deashboard/Tutor/EditBlogById/EditBlogById";
 import ParentApply from "../pages/Deashboard/Tutor/ParentApply/ParentApply";
+import TuitionJobCreate from "../pages/Deashboard/Admin/TuitionJobCreate/TuitionJobCreate";
 
 const router = createBrowserRouter([
     {
@@ -156,6 +157,12 @@ const router = createBrowserRouter([
                 path: "/dashboard/hire-tutor-request-approve",
                 element: (
                     <TutorJobsRequest />
+                ),
+            },
+            {
+                path: "/dashboard/create-tuition-job",
+                element: (
+                    <TuitionJobCreate />
                 ),
             },
             {

@@ -20,6 +20,7 @@ const InfoCart = () => {
 
     const coaching = (allUsers || []).filter((data) => data.isCoaching === true);
     const parents = (allUsers || []).filter((data) => data.isParent === true);
+    console.log('all users', allUsers);
 
     const [tutors] = allTutor();
 
@@ -84,7 +85,7 @@ const InfoCart = () => {
                     </div>
                 </div>
 
-                 <h2 className="text-2xl font-semibold text-slate-600">Tuition Jobs Information</h2>
+                <h2 className="text-2xl font-semibold text-slate-600">Tuition Jobs Information</h2>
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-5">
                     <Link to="/dashboard/all-request-approve-jobs" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-500 hover:text-white border-blue-500 bg-white rounded-md hover:border-r-blue-500 hover:border-l-blue-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">
@@ -117,7 +118,7 @@ const InfoCart = () => {
                     </Link>
                 </div>
 
-                 <h2 className="text-2xl font-semibold text-slate-600">Tutor Request Information</h2>
+                <h2 className="text-2xl font-semibold text-slate-600">Tutor Request Information</h2>
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-5">
                     <Link to="/dashboard/tutor-jobs-request" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-blue-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">
@@ -150,7 +151,7 @@ const InfoCart = () => {
                     </Link>
                 </div>
 
-                 <h2 className="text-2xl font-semibold text-slate-700">All Blog Information</h2>
+                <h2 className="text-2xl font-semibold text-slate-700">All Blog Information</h2>
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-5">
                     <Link to="/dashboard/all-blog" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-sky-500 hover:text-white border-sky-500 bg-white rounded-md hover:border-r-sky-500 hover:border-l-sky-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">

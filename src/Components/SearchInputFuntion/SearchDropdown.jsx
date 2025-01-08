@@ -5,8 +5,8 @@ const SearchDropdown = ({ options, selectedValue, onSelect, hookPlaceholder }) =
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  const filteredOptions = options.filter((option) =>
-    option.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredOptions = options.filter((option) => 
+    typeof option === 'string' && option.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleInputClick = () => {
