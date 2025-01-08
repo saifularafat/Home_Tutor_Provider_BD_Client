@@ -6,6 +6,9 @@ import { Duration, FixedTime, JobCategory, JobSalary, Medium, PerWeek, StudentGe
 import PreferableClassOptions from "../../../../Helpers/PreferableClass";
 import AllSubjects from "../../../../Helpers/SubjectData";
 import DistrictAreas from "../../../../Helpers/DistrictAreas";
+import axios from "axios";
+import { serverApiUrl } from "../../../../../ApiSecret";
+import Swal from "sweetalert2";
 
 const TuitionJobCreate = () => {
     const {
@@ -15,7 +18,7 @@ const TuitionJobCreate = () => {
         setValue,
         watch,
         formState: { errors }
-    } = useForm()
+    } = useForm();
 
     const jobSalary = watch("jobSalary");
     const tutorGender = watch("tutorGender");
@@ -29,37 +32,51 @@ const TuitionJobCreate = () => {
     const studentGender = watch("studentGender");
     const tuitionDistrictName = watch("tuitionDistrictName");
 
-    // LOCATION CLICK show sub location
-    // const handleDistricts = (e) => {
-    //     setDistricts(e.target.value)
-    //     setCityAreas(BdDistricts.find(areas => areas.stateName === e.target.value).stateAreas)
-    // }
-
-    // jobLocation, jobSalary, contactNumber, whatsAppNumber, tutorGender, medium,jobCategory
-    // perWeek, className, subject, jobComment, duration, studentGender, studentSchool, 
-    // fixedTime, description
-
-    const onSubmit = data => {
+    const onSubmit = async (data) => {
         const tuitionJobCreate = {
             userId: "012457836",
-            locationName: data.jobLocation,
-            jobSalary: jobSalary,
-            tutorGender: tutorGender,
-            medium: medium,
-            jobCategory: jobCategory,
-            contactNumber: data.contactNumber,
-            whatsAppNumber: data.whatsAppNumber || 'N/A',
-            perWeek: perWeek,
-            className: className,
-            subject: subject,
-            fixedTime: fixedTime,
-            duration: duration,
-            studentGender: studentGender,
-            jobComment: data.jobComment || 'N/A',
-            tuitionDistrictName: tuitionDistrictName,
+            jobLocation: data.jobLocation || "",
+            jobSalary: jobSalary || "",
+            tutorGender: tutorGender || "",
+            medium: medium || "",
+            jobCategory: jobCategory || "",
+            contactNumber: data.contactNumber || "",
+            whatsAppNumber: data.whatsAppNumber || "N/A",
+            perWeek: perWeek || "",
+            className: className || "",
+            subject: subject || "",
+            fixedTime: fixedTime || "",
+            duration: duration || "",
+            studentSchool: data.studentSchool || "N/A",
+            studentGender: studentGender || "",
+            jobComment: data.jobComment || "N/A",
+            tuitionDistrictName: tuitionDistrictName || "",
+        };
+        console.log("Payload being sent to the server:", tuitionJobCreate);
+        try {
+            const response = await axios.post(`${serverApiUrl}/api/tuition-job`, tuitionJobCreate);
+            console.log("API Response:", response.data);
+            if (response.data.success) {
+                reset();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        } catch (error) {
+            console.error("Error posting tuition job information:", error.response?.data || error.message);
+            Swal.fire({
+                position: "top-center",
+                icon: "error",
+                title: "Failed to create job. Check your inputs.",
+                text: error.response?.data?.message || error.message,
+                showConfirmButton: true
+            });
         }
-        console.log('tuitionJobCreate ==>', tuitionJobCreate);
-    }
+    };
 
     return (
         <div className="mt-5">
@@ -68,95 +85,33 @@ const TuitionJobCreate = () => {
                 <h2 className="py-4 text-3xl font-semibold text-slate-700 text-center">Create Tuition Job</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="text-center">
                     <div className="grid md:grid-cols-2 gap-5 p-5">
-                        {/* jobLocation */}
+                        {/* Job Location */}
                         <div className="space-y-2 md:col-span-2 text-left">
                             <label className="block text-slate-700 font-medium">
                                 <span className="font-semibold text-slate-600 tracking-wider">Job Location*</span>
                             </label>
                             <input
-                                {...register("jobLocation", { required: true })}
+                                {...register("jobLocation", { required: "Job location is required" })}
                                 type="text"
                                 placeholder="Enter your job location"
                                 className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm mt-2"
                             />
                             {errors.jobLocation && (
-                                <p className="text-red-500 text-sm">Job location is required</p>
+                                <p className="text-red-500 text-sm">{errors.jobLocation.message}</p>
                             )}
                         </div>
-                        {/* class Name */}
-                        <SearchDropDownField
-                            label="Class Name *"
-                            options={PreferableClassOptions}
-                            selectedValue={className}
-                            setValue={(value) => setValue("className", value, { shouldValidate: true })}
-                        />
-                        {/* subject*/}
-                        <SearchDropDownField
-                            label="Subject *"
-                            options={AllSubjects}
-                            selectedValue={subject}
-                            setValue={(value) => setValue("subject", value, { shouldValidate: true })}
-                        />
-                        {/* tuition Medium */}
-                        <SearchDropDownField
-                            label="Tuition Medium *"
-                            options={Medium}
-                            selectedValue={medium}
-                            setValue={(value) => setValue("medium", value, { shouldValidate: true })}
-                        />
-                        {/* Job Category */}
-                        <SearchDropDownField
-                            label="Job Category *"
-                            options={JobCategory}
-                            selectedValue={jobCategory}
-                            setValue={(value) => setValue("jobCategory", value, { shouldValidate: true })}
-                        />
-
-                        {/* jobSalary */}
-                        <SearchDropDownField
-                            label="Tuition Salary *"
-                            options={JobSalary}
-                            selectedValue={jobSalary}
-                            setValue={(value) => setValue("jobSalary", value, { shouldValidate: true })}
-                        />
-                        {/* tuition Gender */}
-                        <SearchDropDownField
-                            label="Tuition Gender *"
-                            options={TuitionGender}
-                            selectedValue={tutorGender}
-                            setValue={(value) => setValue("tutorGender", value, { shouldValidate: true })}
-                        />
-
-                        {/* per Week */}
-                        <SearchDropDownField
-                            label="Per Week *"
-                            options={PerWeek}
-                            selectedValue={perWeek}
-                            setValue={(value) => setValue("perWeek", value, { shouldValidate: true })}
-                        />
-
-                        {/* Duration*/}
-                        <SearchDropDownField
-                            label="Class Duration *"
-                            options={Duration}
-                            selectedValue={duration}
-                            setValue={(value) => setValue("duration", value, { shouldValidate: true })}
-                        />
-                        {/* fixedTime*/}
-                        <SearchDropDownField
-                            label="Fixed Time *"
-                            options={FixedTime}
-                            selectedValue={fixedTime}
-                            setValue={(value) => setValue("fixedTime", value, { shouldValidate: true })}
-                        />
-                        {/* StudentGender*/}
-                        <SearchDropDownField
-                            label="Student Gender *"
-                            options={StudentGender}
-                            selectedValue={studentGender}
-                            setValue={(value) => setValue("studentGender", value, { shouldValidate: true })}
-                        />
-                        {/* jobLocation */}
+                        {/* Dropdown Fields */}
+                        <SearchDropDownField label="Class Name *" options={PreferableClassOptions} selectedValue={className} setValue={(value) => setValue("className", value)} />
+                        <SearchDropDownField label="Subject *" options={AllSubjects} selectedValue={subject} setValue={(value) => setValue("subject", value)} />
+                        <SearchDropDownField label="Tuition Medium *" options={Medium} selectedValue={medium} setValue={(value) => setValue("medium", value)} />
+                        <SearchDropDownField label="Job Category *" options={JobCategory} selectedValue={jobCategory} setValue={(value) => setValue("jobCategory", value)} />
+                        <SearchDropDownField label="Tuition Salary *" options={JobSalary} selectedValue={jobSalary} setValue={(value) => setValue("jobSalary", value)} />
+                        <SearchDropDownField label="Tuition Gender *" options={TuitionGender} selectedValue={tutorGender} setValue={(value) => setValue("tutorGender", value)} />
+                        <SearchDropDownField label="Per Week *" options={PerWeek} selectedValue={perWeek} setValue={(value) => setValue("perWeek", value)} />
+                        <SearchDropDownField label="Class Duration *" options={Duration} selectedValue={duration} setValue={(value) => setValue("duration", value)} />
+                        <SearchDropDownField label="Fixed Time *" options={FixedTime} selectedValue={fixedTime} setValue={(value) => setValue("fixedTime", value)} />
+                        <SearchDropDownField label="Student Gender *" options={StudentGender} selectedValue={studentGender} setValue={(value) => setValue("studentGender", value)} />
+                        {/* Contact Details */}
                         <div className="space-y-2">
                             <label className="block text-slate-700 font-medium">
                                 <span className="font-semibold text-slate-600 tracking-wider">Contact Number*</span>
@@ -164,21 +119,21 @@ const TuitionJobCreate = () => {
                             <input
                                 type="number"
                                 placeholder="Your contact number"
-                                {...register("contactNumber", { maxLength: 14 })}
+                                {...register("contactNumber", { required: "Contact number is required", maxLength: 14, value: '8801' })}
                                 className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                             />
                             {errors.contactNumber && (
-                                <p className="text-red-500 text-sm">Contact number is required</p>
+                                <p className="text-red-500 text-sm">{errors.contactNumber.message}</p>
                             )}
                         </div>
-                        {/* jobLocation */}
+                        {/* WhatsApp Number */}
                         <div className="space-y-2">
                             <label className="block text-slate-700 font-medium">
                                 <span className="font-semibold text-slate-600 tracking-wider">WhatsApp Number</span>
                             </label>
                             <input
                                 type="number"
-                                placeholder="Your whatsApp number"
+                                placeholder="Your WhatsApp number"
                                 {...register("whatsAppNumber", { maxLength: 14 })}
                                 className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                             />
@@ -199,13 +154,8 @@ const TuitionJobCreate = () => {
                             )}
                         </div>
 
-                        {/* tuitionDistrictName*/}
-                        <SearchDropDownField
-                            label="Tuition District Name *"
-                            options={DistrictAreas}
-                            selectedValue={tuitionDistrictName}
-                            setValue={(value) => setValue("tuitionDistrictName", value, { shouldValidate: true })}
-                        />
+                        <SearchDropDownField label="Tuition District Name *" options={DistrictAreas} selectedValue={tuitionDistrictName} setValue={(value) => setValue("tuitionDistrictName", value)} />
+                        {/* Job Comment */}
                         <div className="space-y-2">
                             <label className="block text-slate-700 font-medium">
                                 <span className="font-semibold text-slate-600 tracking-wider">Job Comment</span>
@@ -229,7 +179,7 @@ const TuitionJobCreate = () => {
                 </form>
             </div>
         </div>
-    )
+    );
 };
 
 export default TuitionJobCreate;
