@@ -4,7 +4,7 @@ import Loading from "../../../../Components/Loading/Loading";
 import PageTitleShow from "../../../../Components/PageTitleShow/PageTitleShow";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { handleDeleteById } from "../../../../Components/DeletedItem/DeletedItem";
+import { useDeleteItemById } from "../../../../Components/DeletedItem/DeletedItem";
 import { Link, useNavigate } from "react-router-dom";
 
 const ShowYourBlog = () => {
@@ -17,14 +17,16 @@ const ShowYourBlog = () => {
     const blogUserIdFinding = blogList?.filter((singleBlog) => singleBlog?.userId === blogUserId) || [];
     console.log("blogUserId ===>>", blogUserIdFinding);
 
-    const handleBlogDeleteBlog = (blog) => {
-        const deleteOption = `api/blog/${blog?._id}`;
-        const deleteTitle = "blog";
-        const showDeleteTitle = "Your Blog";
-        handleDeleteById(deleteOption, deleteTitle, refetch, showDeleteTitle);
-    };
+    // const handleBlogDeleteBlog = (blog) => {
+    //     const deleteOption = `api/blog/${blog?._id}`;
+    //     const deleteTitle = "blog";
+    //     const showDeleteTitle = "Your Blog";
+    //     handleDeleteById(deleteOption, deleteTitle, refetch, showDeleteTitle);
+    // };
+    const { handleDeleteById, isDeleting } = useDeleteItemById(refetch); 
 
-    if (isLoading) {
+
+    if (isLoading || isDeleting) {
         return <Loading />
     }
     return (
@@ -84,7 +86,9 @@ const ShowYourBlog = () => {
                                         <FaEdit className="text-lg" />
                                     </Link>
                                     <button
-                                        onClick={() => handleBlogDeleteBlog(blog)}
+                                         onClick={() => handleDeleteById(`api/blog/${blog?._id}`,
+                                            "blog",
+                                            "Your blog")}
                                         title="Delete"
                                         className="bg-red-400 hover:bg-white hover:text-red-400 text-white py-2 px-3 rounded-md"
                                     >

@@ -4,6 +4,7 @@ import { allTuitionJobs } from "../../../../../api/allTuitionJobs";
 import Loading from "../../../../../Components/Loading/Loading";
 import Pagination from "../../../../../Components/Pagination/Pagination";
 import { useNavigate } from "react-router-dom";
+import { useDeleteItemById } from "../../../../../Components/DeletedItem/DeletedItem";
 
 const AllTuitionJobs = () => {
     const [page, setPage] = useState(1);
@@ -15,6 +16,8 @@ const AllTuitionJobs = () => {
     const { tuitionJobs: jobs, pagination } = tuitionJobs || {};
     const { currentPage, nextPage, previousPage, totalPage, totalNumberOfTuition } = pagination || {};
 
+    const { handleDeleteById, isDeleting } = useDeleteItemById(refetch); 
+
     const handlerSearch = () => {
         setSubmittedSearchText(searchText);
         refetch();
@@ -24,18 +27,14 @@ const AllTuitionJobs = () => {
         navigate(`/tuition-job-details/${id}`);
     };
 
-
-    // TODO TUITION JOBS DELETED 
-
-
-    if (isLoading) {
+    if (isLoading || isDeleting) {
         return <Loading />;
     }
 
     return (
         <div className="overflow-x-auto my-8 px-4 py-6 rounded-lg bg-white">
             <PageTitleShow currentPage="All Tuition Jobs |" />
-            {/* searching filet */}
+            {/* Searching file */}
             <div className="flex items-center justify-between md:px-6 px-3 md:pb-4 py-2 rounded-xl md:shadow-2xl shadow-xl">
                 <div className="w-4/6">
                     <input
@@ -46,7 +45,7 @@ const AllTuitionJobs = () => {
                     />
                     <button
                         onClick={handlerSearch}
-                        className="py-[9px] md:px-3 px-2 md:w-1/6 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider"
+                        className="py-[9px] md:px-3 px-2 ml-1 md:w-1/6 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider"
                     >
                         Search
                     </button>
@@ -70,19 +69,25 @@ const AllTuitionJobs = () => {
                         <th className="py-2 px-2 text-sm border-b text-end">Action</th>
                     </tr>
                 </thead>
-                <tbody className="">
-                    {
-                        jobs.map((job, index) =>
-                            <tr
+                <tbody>
+                    {jobs.map((job, index) => (
+                        <tr key={job?._id} className="hover:bg-slate-200 border-b transition duration-300">
+                            <td className="px-1 border-b text-sm font-normal">{index + 1}</td>
+                            <td
                                 onClick={() => handleRowClick(job?._id)}
-                                key={job?._id}
-                                className="hover:bg-slate-200 border-b transition duration-300">
-                                <td className="px-1 border-b text-sm font-normal">{index + 1}</td>
-                                <td className="py-1 px-2 border-b text-sm font-normal">{job?.jobLocation}</td>
-                                <td className="py-1 px-2 border-b text-sm font-normal">{job?.jobSalary}k</td>
-                                <td className="py-1 px-2 border-b text-sm font-normal">{job?.perWeek} days</td>
-                                <td className="py-1 px-2 border-b text-sm font-normal">{job?.className}</td>
-                                <td className={`py-1 px-2 border-b text-sm font-normal text-center 
+                                className="py-1 px-2 border-b text-sm font-normal">{job?.jobLocation}</td>
+                            <td
+                                onClick={() => handleRowClick(job?._id)}
+                                className="py-1 px-2 border-b text-sm font-normal">{job?.jobSalary}k</td>
+                            <td
+                                onClick={() => handleRowClick(job?._id)}
+                                className="py-1 px-2 border-b text-sm font-normal">{job?.perWeek} days</td>
+                            <td
+                                onClick={() => handleRowClick(job?._id)}
+                                className="py-1 px-2 border-b text-sm font-normal">{job?.className}</td>
+                            <td
+                                onClick={() => handleRowClick(job?._id)}
+                                className={`py-1 px-2 border-b text-sm font-normal text-center 
                                 ${job?.subject === 'Science' ? 'bg-sky-300 text-white'
                                         : job?.subject === "Commerce" ? 'bg-green-400 text-white'
                                             : job?.subject === "Arch" ? 'bg-orange-300'
@@ -92,26 +97,39 @@ const AllTuitionJobs = () => {
                                                             : job?.subject === "All" ? 'bg-green-400 text-slate-700'
                                                                 : "bg-slate-500 text-white"
                                     }`}
+                            >
+                                {job?.subject}
+                            </td>
+                            <td
+                                onClick={() => handleRowClick(job?._id)}
+                                className="py-1 px-2 border-b text-sm font-normal">{job?.tuitionCode}</td>
+                            <td
+                                onClick={() => handleRowClick(job?._id)}
+                                className="py-1 px-2 border-b text-sm font-normal">{job?.tutorGender}</td>
+                            <td
+                                onClick={() => handleRowClick(job?._id)}
+                                className="py-1 px-2 border-b text-sm font-normal">{job?.medium}</td>
+                            <td className={`py-1 px-2 border-b text-sm font-normal text-center 
+                                ${job?.jobCategory === 'Home' ? 'bg-sky-500'
+                                    : job?.jobCategory === 'Online' ? "bg-orange-400"
+                                        : "bg-green-400"}`} >
+                                {job?.jobCategory}
+                            </td>
+                            <td className="py-1 px-2 border-b text-end">
+                                <button
+                                    onClick={() => handleDeleteById(`api/tuition-job/${job?._id}`,
+                                        "tuition",
+                                        "Your Tuition Job")}
+                                    className="bg-red-400 hover:bg-red-500 transition-all duration-200 text-white py-1 px-2 rounded-md"
                                 >
-                                    {job?.subject}
-                                </td>
-                                <td className="py-1 px-2 border-b text-sm font-normal">{job?.tuitionCode}</td>
-                                <td className="py-1 px-2 border-b text-sm font-normal">{job?.tutorGender}</td>
-                                <td className="py-1 px-2 border-b text-sm font-normal">{job?.medium}</td>
-                                <td className={`py-1 px-2 border-b text-sm font-normal text-center 
-                                    ${job?.jobCategory === 'Home' ? 'bg-sky-500'
-                                        : job?.jobCategory === 'Online' ? "bg-orange-400"
-                                            : "bg-green-400"}`}>
-                                    {job?.jobCategory}
-                                </td>
-                                <td className="py-1 px-2 border-b text-end">
-                                    <button className="bg-red-400 hover:bg-red-500 transition-all duration-200 text-white py-1 px-2 rounded-md">Details</button>
-                                </td>
-                            </tr>
-                        )
-                    }
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
+
             {/* Pagination Controls */}
             <Pagination
                 totalPage={totalPage}
@@ -120,7 +138,7 @@ const AllTuitionJobs = () => {
                 setPage={setPage}
                 previousPage={previousPage}
             />
-        </div >
+        </div>
     );
 };
 
