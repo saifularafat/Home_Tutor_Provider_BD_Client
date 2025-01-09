@@ -24,11 +24,11 @@ const AllJobsRequestApprove = () => {
             <div className="w-full md:flex-col items-center overflow-hidden p-2 sm:p-5">
                 {/*Approve section */}
                 <div className={`${requestApprove ? 'h-full duration-300' : 'invisible h-0 opacity-0'}`}>
-                    <ApproveJobs approveJob={approveJob} isLoading={isLoading} />
+                    <ApproveJobs approveJob={approveJob} refetch={refetch} isLoading={isLoading} />
                 </div>
                 {/* Pending section */}
                 <div className={`${requestApprove ? 'h-0 opacity-0' : 'h-full duration-300'}`}>
-                    <PendingJobs pendingJob={pendingJob} isLoading={isLoading} />
+                    <PendingJobs pendingJob={pendingJob} refetch={refetch} isLoading={isLoading} />
                 </div>
             </div>
         </div>

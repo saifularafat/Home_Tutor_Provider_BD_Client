@@ -1,9 +1,9 @@
 import Loading from "../../../../../Components/Loading/Loading";
 
-const PendingJobs = ({ pendingJob, isLoading }) => {
+const PendingJobs = ({ pendingJob, refetch, isLoading }) => {
 
     console.log('object pendingJob JOb', pendingJob);
-// TODO TUITION JOB IS PENDING UPCOMING JOB
+    // TODO TUITION JOB IS PENDING UPCOMING JOB
     if (isLoading) {
         return <Loading />;
     }
@@ -25,51 +25,27 @@ const PendingJobs = ({ pendingJob, isLoading }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className="hover:bg-gray-100 transition duration-300">
-                        <td className="p-1 text-xs font-medium text-center border-b">Shiyam Ahmed</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">HPT-19021</td>
-                        <td className="p-1 text-xs font-medium border-b text-end">Mirpur 15, Dhaka</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">Sciences</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">class- 9 to 10</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">Bangla</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">5K</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">4d</td>
-                        <td className="p-1 text-xs font-medium border-b text-end"> Shemoley, Mirpur-10, Dhaka</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">
-                            <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg mr-1">Cancel</button>
-                            <button className="text-[11px] px-1 py-1 bg-blue-500 text-white rounded-lg mr-1">Approve</button>
-                        </td>
-                    </tr>
-                    <tr className="hover:bg-gray-100 transition duration-300">
-                        <td className="p-1 text-xs font-medium text-center border-b">Parvej Ahmed Anto</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">HPT-19023</td>
-                        <td className="p-1 text-xs font-medium border-b text-end">Uttora-1, Dhaka</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">Commerces</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">class- Ten</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">Bangla</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">4K</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">3d</td>
-                        <td className="p-1 text-xs font-medium border-b text-end"> Uttora-2, Ges Fames, Dhaka</td>
-                         <td className="p-1 text-xs font-medium text-center border-b">
-                            <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg mr-1">Cancel</button>
-                            <button className="text-[11px] px-1 py-1 bg-blue-500 text-white rounded-lg mr-1">Approve</button>
-                        </td>
-                    </tr>
-                    <tr className="hover:bg-gray-100 transition duration-300">
-                        <td className="p-1 text-xs font-medium text-center border-b">Tanjila Akter Shemo</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">HPT-19026</td>
-                        <td className="p-1 text-xs font-medium border-b text-end">Danmondi, Dhaka</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">Sciences</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">class- 11 to 12</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">English</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">7K</td>
-                        <td className="p-1 text-xs font-medium text-center border-b">4d</td>
-                        <td className="p-1 text-xs font-medium border-b text-end"> Fukira Bazar, Mirpur-10, Dhaka</td>
-                         <td className="p-1 text-xs font-medium text-center border-b">
-                            <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg mr-1">Cancel</button>
-                            <button className="text-[11px] px-1 py-1 bg-blue-500 text-white rounded-lg mr-1">Approve</button>
-                        </td>
-                    </tr>
+                    {
+                        pendingJob.map((job) =>
+                            <tr
+                                key={job?._id}
+                                className="hover:bg-gray-100 transition duration-300">
+                                <td className="p-1 text-xs font-medium text-center border-b">{job?.tutorName || 'Tutor Name'}</td>
+                                <td className="p-1 text-xs font-medium text-center border-b">{job?.tutorId || "HTP-0000"}</td>
+                                <td className="p-1 text-xs font-medium border-b text-end">{job?.tutorAddress || 'Dhaka, Bangladesh'}</td>
+                                <td className="p-1 text-xs font-medium text-center border-b">{job?.jobSubject || 'Sciences'}</td>
+                                <td className="p-1 text-xs font-medium text-center border-b">{job?.jobClass || 'class-N/A'}</td>
+                                <td className="p-1 text-xs font-medium text-center border-b">{job?.jobMedium || 'Bangla'}</td>
+                                <td className="p-1 text-xs font-medium text-center border-b">{job?.jobSalary || '5'}k</td>
+                                <td className="p-1 text-xs font-medium text-center border-b">{job?.jobPerWeek || 'd'}d</td>
+                                <td className="p-1 text-xs font-medium border-b text-end"> {job?.jobAddress || 'Dhaka, Bangladesh'}</td>
+                                <td className="p-1 text-xs font-medium text-center border-b">
+                                    <button className="text-[11px] px-1 py-1 bg-blue-500 text-white rounded-lg mr-1">Approve</button>
+                                    <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg mr-1">Cancel</button>
+                                </td>
+                            </tr>
+                        )
+                    }
                 </tbody>
             </table>
         </div>
