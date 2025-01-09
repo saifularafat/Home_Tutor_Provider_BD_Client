@@ -1,9 +1,15 @@
+import { useDeleteItemById } from "../../../../../Components/DeletedItem/DeletedItem";
 import Loading from "../../../../../Components/Loading/Loading";
+import { useManageAction } from "../../../../../Components/useManageAction/useManageAction";
 
 const PendingJobs = ({ pendingJob, refetch, isLoading }) => {
-
+    
     console.log('object pendingJob JOb', pendingJob);
-    // TODO TUITION JOB IS PENDING UPCOMING JOB
+
+    const { handleManageAction } = useManageAction(refetch);
+
+    const { handleDeleteById, isDeleting } = useDeleteItemById(refetch);
+
     if (isLoading) {
         return <Loading />;
     }
@@ -40,8 +46,24 @@ const PendingJobs = ({ pendingJob, refetch, isLoading }) => {
                                 <td className="p-1 text-xs font-medium text-center border-b">{job?.jobPerWeek || 'd'}d</td>
                                 <td className="p-1 text-xs font-medium border-b text-end"> {job?.jobAddress || 'Dhaka, Bangladesh'}</td>
                                 <td className="p-1 text-xs font-medium text-center border-b">
-                                    <button className="text-[11px] px-1 py-1 bg-blue-500 text-white rounded-lg mr-1">Approve</button>
-                                    <button className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg mr-1">Cancel</button>
+                                    <button
+                                        onClick={() =>
+                                            handleManageAction(`api/job-apply/manage-job-apply/${job?._id}`,
+                                                "approve",
+                                                "job apply",
+                                                "Job Apply")
+                                        }
+                                        className="text-[11px] px-1 py-1 bg-blue-500 text-white rounded-lg mr-1">
+                                        Approve
+                                    </button>
+                                    <button
+                                        onClick={() => handleDeleteById(`api/job-apply/${job?._id}`,
+                                            "Tuition Job Apply",
+                                            "Your Tuition Job Apply"
+                                        )}
+                                        className="text-[11px] px-1 py-1 bg-red-500 text-white rounded-lg mr-1">
+                                        Cancel
+                                    </button>
                                 </td>
                             </tr>
                         )
