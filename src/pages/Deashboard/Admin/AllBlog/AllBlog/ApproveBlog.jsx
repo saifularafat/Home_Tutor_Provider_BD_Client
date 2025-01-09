@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../../../Components/Loading/Loading";
+import { useDeleteItemById } from "../../../../../Components/DeletedItem/DeletedItem";
 
-const ApproveBlog = ({ approveBlog, isLoading }) => {
+const ApproveBlog = ({ approveBlog, isLoading, refetch }) => {
     const [hoveredRow, setHoveredRow] = useState(null);
     const navigate = useNavigate();
 
-// TODO ACTION APPROVE AND DELETED
+    const { handleDeleteById, isDeleting } = useDeleteItemById(refetch);
 
     const handleRowClick = (id) => {
         navigate(`/details/${id}`);
     };
 
-    if (isLoading) {
+    if (isLoading || isDeleting) {
         return <Loading />
     }
     return (
@@ -34,22 +35,36 @@ const ApproveBlog = ({ approveBlog, isLoading }) => {
                         <tr
                             key={blog?._id}
                             className="relative cursor-pointer hover:bg-gray-50 even:bg-gray-50"
-                            onClick={() => handleRowClick(blog?._id)}
-                            onMouseEnter={() => setHoveredRow(index)} 
-                            onMouseLeave={() => setHoveredRow(null)} 
+                            onMouseEnter={() => setHoveredRow(index)}
+                            onMouseLeave={() => setHoveredRow(null)}
                         >
-                            <td className="border border-gray-200 px-4 py-2">{index + 1}</td>
-                            <td className="border border-gray-200 px-4 py-2">{blog?.authorName}</td>
-                            <td className="border border-gray-200 px-4 py-2">{blog?.authorStudySubject}</td>
-                            <td className="border border-gray-200 px-4 py-2">{blog?.medium}</td>
-                            <td className="border border-gray-200 px-4 py-2">{blog?.blogCode}</td>
+                            <td
+                                onClick={() => handleRowClick(blog?._id)}
+
+                                className="border border-gray-200 px-4 py-2">{index + 1}</td>
+                            <td
+                                onClick={() => handleRowClick(blog?._id)}
+
+                                className="border border-gray-200 px-4 py-2">{blog?.authorName}</td>
+                            <td
+                                onClick={() => handleRowClick(blog?._id)}
+
+                                className="border border-gray-200 px-4 py-2">{blog?.authorStudySubject}</td>
+                            <td
+                                onClick={() => handleRowClick(blog?._id)}
+
+                                className="border border-gray-200 px-4 py-2">{blog?.medium}</td>
+                            <td
+                                onClick={() => handleRowClick(blog?._id)}
+
+                                className="border border-gray-200 px-4 py-2">{blog?.blogCode}</td>
                             <td className="border border-gray-200 px-4 py-2">
-                                <div className="flex gap-2">
+                                <div className="flex gap-2 z-50">
                                     <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            alert(`Deleting ${blog?.authorName}`);
-                                        }}
+                                        onClick={() => handleDeleteById(`api/blog/${blog?._id}`,
+                                            "blog",
+                                            "Your blog"
+                                        )}
                                         className="text-red-600 hover:underline"
                                     >
                                         Delete
@@ -57,15 +72,15 @@ const ApproveBlog = ({ approveBlog, isLoading }) => {
                                 </div>
                             </td>
                             {/* Custom tooltip */}
-                            {hoveredRow === index && blog?.description && (
+                            {/* {hoveredRow === index && blog?.description && (
                                 <td
-                                    colSpan="6"
-                                    className="absolute left-0 top-0 z-10 w-full bg-gray-800/80 text-white h-full text-sm px-2"
+                                    colSpan="4"
+                                    className="absolute left-0 top-0 z-10 w-full bg-gray-800/80 text-white h-full text-sm"
                                 >
                                     <div className="leading-3 font-medium">Title: {blog?.title}</div>
                                     <div className="text-sm">Description: {blog?.description}</div>
                                 </td>
-                            )}
+                            )} */}
                         </tr>
                     ))}
                 </tbody>

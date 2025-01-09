@@ -1,11 +1,15 @@
+import { useDeleteItemById } from "../../../../../Components/DeletedItem/DeletedItem";
 import Loading from "../../../../../Components/Loading/Loading";
 
-const PendingBlog = ({ pendingBlog, isLoading }) => {
+const PendingBlog = ({ pendingBlog, isLoading, refetch }) => {
     console.log('pending Blog ====>', pendingBlog);
 
     // TODO ACTION APPROVE AND DELETED
 
-    if (isLoading) {
+
+    const { handleDeleteById, isDeleting } = useDeleteItemById(refetch);
+
+    if (isLoading || isDeleting) {
         return <Loading />
     }
     return (
@@ -36,7 +40,12 @@ const PendingBlog = ({ pendingBlog, isLoading }) => {
                         <button className="text-sm font-medium px-3 py-1 bg-blue-400 hover:bg-blue-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg">
                             Approve
                         </button>
-                        <button className="text-sm font-medium px-3 py-1 bg-red-400 hover:bg-red-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg">
+                        <button
+                            onClick={() => handleDeleteById(`api/blog/${blog?._id}`,
+                                "blog",
+                                "Your blog"
+                            )}
+                            className="text-sm font-medium px-3 py-1 bg-red-400 hover:bg-red-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg">
                             Delete
                         </button>
                     </div>

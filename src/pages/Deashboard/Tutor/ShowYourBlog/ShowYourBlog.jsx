@@ -15,16 +15,9 @@ const ShowYourBlog = () => {
     const { blogs: blogList = [] } = blogs || {};
     console.log('object', blogList);
     const blogUserIdFinding = blogList?.filter((singleBlog) => singleBlog?.userId === blogUserId) || [];
-    console.log("blogUserId ===>>", blogUserIdFinding);
+    // console.log("blogUserId ===>>", blogUserIdFinding);
 
-    // const handleBlogDeleteBlog = (blog) => {
-    //     const deleteOption = `api/blog/${blog?._id}`;
-    //     const deleteTitle = "blog";
-    //     const showDeleteTitle = "Your Blog";
-    //     handleDeleteById(deleteOption, deleteTitle, refetch, showDeleteTitle);
-    // };
     const { handleDeleteById, isDeleting } = useDeleteItemById(refetch); 
-
 
     if (isLoading || isDeleting) {
         return <Loading />
