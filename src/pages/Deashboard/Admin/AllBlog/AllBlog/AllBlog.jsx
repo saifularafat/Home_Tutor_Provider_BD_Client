@@ -3,7 +3,6 @@ import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow
 import ApproveBlog from "./ApproveBlog";
 import PendingBlog from "./PendingBlog";
 import { useAllBlogs } from "../../../../../api/useAllBlog";
-import { useDeleteItemById } from "../../../../../Components/DeletedItem/DeletedItem";
 
 const AllBlog = () => {
     const [requestApprove, setRequestApprove] = useState(false);
@@ -16,9 +15,6 @@ const AllBlog = () => {
 
     const approveBlog = blogList?.filter((singleBlog) => singleBlog?.isBlog === true) || [];
     const pendingBlog = blogList?.filter((singleBlog) => singleBlog?.isBlog === false) || [];
-
-    // TODO BLOG DELETED AND APPROVE
-    const { handleDeleteById, isDeleting } = useDeleteItemById(refetch);
 
     const handlerSearch = () => {
         setSubmittedSearchText(searchText)

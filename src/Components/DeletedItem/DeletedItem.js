@@ -47,7 +47,8 @@ export const useDeleteItemById = (refetch) => {
           icon: "error",
         });
       }
-    } finally {
+    } 
+    finally {
       setIsDeleting(false); // Set deleting state back to false
     }
   };

@@ -1,21 +1,25 @@
-import { useDeleteItemById } from "../../../../../Components/DeletedItem/DeletedItem";
 import Loading from "../../../../../Components/Loading/Loading";
+import { useManageAction } from "../../../../../Components/useManageAction/useManageAction";
+import { useDeleteItemById } from "../../../../../Components/DeletedItem/DeletedItem";
 
 const PendingBlog = ({ pendingBlog, isLoading, refetch }) => {
-    console.log('pending Blog ====>', pendingBlog);
+    console.log('pendingBlog ==>>', pendingBlog);
 
-    // TODO ACTION APPROVE AND DELETED
-
+    const { handleManageAction } = useManageAction(refetch);
 
     const { handleDeleteById, isDeleting } = useDeleteItemById(refetch);
 
     if (isLoading || isDeleting) {
-        return <Loading />
+        return <Loading />;
     }
+
     return (
         <div className="grid md:grid-cols-3 grid-cols-1 gap-5 pb-5">
             {pendingBlog?.map((blog) => (
-                <div key={blog?._id} className="w-full bg-white rounded-xl shadow-md hover:shadow-xl hover:shadow-sky-200 flex flex-col transition-all duration-300">
+                <div
+                    key={blog?._id}
+                    className="w-full bg-white rounded-xl shadow-md hover:shadow-xl hover:shadow-sky-200 flex flex-col transition-all duration-300"
+                >
                     <div>
                         <img
                             className="h-[250px] w-full rounded-t-lg object-cover"
@@ -30,22 +34,30 @@ const PendingBlog = ({ pendingBlog, isLoading, refetch }) => {
                             A. Name: <span className="font-semibold">{blog?.authorName}</span>
                         </p>
                         <p className="text-sm font-normal">
-                            Time: <span className="font-normal">
+                            Time:{" "}
+                            <span className="font-normal">
                                 {new Date(blog?.createdAt).toLocaleDateString()}{" "}
-                                <span className="font-semibold"> {new Date(blog?.createdAt).toLocaleTimeString()}</span>
+                                <span className="font-semibold">
+                                    {new Date(blog?.createdAt).toLocaleTimeString()}
+                                </span>
                             </span>
                         </p>
                     </div>
                     <div className="flex items-center justify-between px-4 py-3 mt-auto">
-                        <button className="text-sm font-medium px-3 py-1 bg-blue-400 hover:bg-blue-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg">
+                        <button
+                            onClick={() =>
+                                handleManageAction(`api/blog/manage-blog/${blog?._id}`, "approve", "blog", "Blog")
+                            }
+                            className="text-sm font-medium px-3 py-1 bg-blue-400 hover:bg-blue-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg"
+                        >
                             Approve
                         </button>
                         <button
-                            onClick={() => handleDeleteById(`api/blog/${blog?._id}`,
-                                "blog",
-                                "Your blog"
-                            )}
-                            className="text-sm font-medium px-3 py-1 bg-red-400 hover:bg-red-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg">
+                            onClick={() =>
+                                handleDeleteById(`api/blog/${blog?._id}`, "blog", "Your blog")
+                            }
+                            className="text-sm font-medium px-3 py-1 bg-red-400 hover:bg-red-600 hover:text-slate-100 hover:scale-105 transition-all duration-200 tracking-wider text-slate-800 rounded-lg"
+                        >
                             Delete
                         </button>
                     </div>

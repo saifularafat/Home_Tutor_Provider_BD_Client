@@ -2,11 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../../../Components/Loading/Loading";
 import { useDeleteItemById } from "../../../../../Components/DeletedItem/DeletedItem";
+import { useManageAction } from "../../../../../Components/useManageAction/useManageAction";
 
 const ApproveBlog = ({ approveBlog, isLoading, refetch }) => {
+    console.log('object ==>>', approveBlog);
     const [hoveredRow, setHoveredRow] = useState(null);
     const navigate = useNavigate();
 
+    const { handleManageAction } = useManageAction(refetch);
     const { handleDeleteById, isDeleting } = useDeleteItemById(refetch);
 
     const handleRowClick = (id) => {
@@ -27,7 +30,7 @@ const ApproveBlog = ({ approveBlog, isLoading, refetch }) => {
                         <th className="border border-gray-200 px-4 py-2">Subject</th>
                         <th className="border border-gray-200 px-4 py-2">Code</th>
                         <th className="border border-gray-200 px-4 py-2">Medium</th>
-                        <th className="border border-gray-200 px-4 py-2">Action</th>
+                        <th className="border border-gray-200 px-4 py-2 text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,14 +61,22 @@ const ApproveBlog = ({ approveBlog, isLoading, refetch }) => {
                                 onClick={() => handleRowClick(blog?._id)}
 
                                 className="border border-gray-200 px-4 py-2">{blog?.blogCode}</td>
-                            <td className="border border-gray-200 px-4 py-2">
-                                <div className="flex gap-2 z-50">
+                            <td className="border border-gray-200 px-4 py-2 text-right">
+                                <div className="flex gap-2 justify-center z-50">
+                                    <button
+                                        onClick={() =>
+                                            handleManageAction(`api/blog/manage-blog/${blog?._id}`, "pending", "blog", "Blog")
+                                        }
+                                        className="text-yellow-500 bg-slate-800 px-2 py-1 rounded-lg hover:underline"
+                                    >
+                                        Pending
+                                    </button>
                                     <button
                                         onClick={() => handleDeleteById(`api/blog/${blog?._id}`,
                                             "blog",
                                             "Your blog"
                                         )}
-                                        className="text-red-600 hover:underline"
+                                        className="bg-red-600 text-white px-2 py-1 rounded-lg hover:underline"
                                     >
                                         Delete
                                     </button>
