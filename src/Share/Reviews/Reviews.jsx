@@ -1,20 +1,15 @@
 import { useAllRatings } from "../../api/useAllRatings";
+import Loading from "../../Components/Loading/Loading";
 import ReviewsCard from "./ReviewsCard";
 
 const Reviews = () => {
     // Fetch ratings data using custom hook
     const [payload, refetch, isLoading] = useAllRatings(1);
-    const { rating = [], pagination = {} } = payload || { rating: [], pagination: {} };
-    console.log("Rating By Reviews 0066 ==>>", payload);
+    const { rating = [] } = payload || { rating: [] };
+    // console.log("Rating By Reviews 0066 ==>>", payload);
 
     // Extracting the rating values from the array of objects
     const ratingsArray = rating.map((item) => item.rating);
-    console.log("Extracted ratings:", ratingsArray);
-
-    // Calculating the total of all ratings
-    const totalRatingNumber = ratingsArray.reduce((acc, ratingValue) => acc + ratingValue, 0);
-    console.log("Total rating number:", totalRatingNumber);
-
 
     // Calculate total ratings count
     const totalRatings = ratingsArray.length;
@@ -22,6 +17,9 @@ const Reviews = () => {
     // Calculate the average rating
     const averageRating = (ratingsArray.reduce((sum, rating) => sum + rating, 0) / totalRatings).toFixed(2);
 
+    // if (isLoading) {
+    //     return <Loading />;
+    // }
     return (
         <div className="max-w-5xl mx-auto md:pb-10 pb-5 md:px-10 px-4 shadow-lg rounded-lg bg-white">
             {/* Header */}
@@ -33,13 +31,12 @@ const Reviews = () => {
             <div className="grid md:grid-cols-6 grid-cols-1 gap-5">
                 {/* Average Rating Section */}
                 <div className="md:col-span-2 col-span-1 bg-blue-100 w-full py-8 rounded-lg text-center space-y-3">
-                    {/* Display the calculated average rating */}
                     <h6 className="text-4xl font-bold text-slate-700">{averageRating}</h6>
-                    {/* Dynamically display star ratings */}
                     <div>
                         <div className="rating rating-md">
                             {[1, 2, 3, 4, 5].map((star) => (
                                 <input
+                                disabled
                                     key={star}
                                     type="radio"
                                     name="rating-7"
@@ -56,7 +53,6 @@ const Reviews = () => {
                 {/* Rating Breakdown Section */}
                 <div className="disabled md:col-span-4 col-span-1 w-full rounded-lg text-center space-y-3">
                     {[5, 4, 3, 2, 1].map((rating) => {
-                        // Count occurrences of each rating in the array
                         const count = ratingsArray.filter((value) => value === rating).length;
                         return (
                             <div key={rating} className="flex items-center gap-3">
@@ -76,9 +72,9 @@ const Reviews = () => {
                 </div>
             </div>
 
-            {/* Reviews Section */}
+            {/* Reviews card Section */}
             <div className="md:py-6 py-3">
-                <ReviewsCard />
+                <ReviewsCard rating={rating} isLoading={isLoading} />
             </div>
         </div>
     );
