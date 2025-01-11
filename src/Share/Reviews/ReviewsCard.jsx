@@ -3,12 +3,14 @@ import ReviewModal from "./ReviewModal";
 import Loading from "../../Components/Loading/Loading";
 import RatingStar from "./RatingStar";
 import { useAllUsers } from "../../api/useAllUsers";
+import Pagination from "../../Components/Pagination/Pagination";
 
-const ReviewsCard = ({ rating, isLoading }) => {
+const ReviewsCard = ({ rating, pagination, setPage, isLoading }) => {
     const [expandedReview, setExpandedReview] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [selectedRating, setSelectedRating] = useState(5);
     const [usersWithRatings, setUsersWithRatings] = useState([]);
+    const { currentPage, nextPage, previousPage, totalNumberOfRating, totalPage } = pagination;
 
     // Check if users data is available
     const [usersData] = useAllUsers();
@@ -90,6 +92,17 @@ const ReviewsCard = ({ rating, isLoading }) => {
                         </div>
                     );
                 })}
+            </div>
+
+            {/* pagination */}
+            <div className="flex justify-center">
+                <Pagination
+                    totalPage={totalPage}
+                    currentPage={currentPage}
+                    nextPage={nextPage}
+                    setPage={setPage}
+                    previousPage={previousPage}
+                />
             </div>
 
             {/* Review Modal */}

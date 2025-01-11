@@ -100,6 +100,7 @@ const AllUserManage = () => {
                 </table>
             </div>
 
+            {/* pagination */}
             <div className="flex justify-center my-6">
                 <Pagination
                     totalPage={totalPage}

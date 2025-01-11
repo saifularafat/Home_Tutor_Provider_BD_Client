@@ -1,14 +1,14 @@
+import { useState } from "react";
 import { useAllRatings } from "../../api/useAllRatings";
 import Loading from "../../Components/Loading/Loading";
 import ReviewsCard from "./ReviewsCard";
 
 const Reviews = () => {
-    // Fetch ratings data using custom hook
-    const [payload, refetch, isLoading] = useAllRatings(1);
-    const { rating = [] } = payload || { rating: [] };
-    // console.log("Rating By Reviews 0066 ==>>", payload);
+    const [page, setPage] = useState(1);
+    const [payload, refetch, isLoading] = useAllRatings(page);
+    const { rating = [], pagination = {} } = payload || { rating: [] };
+    console.log("pagiation", pagination);
 
-    // Extracting the rating values from the array of objects
     const ratingsArray = rating.map((item) => item.rating);
 
     // Calculate total ratings count
@@ -17,9 +17,9 @@ const Reviews = () => {
     // Calculate the average rating
     const averageRating = (ratingsArray.reduce((sum, rating) => sum + rating, 0) / totalRatings).toFixed(2);
 
-    // if (isLoading) {
-    //     return <Loading />;
-    // }
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div className="max-w-5xl mx-auto md:pb-10 pb-5 md:px-10 px-4 shadow-lg rounded-lg bg-white">
             {/* Header */}
@@ -36,7 +36,7 @@ const Reviews = () => {
                         <div className="rating rating-md">
                             {[1, 2, 3, 4, 5].map((star) => (
                                 <input
-                                disabled
+                                    disabled
                                     key={star}
                                     type="radio"
                                     name="rating-7"
@@ -74,7 +74,7 @@ const Reviews = () => {
 
             {/* Reviews card Section */}
             <div className="md:py-6 py-3">
-                <ReviewsCard rating={rating} isLoading={isLoading} />
+                <ReviewsCard rating={rating} pagination={pagination} setPage={setPage} isLoading={isLoading} />
             </div>
         </div>
     );
