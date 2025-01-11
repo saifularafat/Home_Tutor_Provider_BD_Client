@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
-import { allRatings } from "../../../../api/allRatings";
+import { useAllRatings } from "../../../../api/useAllRatings";
 import Loading from "../../../../Components/Loading/Loading";
 import { array } from "../../../../../data";
 
 const Testimonial = () => {
     const [currentSlider, setCurrentSlider] = useState(0);
 
-    const [payload, refetch, isLoading] = allRatings();
+    const [payload, refetch, isLoading] = useAllRatings();
     const { rating = [], pagination = {} } = payload || { rating: [], pagination: {} };
 
     const sortedRatings = [...rating].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

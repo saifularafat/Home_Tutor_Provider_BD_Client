@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { serverApiUrl } from "../../ApiSecret";
 
-export const allRatings = (page = 1) => {
+export const useAllRatings = (page = 1) => {
     const { data: payload = { rating: [], pagination: {} }, refetch, isLoading } = useQuery({
         queryKey: ['ratings', page],
         queryFn: async () => {
