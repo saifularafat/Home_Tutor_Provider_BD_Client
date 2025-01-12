@@ -12,7 +12,7 @@ const Reviews = () => {
     const ratingsArray = rating.map((item) => item.rating);
 
     // Calculate total ratings count
-    const totalRatings = pagination?.totalNumberOfRating;
+    const totalRatings = ratingsArray.length;
 
     // Calculate the average rating
     const averageRating = (ratingsArray.reduce((sum, rating) => sum + rating, 0) / totalRatings).toFixed(2);
