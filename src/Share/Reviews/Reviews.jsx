@@ -6,13 +6,13 @@ import ReviewsCard from "./ReviewsCard";
 const Reviews = () => {
     const [page, setPage] = useState(1);
     const [payload, refetch, isLoading] = useAllRatings(page);
-    const { rating = [], pagination = {} } = payload || { rating: [] };
+    const { rating = [], pagination = {} } = payload || { rating: [], pagination: {} };
     console.log("pagiation", pagination);
 
     const ratingsArray = rating.map((item) => item.rating);
 
     // Calculate total ratings count
-    const totalRatings = ratingsArray.length;
+    const totalRatings = pagination?.totalNumberOfRating;
 
     // Calculate the average rating
     const averageRating = (ratingsArray.reduce((sum, rating) => sum + rating, 0) / totalRatings).toFixed(2);

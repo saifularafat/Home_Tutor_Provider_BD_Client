@@ -1,18 +1,60 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import { serverApiUrl } from "../../../ApiSecret";
+import Swal from "sweetalert2";
 
-const ReviewModal = ({ openModal, setOpenModal, setSelectedRating }) => {
-
+const ReviewModal = ({ users, openModal, setOpenModal, setSelectedRating }) => {
     const {
         register,
-        handleSubmit
+        handleSubmit,
+        reset,
+        formState: { errors }
     } = useForm();
+
+    const emailLogin = "saifulislam@gmail.com"
+    console.log("users ==>>", users?.map((user) => user.email)) || {};
+    // const email = users.map((user) => user.email);
 
     const handleRatingChange = (e) => {
         setSelectedRating(e.target.value);
     };
 
-    const onSubmit = (data) => {
-        console.log("Rating data", data);
+    const onSubmit = async (data) => {
+        const ratingData = {
+            userEmail: emailLogin || "your email",
+            rating: data.selectedRating === '5' ? 5
+                : data.selectedRating === '4' ? 4
+                    : data.selectedRating === '3' ? 3
+                        : data.selectedRating === '2' ? 2
+                            : data.selectedRating === '1' ? 1
+                                : 5,
+            review: data.reviewComment || "N/A",
+        }
+        console.log("Rating data", ratingData);
+        try {
+            const response = await axios.post(`${serverApiUrl}/api/rating`, ratingData);
+            console.log("API Response:", response.data);
+            if (response.data.success) {
+                reset();
+               setOpenModal(false)
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        } catch (error) {
+            console.error("Error posting tuition job information:", error.response?.data || error.message);
+            Swal.fire({
+                position: "top-center",
+                icon: "error",
+                title: "Failed to your review. Check your inputs.",
+                text: error.response?.data?.message || error.message,
+                showConfirmButton: true
+            });
+        }
     }
     return (
         <div className="mx-auto flex items-end justify-end">
@@ -54,11 +96,11 @@ const ReviewModal = ({ openModal, setOpenModal, setSelectedRating }) => {
                                         onChange={handleRatingChange}
                                         className="select text-orange-600 input input-bordered w-full focus:border-blue-400 text-base font-normal"
                                     >
-                                        <option value="star5">★★★★★</option>
-                                        <option value="star4">★★★★☆</option>
-                                        <option value="star3">★★★☆☆</option>
-                                        <option value="star2">★★☆☆☆</option>
-                                        <option value="star1">★☆☆☆☆ </option>
+                                        <option value='5'>★★★★★</option>
+                                        <option value="4">★★★★☆</option>
+                                        <option value="3">★★★☆☆</option>
+                                        <option value="2">★★☆☆☆</option>
+                                        <option value="1">★☆☆☆☆ </option>
                                     </select>
 
                                 </div>
@@ -69,7 +111,7 @@ const ReviewModal = ({ openModal, setOpenModal, setSelectedRating }) => {
                                         <span className="label-text text-base text-slate-600 font-semibold">Comment</span>
                                     </label>
                                     <textarea
-                                        {...register("reviewComment")}
+                                        {...register("reviewComment", { required: true })}
                                         name="reviewComment"
                                         id=""
                                         cols="20"
@@ -78,6 +120,9 @@ const ReviewModal = ({ openModal, setOpenModal, setSelectedRating }) => {
                                         className="rounded-lg border border-slate-300 bg-transparent px-3 py-2 text-slate-600 ring-offset-1 duration-200 focus:outline-none focus:ring-2 overflow-hidden w-full"
                                     >
                                     </textarea>
+                                    {errors.reviewComment && (
+                                        <p className="text-red-500 text-sm">Please give your comment</p>
+                                    )}
                                 </div>
                             </div>
                         </div>

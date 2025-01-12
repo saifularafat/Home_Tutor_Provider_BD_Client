@@ -10,7 +10,7 @@ const ReviewsCard = ({ rating, pagination, setPage, isLoading }) => {
     const [openModal, setOpenModal] = useState(false);
     const [selectedRating, setSelectedRating] = useState(5);
     const [usersWithRatings, setUsersWithRatings] = useState([]);
-    const { currentPage, nextPage, previousPage, totalNumberOfRating, totalPage } = pagination;
+    const { currentPage, nextPage, previousPage, totalPage } = pagination;
 
     // Check if users data is available
     const [usersData] = useAllUsers();
@@ -20,6 +20,7 @@ const ReviewsCard = ({ rating, pagination, setPage, isLoading }) => {
     const getUserInfo = (userEmail) => {
         return users?.find(user => user.email === userEmail);
     };
+    console.log("rating  =>>>>", rating);
 
     useEffect(() => {
         // Match ratings with corresponding user data based on userEmail
@@ -107,6 +108,7 @@ const ReviewsCard = ({ rating, pagination, setPage, isLoading }) => {
 
             {/* Review Modal */}
             <ReviewModal
+                users={users}
                 setSelectedRating={setSelectedRating}
                 openModal={openModal}
                 setOpenModal={setOpenModal}
