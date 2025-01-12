@@ -5,7 +5,7 @@ import RatingStar from "./RatingStar";
 import { useAllUsers } from "../../api/useAllUsers";
 import Pagination from "../../Components/Pagination/Pagination";
 
-const ReviewsCard = ({ rating, pagination, setPage, isLoading }) => {
+const ReviewsCard = ({ rating, refetch, pagination, setPage, isLoading }) => {
     const [expandedReview, setExpandedReview] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [selectedRating, setSelectedRating] = useState(5);
@@ -111,6 +111,7 @@ const ReviewsCard = ({ rating, pagination, setPage, isLoading }) => {
                 users={users}
                 setSelectedRating={setSelectedRating}
                 openModal={openModal}
+                refetch={refetch}
                 setOpenModal={setOpenModal}
             />
         </>

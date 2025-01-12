@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { serverApiUrl } from "../../../ApiSecret";
 import Swal from "sweetalert2";
 
-const ReviewModal = ({ users, openModal, setOpenModal, setSelectedRating }) => {
+const ReviewModal = ({ users, openModal, setOpenModal, refetch, setSelectedRating }) => {
     const {
         register,
         handleSubmit,
@@ -36,7 +36,8 @@ const ReviewModal = ({ users, openModal, setOpenModal, setSelectedRating }) => {
             console.log("API Response:", response.data);
             if (response.data.success) {
                 reset();
-               setOpenModal(false)
+                refetch();
+                setOpenModal(false)
                 Swal.fire({
                     position: "top-center",
                     icon: "success",

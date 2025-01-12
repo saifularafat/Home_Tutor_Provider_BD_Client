@@ -32,22 +32,33 @@ const Reviews = () => {
                 {/* Average Rating Section */}
                 <div className="md:col-span-2 col-span-1 bg-blue-100 w-full py-8 rounded-lg text-center space-y-3">
                     <h6 className="text-4xl font-bold text-slate-700">{averageRating}</h6>
-                    <div>
+                    {/* Average Star section */}
+                    <div className="Star Section">
                         <div className="rating rating-md">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                                <input
-                                    disabled
-                                    key={star}
-                                    type="radio"
-                                    name="rating-7"
-                                    className={`mask mask-star-2 ${star <= Math.round(averageRating) ? "bg-orange-400" : "bg-gray-300"}`}
-                                    readOnly
-                                />
-                            ))}
+                            {[1, 2, 3, 4, 5].map((star) => {
+                                const isFullStar = star <= Math.floor(averageRating);
+                                const isHalfStar = star === Math.ceil(averageRating) && averageRating % 1 >= 0.5;
+
+                                return (
+                                    <input
+                                        disabled
+                                        key={star}
+                                        type="radio"
+                                        name="rating-7"
+                                        className={`mask mask-star-2 ${isFullStar
+                                            ? "bg-orange-400"
+                                            : isHalfStar
+                                                ? "bg-orange-200"
+                                                : "bg-gray-300"
+                                            }`}
+                                        readOnly
+                                    />
+                                );
+                            })}
                         </div>
                     </div>
                     {/* Display total number of ratings */}
-                    <p className="text-base font-medium">{totalRatings} Reviews</p>
+                    <p className="text-base font-medium">{pagination?.totalNumberOfRating} Reviews</p>
                 </div>
 
                 {/* Rating Breakdown Section */}
@@ -74,7 +85,7 @@ const Reviews = () => {
 
             {/* Reviews card Section */}
             <div className="md:py-6 py-3">
-                <ReviewsCard rating={rating} pagination={pagination} setPage={setPage} isLoading={isLoading} />
+                <ReviewsCard rating={rating} refetch={refetch} pagination={pagination} setPage={setPage} isLoading={isLoading} />
             </div>
         </div>
     );
