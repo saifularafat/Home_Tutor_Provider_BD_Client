@@ -4,6 +4,7 @@ import Loading from "../../../../../Components/Loading/Loading";
 import { useAllContactMessage } from "../../../../../api/useAllContactMessage";
 import Pagination from "../../../../../Components/Pagination/Pagination";
 import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow";
+import EmptyDataUiShow from "../../../../../Components/EmptyDataUiShow/EmptyDataUiShow";
 
 const InboxMessage = () => {
     const [page, setPage] = useState(1);
@@ -71,33 +72,39 @@ const InboxMessage = () => {
                             <th>Message</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {contact?.map((message, index) => (
-                            <tr
-                                onClick={() => handleRowClick(message?._id)}
-                                key={message._id}
-                                className={
-                                    index % 2 === 0
-                                        ? "bg-base-200 text-sm font-normal hover:bg-sky-200 text-center"
-                                        : "text-sm font-normal hover:bg-green-200 text-center"
-                                }
-                            >
-                                <td>{index + 1}</td>
-                                <td>
-                                    {message.userId}
-                                </td>
-                                <td>
-                                    {message.contactName}
-                                </td>
-                                <td>
-                                    {message.contactEmail}
-                                </td>
-                                <td>
-                                    {message.message}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
+                    {
+                        contact?.length > 0 ? (
+                            <tbody>
+                                {contact?.map((message, index) => (
+                                    <tr
+                                        onClick={() => handleRowClick(message?._id)}
+                                        key={message._id}
+                                        className={
+                                            index % 2 === 0
+                                                ? "bg-base-200 text-sm font-normal hover:bg-sky-200 text-center"
+                                                : "text-sm font-normal hover:bg-green-200 text-center"
+                                        }
+                                    >
+                                        <td>{index + 1}</td>
+                                        <td>
+                                            {message.userId}
+                                        </td>
+                                        <td>
+                                            {message.contactName}
+                                        </td>
+                                        <td>
+                                            {message.contactEmail}
+                                        </td>
+                                        <td>
+                                            {message.message}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        ) : (
+                            <EmptyDataUiShow />
+                        )
+                    }
                 </table>
             </div>
 

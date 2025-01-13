@@ -3,6 +3,7 @@ import { useAllUsers } from "../../../../../api/useAllUsers";
 import Loading from "../../../../../Components/Loading/Loading";
 import Pagination from "../../../../../Components/Pagination/Pagination";
 import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow";
+import EmptyDataUiShow from "../../../../../Components/EmptyDataUiShow/EmptyDataUiShow";
 
 const AllUserManage = () => {
     const [page, setPage] = useState(1);
@@ -59,44 +60,50 @@ const AllUserManage = () => {
                             <th>Delete</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {allUsers?.map((user, index) => (
-                            <tr key={user?._id}>
-                                <td>{index + 1}</td>
-                                <td>{user?.name}</td>
-                                <td>{user?.email}</td>
-                                <td>
-                                    {user?.isAdmin ? "Admin" : user?.isTutor ? "Tutor" : user?.isParent ? "Parent" : user?.isCoaching ? "Coaching" : user?.isBanned ? "Banned" : "Active"}
-                                </td>
-                                <td>{user?.userId}</td>
-                                <td>
-                                    {user.isBanned ? (
-                                        <button
-                                            // onClick={() => handleMakeAdmin(user)}
-                                            className="bg-rose-600 hover:bg-slate-300 hover:text-slate-800 font-medium text-white rounded-lg btn-sm transition duration-300"
-                                        >
-                                            UnBan
-                                        </button>
-                                    ) : (
-                                        <button
-                                            // onClick={() => handleMakeAdmin(user)}
-                                            className="bg-warning btn btn-ghost btn-sm"
-                                        >
-                                            Ban
-                                        </button>
-                                    )}
-                                </td>
-                                <td>
-                                    <button
-                                        // onClick={() => handleDeleteUser(user)}
-                                        className="text-white bg-red-700 rounded-md btn-sm"
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
+                    {
+                        allUsers?.length > 0 ? (
+                            <tbody>
+                                {allUsers?.map((user, index) => (
+                                    <tr key={user?._id}>
+                                        <td>{index + 1}</td>
+                                        <td>{user?.name}</td>
+                                        <td>{user?.email}</td>
+                                        <td>
+                                            {user?.isAdmin ? "Admin" : user?.isTutor ? "Tutor" : user?.isParent ? "Parent" : user?.isCoaching ? "Coaching" : user?.isBanned ? "Banned" : "Active"}
+                                        </td>
+                                        <td>{user?.userId}</td>
+                                        <td>
+                                            {user.isBanned ? (
+                                                <button
+                                                    // onClick={() => handleMakeAdmin(user)}
+                                                    className="bg-rose-600 hover:bg-slate-300 hover:text-slate-800 font-medium text-white rounded-lg btn-sm transition duration-300"
+                                                >
+                                                    UnBan
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    // onClick={() => handleMakeAdmin(user)}
+                                                    className="bg-warning btn btn-ghost btn-sm"
+                                                >
+                                                    Ban
+                                                </button>
+                                            )}
+                                        </td>
+                                        <td>
+                                            <button
+                                                // onClick={() => handleDeleteUser(user)}
+                                                className="text-white bg-red-700 rounded-md btn-sm"
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        ) : (
+                            <EmptyDataUiShow />
+                        )
+                    }
                 </table>
             </div>
 

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../../../../../Components/Loading/Loading";
 import { allTutor } from "../../../../../api/allTutor";
 import Pagination from "../../../../../Components/Pagination/Pagination";
+import EmptyDataUiShow from "../../../../../Components/EmptyDataUiShow/EmptyDataUiShow";
 
 const AllTutor = () => {
     const [page, setPage] = useState(1);
@@ -70,25 +71,31 @@ const AllTutor = () => {
                         <th className="py-2 text-sm text-center border-b">Address</th>
                     </tr>
                 </thead>
-                <tbody className="">
-                    {
-                        tutor.map((data, index) =>
-                            <tr
-                                key={data?._id}
-                                onClick={() => handleRowClick(data?._id)}
-                                className={`hover:bg-gray-100 transition duration-300`} title={data?.name}>
-                                <td className="py-1 text-sm text-center border-b">{index + 1}</td>
-                                <td className="py-1 text-sm text-center border-b">{data?.name}</td>
-                                <td className="py-1 text-sm text-center border-b">Sciences</td>
-                                <td className="py-1 text-sm text-center border-b">Dhaka International University</td>
-                                <td className="py-1 text-sm text-center border-b">4 Years</td>
-                                <td className="py-1 text-sm text-center border-b">5 K</td>
-                                <td className="py-1 text-sm text-center border-b"> 4 Student</td>
-                                <td className="py-1 text-sm text-center border-b">{data?.gender}</td>
-                                <td className="py-1 text-sm text-center border-b">{data?.address}</td>
-                            </tr>
-                        )}
-                </tbody>
+                {
+                    tutor?.length > 0 ? (
+                        <tbody className="">
+                            {
+                                tutor.map((data, index) =>
+                                    <tr
+                                        key={data?._id}
+                                        onClick={() => handleRowClick(data?._id)}
+                                        className={`hover:bg-gray-100 transition duration-300`} title={data?.name}>
+                                        <td className="py-1 text-sm text-center border-b">{index + 1}</td>
+                                        <td className="py-1 text-sm text-center border-b">{data?.name}</td>
+                                        <td className="py-1 text-sm text-center border-b">Sciences</td>
+                                        <td className="py-1 text-sm text-center border-b">Dhaka International University</td>
+                                        <td className="py-1 text-sm text-center border-b">4 Years</td>
+                                        <td className="py-1 text-sm text-center border-b">5 K</td>
+                                        <td className="py-1 text-sm text-center border-b"> 4 Student</td>
+                                        <td className="py-1 text-sm text-center border-b">{data?.gender}</td>
+                                        <td className="py-1 text-sm text-center border-b">{data?.address}</td>
+                                    </tr>
+                                )}
+                        </tbody>
+                    ) : (
+                        <EmptyDataUiShow />
+                    )
+                }
             </table>
 
             {/* Pagination Controls */}
