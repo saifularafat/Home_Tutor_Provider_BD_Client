@@ -5,7 +5,6 @@ const ApproveJobs = ({ approveJob, refetch, isLoading }) => {
 
     console.log('object approve JOb', approveJob);
 
-    // TODO TUITION JOB IS APPROVE JOB 
     const { handleDeleteById, isDeleting } = useDeleteItemById(refetch);
 
     if (isLoading) {

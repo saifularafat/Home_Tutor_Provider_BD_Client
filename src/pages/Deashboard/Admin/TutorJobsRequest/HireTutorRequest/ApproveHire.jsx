@@ -1,8 +1,10 @@
+import { useDeleteItemById } from "../../../../../Components/DeletedItem/DeletedItem";
 import Loading from "../../../../../Components/Loading/Loading";
 
 const ApproveHire = ({ approveHire, refetch, isLoading }) => {
     console.log("approve Hire 4 ==>>", approveHire);
 
+     const { handleDeleteById, isDeleting } = useDeleteItemById(refetch);
     // parent information backed modify now 
     if (isLoading) {
         return <Loading />
@@ -110,10 +112,10 @@ const ApproveHire = ({ approveHire, refetch, isLoading }) => {
                                 </td>
                                 <td className="p-1 text-xs font-medium text-center border-b">
                                     <button
-                                        // onClick={() => handleDeleteById(`api/hire-apply/${hire?._id}`,
-                                        //     "Tuition Job",
-                                        //     "Your Tuition Job"
-                                        // )}
+                                        onClick={() => handleDeleteById(`api/tutor-hire-request/${hire?._id}`,
+                                            "Tutor Hire",
+                                            "Your Tutor Hire"
+                                        )}
                                         className="text-xs px-1 py-2 bg-red-400 hover:bg-red-600 hover:underline text-white rounded-lg transition-all duration-200">Cancel</button>
                                 </td>
                             </tr>
