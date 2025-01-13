@@ -7,7 +7,7 @@ import { SiFampay } from "react-icons/si";
 import { Link } from "react-router-dom";
 import { useAllUsers } from "../../../../../api/useAllUsers";
 import { useAllBlogs } from "../../../../../api/useAllBlog";
-import { useParentRequestTutor } from "../../../../../api/useAllParentRequestToTutor";
+import { useParentRequestTutor } from "../../../../../api/useAllParentHireRequestToTutor";
 import { useAllRequestJobs } from "../../../../../api/useAllRequestJobs";
 import Loading from "../../../../../Components/Loading/Loading";
 import { allTutor } from "../../../../../api/allTutor";
@@ -20,7 +20,7 @@ const InfoCart = () => {
 
     const coaching = (allUsers || []).filter((data) => data.isCoaching === true);
     const parents = (allUsers || []).filter((data) => data.isParent === true);
-    console.log('all users', allUsers);
+    // console.log('all users', allUsers);
 
     const [tutors] = allTutor();
 

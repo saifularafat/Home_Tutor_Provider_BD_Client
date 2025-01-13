@@ -1,8 +1,18 @@
+import { useAllUsers } from "../../../../../api/useAllUsers";
+import Loading from "../../../../../Components/Loading/Loading";
 import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow";
 import logo from './../../../../../assets/leaf.jpg'
 import license from './../../../../../assets/premium/tutor3.jpg'
 
 const CoachingCenterAdmin = () => {
+    const [users, refetch, isLoading] = useAllUsers();
+    const { users: allUsers } = users || {};
+    const checkCoaching = allUsers.filter((check) => check?.isCoaching === true);
+    console.log("checkCoaching ===>>>>>", checkCoaching);
+
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div className="overflow-x-auto ">
             <PageTitleShow currentPage="Coaching Center |" />
@@ -22,55 +32,26 @@ const CoachingCenterAdmin = () => {
                     </tr>
                 </thead>
                 <tbody className="">
-                    <tr className={`hover:bg-gray-100 transition duration-300 border-b`} title="Shiyam Ahmed">
-                        <td className="text-center">1</td>
-                        <td className="pb-1 flex justify-center">
-                            <img src={logo} alt="coaching logo" className="h-12 w-12 rounded-lg object-cover bg-gray-300" />
-                        </td>
-                        <td className="text-sm text-center">Shiyam Ahmed</td>
-                        <td className="text-sm text-center">Nine-Ten</td>
-                        <td className="text-sm text-center">math, english</td>
-                        <td className="px-3 text-sm text-center">5 K</td>
-                        <td className="px-3 text-sm text-center"> 4 S.</td>
-                        <td className="px-3 text-sm text-center"> 01/01/2025</td>
-                        <td className="text-sm text-center"> Kajipara, Mirpur 10, Dhaka</td>
-                        <td className="pb-1 flex justify-center">
-                            <img src={license} alt="coaching logo" className="h-12 w-[72PX] rounded-lg object-cover bg-gray-300" />
-                        </td>
-                    </tr>
-                    <tr className={`hover:bg-gray-100 transition duration-300 border-b`} title="Shiyam Ahmed">
-                        <td className="text-center">2</td>
-                        <td className="pb-1 flex justify-center">
-                            <img src={logo} alt="coaching logo" className="h-12 w-12 rounded-lg object-cover bg-gray-300" />
-                        </td>
-                        <td className="text-sm text-center">Shiyam Ahmed</td>
-                        <td className="text-sm text-center">One-Five</td>
-                        <td className="text-sm text-center">All</td>
-                        <td className="px-3 text-sm text-center">6 K</td>
-                        <td className="px-3 text-sm text-center"> 5 S.</td>
-                        <td className="px-3 text-sm text-center"> 03/02/2025</td>
-                        <td className="text-sm text-center"> Kajipara, Mirpur 10, Dhaka</td>
-                        <td className="pb-1 flex justify-center">
-                            <img src={license} alt="coaching logo" className="h-12 w-[72PX] rounded-lg object-cover bg-gray-300" />
-                        </td>
-                    </tr>
-                    <tr className={`hover:bg-gray-100 transition duration-300 border-b`} title="Shiyam Ahmed">
-                        <td className="text-center">3</td>
-                        <td className="pb-1 flex justify-center">
-                            <img src={logo} alt="coaching logo" className="h-12 w-12 rounded-lg object-cover bg-gray-300" />
-                        </td>
-                        <td className="text-sm text-center">Shiyam Ahmed</td>
-                        <td className="text-sm text-center">Seven-Eight</td>
-                        <td className="text-sm text-center">Math, English, Science</td>
-                        <td className="px-3 text-sm text-center">4 K</td>
-                        <td className="px-3 text-sm text-center"> 3 S.</td>
-                        <td className="px-3 text-sm text-center"> 01/02/2025</td>
-                        <td className="text-sm text-center"> Kajipara, Mirpur 10, Dhaka</td>
-                        <td className="pb-1 flex justify-center">
-                            <img src={license} alt="coaching logo" className="h-12 w-[72PX] rounded-lg object-cover bg-gray-300" />
-                        </td>
-                    </tr>
-
+                    {
+                        checkCoaching.map((coaching) =>
+                            <tr key={coaching?._id} className={`hover:bg-gray-100 transition duration-300 border-b`} title="Shiyam Ahmed">
+                                <td className="text-center">1</td>
+                                <td className="pb-1 flex justify-center">
+                                    <img src={logo} alt="coaching logo" className="h-12 w-12 rounded-lg object-cover bg-gray-300" />
+                                </td>
+                                <td className="text-sm text-center">{coaching?.name || "Coaching Center"}</td>
+                                <td className="text-sm text-center">Nine-Ten</td>
+                                <td className="text-sm text-center">math, english</td>
+                                <td className="px-3 text-sm text-center">5 K</td>
+                                <td className="px-3 text-sm text-center"> 4 S.</td>
+                                <td className="px-3 text-sm text-center"> 01/01/2025</td>
+                                <td className="text-sm text-center">{coaching?.address || ' Kajipara, Mirpur 10, Dhaka'}</td>
+                                <td className="pb-1 flex justify-center">
+                                    <img src={license} alt="coaching logo" className="h-12 w-[72PX] rounded-lg object-cover bg-gray-300" />
+                                </td>
+                            </tr>
+                        )
+                    }
                 </tbody>
             </table>
         </div>

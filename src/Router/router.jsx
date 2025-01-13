@@ -41,7 +41,7 @@ import AllPayments from "../pages/Deashboard/Admin/AllPayments/AllPayments/AllPa
 import TermsAndCondition from "../pages/Deashboard/Admin/TermsAndCondition/TermsAndCondition";
 import AllTutor from "../pages/Deashboard/Admin/AllTutor/AllTutor/AllTutor";
 import AllJobsRequestApprove from "../pages/Deashboard/Admin/AllJobsRequest&Approve/AllJobsRequest&Approve/AllJobsRequestApprove";
-import TutorJobsRequest from "../pages/Deashboard/Admin/TutorJobsRequest/TutorJobsRequest/TutorJobsRequest";
+import HireTutorRequestAndPending from "../pages/Deashboard/Admin/TutorJobsRequest/HireTutorRequest/HireTutorRequestAndPending";
 import CreateNotice from "../pages/Deashboard/Admin/CreateNotice/CreateNotice/CreateNotice";
 import AllTuitionJobs from "../pages/Deashboard/Admin/AllJobTuition/AllJobTuition/AllTuitionJobs";
 import AllBlog from "../pages/Deashboard/Admin/AllBlog/AllBlog/AllBlog";
@@ -156,7 +156,7 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/hire-tutor-request-approve",
                 element: (
-                    <TutorJobsRequest />
+                    <HireTutorRequestAndPending />
                 ),
             },
             {
