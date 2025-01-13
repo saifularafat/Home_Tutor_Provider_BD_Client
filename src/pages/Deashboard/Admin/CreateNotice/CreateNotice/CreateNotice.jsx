@@ -37,8 +37,9 @@ const CreateNotice = () => {
             <PageTitleShow currentPage="Notice Create |" />
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className='mx-auto max-w-screen-lg border-2 bg-white rounded-xl p-3 md:p-6 shadow-lg'
+                className='mx-auto max-w-screen-lg border-2 bg-red-400 rounded-xl p-3 md:p-6 shadow-lg'
             >
+                <h1 className='md:text-xl text-lg font-semibold my-2 md:my-4 text-center text-slate-700 capitalize'>up comming....</h1>
                 <h1 className='md:text-3xl text-xl font-semibold my-2 md:my-4 text-center text-slate-700'>Create Notice</h1>
                 <div className='grid md:grid-cols-3 grid-cols-1 gap-4'>
                     <div className="space-y-2 text-left">
@@ -90,6 +91,7 @@ const CreateNotice = () => {
                     <input
                         className='btn btn-info'
                         type='submit'
+                        disabled
                         value='Create Notice'
                     />
                 </div>

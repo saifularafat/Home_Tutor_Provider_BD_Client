@@ -9,8 +9,8 @@ import Pagination from "../../../Components/Pagination/Pagination";
 const TutorProfile = () => {
     const [page, setPage] = useState(1);
     const [searchText, setSearchText] = useState("");
-
-    const [tutors, refetch, isLoading] = allTutor(page, searchText);
+    const [submittedSearchText, setSubmittedSearchText] = useState("");
+    const [tutors, refetch, isLoading] = allTutor(page, submittedSearchText);
     const { tutors: tutor, pagination } = tutors || {};
     const { currentPage, nextPage, previousPage, totalPage } = pagination || {};
 
@@ -19,6 +19,7 @@ const TutorProfile = () => {
     }, [page, refetch]);
 
     const handlerSearch = () => {
+        setSubmittedSearchText(searchText)
         refetch();
     };
 

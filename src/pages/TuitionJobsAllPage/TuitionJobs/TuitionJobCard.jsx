@@ -12,8 +12,9 @@ import Pagination from "../../../Components/Pagination/Pagination";
 const TuitionJobCard = () => {
     const [page, setPage] = useState(1);
     const [searchText, setSearchText] = useState("");
+    const [submittedSearchText, setSubmittedSearchText] = useState("");
 
-    const [tuitionJobs, refetch, isLoading] = allTuitionJobs(page, searchText);
+    const [tuitionJobs, refetch, isLoading] = allTuitionJobs(page, submittedSearchText);
     const { tuitionJobs: jobs, pagination } = tuitionJobs || {};
     const { currentPage, nextPage, previousPage, totalPage } = pagination || {};
 
@@ -22,7 +23,7 @@ const TuitionJobCard = () => {
     }, [page, refetch]);
 
     const handlerSearch = () => {
-        console.log("Searching for:", searchText);
+        setSubmittedSearchText(searchText);
         refetch();
     };
 
