@@ -4,6 +4,8 @@ import Loading from "../../../../../Components/Loading/Loading";
 import Pagination from "../../../../../Components/Pagination/Pagination";
 import PageTitleShow from "../../../../../Components/PageTitleShow/PageTitleShow";
 import EmptyDataUiShow from "../../../../../Components/EmptyDataUiShow/EmptyDataUiShow";
+import { useManageAction } from "../../../../../Components/useManageAction/useManageAction";
+import { useDeleteItemById } from "../../../../../Components/DeletedItem/DeletedItem";
 
 const AllUserManage = () => {
     const [page, setPage] = useState(1);
@@ -20,6 +22,9 @@ const AllUserManage = () => {
     };
 
     // TODO USER DELETED USER BANNED AND UNBANNED
+    const { handleManageAction } = useManageAction(refetch);
+
+    const { handleDeleteById } = useDeleteItemById(refetch);
 
     if (isLoading) {
         return <Loading />;
@@ -75,14 +80,28 @@ const AllUserManage = () => {
                                         <td>
                                             {user.isBanned ? (
                                                 <button
-                                                    // onClick={() => handleMakeAdmin(user)}
+                                                    onClick={() =>
+                                                        handleManageAction(
+                                                            `api/users/manage-user/${user?._id}`,
+                                                            "unBan",
+                                                            "User unBan",
+                                                            "Admin User unBan"
+                                                        )
+                                                    }
                                                     className="bg-rose-600 hover:bg-slate-300 hover:text-slate-800 font-medium text-white rounded-lg btn-sm transition duration-300"
                                                 >
                                                     UnBan
                                                 </button>
                                             ) : (
                                                 <button
-                                                    // onClick={() => handleMakeAdmin(user)}
+                                                    onClick={() =>
+                                                        handleManageAction(
+                                                            `api/users/manage-user/${user?._id}`,
+                                                            "ban",
+                                                            "User Ban",
+                                                            "Admin User ban"
+                                                        )
+                                                    }
                                                     className="bg-warning btn btn-ghost btn-sm"
                                                 >
                                                     Ban
@@ -91,7 +110,13 @@ const AllUserManage = () => {
                                         </td>
                                         <td>
                                             <button
-                                                // onClick={() => handleDeleteUser(user)}
+                                                onClick={() =>
+                                                    handleDeleteById(
+                                                        `api/users/${user?._id}`,
+                                                        "User",
+                                                        "Your User"
+                                                    )
+                                                }
                                                 className="text-white bg-red-700 rounded-md btn-sm"
                                             >
                                                 Delete
