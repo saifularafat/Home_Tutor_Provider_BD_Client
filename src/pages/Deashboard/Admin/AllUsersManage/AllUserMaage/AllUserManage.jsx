@@ -33,23 +33,23 @@ const AllUserManage = () => {
     return (
         <div className="bg-white py-5 px-4 rounded-lg my-6">
             <PageTitleShow currentPage="All Users |" />
-            <div className="flex items-center justify-between md:px-6 px-3 md:pt-4 md:pb-2 py-2 rounded-xl shadow-xl mt-2 bg-white">
-                <div className="w-4/6 mb-2">
+            <div className="md:flex items-center justify-between md:px-6 px-3 md:pt-4 md:pb-2 py-2 rounded-xl shadow-xl bg-white">
+                <div className="md:w-4/6 mb-2 flex items-center gap-1">
                     <input
                         onChange={(e) => setSearchText(e.target.value)}
                         type="text"
                         value={searchText}
                         placeholder="Search Your Tuition Code"
-                        className="md:px-9 px-2 md:py-[10px] md:w-4/6 md:mr-2 mr-1 py-2 placeholder:text-slate-300 text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400 focus:outline-double"
+                        className="md:px-9 px-2 md:py-[10px] md:w-4/6 w-2/3 md:mr-2 mr-1 py-[6px] placeholder:text-slate-300 text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none md:placeholder:text-sm placeholder:text-xs focus:outline-blue-400 focus:outline-double"
                     />
                     <button
                         onClick={handleSearch}
-                        className="py-[9px] md:px-3 px-2 md:w-1/6 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider"
+                        className="py-[9px] md:px-3 px-2 md:w-1/6 w-1/3 bg-sky-600 text-white rounded-br-md rounded-tr-md md:text-lg text-sm tracking-wider"
                     >
                         Search
                     </button>
                 </div>
-                <h2 className="w-2/6 text-right text-xl font-medium text-slate-700">Total Tutor = <span className="text-blue-500 text-2xl font-semibold">({totalNumberOfUser})</span></h2>
+                <h2 className="md:w-2/6 md:text-right text-left md:text-2xl text-xl font-medium text-slate-700">Total Tutor = <span className="text-blue-500 md:text-2xl font-semibold">({totalNumberOfUser})</span></h2>
             </div>
 
             <div className="overflow-x-auto p-4 min-h-[80vh]">
