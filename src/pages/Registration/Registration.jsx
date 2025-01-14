@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Lottie from "lottie-react";
 import loginLottie from "./../../assets/Animation/login.json";
 import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
+import { imageURLKey } from "../../../ApiSecret";
 
 const Registration = () => {
     const [password, setPassword] = useState("");
@@ -11,6 +12,12 @@ const Registration = () => {
     const [passShow, setPassShow] = useState(false);
     const [passConShow, setPassConShow] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
     const onPasswordChange = (e) => {
         setPassword(e.target.value);
@@ -20,7 +27,6 @@ const Registration = () => {
             setErrorMessage("");
         }
     };
-
     const onConfirmPasswordChange = (e) => {
         setConfirmPassword(e.target.value);
         if (e.target.value !== password) {
@@ -34,37 +40,53 @@ const Registration = () => {
     const { registerRole } = location.state || {};
     console.log(registerRole);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    const imageURL = `https://api.imgbb.com/1/upload?key=${imageURLKey}`;
 
     const onSubmit = (data) => {
+        const formData = new FormData();
 
-        const formData = new FormData()
+        // Prepare user data
+        const userDate = {
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            address: data.address,
+            password: data.password,
+            confirmPassword: data.confirmPassword,
+            isAdmin: registerRole === "Admin",
+            isParent: registerRole === "Parent",
+            isTutor: registerRole === "Tutor",
+            isCoaching: registerRole === "Coaching",
+            image: null,
+            nidBirth: null,
+        };
 
         if (data.coachingLogoImage && data.coachingLogoImage[0]) {
             formData.append("coachingLogoImage", data.coachingLogoImage[0]);
+            userDate.image = data.coachingLogoImage[0];
         }
         if (data.coachingTedLicense && data.coachingTedLicense[0]) {
             formData.append("coachingTedLicense", data.coachingTedLicense[0]);
+            userDate.nidBirth = data.coachingTedLicense[0];
         }
-        // userImage info
         if (data.parentImage && data.parentImage[0]) {
             formData.append("parentImage", data.parentImage[0]);
+            userDate.image = data.parentImage[0];
         }
         if (data.parentNIDCart && data.parentNIDCart[0]) {
             formData.append("parentNIDCart", data.parentNIDCart[0]);
+            userDate.nidBirth = data.parentNIDCart[0];
         }
-        // Tutor info
         if (data.tutorImage && data.tutorImage[0]) {
             formData.append("tutorImage", data.tutorImage[0]);
+            userDate.image = data.tutorImage[0];
         }
         if (data.tutorIDCart && data.tutorIDCart[0]) {
             formData.append("tutorIDCart", data.tutorIDCart[0]);
+            userDate.nidBirth = data.tutorIDCart[0];
         }
-        console.log(data);
+
+        console.log(userDate);
 
     };
 
@@ -88,51 +110,80 @@ const Registration = () => {
                         </div>
                         <div className="p-6">
                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                                <div className=" space-y-1">
-                                    <label className="block text-slate-700  font-medium">
+                                {/* Name Field */}
+                                <div className="relative space-y-1">
+                                    <label className="block text-slate-700 font-medium">
                                         <span className="font-bold text-slate-500 tracking-wider capitalize">{registerRole} Name* </span>
                                     </label>
                                     <input
-                                        {...register("name", { required: true })}
+                                        {...register("name", {
+                                            required: "Name field is required",
+                                            minLength: {
+                                                value: 3,
+                                                message: "The length of the name must be at least 3 characters",
+                                            },
+                                            maxLength: {
+                                                value: 31,
+                                                message: "The length of the name can be a maximum of 31 characters",
+                                            },
+                                            validate: (value) =>
+                                                value.trim().length >= 3 || "Name cannot be empty or only spaces",
+                                        })}
                                         type="text"
-                                        placeholder="Enter Your Name"
+                                        id="name"
+                                        placeholder="Enter your name"
                                         className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                                     />
                                     {errors.name && (
                                         <span className="mt-1 text-red-500">
-                                            Name field is required
+                                            {errors.name.message}
                                         </span>
                                     )}
                                 </div>
-                                <div className=" space-y-1">
-                                    <label className="block text-slate-700  font-medium">
+
+                                {/* Email Field */}
+                                <div className="relative space-y-1">
+                                    <label className="block text-slate-700 font-medium">
                                         <span className="font-bold text-slate-500 tracking-wider">Email* </span>
                                     </label>
                                     <input
-                                        {...register("email", { required: true })}
+                                        {...register("email", {
+                                            required: "Email field is required",
+                                            pattern: {
+                                                value: /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/,
+                                                message: "Please enter a valid email",
+                                            },
+                                        })}
                                         type="email"
-                                        placeholder="Enter Your Email"
+                                        id="email"
+                                        placeholder="Enter your email"
                                         className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                                     />
                                     {errors.email && (
                                         <span className="mt-1 text-red-500">
-                                            Email field is required
+                                            {errors.email.message}
                                         </span>
                                     )}
                                 </div>
-                                <div className=" space-y-1">
-                                    <label className="block text-slate-700  font-medium">
+                                <div className="space-y-1">
+                                    <label className="block text-slate-700 font-medium">
                                         <span className="font-bold text-slate-500 tracking-wider">Phone* </span>
                                     </label>
                                     <input
-                                        {...register("phone", { required: true })}
-                                        type="number"
-                                        placeholder="Enter Your Phone"
+                                        {...register("phone", {
+                                            required: "Phone field is required",
+                                            pattern: {
+                                                value: /^(\+8801|8801|01)[3-9]\d{8}$/,
+                                                message: "Please enter a valid phone number starting with +8801, 8801, or 01",
+                                            },
+                                        })}
+                                        type="text"
+                                        placeholder="Enter Your Phone (e.g., +8801XXXXXXXXX)"
                                         className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                                     />
                                     {errors.phone && (
                                         <span className="mt-1 text-red-500">
-                                            Phone field is required
+                                            {errors.phone.message}
                                         </span>
                                     )}
                                 </div>
@@ -146,20 +197,29 @@ const Registration = () => {
                                         placeholder="Enter Your Address"
                                         className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                                     />
-                                    {errors.phone && (
+                                    {errors.address && (
                                         <span className="mt-1 text-red-500">
                                             Address field is required
                                         </span>
                                     )}
                                 </div>
-
-                                {/* Password Show and Hide */}
+                                {/* Password Field */}
                                 <div className="relative space-y-1">
                                     <label className="block text-slate-700 font-medium">
-                                        <span className="font-bold text-slate-500 tracking-wider">Password</span>
+                                        <span className="font-bold text-slate-500 tracking-wider">Password* </span>
                                     </label>
                                     <input
-                                        {...register("password", { required: true })}
+                                        {...register("password", {
+                                            required: "Password field is required",
+                                            minLength: {
+                                                value: 8,
+                                                message: "The length of the password must be at least 8 characters",
+                                            },
+                                            pattern: {
+                                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                                                message: "Password must include at least one uppercase, one lowercase, one number, and one special character",
+                                            },
+                                        })}
                                         type={passShow ? "text" : "password"}
                                         id="password"
                                         value={password}
@@ -174,14 +234,24 @@ const Registration = () => {
                                     >
                                         {passShow ? "🙉" : "🙈"}
                                     </button>
+                                    {errors.password && (
+                                        <span className="mt-1 text-red-500">
+                                            {errors.password.message}
+                                        </span>
+                                    )}
                                 </div>
 
                                 {/* Confirm Password Field */}
                                 <div className="relative space-y-1">
                                     <label className="block text-slate-700 font-medium">
-                                        <span className="font-bold text-slate-500 tracking-wider">Confirm Password</span>
+                                        <span className="font-bold text-slate-500 tracking-wider">Confirm Password* </span>
                                     </label>
                                     <input
+                                        {...register("confirmPassword", {
+                                            required: "Confirm Password field is required",
+                                            validate: (value) =>
+                                                value === password || "Passwords do not match",
+                                        })}
                                         type={passConShow ? "text" : "password"}
                                         id="confirm-password"
                                         value={confirmPassword}
@@ -196,11 +266,12 @@ const Registration = () => {
                                     >
                                         {passConShow ? "🙉" : "🙈"}
                                     </button>
+                                    {errors.confirmPassword && (
+                                        <span className="mt-1 text-red-500">
+                                            {errors.confirmPassword.message}
+                                        </span>
+                                    )}
                                 </div>
-                                {errorMessage && (
-                                    <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-                                )}
-
                                 <div className="space-y-1 hidden">
                                     <input
                                         {...register("isAdmin")}

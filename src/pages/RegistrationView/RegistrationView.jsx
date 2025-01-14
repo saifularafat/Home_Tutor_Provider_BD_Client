@@ -19,7 +19,7 @@ const RegistrationView = () => {
             <div className='grid md:grid-cols-3 grid-cols-1 mx-3 md:mx-0 space-y-5 md:gap-5 items-center md:py-12 py-1'>
                 <label
                     className={`cursor-pointer grid md:grid-cols-2 grid-cols-1 hover:scale-105 transition-all duration-200 md:w-[400px] rounded-lg mt-5
-          ${selectedOption === 'parent' ? 'bg-[#1e5e35] ' : 'bg-[#16A34A]'}
+          ${selectedOption === 'Parent' ? 'bg-[#1e5e35] ' : 'bg-[#16A34A]'}
           `}
                 >
                     <div className="md:w-[400px] w-full h-full shadow-xl hover:shadow-sky-300 md:mb-0 mb-5">
@@ -28,21 +28,21 @@ const RegistrationView = () => {
                         </div>
                         <div className="text-center bg-white z-30 h-2/3 rounded-lg w-full md:p-7 p-3">
                             <h1 className="text-2xl text-[#16A34A] font-bold pb-3">Parent Registration</h1>
-                            <p className="font-medium text-slate-600">Register as a parent to find a tutor for your child.</p>
+                            <p className="font-medium text-slate-600">Register as a Parent to find a Tutor for your child.</p>
                         </div>
                     </div>
                     <input
                         type='radio'
                         name='radio-2'
                         className="invisible"
-                        value='parent'
-                        checked={selectedOption === 'parent'}
+                        value='Parent'
+                        checked={selectedOption === 'Parent'}
                         onChange={handleOptionChange}
                     />
                 </label>
                 <label
                     className={`cursor-pointer grid md:grid-cols-2 grid-cols-1 hover:scale-105 transition-all duration-200 md:w-[400px] rounded-lg
-           ${selectedOption === 'tutor' ? ' bg-sky-600' : 'bg-sky-400'
+           ${selectedOption === 'Tutor' ? ' bg-sky-600' : 'bg-sky-400'
                         }
            `} >
                     <div className="md:w-[400px] w-full h-full shadow-xl hover:shadow-sky-300 mb-5">
@@ -51,21 +51,21 @@ const RegistrationView = () => {
                         </div>
                         <div className="text-center bg-white z-30 h-2/3 rounded-lg w-full md:p-7 p-3">
                             <h1 className="text-2xl text-sky-600 font-bold pb-3">Tutor Registration</h1>
-                            <p className="font-medium text-slate-600">Sign up as a tutor to start teaching.</p>
+                            <p className="font-medium text-slate-600">Sign up as a Tutor to start teaching.</p>
                         </div>
                     </div>
                     <input
                         type='radio'
                         name='radio-2'
                         className="invisible"
-                        value='tutor'
-                        checked={selectedOption === 'tutor'}
+                        value='Tutor'
+                        checked={selectedOption === 'Tutor'}
                         onChange={handleOptionChange}
                     />
                 </label>
                 <label
                     className={`cursor-pointer grid md:grid-cols-2 grid-cols-1 hover:scale-105 transition-all duration-200 md:w-[400px] rounded-lg mt-9
-           ${selectedOption === 'coaching' ? ' bg-red-600' : 'bg-red-400'
+           ${selectedOption === 'Coaching' ? ' bg-red-600' : 'bg-red-400'
                         }
            
            `}
@@ -76,15 +76,15 @@ const RegistrationView = () => {
                         </div>
                         <div className="text-center bg-white z-30 h-2/3 rounded-lg w-full md:p-7 p-3">
                             <h1 className="text-2xl text-red-500 font-bold pb-3">Coaching Registration</h1>
-                            <p className="font-medium text-slate-600">Sign up your coaching center to start accepting students.</p>
+                            <p className="font-medium text-slate-600">Sign up your Coaching center to start accepting students.</p>
                         </div>
                     </div>
                     <input
                         type='radio'
                         name='radio-2'
                         className="invisible"
-                        value='coaching'
-                        checked={selectedOption === 'coaching'}
+                        value='Coaching'
+                        checked={selectedOption === 'Coaching'}
                         onChange={handleOptionChange}
                     />
                 </label>
