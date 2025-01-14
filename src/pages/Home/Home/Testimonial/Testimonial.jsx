@@ -8,13 +8,13 @@ import RatingStar from "../../../../Share/Reviews/RatingStar";
 
 const Testimonial = () => {
     const [currentSlider, setCurrentSlider] = useState(0);
-    const [usersWithRatings, setUsersWithRatings] = useState([]);
+    const [usersWithRatings, setUsersWithRatings] = useState([])
 
     const [payload, refetch, isLoading] = useAllRatings();
     const { rating = [] } = payload || { rating: [] };
 
-    const [usersData] = useAllUsers();
-    const { users } = usersData || {};
+    const [users] = useAllUsers();
+    const userArray = users.users || [];
 
     const sortedRatings = [...rating].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
@@ -30,29 +30,26 @@ const Testimonial = () => {
             currentSlider === testimonials.length - 1 ? 0 : currentSlider + 1
         );
 
-    // console.log("usersWithRatings =>", usersWithRatings);
     const getUserInfo = (userEmail) => {
-        return users?.find(user => user.email === userEmail);
+        return userArray.find(user => user.email === userEmail);
     };
 
     useEffect(() => {
-        if (rating && users) {
+        if (rating && userArray.length > 0) {
             const matchedUsersWithRatings = rating.map((review) => {
                 const user = getUserInfo(review.userEmail);
                 return user ? { ...review, userInfo: user } : null;
             }).filter(review => review !== null);
             setUsersWithRatings(matchedUsersWithRatings);
         }
-    }, [rating, users]);
+    }, [rating, userArray]);
 
     useEffect(() => {
         const intervalId = setInterval(nextSlider, 5000);
         return () => clearInterval(intervalId);
     }, [testimonials]);
 
-
     const isSmallScreen = window.innerWidth <= 768;
-
 
     const renderStars = (ratingValue) => {
         const filledStars = Math.min(Math.max(ratingValue, 0), 5);
@@ -112,7 +109,6 @@ const Testimonial = () => {
                                     </p>
                                     <div className="flex space-x-1 mb-4">
                                         {renderStars(rating?.rating || 0)}
-                                        {/* <RatingStar id={rating._id} star={rating.rating} /> */}
                                     </div>
                                     <a className="inline-flex items-center bottom-0">
                                         <img
@@ -125,9 +121,7 @@ const Testimonial = () => {
                                                 {rating?.userInfo?.name || 'user Name'}
                                             </span>
                                             <div className="flex items-center justify-between">
-                                                <span className="text-gray-500 text-sm">
-                                                    {/* {rating.designation || "User"} */}
-                                                </span>
+                                                <span className="text-gray-500 text-sm"></span>
                                                 <span className="font-normal text-xs">
                                                     {new Date(rating?.createdAt).toLocaleDateString()}{" "}
                                                     {new Date(rating?.createdAt).toLocaleTimeString()}
@@ -135,7 +129,6 @@ const Testimonial = () => {
                                             </div>
                                         </span>
                                     </a>
-                                    {/* )} */}
                                 </div>
                             </div>
                         ))}

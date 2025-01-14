@@ -4,7 +4,9 @@ import { useForm } from "react-hook-form";
 import Lottie from "lottie-react";
 import loginLottie from "./../../assets/Animation/login.json";
 import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
-import { imageURLKey } from "../../../ApiSecret";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { imageURLKey, serverApiUrl } from "../../../ApiSecret";
 
 const Registration = () => {
     const [password, setPassword] = useState("");
@@ -12,9 +14,11 @@ const Registration = () => {
     const [passShow, setPassShow] = useState(false);
     const [passConShow, setPassConShow] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [imageError, setImageError] = useState(null);
 
     const {
         register,
+        reset,
         handleSubmit,
         formState: { errors },
     } = useForm();
@@ -42,53 +46,105 @@ const Registration = () => {
 
     const imageURL = `https://api.imgbb.com/1/upload?key=${imageURLKey}`;
 
-    const onSubmit = (data) => {
-        const formData = new FormData();
+    const onSubmit = async (data) => {
+        try {
+            const imageFile = data.image[0];
+            setImageError(null);
 
-        // Prepare user data
-        const userDate = {
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            address: data.address,
-            password: data.password,
-            confirmPassword: data.confirmPassword,
-            isAdmin: registerRole === "Admin",
-            isParent: registerRole === "Parent",
-            isTutor: registerRole === "Tutor",
-            isCoaching: registerRole === "Coaching",
-            image: null,
-            nidBirth: null,
-        };
+            if (imageFile.size > 2 * 1024 * 1024) {
+                setImageError("Image size should not exceed 2MB.");
+                return;
+            }
 
-        if (data.coachingLogoImage && data.coachingLogoImage[0]) {
-            formData.append("coachingLogoImage", data.coachingLogoImage[0]);
-            userDate.image = data.coachingLogoImage[0];
-        }
-        if (data.coachingTedLicense && data.coachingTedLicense[0]) {
-            formData.append("coachingTedLicense", data.coachingTedLicense[0]);
-            userDate.nidBirth = data.coachingTedLicense[0];
-        }
-        if (data.parentImage && data.parentImage[0]) {
-            formData.append("parentImage", data.parentImage[0]);
-            userDate.image = data.parentImage[0];
-        }
-        if (data.parentNIDCart && data.parentNIDCart[0]) {
-            formData.append("parentNIDCart", data.parentNIDCart[0]);
-            userDate.nidBirth = data.parentNIDCart[0];
-        }
-        if (data.tutorImage && data.tutorImage[0]) {
-            formData.append("tutorImage", data.tutorImage[0]);
-            userDate.image = data.tutorImage[0];
-        }
-        if (data.tutorIDCart && data.tutorIDCart[0]) {
-            formData.append("tutorIDCart", data.tutorIDCart[0]);
-            userDate.nidBirth = data.tutorIDCart[0];
-        }
+            const formData = new FormData();
+            formData.append("image", imageFile);
 
-        console.log(userDate);
+            const imageResponse = await fetch(imageURL, {
+                method: "POST",
+                body: formData,
+            });
+            const imageData = await imageResponse.json();
 
+            if (!imageData.success) {
+                throw new Error("Failed to upload image");
+            }
+
+            const imgURL = imageData.data.display_url;
+
+            // Prepare the user data
+            const userDate = {
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                address: data.address,
+                password: data.password,
+                confirmPassword: data.confirmPassword,
+                isAdmin: registerRole === "Admin",
+                isParent: registerRole === "Parent",
+                isTutor: registerRole === "Tutor",
+                isCoaching: registerRole === "Coaching",
+                image: imgURL,  
+                nidBirth: null,
+            };
+
+            // Handle other role-specific files
+            if (data.coachingLogoImage && data.coachingLogoImage[0]) {
+                formData.append("coachingLogoImage", data.coachingLogoImage[0]);
+                userDate.image = data.coachingLogoImage[0];
+            }
+            if (data.coachingTedLicense && data.coachingTedLicense[0]) {
+                formData.append("coachingTedLicense", data.coachingTedLicense[0]);
+                userDate.nidBirth = data.coachingTedLicense[0];
+            }
+            if (data.parentImage && data.parentImage[0]) {
+                formData.append("parentImage", data.parentImage[0]);
+                userDate.image = data.parentImage[0];
+            }
+            if (data.parentNIDCart && data.parentNIDCart[0]) {
+                formData.append("parentNIDCart", data.parentNIDCart[0]);
+                userDate.nidBirth = data.parentNIDCart[0];
+            }
+            if (data.tutorImage && data.tutorImage[0]) {
+                formData.append("tutorImage", data.tutorImage[0]);
+                userDate.image = data.tutorImage[0];
+            }
+            if (data.tutorIDCart && data.tutorIDCart[0]) {
+                formData.append("tutorIDCart", data.tutorIDCart[0]);
+                userDate.nidBirth = data.tutorIDCart[0];
+            }
+
+            const response = await axios.post(`${serverApiUrl}/api/users/process-register`, userDate);
+
+            if (response.status === 201) {
+                reset();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: response.data.message, 
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
+        } catch (error) {
+            if (error.response?.status === 422) {
+                const errorMessages = error.response.data.errors;
+                Swal.fire({
+                    title: "Validation Error",
+                    icon: "error",
+                    html: errorMessages
+                        .map((err) => `<p>${err.field}: ${err.message}</p>`)
+                        .join(""),
+                });
+            } else {
+                Swal.fire({
+                    title: "Error",
+                    text: error.message || "Something went wrong",
+                    icon: "error",
+                });
+            }
+        }
     };
+
 
 
     return (
@@ -312,6 +368,14 @@ const Registration = () => {
                                                             type='file'
                                                             className='file-input file-input-bordered file-input-md w-full max-w-md'
                                                         />
+                                                        {errors.coachingLogoImage && (
+                                                            <span className="mt-1 text-red-500">
+                                                                Coaching Logo Image is required
+                                                            </span>
+                                                        )}
+                                                        {imageError && (
+                                                            <p className="text-red-500 text-sm">{imageError}</p>
+                                                        )}
                                                     </div>
                                                 </div>
 
@@ -327,6 +391,14 @@ const Registration = () => {
                                                             type='file'
                                                             className='file-input file-input-bordered file-input-md w-full max-w-md'
                                                         />
+                                                        {errors.coachingTedLicense && (
+                                                            <span className="mt-1 text-red-500">
+                                                                Coaching Ted License is required
+                                                            </span>
+                                                        )}
+                                                        {imageError && (
+                                                            <p className="text-red-500 text-sm">{imageError}</p>
+                                                        )}
                                                     </div>
                                                 </div> */}
                                             </div>
@@ -349,6 +421,14 @@ const Registration = () => {
                                                                         type='file'
                                                                         className='file-input file-input-bordered file-input-md w-full max-w-md'
                                                                     />
+                                                                    {errors.parentImage && (
+                                                                        <span className="mt-1 text-red-500">
+                                                                            Image is required
+                                                                        </span>
+                                                                    )}
+                                                                    {imageError && (
+                                                                        <p className="text-red-500 text-sm">{imageError}</p>
+                                                                    )}
                                                                 </div>
                                                             </div>
                                                             {/* parent NID Image file */}
@@ -363,6 +443,14 @@ const Registration = () => {
                                                                         type='file'
                                                                         className='file-input file-input-bordered file-input-md w-full max-w-md'
                                                                     />
+                                                                    {errors.parentNIDCart && (
+                                                                        <span className="mt-1 text-red-500">
+                                                                            NID Cart is required
+                                                                        </span>
+                                                                    )}
+                                                                    {imageError && (
+                                                                        <p className="text-red-500 text-sm">{imageError}</p>
+                                                                    )}
                                                                 </div>
                                                             </div> */}
                                                             {/* gender */}
@@ -393,6 +481,14 @@ const Registration = () => {
                                                                         type='file'
                                                                         className='file-input file-input-bordered file-input-md w-full max-w-md'
                                                                     />
+                                                                    {errors.tutorImage && (
+                                                                        <span className="mt-1 text-red-500">
+                                                                            Image is required
+                                                                        </span>
+                                                                    )}
+                                                                    {imageError && (
+                                                                        <p className="text-red-500 text-sm">{imageError}</p>
+                                                                    )}
                                                                 </div>
                                                             </div>
                                                             {/* tutor Student ID Image file */}
@@ -407,6 +503,14 @@ const Registration = () => {
                                                                         type='file'
                                                                         className='file-input file-input-bordered file-input-md w-full max-w-md'
                                                                     />
+                                                                    {errors.tutorIDCart && (
+                                                                        <span className="mt-1 text-red-500">
+                                                                            ID Cart is required
+                                                                        </span>
+                                                                    )}
+                                                                    {imageError && (
+                                                                        <p className="text-red-500 text-sm">{imageError}</p>
+                                                                    )}
                                                                 </div>
                                                             </div> */}
                                                             <div className="md:w-1/3 w-full">

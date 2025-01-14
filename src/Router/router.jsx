@@ -52,6 +52,7 @@ import ShowYourBlog from "../pages/Deashboard/Tutor/ShowYourBlog/ShowYourBlog";
 import EditBlogById from "../pages/Deashboard/Tutor/EditBlogById/EditBlogById";
 import ParentApply from "../pages/Deashboard/Tutor/ParentApply/ParentApply";
 import TuitionJobCreate from "../pages/Deashboard/Admin/TuitionJobCreate/TuitionJobCreate";
+import ActivateUser from "../pages/ActivateUser/ActivateUser";
 
 const router = createBrowserRouter([
     {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
             {
                 path: "/registrationview",
                 element: <RegistrationView />
+            },
+            {
+                path: "/api/users/activate/:token",
+                element: <ActivateUser />
             },
             {
                 path: "/terms-condition",
