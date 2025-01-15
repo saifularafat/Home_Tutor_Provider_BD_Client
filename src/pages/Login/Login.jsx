@@ -1,25 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { serverApiUrl } from "../../../ApiSecret"; // Your API URL
+import axios from "axios";
 import Lottie from "lottie-react";
 import loginLottie from "./../../assets/Animation/login.json";
 import PageTitleShow from "../../Components/PageTitleShow/PageTitleShow";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
-    const [password, setPassword] = useState("");
-    const [passShow, setPassShow] = useState(false);
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
-
-    const onSubmit = (data) => {
-        console.log(data);
-    };
-
+   
     return (
-        <div className=" footerBg h-screen">
-            <PageTitleShow currentPage="Login" />
+        <div className="footerBg h-screen">
+            <PageTitleShow currentPage="Login | " />
 
             <div className="container mx-auto py-12">
                 <div className="items-center justify-between gap-12 p-3 md:flex">
@@ -61,7 +54,7 @@ const Login = () => {
                                         type={passShow ? "text" : "password"}
                                         id="password"
                                         value={password}
-                                        onChange={(e) => setPassword(e.target.value)} 
+                                        onChange={(e) => setPassword(e.target.value)}
                                         placeholder="***********"
                                         className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                                     />
@@ -74,11 +67,6 @@ const Login = () => {
                                     </button>
                                 </div>
                                 <div className="my-5 text-center">
-                                    {/* <input
-                                        className="relative inline-block h-14 w-40 overflow-hidden border-sky-500 px-5 py-2 text-sky-500 shadow-lg before:absolute before:inset-0 before:-z-10 before:block before:translate-x-[90%] before:rounded-s-full before:bg-sky-600 before:duration-200 after:absolute after:inset-0 after:-z-10 after:block after:-translate-x-[90%] after:rounded-e-full after:bg-sky-600 after:duration-500 hover:text-white before:hover:translate-x-0 after:hover:translate-x-0"
-                                        type="submit"
-                                        value={"Submit"}
-                                    /> */}
                                     <button type="submit" className="relative inline-block h-14 w-40 overflow-hidden border-sky-500 px-5 py-2 
                                     text-sky-500 shadow-lg before:absolute before:inset-0 before:-z-10 before:block before:translate-x-[90%] 
                                     before:rounded-s-full before:bg-sky-600 before:duration-200 after:absolute after:inset-0 after:-z-10 after:block after:-translate-x-[90%] after:rounded-e-full 
@@ -89,10 +77,9 @@ const Login = () => {
                                 <div className="divider divide-red-50"></div>
                                 <p className="text-center text-sm font-semibold">
                                     Not a tutor yet?
-                                    <Link className="text-base font-bold text-red-600 tracking-wider" to="/registrationview"> Register Here
-                                    </Link>
+                                    <a className="text-base font-bold text-red-600 tracking-wider" href="/registrationview"> Register Here
+                                    </a>
                                 </p>
-                                {/* <p className="mt-1 text-center text-red-400">{msg}</p> */}
                             </div>
                         </div>
                     </div>

@@ -15,7 +15,10 @@
     <!-- AOS animation script link -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-      AOS.init();
+      // Ensure the script runs after the DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        AOS.init();
+      });
     </script>
   </body>
 </html>

@@ -47,105 +47,103 @@ const Registration = () => {
     const imageURL = `https://api.imgbb.com/1/upload?key=${imageURLKey}`;
 
     const onSubmit = async (data) => {
-        try {
-            const imageFile = data.image[0];
-            setImageError(null);
+    try {
+        console.log("Form data:", data);
 
-            if (imageFile.size > 2 * 1024 * 1024) {
-                setImageError("Image size should not exceed 2MB.");
-                return;
-            }
+        // Prepare form data for image upload
+        const formData = new FormData();
+        let selectedImage;
 
-            const formData = new FormData();
-            formData.append("image", imageFile);
-
-            const imageResponse = await fetch(imageURL, {
-                method: "POST",
-                body: formData,
-            });
-            const imageData = await imageResponse.json();
-
-            if (!imageData.success) {
-                throw new Error("Failed to upload image");
-            }
-
-            const imgURL = imageData.data.display_url;
-
-            // Prepare the user data
-            const userDate = {
-                name: data.name,
-                email: data.email,
-                phone: data.phone,
-                address: data.address,
-                password: data.password,
-                confirmPassword: data.confirmPassword,
-                isAdmin: registerRole === "Admin",
-                isParent: registerRole === "Parent",
-                isTutor: registerRole === "Tutor",
-                isCoaching: registerRole === "Coaching",
-                image: imgURL,  
-                nidBirth: null,
-            };
-
-            // Handle other role-specific files
-            if (data.coachingLogoImage && data.coachingLogoImage[0]) {
-                formData.append("coachingLogoImage", data.coachingLogoImage[0]);
-                userDate.image = data.coachingLogoImage[0];
-            }
-            if (data.coachingTedLicense && data.coachingTedLicense[0]) {
-                formData.append("coachingTedLicense", data.coachingTedLicense[0]);
-                userDate.nidBirth = data.coachingTedLicense[0];
-            }
-            if (data.parentImage && data.parentImage[0]) {
-                formData.append("parentImage", data.parentImage[0]);
-                userDate.image = data.parentImage[0];
-            }
-            if (data.parentNIDCart && data.parentNIDCart[0]) {
-                formData.append("parentNIDCart", data.parentNIDCart[0]);
-                userDate.nidBirth = data.parentNIDCart[0];
-            }
-            if (data.tutorImage && data.tutorImage[0]) {
-                formData.append("tutorImage", data.tutorImage[0]);
-                userDate.image = data.tutorImage[0];
-            }
-            if (data.tutorIDCart && data.tutorIDCart[0]) {
-                formData.append("tutorIDCart", data.tutorIDCart[0]);
-                userDate.nidBirth = data.tutorIDCart[0];
-            }
-
-            const response = await axios.post(`${serverApiUrl}/api/users/process-register`, userDate);
-
-            if (response.status === 201) {
-                reset();
-                Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: response.data.message, 
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-            }
-        } catch (error) {
-            if (error.response?.status === 422) {
-                const errorMessages = error.response.data.errors;
-                Swal.fire({
-                    title: "Validation Error",
-                    icon: "error",
-                    html: errorMessages
-                        .map((err) => `<p>${err.field}: ${err.message}</p>`)
-                        .join(""),
-                });
-            } else {
-                Swal.fire({
-                    title: "Error",
-                    text: error.message || "Something went wrong",
-                    icon: "error",
-                });
-            }
+        // Determine the image based on role
+        if (registerRole === "Coaching" && data.coachingLogoImage?.[0]) {
+            selectedImage = data.coachingLogoImage[0];
+        } else if (registerRole === "Parent" && data.parentImage?.[0]) {
+            selectedImage = data.parentImage[0];
+        } else if (registerRole === "Tutor" && data.tutorImage?.[0]) {
+            selectedImage = data.tutorImage[0];
+        } else {
+            setImageError("No image provided for the selected role.");
+            return;
         }
-    };
 
+        formData.append("image", selectedImage);
 
+        // Upload image
+        const imageResponse = await fetch(imageURL, {
+            method: "POST",
+            body: formData,
+        });
+        const imageData = await imageResponse.json();
+
+        if (!imageData.success) {
+            throw new Error("Failed to upload image");
+        }
+
+        const imgURL = imageData.data.display_url; 
+
+        // Map role to boolean fields
+        const roleMapping = {
+            Admin: { isAdmin: true, isTutor: false, isParent: false, isCoaching: false },
+            Tutor: { isAdmin: false, isTutor: true, isParent: false, isCoaching: false },
+            Parent: { isAdmin: false, isTutor: false, isParent: true, isCoaching: false },
+            Coaching: { isAdmin: false, isTutor: false, isParent: false, isCoaching: true },
+        };
+
+        const roleData = roleMapping[registerRole] || {};
+
+        // Prepare user data
+        const userData = {
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            address: data.address,
+            password: data.password,
+            gender: data.gender,
+            image: imgURL,
+            ...roleData, 
+        };
+
+        console.log("Prepared user data:", userData);
+
+        // Post data to backend
+        const response = await axios.post(`${serverApiUrl}/api/users/process-register`, userData);
+
+        if (response.status === 200) {
+            console.log("Response data:", response?.data);
+            reset();
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: response.data.message || "Please Check Your Email",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+    } catch (error) {
+        if (error.response?.status === 409) {
+            Swal.fire({
+                title: "User Exists",
+                text: error.response.data.message || "This email is already registered.",
+                icon: "error",
+            });
+        } else if (error.response?.status === 422) {
+            const errorMessages = error.response.data?.errors || [];
+            Swal.fire({
+                title: "Validation Error",
+                icon: "error",
+                html: errorMessages
+                    .map((err) => `<p>${err.field}: ${err.message}</p>`)
+                    .join(""),
+            });
+        } else {
+            Swal.fire({
+                title: "Error",
+                text: error.message || "Something went wrong",
+                icon: "error",
+            });
+        }
+    }
+};
 
     return (
         <div className=" footerBg h-screen">
@@ -332,28 +330,28 @@ const Registration = () => {
                                     <input
                                         {...register("isAdmin")}
                                         name="isAdmin"
-                                        defaultValue={registerRole === 'admin'}
+                                        defaultValue={registerRole === 'Admin'}
                                     />
                                     <input
                                         {...register("isParent")}
                                         name="isParent"
-                                        defaultValue={registerRole === 'parent'}
+                                        defaultValue={registerRole === 'Parent'}
                                     />
                                     <input
                                         {...register("isTutor")}
                                         name="isTutor"
-                                        defaultValue={registerRole === 'tutor'}
+                                        defaultValue={registerRole === 'Tutor'}
                                     />
                                     <input
                                         {...register("isCoaching")}
                                         name="isCoaching"
-                                        defaultValue={registerRole === 'coaching'}
+                                        defaultValue={registerRole === 'Coaching'}
                                     />
                                 </div>
 
                                 {/*  Condition Photo session section */}
                                 {
-                                    registerRole === "coaching" ?
+                                    registerRole === "Coaching" ?
                                         (
                                             <div className="flex items-center justify-between gap-5">
                                                 {/* coaching Logo Image File */}
@@ -370,7 +368,7 @@ const Registration = () => {
                                                         />
                                                         {errors.coachingLogoImage && (
                                                             <span className="mt-1 text-red-500">
-                                                                Coaching Logo Image is required
+                                                                Logo Image is required
                                                             </span>
                                                         )}
                                                         {imageError && (
@@ -379,34 +377,13 @@ const Registration = () => {
                                                     </div>
                                                 </div>
 
-                                                {/* coaching Ted License file */}
-                                                {/* <div className="md:1/3 w-full ">
-                                                    <label htmlFor="coachingTedLicense" className="block text-slate-700 font-medium pb-1">
-                                                        <span className="font-bold text-slate-500 tracking-wider">Coaching TED License</span>
-                                                    </label>
-                                                    <div className='form-control rounded-lg border-2   items-center '>
-                                                        <input
-                                                            {...register('coachingTedLicense', { required: true })}
-                                                            name='coachingTedLicense'
-                                                            type='file'
-                                                            className='file-input file-input-bordered file-input-md w-full max-w-md'
-                                                        />
-                                                        {errors.coachingTedLicense && (
-                                                            <span className="mt-1 text-red-500">
-                                                                Coaching Ted License is required
-                                                            </span>
-                                                        )}
-                                                        {imageError && (
-                                                            <p className="text-red-500 text-sm">{imageError}</p>
-                                                        )}
-                                                    </div>
-                                                </div> */}
+
                                             </div>
                                         )
                                         :
                                         <>
                                             {
-                                                registerRole === "parent" ?
+                                                registerRole === "Parent" ?
                                                     (
                                                         <div className="md:flex items-center justify-between gap-5">
                                                             {/* parent Image File */}
@@ -431,37 +408,16 @@ const Registration = () => {
                                                                     )}
                                                                 </div>
                                                             </div>
-                                                            {/* parent NID Image file */}
-                                                            {/* <div className="md:col-span-2 col-span-1">
-                                                                <label htmlFor="parentNIDCart" className="block text-slate-700 font-medium pb-1">
-                                                                    <span className="font-bold text-slate-500 tracking-wider">Upload Your NID Cart</span>
-                                                                </label>
-                                                                <div className='form-control rounded-lg border-2   items-center '>
-                                                                    <input
-                                                                        {...register('parentNIDCart', { required: true })}
-                                                                        name='parentNIDCart'
-                                                                        type='file'
-                                                                        className='file-input file-input-bordered file-input-md w-full max-w-md'
-                                                                    />
-                                                                    {errors.parentNIDCart && (
-                                                                        <span className="mt-1 text-red-500">
-                                                                            NID Cart is required
-                                                                        </span>
-                                                                    )}
-                                                                    {imageError && (
-                                                                        <p className="text-red-500 text-sm">{imageError}</p>
-                                                                    )}
-                                                                </div>
-                                                            </div> */}
+
                                                             {/* gender */}
                                                             <div className="md:w-1/3 w-full">
                                                                 <label htmlFor='' className='block text-slate-700 font-medium pb-1'>
                                                                     <span className="font-bold text-slate-500 tracking-wider">Gender</span>
                                                                 </label>
                                                                 <select {...register("gender")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
-                                                                    <option value="male">male</option>
-                                                                    <option value="female">female</option>
-                                                                    <option value="other">other</option>
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                    <option value="Other">Other</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -491,36 +447,15 @@ const Registration = () => {
                                                                     )}
                                                                 </div>
                                                             </div>
-                                                            {/* tutor Student ID Image file */}
-                                                            {/* <div className="md:col-span-2 col-span-1">
-                                                                <label htmlFor="tutorIDCart" className="block text-slate-700 font-medium pb-1">
-                                                                    <span className="font-bold text-slate-500 tracking-wider">Upload Student Id Cart</span>
-                                                                </label>
-                                                                <div className='form-control rounded-lg border-2   items-center '>
-                                                                    <input
-                                                                        {...register('tutorIDCart', { required: true })}
-                                                                        name='tutorIDCart'
-                                                                        type='file'
-                                                                        className='file-input file-input-bordered file-input-md w-full max-w-md'
-                                                                    />
-                                                                    {errors.tutorIDCart && (
-                                                                        <span className="mt-1 text-red-500">
-                                                                            ID Cart is required
-                                                                        </span>
-                                                                    )}
-                                                                    {imageError && (
-                                                                        <p className="text-red-500 text-sm">{imageError}</p>
-                                                                    )}
-                                                                </div>
-                                                            </div> */}
+
                                                             <div className="md:w-1/3 w-full">
                                                                 <label htmlFor='' className='block text-slate-700 font-medium pb-1'>
                                                                     <span className="font-bold text-slate-500 tracking-wider">Gender</span>
                                                                 </label>
                                                                 <select {...register("gender")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
-                                                                    <option value="male">male</option>
-                                                                    <option value="female">female</option>
-                                                                    <option value="other">other</option>
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                    <option value="Other">Other</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -556,7 +491,6 @@ const Registration = () => {
                                     <Link className="text-base font-bold text-red-600 tracking-wider" to="/login"> Login
                                     </Link>
                                 </p>
-                                {/* <p className="mt-1 text-center text-red-400">{msg}</p> */}
                             </div>
                         </div>
                     </div>
