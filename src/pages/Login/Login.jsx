@@ -10,6 +10,66 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
    
+const [password, setPassword] = useState("");
+const [passShow, setPassShow] = useState(false);
+const navigate = useNavigate();
+const {
+    register,
+    handleSubmit,
+    formState: { errors },
+} = useForm();
+
+// onSubmit function for the login form
+const onSubmit = async (data) => {
+    const userData = {
+        email: data.email,
+        password: data.password,
+    };
+
+    try {
+        // Ensure that the credentials (cookies) are included in the request
+        const response = await axios.post(
+            `${serverApiUrl}/api/auth/login`,
+            userData,
+            { withCredentials: true } // This ensures that cookies are sent with the request
+        );
+
+        if (response.status === 200) {
+            // On successful login, the server will set the cookies (accessToken and refreshToken)
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: response.data.message,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+
+            // You can redirect the user to another page (e.g., dashboard)
+            // Example: window.location.href = "/dashboard"; 
+            navigate('/')
+        }
+    } catch (error) {
+        if (error.response?.status === 401) {
+            Swal.fire({
+                title: "Error",
+                text: "Invalid email or password",
+                icon: "error",
+            });
+        } else if (error.response?.status === 403) {
+            Swal.fire({
+                title: "Banned",
+                text: "Your account is banned. Please contact the authorities.",
+                icon: "error",
+            });
+        } else {
+            Swal.fire({
+                title: "Error",
+                text: error.message || "Something went wrong. Please try again.",
+                icon: "error",
+            });
+        }
+    }
+};
     return (
         <div className="footerBg h-screen">
             <PageTitleShow currentPage="Login | " />
