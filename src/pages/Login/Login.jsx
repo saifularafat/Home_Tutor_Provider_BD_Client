@@ -43,9 +43,6 @@ const onSubmit = async (data) => {
                 showConfirmButton: false,
                 timer: 1500,
             });
-
-            // You can redirect the user to another page (e.g., dashboard)
-            // Example: window.location.href = "/dashboard"; 
             navigate('/')
         }
     } catch (error) {

@@ -2,9 +2,11 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { serverApiUrl } from "../../../ApiSecret";
+import { useNavigate } from "react-router-dom";
 
 const ActivateUser = () => {
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
@@ -21,6 +23,7 @@ const ActivateUser = () => {
                     showConfirmButton: false,
                     timer: 1500,
                 });
+                navigate('/login')
             }
         } catch (error) {
             if (error.response?.data?.message) {

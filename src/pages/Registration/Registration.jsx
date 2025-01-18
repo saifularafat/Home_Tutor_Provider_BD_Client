@@ -47,103 +47,116 @@ const Registration = () => {
     const imageURL = `https://api.imgbb.com/1/upload?key=${imageURLKey}`;
 
     const onSubmit = async (data) => {
-    try {
-        console.log("Form data:", data);
+        try {
+            console.log("Form data:", data);
 
-        // Prepare form data for image upload
-        const formData = new FormData();
-        let selectedImage;
+            const formData = new FormData();
+            let selectedImage;
 
-        // Determine the image based on role
-        if (registerRole === "Coaching" && data.coachingLogoImage?.[0]) {
-            selectedImage = data.coachingLogoImage[0];
-        } else if (registerRole === "Parent" && data.parentImage?.[0]) {
-            selectedImage = data.parentImage[0];
-        } else if (registerRole === "Tutor" && data.tutorImage?.[0]) {
-            selectedImage = data.tutorImage[0];
-        } else {
-            setImageError("No image provided for the selected role.");
-            return;
-        }
+            // Determine the image based on role
+            if (registerRole === "Coaching" && data.coachingLogoImage?.[0]) {
+                selectedImage = data.coachingLogoImage[0];
+            } else if (registerRole === "Parent" && data.parentImage?.[0]) {
+                selectedImage = data.parentImage[0];
+            } else if (registerRole === "Tutor" && data.tutorImage?.[0]) {
+                selectedImage = data.tutorImage[0];
+            } else {
+                setImageError("No image provided for the selected role.");
+                return;
+            }
 
-        formData.append("image", selectedImage);
+            formData.append("image", selectedImage);
 
-        // Upload image
-        const imageResponse = await fetch(imageURL, {
-            method: "POST",
-            body: formData,
-        });
-        const imageData = await imageResponse.json();
-
-        if (!imageData.success) {
-            throw new Error("Failed to upload image");
-        }
-
-        const imgURL = imageData.data.display_url; 
-
-        // Map role to boolean fields
-        const roleMapping = {
-            Admin: { isAdmin: true, isTutor: false, isParent: false, isCoaching: false },
-            Tutor: { isAdmin: false, isTutor: true, isParent: false, isCoaching: false },
-            Parent: { isAdmin: false, isTutor: false, isParent: true, isCoaching: false },
-            Coaching: { isAdmin: false, isTutor: false, isParent: false, isCoaching: true },
-        };
-
-        const roleData = roleMapping[registerRole] || {};
-
-        // Prepare user data
-        const userData = {
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            address: data.address,
-            password: data.password,
-            gender: data.gender,
-            image: imgURL,
-            ...roleData, 
-        };
-
-        console.log("Prepared user data:", userData);
-
-        // Post data to backend
-        const response = await axios.post(`${serverApiUrl}/api/users/process-register`, userData);
-
-        if (response.status === 200) {
-            console.log("Response data:", response?.data);
-            reset();
-            Swal.fire({
-                position: "top-center",
-                icon: "success",
-                title: response.data.message || "Please Check Your Email",
-                showConfirmButton: false,
-                timer: 1500,
+            // Upload image
+            const imageResponse = await fetch(imageURL, {
+                method: "POST",
+                body: formData,
             });
+            const imageData = await imageResponse.json();
+
+            if (!imageData.success) {
+                throw new Error("Failed to upload image");
+            }
+
+            const imgURL = imageData.data.display_url;
+
+            // Role-specific flags
+            let roleFlags = {
+                isAdmin: false,
+                isTutor: false,
+                isParent: false,
+                isCoaching: false,
+            };
+            // Based on the registerRole, set the respective flag to true
+            switch (registerRole) {
+                case "Admin":
+                    roleFlags.isAdmin = true;
+                    break;
+                case "Tutor":
+                    roleFlags.isTutor = true;
+                    break;
+                case "Parent":
+                    roleFlags.isParent = true;
+                    break;
+                case "Coaching":
+                    roleFlags.isCoaching = true;
+                    break;
+                default:
+                    break;
+            }
+            // Prepare user data
+            const userData = {
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                address: data.address,
+                password: data.password,
+                gender: data.gender,
+                image: imgURL,
+                ...roleFlags,
+            };
+
+            console.log("Prepared user data:", userData);
+
+            // Post data to backend
+            const response = await axios.post(`${serverApiUrl}/api/users/process-register`, userData);
+
+            if (response.status === 200) {
+                console.log("Response data:", response?.data);
+                reset();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: response.data.message || "Please Check Your Email",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
+        } catch (error) {
+            if (error.response?.status === 409) {
+                Swal.fire({
+                    title: "User Exists",
+                    text: error.response.data.message || "This email is already registered.",
+                    icon: "error",
+                });
+            } else if (error.response?.status === 422) {
+                const errorMessages = error.response.data?.errors || [];
+                Swal.fire({
+                    title: "Validation Error",
+                    icon: "error",
+                    html: errorMessages
+                        .map((err) => `<p>${err.field}: ${err.message}</p>`)
+                        .join(""),
+                });
+            } else {
+                Swal.fire({
+                    title: "Error",
+                    text: error.message || "Something went wrong",
+                    icon: "error",
+                });
+            }
         }
-    } catch (error) {
-        if (error.response?.status === 409) {
-            Swal.fire({
-                title: "User Exists",
-                text: error.response.data.message || "This email is already registered.",
-                icon: "error",
-            });
-        } else if (error.response?.status === 422) {
-            const errorMessages = error.response.data?.errors || [];
-            Swal.fire({
-                title: "Validation Error",
-                icon: "error",
-                html: errorMessages
-                    .map((err) => `<p>${err.field}: ${err.message}</p>`)
-                    .join(""),
-            });
-        } else {
-            Swal.fire({
-                title: "Error",
-                text: error.message || "Something went wrong",
-                icon: "error",
-            });
-        }
-    }
-};
+    };
 
     return (
         <div className=" footerBg h-screen">
