@@ -1,79 +1,45 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import HirePageRequestModel from "../../../Components/Model/HirePageRequestModel";
-const HireRequestFrom = () => {
+import { BdAllDistrictAndArea } from "../../../Helpers/BdAllDistrictAndArea";
+import { singleTutor } from "../../../api/allTutor";
+import Loading from "../../../Components/Loading/Loading";
+import ErrorComponent from "../../../Components/ErrorComponent/ErrorComponent";
+import NoJobFound from "../../../Components/NoFoundData/NoFoundData";
+const HireRequestFrom = ({ id }) => {
     const [openModal, setOpenModal] = useState(false);
-
     const [districts, setDistricts] = useState();
     const [cityAreas, setCityAreas] = useState([]);
 
-    const { register,
-        formState: { errors },
-        handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, } = useForm();
 
-    // location data
-    const BdDistricts = [
-        {
-            stateName: "Dhaka", stateAreas: [
-                { name: "Mirpur-1", },
-                { name: "Kajipara", },
-                { name: "Shahabag", },
-                { name: "Bonosri", },
-                { name: "Shaidabad", },
-                { name: "New Market", },
-                { name: "Dhaka University", },
-                { name: "Baridara", },
-                { name: "Kowran-Bazar", },
-                { name: "Mirpur-10", },
-                { name: "Mirpur-11", },
-                { name: "Mirpur-12", },
-                { name: "Danmondi", },
-                { name: "Jatrabari", },
-                { name: "Gulistan", },
-                { name: "Uttora", },
-            ]
-        },
-        {
-            stateName: "Cumilla", stateAreas: [
-                { name: "Kandirpar", },
-                { name: "Jowtala", },
-                { name: "Rajgonju", },
-                { name: "Ranir-Bazar", },
-                { name: "Shahsongasa", },
-                { name: "polis line", },
-                { name: "Chok-Bazar", },
-                { name: "Bibir-Bazar", },
-                { name: "Burisong", },
-                { name: "B-Para", },
-                { name: "Mirpur", },
-                { name: "Canterman", },
-                { name: "Laksam", },
-            ]
-        },
-        {
-            stateName: "Syhlet", stateAreas: [
-                { name: "Syhlet", },
-                { name: "Sunamgong", },
-                { name: "Hobigong", },
-                { name: "Mahdubpur", },
-                { name: "Molebi-Bazar", },
-                { name: "Srimongol", }
-            ]
-        }
-    ]
+    const { tutors, refetch, isLoading, isError } = singleTutor(id);
+    console.log('object tutors HireRequestFrom serial number 13=====>', tutors);
 
     // LOCATION CLICK show sub location
     const handleDistricts = (e) => {
         setDistricts(e.target.value)
-        setCityAreas(BdDistricts.find(areas => areas.stateName === e.target.value).stateAreas)
+        setCityAreas(BdAllDistrictAndArea.find(areas => areas.stateName === e.target.value).stateAreas)
     }
 
-    // all from is submit from
-    const onSubmit = (data) => {
+    // all data submit from
+    const onSubmit = async(data) => {
+        const hireData = {
+
+        }
         console.log("first data", data);
-
     }
 
+    if (isLoading) {
+        return <Loading />;
+    }
+    if (isError) {
+        return <ErrorComponent message="Error fetching tutor information details." />;
+    }
+
+    if (!tutors) {
+        return <NoJobFound message="No tutor found." />;
+    }
     return (
         <>
             <div>
@@ -106,7 +72,7 @@ const HireRequestFrom = () => {
                                 >
                                     <option value="" selected>-- select -- </option>
                                     {
-                                        BdDistricts.map(district => (
+                                        BdAllDistrictAndArea.map(district => (
                                             <option
                                                 key={district?.stateName}
                                                 value={district?.stateName}>
@@ -119,7 +85,6 @@ const HireRequestFrom = () => {
                                     <p className="text-red-600 text-sm">Location is required</p>
                                 )}
                             </div>
-
                             <div className="w-full">
                                 <label className="label">
                                     <span className="label-text text-lg  font-semibold">Sub Location *</span>

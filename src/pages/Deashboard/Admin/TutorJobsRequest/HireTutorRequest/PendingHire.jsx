@@ -4,7 +4,7 @@ import Loading from "../../../../../Components/Loading/Loading";
 import { useManageAction } from "../../../../../Components/useManageAction/useManageAction";
 
 const PendingHire = ({ pendingHire, refetch, isLoading }) => {
-    console.log("pendingHire Hire 5 ==>>", pendingHire);
+    console.log("pendingHire Hire 5 33333==>>", pendingHire);
 
     const { handleManageAction } = useManageAction(refetch);
     const { handleDeleteById } = useDeleteItemById(refetch);
@@ -78,8 +78,8 @@ const PendingHire = ({ pendingHire, refetch, isLoading }) => {
                                         <td className="py-2">
                                             <div className="flex items-center text-center justify-center">
                                                 <div>
-                                                    <div className="font-medium text-sm">{hire?.JobSubject || "Sciences"}</div>
-                                                    <div className="font-medium text-xs opacity-60">{hire?.JobCategory || "Home"}</div>
+                                                    <div className="font-medium text-sm">{hire?.jobSubject || "Sciences"}</div>
+                                                    <div className="font-medium text-xs opacity-60">{hire?.jobCategory || "Home"}</div>
                                                 </div>
                                             </div>
                                         </td>
@@ -94,16 +94,16 @@ const PendingHire = ({ pendingHire, refetch, isLoading }) => {
                                         <td className="py-2">
                                             <div className="flex items-center text-center justify-center">
                                                 <div>
-                                                    <div className="font-medium text-sm">{hire?.guardianName || "Guardian Name"}</div>
-                                                    <div className="font-medium text-xs opacity-50">{hire?.guardianId || "P-00000"}</div>
+                                                    <div className="font-medium text-sm">{hire?.parentName || "Parent Name"}</div>
+                                                    <div className="font-medium text-xs opacity-50">{hire?.parentId || "P-00000"}</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="py-2">
                                             <div className="flex items-center text-center justify-center">
                                                 <div>
-                                                    <div className="font-medium text-sm">{hire?.guardianAddress || "Dhaka, Bangladesh"}</div>
-                                                    <div className="font-medium text-xs opacity-70">{hire?.guardianPhone || "+8801888888888"}</div>
+                                                    <div className="font-medium text-sm">{hire?.parentAddress || "Dhaka, Bangladesh"}</div>
+                                                    <div className="font-medium text-xs opacity-70">{hire?.parentPhone || "+8801888888888"}</div>
                                                 </div>
                                             </div>
                                         </td>

@@ -3,7 +3,7 @@ import EmptyDataUiShow from "../../../../../Components/EmptyDataUiShow/EmptyData
 import Loading from "../../../../../Components/Loading/Loading";
 
 const ApproveHire = ({ approveHire, refetch, isLoading }) => {
-    console.log("approve Hire 4 ==>>", approveHire);
+    console.log("approve Hire 4 111111==>>", approveHire);
 
     const { handleDeleteById, isDeleting } = useDeleteItemById(refetch);
     // parent information backed modify now 
@@ -77,8 +77,8 @@ const ApproveHire = ({ approveHire, refetch, isLoading }) => {
                                             <td className="py-2">
                                                 <div className="flex items-center text-center justify-center">
                                                     <div>
-                                                        <div className="font-medium text-sm">{hire?.JobSubject || 'Sciences'}</div>
-                                                        <div className="font-medium text-xs opacity-60">{hire?.JobCategory || "Home"}</div>
+                                                        <div className="font-medium text-sm">{hire?.jobSubject || 'Sciences'}</div>
+                                                        <div className="font-medium text-xs opacity-60">{hire?.jobCategory || "Home"}</div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -93,16 +93,16 @@ const ApproveHire = ({ approveHire, refetch, isLoading }) => {
                                             <td className="py-2">
                                                 <div className="flex items-center text-center justify-center">
                                                     <div>
-                                                        <div className="font-medium text-sm">{hire?.guardianName || 'guardian name'}</div>
-                                                        <div className="font-medium text-xs opacity-50">{hire?.guardianId || 'P-00000'}</div>
+                                                        <div className="font-medium text-sm">{hire?.parentName || 'guardian name'}</div>
+                                                        <div className="font-medium text-xs opacity-50">{hire?.parentId || 'P-00000'}</div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className="py-2">
                                                 <div className="flex items-center text-center justify-center">
                                                     <div>
-                                                        <div className="font-medium text-sm">{hire?.guardianAddress || 'Dhaka, Bangladesh'}</div>
-                                                        <div className="font-medium text-xs opacity-70">{hire?.guardianPhone || "+8801888888888"}</div>
+                                                        <div className="font-medium text-sm">{hire?.parentAddress || 'Dhaka, Bangladesh'}</div>
+                                                        <div className="font-medium text-xs opacity-70">{hire?.parentPhone || "+8801888888888"}</div>
                                                     </div>
                                                 </div>
                                             </td>
