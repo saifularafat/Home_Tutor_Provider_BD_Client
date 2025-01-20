@@ -12,20 +12,23 @@ import SearchDropdown from "../../../Components/SearchInputFuntion/SearchDropdow
 import AllSubjects from "../../../Helpers/SubjectData";
 import PreferableClassOptions from "../../../Helpers/PreferableClass";
 import { JobSalary, PerMonth, PerWeek, StudentGender } from "../../../Helpers/TuitionJobCreate";
+import axios from "axios";
+import { serverApiUrl } from "../../../../ApiSecret";
+import Swal from "sweetalert2";
 const HireRequestFrom = ({ id }) => {
     const [openModal, setOpenModal] = useState(false);
     const [districts, setDistricts] = useState();
     const [cityAreas, setCityAreas] = useState([]);
 
-    const { register, formState: { errors }, handleSubmit, setValue, watch } = useForm();
+    const { register, formState: { errors }, reset, handleSubmit, setValue, watch } = useForm();
 
     const { tutors, refetch, isLoading, isError } = singleTutor(id);
     const [users] = useAllUsers();
     const { users: allUsers } = users || [];
-    
+
     if (!allUsers) {
-    return <Loading />;
-}
+        return <Loading />;
+    }
     // console.log('object allUsers HireRequestFrom serial number 13=====>', allUsers);
     const parentFind = allUsers.find((parent) => parent?.isParent === true) || {}
 
@@ -50,7 +53,7 @@ const HireRequestFrom = ({ id }) => {
             tutorEmail: tutors?.user?.email || '',
             tutorName: tutors?.user?.name || '',
             tutorPhone: tutors?.user?.phone || "",
-            tutorImage: tutors?.user?.image || "image upcomming",
+            tutorImage: tutors?.user?.image || "image upComming",
             tutorAddress: tutors?.user?.address || "",
             // parent info
             ParentEmail: parentFind?.email || "",
@@ -71,9 +74,31 @@ const HireRequestFrom = ({ id }) => {
             studentSubLocation: data?.studentSubLocation || "",
             tuitionFullAddress: data?.tuitionFullAddress || "",
             comments: data?.comments || "",
-
         }
         console.log("first data hire Data ===>>>", hireData);
+        try {
+            const response = await axios.post(`${serverApiUrl}/api/tutor-hire-request`, hireData);
+            console.log("API Response:", response.data);
+            if (response.data.success) {
+                reset();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        } catch (error) {
+            console.error("Error posting tutor hire request information:", error.response?.data || error.message);
+            Swal.fire({
+                position: "top-center",
+                icon: "error",
+                title: "Failed to create job. Check your inputs.",
+                text: error.response?.data?.message || error.message,
+                showConfirmButton: true
+            });
+        }
     }
 
     if (isLoading) {
@@ -253,12 +278,13 @@ const HireRequestFrom = ({ id }) => {
                             <input
                                 type="number"
                                 placeholder="Your Parent Phone Number"
-                                {...register("parentPhone", { required: true, maxLength: 120 })}
-                                className="input input-bordered w-full text-base"
+                                {...register("parentPhone", { required: "Contact number is required", maxLength: 14, value: '8801' })}
+                                className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                             />
-                            {errors.parentPhone?.type === "required" && (
-                                <p className="text-red-600 text-sm">Parent Phone Number is required</p>
-                            )}
+                            {
+                                errors.parentPhone?.type === "required" && (
+                                    <p className="text-red-600 text-sm">Parent Phone Number is required</p>
+                                )}
                         </div>
                         <div className="md:col-span-2">
                             <label className="label">
