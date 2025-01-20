@@ -24,11 +24,18 @@ const InfoCart = () => {
 
     const [tutors] = allTutor();
 
-    const [payload] = useParentRequestTutor();
-    const { tutorRequest = [] } = payload || { tutorRequest: [] };
 
     const [payloads] = useAllRequestJobs();
-    const { pagination = {} } = payloads || { tutorJobApplies: [] };
+    const { tutorJobApplies = [], pagination = {} } = payloads || { tutorJobApplies: [], pagination: {} };
+    const approveRequestJob = tutorJobApplies?.filter((singleJob) => singleJob?.isJobApply === true) || [];
+    const pendingRequestJob = tutorJobApplies?.filter((singleJob) => singleJob?.isJobApply === false) || [];
+    console.log('all approveRequestJob', approveRequestJob);
+    console.log('all pendingRequestJob', pendingRequestJob);
+
+    const [payload] = useParentRequestTutor();
+    const { tutorRequest = [] } = payload || { tutorRequest: [] };
+    const hireTutorPending = (tutorRequest || []).filter((data) => data.isTutorRequest === false);
+    const hireTutorApprove = (tutorRequest || []).filter((data) => data.isTutorRequest === true);
 
     const [blogs] = useAllBlogs();
     const { blogs: blog } = blogs || {};
@@ -87,7 +94,7 @@ const InfoCart = () => {
 
                 <h2 className="text-2xl font-semibold text-slate-600">Tuition Jobs Information</h2>
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-5">
-                    <Link to="/dashboard/all-request-approve-jobs" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-500 hover:text-white border-blue-500 bg-white rounded-md hover:border-r-blue-500 hover:border-l-blue-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+                    <Link to="/dashboard/all-jobs-request-approve" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-500 hover:text-white border-blue-500 bg-white rounded-md hover:border-r-blue-500 hover:border-l-blue-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">
                             <div>
                                 <h4 className="text-lg font-medium">Total Tuition Jobs</h4>
@@ -96,22 +103,20 @@ const InfoCart = () => {
                             <MdWorkHistory className="md:text-3xl text-xl" />
                         </div>
                     </Link>
-                    <Link to="/dashboard/all-request-approve-jobs" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-red-400 hover:text-white border-red-400 bg-white rounded-md hover:border-r-rose-400 hover:border-l-rose-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+                    <Link to="/dashboard/all-jobs-request-approve" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-red-400 hover:text-white border-red-400 bg-white rounded-md hover:border-r-rose-400 hover:border-l-rose-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">
                             <div>
-                                <h4 className="text-lg font-medium">Request Jobs</h4>
-                                {/* <p className="text-center">{pagination?.totalNumberOfTuition}</p> */}
-                                <p className="text-center">00</p>
+                                <h4 className="text-lg font-medium">Pending Jobs</h4>
+                                <p className="text-center">{pendingRequestJob?.length}</p>
                             </div>
                             <MdWorkHistory className="md:text-3xl text-xl" />
                         </div>
                     </Link>
-                    <Link to="/dashboard/all-request-approve-jobs" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-green-500 hover:text-white border-green-500 bg-white rounded-md hover:border-r-green-500 hover:border-l-green-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+                    <Link to="/dashboard/all-jobs-request-approve" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-green-500 hover:text-white border-green-500 bg-white rounded-md hover:border-r-green-500 hover:border-l-green-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">
                             <div>
-                                <h4 className="text-lg font-medium">Accept Jobs</h4>
-                                {/* <p className="text-center">{pagination?.totalNumberOfTuition}</p> */}
-                                <p className="text-center">00</p>
+                                <h4 className="text-lg font-medium">Approve Jobs</h4>
+                                <p className="text-center">{approveRequestJob?.length}</p> 
                             </div>
                             <MdWorkHistory className="md:text-3xl text-xl" />
                         </div>
@@ -120,7 +125,7 @@ const InfoCart = () => {
 
                 <h2 className="text-2xl font-semibold text-slate-600">Tutor Request Information</h2>
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-5">
-                    <Link to="/dashboard/tutor-jobs-request" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-blue-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+                    <Link to="/dashboard/hire-tutor-request-approve" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-blue-400 hover:text-white border-blue-400 bg-white rounded-md hover:border-r-blue-400 hover:border-l-blue-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">
                             <div>
                                 <h4 className="text-lg font-medium">Total Tutor</h4>
@@ -129,22 +134,20 @@ const InfoCart = () => {
                             <PiHandshakeDuotone className="md:text-3xl text-xl" />
                         </div>
                     </Link>
-                    <Link to="/dashboard/tutor-jobs-request" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-red-400 hover:text-white border-red-400 bg-white rounded-md hover:border-r-red-400 hover:border-l-red-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+                    <Link to="/dashboard/hire-tutor-request-approve" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-red-400 hover:text-white border-red-400 bg-white rounded-md hover:border-r-red-400 hover:border-l-red-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">
                             <div>
-                                <h4 className="text-lg font-medium">Request Tutor</h4>
-                                {/* <p className="text-center">{tutorRequest?.length}</p> */}
-                                <p className="text-center">00</p>
+                                <h4 className="text-lg font-medium">Pending Tutor</h4>
+                                <p className="text-center">{hireTutorPending?.length}</p>
                             </div>
                             <PiHandshakeDuotone className="md:text-3xl text-xl" />
                         </div>
                     </Link>
-                    <Link to="/dashboard/tutor-jobs-request" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-green-500 hover:text-white border-green-500 bg-white rounded-md hover:border-r-green-500 hover:border-l-green-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+                    <Link to="/dashboard/hire-tutor-request-approve" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-green-500 hover:text-white border-green-500 bg-white rounded-md hover:border-r-green-500 hover:border-l-green-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">
                             <div>
-                                <h4 className="text-lg font-medium">Accept Tutor</h4>
-                                {/* <p className="text-center">{tutorRequest?.length}</p> */}
-                                <p className="text-center">00</p>
+                                <h4 className="text-lg font-medium">Approve Tutor</h4>
+                                <p className="text-center">{hireTutorApprove?.length}</p>
                             </div>
                             <PiHandshakeDuotone className="md:text-3xl text-xl" />
                         </div>
@@ -162,7 +165,7 @@ const InfoCart = () => {
                             <FaBlog className="md:text-3xl text-xl" />
                         </div>
                     </Link>
-                    <Link to="/dashboard/all-request-approve-jobs" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-red-400 hover:text-white border-red-400 bg-white rounded-md hover:border-r-red-400 hover:border-l-red-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+                    <Link to="/dashboard/all-blog" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-red-400 hover:text-white border-red-400 bg-white rounded-md hover:border-r-red-400 hover:border-l-red-400 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">
                             <div>
                                 <h4 className="text-lg font-medium">Pending Blog</h4>
@@ -171,7 +174,7 @@ const InfoCart = () => {
                             <CiSquareQuestion className="md:text-3xl text-xl" />
                         </div>
                     </Link>
-                    <Link to="/dashboard/tutor-jobs-request" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-green-500 hover:text-white border-green-500 bg-white rounded-md hover:border-r-green-500 hover:border-l-green-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
+                    <Link to="/dashboard/all-blog" className="hover:scale-105 shadow-lg border-l-2 border-r-2 hover:bg-green-500 hover:text-white border-green-500 bg-white rounded-md hover:border-r-green-500 hover:border-l-green-500 text-slate-700 font-semibold md:py-4 py-2 md:px-6 px-3 transition-all duration-200">
                         <div className="flex items-center justify-between gap-0">
                             <div>
                                 <h4 className="text-lg font-medium">Approve Blog</h4>
