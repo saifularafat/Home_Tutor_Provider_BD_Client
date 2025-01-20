@@ -20,9 +20,13 @@ export const PerWeek = [
     'Negotiation'
 ]
 
+export const PerMonth = [
+    ...Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
+    'Negotiation'
+];
 
 export const StudentGender = [
-    "Male", 'Female', "Kids", "Others"
+    "Male", 'Female', "Male-Female", "Kids", "Others"
 ]
 
 export const Duration = [
