@@ -42,7 +42,7 @@ const NavTest = () => {
     // const user = { displayName: "Test User" };
     //user minings Coaching
 
-    const {} = useAllUsers();
+    // const {} = useAllUsers();
     const isAdmin = true;
     const isTutor = false;
     const isParent = false
