@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
-import TuitionJobLeftDetails from "./TuitionJobLeftDetails"; // Assuming this component is defined elsewhere
-import TuitionJobRightDetails from "./TuitionJobRightDetails"; // Assuming this component is defined elsewhere
+import TuitionJobLeftDetails from "./TuitionJobLeftDetails";
+import TuitionJobRightDetails from "./TuitionJobRightDetails";
 import HirePageRequestModel from "../../../Components/Model/HirePageRequestModel";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LuLink } from "react-icons/lu";
 import { FaFacebookMessenger, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -19,9 +19,10 @@ const TuitionDetails = () => {
 
     // Fetching tuition job details
     const { tuitionJob, refetch, isLoading, isError } = singleTuitionJobs(id);
-
+    
+    // TODO TUITION JOB POST BY TUTOR 
     if (isLoading) {
-        return <Loading />; 
+        return <Loading />;
     }
     if (isError) {
         return <ErrorComponent message="Error fetching tutor information details." />;

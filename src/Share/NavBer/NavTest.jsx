@@ -8,6 +8,7 @@ import Logo from './Logo'
 import axios from 'axios'
 import { serverApiUrl } from '../../../ApiSecret'
 import Swal from 'sweetalert2'
+import { useAllUsers } from '../../api/useAllUsers'
 
 const NavTest = () => {
     const dark = localStorage.getItem('customDarkTheme')
@@ -40,6 +41,8 @@ const NavTest = () => {
     // Temporary variables for testing
     // const user = { displayName: "Test User" };
     //user minings Coaching
+
+    const {} = useAllUsers();
     const isAdmin = true;
     const isTutor = false;
     const isParent = false
@@ -51,7 +54,7 @@ const NavTest = () => {
         setIsDarkMode(!isDarkMode)
     }
 
-    // TODO LOGOUT HANDLE
+    // TODO LOGOUT HANDLE Error
     const handleLogout = async () => {
         try {
             const response = await axios.post(`${serverApiUrl}/api/auth/logout`, {}, { withCredentials: true });
