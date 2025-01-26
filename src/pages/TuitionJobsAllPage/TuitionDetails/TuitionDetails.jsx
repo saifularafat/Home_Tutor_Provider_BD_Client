@@ -19,7 +19,7 @@ const TuitionDetails = () => {
 
 	// Fetching tuition job details
 	const { tuitionJob, refetch, isLoading, isError } = singleTuitionJobs(id);
-	console.log("fetching tuition job", tuitionJob);
+	// console.log("fetching tuition job", tuitionJob);
 
 	// TODO TUITION JOB POST BY TUTOR
 	if (isLoading) {
@@ -105,12 +105,18 @@ const TuitionDetails = () => {
 							</div>
 						</div>
 					</div>
-					<HirePageRequestModel
+					<Link
+						to={`/tuition-job-apply/${tuitionJob?._id}`}
+						className="rounded-md bg-blue-500 hover:bg-blue-600 transition-all duration-200 px-4 py-[6px] text-white"
+					>
+						Apply
+					</Link>
+					{/* <HirePageRequestModel
 						actionBtn="Apply"
 						subLink={"/dashboard/apply-jobs"}
 						openModal={openModal}
 						setOpenModal={setOpenModal}
-					/>
+					/> */}
 				</div>
 			</div>
 		</div>

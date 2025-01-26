@@ -16,7 +16,7 @@ import RegistrationView from "../pages/RegistrationView/RegistrationView";
 import TuitionDetails from "../pages/TuitionJobsAllPage/TuitionDetails/TuitionDetails";
 import TutorProfileDetails from "../pages/TutorAllPage/TutorProfileDetails/TutorProfileDetails";
 import TutorHireRequest from "../pages/TutorAllPage/TutorHireRequest/TutorHireRequest";
-// secret page 
+// secret page
 import Dashboard from "../Layouts/Dashboard";
 import Profile from "../pages/Deashboard/Profile/Profile";
 import Notice from "../pages/Deashboard/Notice/Notice";
@@ -53,279 +53,216 @@ import EditBlogById from "../pages/Deashboard/Tutor/EditBlogById/EditBlogById";
 import ParentApply from "../pages/Deashboard/Tutor/ParentApply/ParentApply";
 import TuitionJobCreate from "../pages/Deashboard/Admin/TuitionJobCreate/TuitionJobCreate";
 import ActivateUser from "../pages/ActivateUser/ActivateUser";
+import TuitionJobApplyForm from "../pages/TuitionJobsAllPage/TuitionJobApplyForm/TuitionJobApplyForm";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Main />,
-        errorElement: <Error />,
-        children: [
-            {
-                path: "/",
-                element: <Home />,
-            },
-            {
-                path: "/tuition-jobs",
-                element: <TuitionJobs />,
-            },
-            {
-                path: "/tuition-job-details/:id",
-                element: <TuitionDetails />,
-            },
-            {
-                path: "/tutor-profile",
-                element: <TutorProfile />,
-            },
-            {
-                path: "/tutor-details/:id",
-                element: <TutorProfileDetails />,
-            },
-            {
-                path: "/tutor-hire-request/:id",
-                element: <TutorHireRequest />,
-            },
-            {
-                path: "/contact-us",
-                element: <ContactUs />,
-            },
-            {
-                path: "/about-us",
-                element: <About />,
-            },
-            {
-                path: "/registrationview",
-                element: <RegistrationView />
-            },
-            {
-                path: "/api/users/activate/:token",
-                element: <ActivateUser />
-            },
-            {
-                path: "/terms-condition",
-                element: <TermsOfUser />
-            }
-        ]
-    },
-    {
-        path: "/login",
-        element: <Login />
-    },
-    {
-        path: "/registration/parent",
-        element: <Registration />
-    },
-    {
-        path: "/registration/tutor",
-        element: <Registration />
-    },
-    {
-        path: "/registration/coaching",
-        element: <Registration />
-    },
+	{
+		path: "/",
+		element: <Main />,
+		errorElement: <Error />,
+		children: [
+			{
+				path: "/",
+				element: <Home />,
+			},
+			{
+				path: "/tuition-jobs",
+				element: <TuitionJobs />,
+			},
+			{
+				path: "/tuition-job-details/:id",
+				element: <TuitionDetails />,
+			},
+			{
+				path: "/tuition-job-apply/:id",
+				element: <TuitionJobApplyForm />,
+			},
+			{
+				path: "/tutor-profile",
+				element: <TutorProfile />,
+			},
+			{
+				path: "/tutor-details/:id",
+				element: <TutorProfileDetails />,
+			},
+			{
+				path: "/tutor-hire-request/:id",
+				element: <TutorHireRequest />,
+			},
+			{
+				path: "/contact-us",
+				element: <ContactUs />,
+			},
+			{
+				path: "/about-us",
+				element: <About />,
+			},
+			{
+				path: "/registrationview",
+				element: <RegistrationView />,
+			},
+			{
+				path: "/api/users/activate/:token",
+				element: <ActivateUser />,
+			},
+			{
+				path: "/terms-condition",
+				element: <TermsOfUser />,
+			},
+		],
+	},
+	{
+		path: "/login",
+		element: <Login />,
+	},
+	{
+		path: "/registration/parent",
+		element: <Registration />,
+	},
+	{
+		path: "/registration/tutor",
+		element: <Registration />,
+	},
+	{
+		path: "/registration/coaching",
+		element: <Registration />,
+	},
 
+	///// DASHBOARD /////
+	{
+		path: "/dashboard",
+		element: <Dashboard />,
+		children: [
+			// Admin Dashboard Routes
+			{
+				path: "/dashboard/admin-home",
+				element: <AdminHome />,
+			},
+			{
+				path: "/dashboard/manage-all-users",
+				element: <AllUserManage />,
+			},
+			{
+				path: "/dashboard/all-payments",
+				element: <AllPayments />,
+			},
+			{
+				path: "/dashboard/all-jobs-request-approve",
+				element: <AllJobsRequestApprove />,
+			},
+			{
+				path: "/dashboard/hire-tutor-request-approve",
+				element: <HireTutorRequestAndPending />,
+			},
+			{
+				path: "/dashboard/create-tuition-job",
+				element: <TuitionJobCreate />,
+			},
+			{
+				path: "/dashboard/create-notice",
+				element: <CreateNotice />,
+			},
+			{
+				path: "/dashboard/all-tuition-jobs",
+				element: <AllTuitionJobs />,
+			},
+			{
+				path: "/dashboard/all-tutor",
+				element: <AllTutor />,
+			},
+			{
+				path: "/dashboard/coaching-center",
+				element: <CoachingCenterAdmin />,
+			},
+			{
+				path: "/dashboard/all-blog",
+				element: <AllBlog />,
+			},
+			{
+				path: "/dashboard/download-and-pdf-zone",
+				element: <DownloadAndPdfZone />,
+			},
+			{
+				path: "/dashboard/admin-inbox-message",
+				element: <InboxMessage />,
+			},
+			{
+				path: "/dashboard/terms-and-condition",
+				element: <TermsAndCondition />,
+			},
 
+			// Tutor Dashboard Routes
+			{
+				path: "/dashboard/tutor-home",
+				element: <TutorHome />,
+			},
+			{
+				path: "/dashboard/apply-jobs",
+				element: <ApplyJobs />,
+			},
+			{
+				path: "/dashboard/parent-tutor-apply",
+				element: <ParentApply />,
+			},
+			{
+				path: "/dashboard/your-blog",
+				element: <ShowYourBlog />,
+			},
+			{
+				path: "/dashboard/edit-blog/:id",
+				element: <EditBlogById />,
+			},
+			{
+				path: "/dashboard/add-blog",
+				element: <AddBlog />,
+			},
+			{
+				path: "/dashboard/join-meeting",
+				element: <JoinMeeting />,
+			},
+			{
+				path: "/dashboard/tutor-update-profile",
+				element: <TutorUpdateProfile />,
+			},
+			{
+				path: "/dashboard/noticeBoard",
+				element: <Notice />,
+			},
 
-
-    ///// DASHBOARD /////
-    {
-        path: "/dashboard",
-        element: (
-            <Dashboard />
-        ),
-        children: [
-            // Admin Dashboard Routes
-            {
-                path: "/dashboard/admin-home",
-                element: (
-                    <AdminHome />
-                ),
-            },
-            {
-                path: "/dashboard/manage-all-users",
-                element: (
-                    <AllUserManage />
-                ),
-            },
-            {
-                path: "/dashboard/all-payments",
-                element: (
-                    <AllPayments />
-                ),
-            },
-            {
-                path: "/dashboard/all-jobs-request-approve",
-                element: (
-                    <AllJobsRequestApprove />
-                ),
-            },
-            {
-                path: "/dashboard/hire-tutor-request-approve",
-                element: (
-                    <HireTutorRequestAndPending />
-                ),
-            },
-            {
-                path: "/dashboard/create-tuition-job",
-                element: (
-                    <TuitionJobCreate />
-                ),
-            },
-            {
-                path: "/dashboard/create-notice",
-                element: (
-                    <CreateNotice />
-                ),
-            },
-            {
-                path: "/dashboard/all-tuition-jobs",
-                element: (
-                    <AllTuitionJobs />
-                ),
-            },
-            {
-                path: "/dashboard/all-tutor",
-                element: (
-                    <AllTutor />
-                ),
-            },
-            {
-                path: "/dashboard/coaching-center",
-                element: (
-                    <CoachingCenterAdmin />
-                ),
-            },
-            {
-                path: "/dashboard/all-blog",
-                element: (
-                    <AllBlog />
-                ),
-            },
-            {
-                path: "/dashboard/download-and-pdf-zone",
-                element: (
-                    <DownloadAndPdfZone />
-                ),
-            },
-            {
-                path: "/dashboard/admin-inbox-message",
-                element: (
-                    <InboxMessage />
-                ),
-            },
-            {
-                path: "/dashboard/terms-and-condition",
-                element: (
-                    <TermsAndCondition />
-                ),
-            },
-
-            // Tutor Dashboard Routes
-            {
-                path: "/dashboard/tutor-home",
-                element: (
-                    <TutorHome />
-                ),
-            },
-            {
-                path: "/dashboard/apply-jobs",
-                element: (
-                    <ApplyJobs />
-                ),
-            },
-            {
-                path: "/dashboard/parent-tutor-apply",
-                element: (
-                    <ParentApply />
-                ),
-            },
-            {
-                path: "/dashboard/your-blog",
-                element: (
-                    <ShowYourBlog />
-                ),
-            },
-            {
-                path: "/dashboard/edit-blog/:id",
-                element: (
-                    <EditBlogById />
-                ),
-            },
-            {
-                path: "/dashboard/add-blog",
-                element: (
-                    <AddBlog />
-                ),
-            },
-            {
-                path: "/dashboard/join-meeting",
-                element: (
-                    <JoinMeeting />
-                ),
-            },
-            {
-                path: "/dashboard/tutor-update-profile",
-                element: (
-                    <TutorUpdateProfile />
-                ),
-            },
-            {
-                path: "/dashboard/noticeBoard",
-                element: (
-                    <Notice />
-                ),
-            },
-
-            // Parent Dashboard Routes
-            {
-                path: "/dashboard/parent-home",
-                element: (
-                    <ParentHome />
-                ),
-            },
-            {
-                path: "/dashboard/profile-update",
-                element: (
-                    <ProfileUpdate />
-                ),
-            },
-            {
-                path: "/dashboard/parent-notice-board",
-                element: (
-                    <ParentNoticeBoard />
-                ),
-            },
-            {
-                path: "/dashboard/job-request-history",
-                element: (
-                    <JobRequestHistory />
-                ),
-            },
-            {
-                path: "/dashboard/payment-history",
-                element: (
-                    <EnrolPremiumHistory />
-                ),
-            },
-            {
-                path: "/dashboard/join-meeting",
-                element: (
-                    <AddMeeting />
-                ),
-            },
-            {
-                path: "/dashboard/student-analytics",
-                element: (
-                    <StudentAnalytics />
-                ),
-            },
-            {
-                path: "/dashboard/profile",
-                element: (
-                    <Profile />
-                ),
-            },
-        ]
-    }
-
+			// Parent Dashboard Routes
+			{
+				path: "/dashboard/parent-home",
+				element: <ParentHome />,
+			},
+			{
+				path: "/dashboard/profile-update",
+				element: <ProfileUpdate />,
+			},
+			{
+				path: "/dashboard/parent-notice-board",
+				element: <ParentNoticeBoard />,
+			},
+			{
+				path: "/dashboard/job-request-history",
+				element: <JobRequestHistory />,
+			},
+			{
+				path: "/dashboard/payment-history",
+				element: <EnrolPremiumHistory />,
+			},
+			{
+				path: "/dashboard/join-meeting",
+				element: <AddMeeting />,
+			},
+			{
+				path: "/dashboard/student-analytics",
+				element: <StudentAnalytics />,
+			},
+			{
+				path: "/dashboard/profile",
+				element: <Profile />,
+			},
+		],
+	},
 ]);
 export default router;
