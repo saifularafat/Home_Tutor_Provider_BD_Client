@@ -6,15 +6,19 @@ import NoJobFound from "../../../Components/NoFoundData/NoFoundData";
 import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
 import { useForm } from "react-hook-form";
 import { allTutor } from "../../../api/allTutor";
+import axios from "axios";
+import { serverApiUrl } from "../../../../ApiSecret";
+import Swal from "sweetalert2";
 
 const TuitionJobApplyForm = () => {
 	const { id } = useParams();
 
 	// Fetching tuition job details
 	const { tuitionJob, refetch, isLoading, isError } = singleTuitionJobs(id);
-	console.log("fetching tuition job", tuitionJob);
+	// console.log("fetching tuition job", tuitionJob);
 
-	// tutor info
+	// TODO TUTOR INFORMATION WITH COOKIES
+	// Fetching tutors info
 	const [tutors] = allTutor();
 	const { tutors: tutor } = tutors || {};
 	const singleTutorFind = tutor?.find((single) => single?.isTutor === true);
@@ -22,10 +26,15 @@ const TuitionJobApplyForm = () => {
 
 	const {
 		register,
-		formState: { errors },
-		reset,
 		handleSubmit,
-	} = useForm();
+		reset,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			applyContactNumber: singleTutorFind?.phone || "8801",
+			applyWhatsAppNumber: singleTutorFind?.whatsApp || "8801",
+		},
+	});
 
 	const onSubmit = async (data) => {
 		console.log("object", data);
@@ -53,7 +62,36 @@ const TuitionJobApplyForm = () => {
 			jobSchoolName: tuitionJob?.studentSchool,
 			jobWhatsappNumber: tuitionJob?.whatsAppNumber,
 		};
-		console.log("apply data ===>", applyData);
+		console.log("Payload being sent to the server applyData: >>>>>", applyData);
+		try {
+			const response = await axios.post(
+				`${serverApiUrl}/api/job-apply`,
+				applyData
+			);
+			console.log("API Response:", response.data);
+			if (response.data.success) {
+				reset();
+				Swal.fire({
+					position: "top-center",
+					icon: "success",
+					title: response.data.message,
+					showConfirmButton: false,
+					timer: 1500,
+				});
+			}
+		} catch (error) {
+			console.error(
+				"Error posting Your job Apply information:",
+				error.response?.data || error.message
+			);
+			Swal.fire({
+				position: "top-center",
+				icon: "error",
+				title: "Failed to tuition job apply. Check your inputs.",
+				text: error.response?.data?.message || error.message,
+				showConfirmButton: true,
+			});
+		}
 	};
 
 	if (isLoading) {
@@ -71,10 +109,11 @@ const TuitionJobApplyForm = () => {
 	return (
 		<>
 			<PageTitleShow currentPage="Tuition Job Apply |" />
-			<div className="md:w-9/12 w-full mx-auto  my-5 rounded-lg shadow-md hover:shadow-xl hover:shadow-slate-200 transition-all duration-300">
-				<h3 className="text-center text-lg font-medium">
-					{tuitionJob?.jobLocation}
+			<div className="md:w-9/12 w-full mx-auto  my-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-slate-200 transition-all duration-300">
+				<h3 className="text-center text-base font-semibold">
+					Apply Your All Information
 				</h3>
+				<h3 className="text-center text-sm">{tuitionJob?.jobLocation}</h3>
 				<form onSubmit={handleSubmit(onSubmit)} className="pb-5">
 					<div className="grid md:grid-cols-2 gap-3 p-5">
 						{/* Current Location */}
@@ -112,10 +151,9 @@ const TuitionJobApplyForm = () => {
 								placeholder="Your contact number"
 								{...register("applyContactNumber", {
 									required: "Contact number is required",
+									minLength: 11,
 									maxLength: 14,
-									value: "8801",
 								})}
-								defaultValue={singleTutorFind?.phone}
 								onInput={(e) =>
 									(e.target.value = e.target.value.replace(/\D/g, ""))
 								}
@@ -123,7 +161,7 @@ const TuitionJobApplyForm = () => {
 							/>
 							{errors.applyContactNumber && (
 								<p className="text-red-500 text-sm">
-									{errors.applyContactNumber.message}
+									please give your contact number
 								</p>
 							)}
 						</div>
@@ -140,10 +178,9 @@ const TuitionJobApplyForm = () => {
 								placeholder="Your WhatsApp number"
 								{...register("applyWhatsAppNumber", {
 									required: "WhatsApp number is required",
+									minLength: 11,
 									maxLength: 14,
-									value: "8801",
 								})}
-								defaultValue={singleTutorFind?.whatsApp || "N/A"}
 								onInput={(e) =>
 									(e.target.value = e.target.value.replace(/\D/g, ""))
 								}
@@ -151,7 +188,7 @@ const TuitionJobApplyForm = () => {
 							/>
 							{errors.applyWhatsAppNumber && (
 								<p className="text-red-500 text-sm">
-									{errors.applyWhatsAppNumber.message}
+									please give your whatsApp
 								</p>
 							)}
 						</div>
@@ -172,7 +209,7 @@ const TuitionJobApplyForm = () => {
 							></textarea>
 							{errors.applyInformation && (
 								<p className="text-red-500 text-sm">
-									{errors.applyInformation.message}
+									please give your all information with tuition job apply..
 								</p>
 							)}
 						</div>
