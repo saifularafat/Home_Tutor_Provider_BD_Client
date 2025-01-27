@@ -54,6 +54,7 @@ import ParentApply from "../pages/Deashboard/Tutor/ParentApply/ParentApply";
 import TuitionJobCreate from "../pages/Deashboard/Admin/TuitionJobCreate/TuitionJobCreate";
 import ActivateUser from "../pages/ActivateUser/ActivateUser";
 import TuitionJobApplyForm from "../pages/TuitionJobsAllPage/TuitionJobApplyForm/TuitionJobApplyForm";
+import TuitionJobApplyDetails from "../pages/TuitionJobApplyDetails/TuitionJobApplyDetails";
 
 const router = createBrowserRouter([
 	{
@@ -73,10 +74,12 @@ const router = createBrowserRouter([
 				path: "/tuition-job-details/:id",
 				element: <TuitionDetails />,
 			},
+			// TODO PROTOCOL WITH ROUTER
 			{
 				path: "/tuition-job-apply/:id",
 				element: <TuitionJobApplyForm />,
 			},
+			// TODO PROTOCOL WITH ROUTER
 			{
 				path: "/tutor-profile",
 				element: <TutorProfile />,
@@ -84,6 +87,11 @@ const router = createBrowserRouter([
 			{
 				path: "/tutor-details/:id",
 				element: <TutorProfileDetails />,
+			},
+			// TODO PROTOCOL WITH ROUTER
+			{
+				path: "/tuition-job-apply/details/:id",
+				element: <TuitionJobApplyDetails />,
 			},
 			{
 				path: "/tutor-hire-request/:id",
@@ -129,6 +137,7 @@ const router = createBrowserRouter([
 	},
 
 	///// DASHBOARD /////
+	// TODO PROTOCOL WITH ROUTER
 	{
 		path: "/dashboard",
 		element: <Dashboard />,

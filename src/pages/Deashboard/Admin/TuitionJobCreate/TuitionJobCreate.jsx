@@ -106,7 +106,7 @@ const TuitionJobCreate = () => {
 	return (
 		<div className="my-5">
 			<PageTitleShow currentPage="Tuition Job Create |" />
-			<div className="md:max-w-5xl w-full mx-2 md:mx-auto bg-white p-5 rounded-xl shadow-md mt-8">
+			<div className="md:max-w-6xl w-full mx-2 md:mx-auto bg-white p-5 rounded-xl shadow-md mt-8">
 				<h2 className="py-4 text-3xl font-semibold text-slate-700 text-center">
 					Create Tuition Job
 				</h2>
