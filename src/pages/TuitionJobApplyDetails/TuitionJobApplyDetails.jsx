@@ -93,6 +93,19 @@ const TuitionJobApplyDetails = () => {
 												"H-M-S"}
 										</span>
 									</p>
+
+									<p className="text-base bg-slate-50 p-1">
+										Tutor Job Apply Status:{" "}
+										{apply?.isTutorRequest === false ? (
+											<span className="font-bold tracking-widest text-red-500">
+												Pending
+											</span>
+										) : (
+											<span className="font-bold tracking-widest text-green-500">
+												Approve
+											</span>
+										)}
+									</p>
 									<p className="text-sm font-semibold pt-2">
 										Tutor Job Apply Information :
 									</p>
@@ -183,13 +196,15 @@ const TuitionJobApplyDetails = () => {
 										</span>
 									</p>
 									<p className="">
-										Job Date :{" "}
+										Job Date:{" "}
 										<span className="font-semibold italic text-slate-500">
-											{new Date(apply?.jobPostDate).toLocaleDateString() ||
-												"DD-MM-YYYY"}
-											{""}&nbsp; &nbsp;
-											{new Date(apply?.jobPostDate).toLocaleTimeString() ||
-												"H-M-S"}
+											{apply?.jobPostDate
+												? `${new Date(
+														apply.jobPostDate
+												  ).toLocaleDateString()} ${new Date(
+														apply.jobPostDate
+												  ).toLocaleTimeString()}`
+												: "DD-MM-YYYY H-M-S"}
 										</span>
 									</p>
 									<p className="font-semibold pt-2">Job Comment : </p>

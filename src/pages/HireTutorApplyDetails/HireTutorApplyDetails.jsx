@@ -14,7 +14,7 @@ const HireTutorApplyDetails = () => {
 
 	const hireDetails =
 		tutorRequest?.filter((singleJob) => singleJob?._id === id) || [];
-	console.log("id apply job hireDetails => ", hireDetails);
+	// console.log("id apply job hireDetails => ", hireDetails);
 
 	if (isLoading) {
 		return <Loading />;
@@ -126,12 +126,12 @@ const HireTutorApplyDetails = () => {
 										</span>
 									</p>
 									<p className="text-sm">
-										Tutor WhatsApp Number:{" "}
+										Parent WhatsApp Number:{" "}
 										<span className="font-semibold">
 											{hire?.tutorWhatsappNumber || "880100-000-00-000"}
 										</span>
 									</p>
-									<p className="text-sm pb-2">
+									<p className="text-sm">
 										hire Date :{" "}
 										<span className="font-semibold italic text-slate-500">
 											{new Date(hire?.createdAt).toLocaleDateString() ||
@@ -140,6 +140,18 @@ const HireTutorApplyDetails = () => {
 											{new Date(hire?.createdAt).toLocaleTimeString() ||
 												"H-M-S"}
 										</span>
+									</p>
+									<p className="text-base bg-slate-50 p-2">
+										Parent Tutor Hire Status:{" "}
+										{hire?.isTutorRequest === false ? (
+											<span className="font-bold tracking-widest text-red-500">
+												Pending
+											</span>
+										) : (
+											<span className="font-bold tracking-widest text-green-500">
+												Approve
+											</span>
+										)}
 									</p>
 									<p className="text-sm font-semibold bg-slate-50">
 										Tutor Job hire Information : **
