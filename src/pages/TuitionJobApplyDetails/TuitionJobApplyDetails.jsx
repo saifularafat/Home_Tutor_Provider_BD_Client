@@ -29,7 +29,7 @@ const TuitionJobApplyDetails = () => {
 						key={apply?._id}
 						className="grid md:grid-cols-2 md:gap-4 gap-3 py-6"
 					>
-						<div className="col-span-1 text-left md:p-5 p-2.5 bg-green-100 rounded-lg">
+						<div className="col-span-1 text-left md:p-5 p-2.5 bg-green-100 rounded-lg hover:shadow-lg hover:bg-green-200 transition-all duration-300">
 							<h2 className="text-lg font-semibold font-mono border-b-2 border-green-400 md:py-3 py-1.5">
 								Tutor Information
 							</h2>
@@ -83,16 +83,28 @@ const TuitionJobApplyDetails = () => {
 											{apply?.tutorWhatsappNumber || "880100-000-00-000"}
 										</span>
 									</p>
+									<p className="text-sm">
+										Apply Date :{" "}
+										<span className="font-semibold italic text-slate-500">
+											{new Date(apply?.createdAt).toLocaleDateString() ||
+												"DD-MM-YYYY"}
+											{""}&nbsp; &nbsp;
+											{new Date(apply?.createdAt).toLocaleTimeString() ||
+												"H-M-S"}
+										</span>
+									</p>
 									<p className="text-sm font-semibold pt-2">
 										Tutor Job Apply Information :
 									</p>
-									<p className="font-medium text-sm">
+									<p className="font-medium text-sm leading-3">
 										{apply?.tutorDescription || "tutor-description"}
 									</p>
 								</div>
 							</div>
 						</div>
-						<div className="col-span-1 text-right md:p-5 p-2.5 bg-orange-100 rounded-lg">
+
+						{/* tuition job details */}
+						<div className="col-span-1 text-right md:p-5 p-2.5 bg-orange-100 rounded-lg hover:shadow-lg hover:bg-orange-200 transition-all duration-300">
 							<h2 className="text-lg font-semibold font-mono border-b-2 border-orange-400 md:py-3 py-1.5">
 								Tuition Job Information
 							</h2>
@@ -169,6 +181,20 @@ const TuitionJobApplyDetails = () => {
 										<span className="font-semibold">
 											{apply?.jobWhatsappNumber || "88010-000-00-000"}
 										</span>
+									</p>
+									<p className="">
+										Job Date :{" "}
+										<span className="font-semibold italic text-slate-500">
+											{new Date(apply?.jobPostDate).toLocaleDateString() ||
+												"DD-MM-YYYY"}
+											{""}&nbsp; &nbsp;
+											{new Date(apply?.jobPostDate).toLocaleTimeString() ||
+												"H-M-S"}
+										</span>
+									</p>
+									<p className="font-semibold pt-2">Job Comment : </p>
+									<p className="font-normal text-sm leading-3">
+										{apply?.jobComment || "comment"}
 									</p>
 								</div>
 							</div>

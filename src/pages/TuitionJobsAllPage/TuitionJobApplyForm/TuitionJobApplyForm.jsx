@@ -15,14 +15,14 @@ const TuitionJobApplyForm = () => {
 
 	// Fetching tuition job details
 	const { tuitionJob, refetch, isLoading, isError } = singleTuitionJobs(id);
-	// console.log("fetching tuition job", tuitionJob);
+	console.log("fetching tuition job", tuitionJob);
 
 	// TODO TUTOR INFORMATION WITH COOKIES
 	// Fetching tutors info
 	const [tutors] = allTutor();
 	const { tutors: tutor } = tutors || {};
 	const singleTutorFind = tutor?.find((single) => single?.isTutor === true);
-	console.log("fetching singleTutorFind number 20 =>", singleTutorFind);
+	// console.log("fetching singleTutorFind number 20 =>", singleTutorFind);
 
 	const {
 		register,
@@ -58,8 +58,10 @@ const TuitionJobApplyForm = () => {
 			jobSalary: tuitionJob?.jobSalary,
 			jobPerWeek: tuitionJob?.perWeek,
 			jobAddress: tuitionJob?.jobLocation,
+			jobComment: tuitionJob?.jobComment,
 			jobPhone: tuitionJob?.contactNumber,
 			jobSchoolName: tuitionJob?.studentSchool,
+			jobPostDate: tuitionJob?.updatedAt,
 			jobWhatsappNumber: tuitionJob?.whatsAppNumber,
 		};
 		console.log("Payload being sent to the server applyData: >>>>>", applyData);
