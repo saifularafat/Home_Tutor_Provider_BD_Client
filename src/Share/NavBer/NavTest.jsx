@@ -200,7 +200,7 @@ const NavTest = () => {
                                     ) : isParent ? (
                                         <Link to='/joinLiveExam'>Join Live Meeting</Link>
                                     ) : (
-                                        <Link to='/'>leader Board</Link>
+                                        <Link to='/leader-board-with-tutor'>leader Board</Link>
                                     )
                                     }
                                 </li>
@@ -261,23 +261,23 @@ const NavTest = () => {
                                                             {isAdmin ? (
                                                                 <>
                                                                     <Link to='/dashboard/admin-home'>Dashboard</Link>
-                                                                    <Link to='/dashboard/admin-home'>leader</Link>
                                                                 </>
                                                             ) : isTutor ? (
                                                                 <>
                                                                     <Link to='/dashboard/tutor-home'>Dashboard</Link>
-                                                                    <Link to='/dashboard/admin-home'>leader</Link>
                                                                 </>
                                                             ) : isParent ? (
                                                                 <Link to='/dashboard/parent-Home'>Dashboard</Link>
                                                             ) : (
                                                                 <>
                                                                     <Link to='/dashboard/coaching-home'>Dashboard</Link>
-                                                                    <Link to='/dashboard/coaching'>Coaching</Link>
                                                                 </>
                                                             )}
                                                         </li>
                                                     )}
+                                                <li>
+                                                    <Link to='/leader-board-with-tutor'>leader</Link>
+                                                </li>
                                                 <li>
                                                     <Link to='/dashboard/profile'>Profile</Link>
                                                 </li>

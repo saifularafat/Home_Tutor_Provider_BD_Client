@@ -200,10 +200,10 @@ const TuitionJobApplyDetails = () => {
 										<span className="font-semibold italic text-slate-500">
 											{apply?.jobPostDate
 												? `${new Date(
-														apply.jobPostDate
-												  ).toLocaleDateString()} ${new Date(
-														apply.jobPostDate
-												  ).toLocaleTimeString()}`
+													apply.jobPostDate
+												).toLocaleDateString()} ${new Date(
+													apply.jobPostDate
+												).toLocaleTimeString()}`
 												: "DD-MM-YYYY H-M-S"}
 										</span>
 									</p>

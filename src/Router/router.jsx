@@ -56,6 +56,7 @@ import ActivateUser from "../pages/ActivateUser/ActivateUser";
 import TuitionJobApplyForm from "../pages/TuitionJobsAllPage/TuitionJobApplyForm/TuitionJobApplyForm";
 import TuitionJobApplyDetails from "../pages/TuitionJobApplyDetails/TuitionJobApplyDetails";
 import HireTutorApplyDetails from "../pages/HireTutorApplyDetails/HireTutorApplyDetails";
+import LeaderBoardWithTutor from "../pages/Deashboard/LeaderBoardWithTutor/LeaderBoardWithTutor";
 
 const router = createBrowserRouter([
 	{
@@ -122,6 +123,12 @@ const router = createBrowserRouter([
 			{
 				path: "/terms-condition",
 				element: <TermsOfUser />,
+			},
+
+			// TODO PROTOCOL WITH ROUTER
+			{
+				path: "/leader-board-with-tutor",
+				element: <LeaderBoardWithTutor />,
 			},
 		],
 	},
