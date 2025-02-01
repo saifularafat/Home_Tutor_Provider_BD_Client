@@ -243,7 +243,7 @@ const router = createBrowserRouter([
 				element: <JoinMeeting />,
 			},
 			{
-				path: "/dashboard/tutor-update-profile",
+				path: "/dashboard/tutor-update-profile/:id",
 				element: <TutorUpdateProfile />,
 			},
 			{
@@ -257,7 +257,7 @@ const router = createBrowserRouter([
 				element: <ParentHome />,
 			},
 			{
-				path: "/dashboard/profile-update",
+				path: "/dashboard/parent-profile-update/:id",
 				element: <ProfileUpdate />,
 			},
 			{

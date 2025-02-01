@@ -9,6 +9,7 @@ import axios from 'axios'
 import { serverApiUrl } from '../../../ApiSecret'
 import Swal from 'sweetalert2'
 import { useAllUsers } from '../../api/useAllUsers'
+import Loading from '../../Components/Loading/Loading'
 
 const NavTest = () => {
     const dark = localStorage.getItem('customDarkTheme')
@@ -38,11 +39,11 @@ const NavTest = () => {
 
 
 
-    // Temporary variables for testing
-    // const user = { displayName: "Test User" };
-    //user minings Coaching
+    const [users, refetch, isLoading] = useAllUsers();
 
-    // const {} = useAllUsers();
+    const { users: allUsers } = users || {};
+    console.log("object");
+
     const isAdmin = true;
     const isTutor = false;
     const isParent = false
@@ -80,7 +81,9 @@ const NavTest = () => {
     };
 
     //   const [notices] = useLiveExam()
-
+    if (isLoading) {
+        return <Loading />
+    }
     return (
         <Headroom
             style={{
@@ -271,6 +274,7 @@ const NavTest = () => {
                                                             ) : (
                                                                 <>
                                                                     <Link to='/dashboard/coaching-home'>Dashboard</Link>
+                                                                    <Link to='/dashboard/coaching'>Coaching</Link>
                                                                 </>
                                                             )}
                                                         </li>
