@@ -42,7 +42,7 @@ const NavTest = () => {
     const [users, refetch, isLoading] = useAllUsers();
 
     const { users: allUsers } = users || {};
-    console.log("object");
+    // console.log("object");
 
     const isAdmin = true;
     const isTutor = false;

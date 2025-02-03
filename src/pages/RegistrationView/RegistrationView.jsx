@@ -13,8 +13,8 @@ const RegistrationView = () => {
         setSelectedOption(event.target.value)
     }
     return (
-        <div className="container mx-auto md:py-12 py-5">
-              <PageTitleShow currentPage="Registration View |" />
+        <div className="md:max-w-7xl w-full mx-auto md:py-12 py-5">
+            <PageTitleShow currentPage="Registration View |" />
             <h3 className="text-4xl font-extrabold tracking-wider text-slate-800 text-center">Join Us Today</h3>
             <div className='grid md:grid-cols-3 grid-cols-1 mx-3 md:mx-0 space-y-5 md:gap-5 items-center md:py-12 py-1'>
                 <label
