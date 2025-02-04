@@ -6,25 +6,47 @@ import EducationLevels from '../../../../../Helpers/EducationLevels';
 import UniversityGroupSubjects from '../../../../../Helpers/UniversityGroupSubjects';
 import ProgrammingLanguages from '../../../../../Helpers/ProgrammingLangues';
 import PolytechnicSubjects from '../../../../../Helpers/PolytecnicAllSubject';
+import { useParams } from 'react-router-dom';
+import { useSingleUser } from '../../../../../api/useAllUsers';
+import Loading from '../../../../../Components/Loading/Loading';
+import SearchDropDownField from '../../../../../Components/SearchDropDownFiled/SearchDropDownField';
+import { universityResults, YearRange } from '../../../../../Helpers/TuitionJobCreate';
 
 const StepSecondForm = ({ completeStep }) => {
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-  const [selectedUniversity, setSelectedUniversity] = useState(''); // State to store selected university
-  const [educationLevels, setEducationLevels] = useState(''); // State to store selected university
-  const [universitySubjects, setUniversitySubjects] = useState(''); // State to store selected university
-  const [polytechnicSubjects, setPolytechnicSubjects] = useState(''); // State to store selected university
-  const [programmingLanguages, setProgrammingLanguages] = useState(''); // State to store selected university
+  const { id } = useParams();
+  const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
+  console.log("useSingleUser", user?.user);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+    watch,
+  } = useForm();
+  // const [selectedUniversity, setSelectedUniversity] = useState('');
+  // const [educationLevels, setEducationLevels] = useState('');
+  // const [universitySubjects, setUniversitySubjects] = useState('');
+  // const [polytechnicSubjects, setPolytechnicSubjects] = useState('');
+  const [programmingLanguages, setProgrammingLanguages] = useState('');
+
+  const selectedUniversity = watch("selectedUniversity");
+  const educationLevels = watch("educationLevels");
+  const universitySubjects = watch("universitySubjects");
+  const universityResult = watch("universityResult");
+  const collageSubject = watch("collageSubject");
+  const collagePassYear = watch("collagePassYear");
+  const schoolPassYears = watch("schoolPassYears");
   // Handle form submission
   const onSubmit = (data) => {
     const formData = {
-
       universitySubjects: universitySubjects,
       educationLevels: educationLevels,
       programmingLanguages: programmingLanguages,
-      resultUniversity: data.resultUniversity,
+      resultUniversity: data.universityResult,
       collegeName: data.collegeName,
-      collegeGroup: polytechnicSubjects,
+      collegeGroup: collageSubject,
       hscResult: data.hscResult,
       hscPassYears: data.hscPassYears,
       schoolName: data.schoolName,
@@ -37,28 +59,6 @@ const StepSecondForm = ({ completeStep }) => {
     completeStep(formData);
   };
 
-  // Function to update the selected university
-  const handleUniversitySelect = (option) => {
-    setSelectedUniversity(option);
-    setValue('selectedUniversity', option); // Optionally, update react-hook-form's value
-  };
-  // Function to update the selected Education Levels
-  const handleEducationLevels = (option) => {
-    setEducationLevels(option);
-    setValue('educationLevels', option);
-  };
-
-  // Function to update the selected Education Levels
-  const handlePolytechnicSubjects = (option) => {
-    setPolytechnicSubjects(option);
-    setValue('polytechnicSubjects', option);
-  };
-
-  // Function to update the selected Subject
-  const handleUniversitySubjects = (option) => {
-    setUniversitySubjects(option);
-    setValue('universitySubjects', option);
-  };
 
   // Function to update the selected Programming langues
   const handleProgrammingLanguages = (option) => {
@@ -66,6 +66,15 @@ const StepSecondForm = ({ completeStep }) => {
     setValue('programmingLanguages', option);
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (isError) {
+    return <p className="text-red-500">Error fetching user data</p>;
+  }
+  if (!user?.user) {
+    return <p>No user data found</p>;
+  }
   return (
     <>
       <h3 className="text-center text-xl font-semibold pt-4">একাডেমিক ইনফর্মেশন</h3>
@@ -73,105 +82,95 @@ const StepSecondForm = ({ completeStep }) => {
         <h2 className="text-lg font-bold text-slate-800">Education</h2>
 
         {/* University Search Dropdown */}
-        <div className='space-y-2'>
-          <div className="space-y-1">
-            <label className="block text-slate-700 font-medium">
-              <span className="font-bold text-slate-500 tracking-wider">University Name</span>
-            </label>
-            <SearchDropdown
-              options={BangladeshAllUniversitiesName} // Pass university options
-              selectedValue={selectedUniversity}
-              onSelect={handleUniversitySelect} // Callback to handle selection
-            />
-          </div>
+        <SearchDropDownField
+          label="University Name *"
+          options={BangladeshAllUniversitiesName}
+          selectedValue={selectedUniversity}
+          setValue={(value) => setValue("selectedUniversity", value)}
+        />
 
-          <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
-            {/* Class Input */}
-            <div className="col-span-1 space-y-1">
-              <label className="block text-slate-700 font-medium">
-                <span className="font-bold text-slate-500 tracking-wider">Class</span>
-              </label>
-              <SearchDropdown
-                options={EducationLevels}
-                selectedValue={educationLevels}
-                onSelect={handleEducationLevels} // Callback to handle selection
-              />
-            </div>
-            {/* Group/Subject Input */}
-            <div className="col-span-1 space-y-1">
-              <label className="block text-slate-700 font-medium">
-                <span className="font-bold text-slate-500 tracking-wider">Group/Subject</span>
-              </label>
-              <SearchDropdown
-                options={UniversityGroupSubjects}
-                selectedValue={universitySubjects}
-                onSelect={handleUniversitySubjects} // Callback to handle selection
-              />
-            </div>
+        <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
+          {/* Class Input */}
+          <SearchDropDownField
+            label="Your Education Level *"
+            options={EducationLevels}
+            selectedValue={educationLevels}
+            setValue={(value) => setValue("educationLevels", value)}
+          />
 
-            {/* Result Input */}
-            <div className="col-span-1 space-y-1">
+          {/* Group/Subject Input */}
+          <SearchDropDownField
+            label="Group/Subject *"
+            options={UniversityGroupSubjects}
+            selectedValue={universitySubjects}
+            setValue={(value) => setValue("universitySubjects", value)}
+          />
+          {/* Result */}
+          <SearchDropDownField
+            label="Result *"
+            options={universityResults}
+            selectedValue={universityResult}
+            setValue={(value) => setValue("universityResult", value)}
+          />
+
+          <div className='md:col-span-3 col-span-1 space-y-2'>
+            <div className="md:col-span-3 col-span-1 space-y-2">
               <label className="block text-slate-700 font-medium">
-                <span className="font-bold text-slate-500 tracking-wider">Result</span>
+                <span className="text-slate-700 font-semibold">Your College Name*</span>
               </label>
               <input
-                {...register("resultUniversity", { required: true })}
+                {...register("collegeName", { required: true })}
                 type="text"
-                placeholder="Enter Your Class"
+                placeholder="Enter Your College Name"
                 className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
               />
             </div>
-          </div>
-        </div>
 
-        {/* Colleges section */}
-        <div className='space-y-2'>
-          <div className="space-y-1">
-            <label className="block text-slate-700 font-medium">
-              <span className="font-bold text-slate-500 tracking-wider">Your College Name*</span>
-            </label>
-            <input
-              {...register("collegeName", { required: true })}
-              type="text"
-              placeholder="Enter Your College Name"
-              className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
-            />
-          </div>
-
-          <div className='grid md:grid-cols-3 grid-cols-1 gap-5 space-y-1'>
-            {/* Class Input */}
-            <div className="col-span-1 space-y-1">
-              <label className="block text-slate-700 font-medium">
-                <span className="font-bold text-slate-500 tracking-wider">Group</span>
-              </label>
-              <SearchDropdown
+            <div className='grid md:grid-cols-3 grid-cols-1 gap-5 '>
+              {/*Collage Group/Subject Input */}
+              <SearchDropDownField
+                label="Group Subject *"
                 options={PolytechnicSubjects}
-                selectedValue={polytechnicSubjects}
-                onSelect={handlePolytechnicSubjects} // Callback to handle selection
+                selectedValue={collageSubject}
+                setValue={(value) => setValue("collageSubject", value)}
               />
-            </div>
-            {/* Result Input */}
-            <div className="col-span-1 space-y-1">
-              <label className="block text-slate-700 font-medium">
-                <span className="font-bold text-slate-500 tracking-wider">Result</span>
-              </label>
-              <input
-                {...register("hscResult", { required: true })}
-                type="text"
-                placeholder="Your HSC Result"
-                className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
-              />
-            </div>
-            {/*Pass Years Input */}
-            <div className="col-span-1 space-y-1">
-              <label className="block text-slate-700 font-medium">
-                <span className="font-bold text-slate-500 tracking-wider">Pass Years</span>
-              </label>
-              <input
-                {...register("hscPassYears", { required: true })}
-                type="number"
-                placeholder="Pass Years"
-                className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
+              {/* Result Input */}
+              <div className="col-span-1 space-y-2">
+                <label className="block text-slate-700 font-medium">
+                  <span className="font-bold text-slate-500 tracking-wider">Result</span>
+                </label>
+                <input
+                  {...register("collageResult", {
+                    required: "This field is required",
+                    pattern: {
+                      value: /^[0-9]\.\d{2}$/,
+                      message: "Enter a valid result (e.g., 4.50, 3.79, 5.00)",
+                    },
+                  })}
+                  type="text"
+                  placeholder="Enter your result (e.g., 4.50, 5.00, 3.79)"
+                  className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full 
+        placeholder:text-sm placeholder:tracking-wider text-sm"
+                  maxLength={4}
+                  onKeyDown={(e) => {
+                    const allowedKeys = ["Backspace", "Tab", "ArrowLeft", "ArrowRight", "Delete"];
+                    if (!/^[0-9.]$/.test(e.key) && !allowedKeys.includes(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
+                />
+                {errors.collageResult && (
+                  <span className="mt-1 text-red-500">
+                    {errors.collageResult.message}
+                  </span>
+                )}
+              </div>
+              {/*Pass Years Input */}
+              <SearchDropDownField
+                label="Pass Year *"
+                options={YearRange}
+                selectedValue={collagePassYear}
+                setValue={(value) => setValue("collagePassYear", value)}
               />
             </div>
           </div>
@@ -206,29 +205,43 @@ const StepSecondForm = ({ completeStep }) => {
               </select>
             </div>
             {/* Result Input */}
-            <div className="col-span-1 space-y-1">
+            <div className="col-span-1 space-y-2">
               <label className="block text-slate-700 font-medium">
-                <span className="font-bold text-slate-500 tracking-wider">Result</span>
+                <span className="font-bold text-slate-500 tracking-wider">SSC Result</span>
               </label>
               <input
-                {...register("sscResult", { required: true })}
+                {...register("schoolResult", {
+                  required: "This field is required",
+                  pattern: {
+                    value: /^[0-9]\.\d{2}$/,
+                    message: "Enter a valid result (e.g., 4.50, 3.79, 5.00)",
+                  },
+                })}
                 type="text"
-                placeholder="Your SSC Result"
-                className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
+                placeholder="Enter your result (e.g., 4.50, 5.00, 3.79)"
+                className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full 
+        placeholder:text-sm placeholder:tracking-wider text-sm"
+                maxLength={4}
+                onKeyDown={(e) => {
+                  const allowedKeys = ["Backspace", "Tab", "ArrowLeft", "ArrowRight", "Delete"];
+                  if (!/^[0-9.]$/.test(e.key) && !allowedKeys.includes(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
               />
+              {errors.schoolResult && (
+                <span className="mt-1 text-red-500">
+                  {errors.schoolResult.message}
+                </span>
+              )}
             </div>
             {/*Pass Years Input */}
-            <div className="col-span-1 space-y-1">
-              <label className="block text-slate-700 font-medium">
-                <span className="font-bold text-slate-500 tracking-wider">Pass Years</span>
-              </label>
-              <input
-                {...register("schoolPassYears", { required: true })}
-                type="number"
-                placeholder="Pass Years"
-                className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
-              />
-            </div>
+            <SearchDropDownField
+              label="Pass Year *"
+              options={YearRange}
+              selectedValue={schoolPassYears}
+              setValue={(value) => setValue("schoolPassYears", value)}
+            />
           </div>
         </div>
 
@@ -307,7 +320,7 @@ const StepSecondForm = ({ completeStep }) => {
             Save and Next
           </button>
         </div>
-      </form>
+      </form >
     </>
   );
 };
