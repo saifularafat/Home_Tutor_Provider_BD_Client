@@ -15,7 +15,7 @@ import { universityResults, YearRange } from '../../../../../Helpers/TuitionJobC
 const StepSecondForm = ({ completeStep }) => {
   const { id } = useParams();
   const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
-  console.log("useSingleUser", user?.user);
+  // console.log("useSingleUser", user?.user);
 
   const {
     register,
@@ -25,45 +25,44 @@ const StepSecondForm = ({ completeStep }) => {
     setValue,
     watch,
   } = useForm();
-  // const [selectedUniversity, setSelectedUniversity] = useState('');
-  // const [educationLevels, setEducationLevels] = useState('');
-  // const [universitySubjects, setUniversitySubjects] = useState('');
-  // const [polytechnicSubjects, setPolytechnicSubjects] = useState('');
-  const [programmingLanguages, setProgrammingLanguages] = useState('');
 
-  const selectedUniversity = watch("selectedUniversity");
+  const universityName = watch("universityName");
   const educationLevels = watch("educationLevels");
   const universitySubjects = watch("universitySubjects");
   const universityResult = watch("universityResult");
+
   const collageSubject = watch("collageSubject");
   const collagePassYear = watch("collagePassYear");
   const schoolPassYears = watch("schoolPassYears");
+  const programmingLanguages = watch("programmingLanguages");
+  const programmingLanguagesStartYears = watch("programmingLanguagesStartYears");
+
   // Handle form submission
   const onSubmit = (data) => {
     const formData = {
-      universitySubjects: universitySubjects,
-      educationLevels: educationLevels,
-      programmingLanguages: programmingLanguages,
-      resultUniversity: data.universityResult,
-      collegeName: data.collegeName,
-      collegeGroup: collageSubject,
-      hscResult: data.hscResult,
-      hscPassYears: data.hscPassYears,
-      schoolName: data.schoolName,
-      schoolGroup: data.schoolGroup,
-      sscResult: data.sscResult,
-      schoolPassYears: data.schoolPassYears,
-      instituteStartYears: data.instituteStartYears
+      universityName: universityName || "N/A",
+      educationLevels: educationLevels || "N/A",
+      universitySubjects: universitySubjects || "N/A",
+      universityResult: universityResult || "N/A",
+
+      collegeName: data.collegeName || "N/A",
+      collegeGroup: collageSubject || "N/A",
+      collageResult: data.collageResult || "N/A",
+      collagePassYear: data.collagePassYear || "N/A",
+
+      schoolName: data.schoolName || "N/A",
+      schoolGroup: data.schoolGroup || "N/A",
+      schoolResult: data.schoolResult || "N/A",
+      schoolPassYears: schoolPassYears || "N/A",
+
+      programmingInstituteName: data.programmingInstituteName || "N/A",
+      programmingLanguages: programmingLanguages || "N/A",
+      programmingLanguagesStartYear: programmingLanguagesStartYears || "N/A",
+      programmingCertificate: data.programmingCertificate || "N/A",
+      progressBar: 50,
     };
     console.log('Submitted Form Data:', formData);
     completeStep(formData);
-  };
-
-
-  // Function to update the selected Programming langues
-  const handleProgrammingLanguages = (option) => {
-    setProgrammingLanguages(option);
-    setValue('programmingLanguages', option);
   };
 
   if (isLoading) {
@@ -78,15 +77,15 @@ const StepSecondForm = ({ completeStep }) => {
   return (
     <>
       <h3 className="text-center text-xl font-semibold pt-4">একাডেমিক ইনফর্মেশন</h3>
-      <form onSubmit={handleSubmit(onSubmit)} className="p-4 space-y-9">
+      <form onSubmit={handleSubmit(onSubmit)} className="md:py-4 py-3 md:px-6 px-3 space-y-9">
         <h2 className="text-lg font-bold text-slate-800">Education</h2>
 
         {/* University Search Dropdown */}
         <SearchDropDownField
           label="University Name *"
           options={BangladeshAllUniversitiesName}
-          selectedValue={selectedUniversity}
-          setValue={(value) => setValue("selectedUniversity", value)}
+          selectedValue={universityName}
+          setValue={(value) => setValue("universityName", value)}
         />
 
         <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
@@ -107,12 +106,13 @@ const StepSecondForm = ({ completeStep }) => {
           />
           {/* Result */}
           <SearchDropDownField
-            label="Result *"
+            label="University Result *"
             options={universityResults}
             selectedValue={universityResult}
             setValue={(value) => setValue("universityResult", value)}
           />
 
+          {/* Collage information */}
           <div className='md:col-span-3 col-span-1 space-y-2'>
             <div className="md:col-span-3 col-span-1 space-y-2">
               <label className="block text-slate-700 font-medium">
@@ -188,6 +188,11 @@ const StepSecondForm = ({ completeStep }) => {
               placeholder="Enter Your School Name"
               className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
             />
+            {errors.schoolName && (
+              <span className="mt-1 text-red-500">
+                school name is required!
+              </span>
+            )}
           </div>
 
           <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
@@ -245,7 +250,6 @@ const StepSecondForm = ({ completeStep }) => {
           </div>
         </div>
 
-
         {/* programming section */}
         <div className='space-y-2'>
           <p className='text-sm font-bold text-slate-600'>Optional</p>
@@ -255,7 +259,7 @@ const StepSecondForm = ({ completeStep }) => {
               <span className="font-bold text-slate-500 tracking-wider">Institute</span>
             </label>
             <input
-              {...register("instituteName",)}
+              {...register("programmingInstituteName",)}
               type="text"
               placeholder="Enter Your Institute Name"
               className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
@@ -263,31 +267,21 @@ const StepSecondForm = ({ completeStep }) => {
           </div>
 
           <div className='grid md:grid-cols-3 grid-cols-1 gap-5 pt-1'>
-            {/* Class Input */}
-            <div className="col-span-1 space-y-1">
-              <label className="block text-slate-700 font-medium">
-                <span className="font-bold text-slate-500 tracking-wider">Programming Langues</span>
-              </label>
-              <SearchDropdown
-                options={ProgrammingLanguages}
-                selectedValue={programmingLanguages}
-                onSelect={handleProgrammingLanguages} // Callback to handle selection
-              />
-            </div>
+            <SearchDropDownField
+              label="Programming Langues"
+              options={ProgrammingLanguages}
+              selectedValue={programmingLanguages}
+              setValue={(value) => setValue("programmingLanguages", value)}
+            />
             {/*Pass Years Input */}
-            <div className="col-span-1 space-y-1">
-              <label className="block text-slate-700 font-medium">
-                <span className="font-bold text-slate-500 tracking-wider">Start Years</span>
-              </label>
-              <input
-                {...register("instituteStartYears")}
-                type="number"
-                placeholder="Years"
-                className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
-              />
-            </div>
+            <SearchDropDownField
+              label="Starting Year "
+              options={YearRange}
+              selectedValue={programmingLanguagesStartYears}
+              setValue={(value) => setValue("programmingLanguagesStartYears", value)}
+            />
 
-            {/* Result Input */}
+            {/* Certificate Picture*/}
             <div className="space-y-2 w-full max-w-xs mx-auto">
               <label className="block text-slate-700 font-medium">
                 <span className="font-medium text-sm text-slate-700 tracking-wider">Certificate Picture (সর্বোচ্চ 200kb)</span>
@@ -295,16 +289,15 @@ const StepSecondForm = ({ completeStep }) => {
               <input
                 type="file"
                 className="file-input file-input-bordered file-input-success w-full"
-                {...register("programmingCertificate",
-                  // {
-                  //   validate: {
-                  //     fileType: (value) =>
-                  //       ["image/png", "image/jpg", "image/jpeg"].includes(value[0]?.type) || "Only PNG, JPG, and JPEG files are allowed.",
-                  //     fileSize: (value) =>
-                  //       value[0]?.size <= 200 * 1024 || "File size should be less than or equal to 200KB.",
-                  //   },
-                  // }
-                )}
+                {...register("programmingCertificate", {
+                  validate: {
+                    fileType: (value) =>
+                      value.length === 0 || // If no file is selected, skip validation
+                      ["image/png", "image/jpg", "image/jpeg"].includes(value[0]?.type) || "Only PNG, JPG, and JPEG files are allowed.",
+                    fileSize: (value) =>
+                      value.length === 0 || value[0]?.size <= 200 * 1024 || "File size should be less than or equal to 200KB.",
+                  },
+                })}
                 accept=".png, .jpg, .jpeg"
               />
             </div>
