@@ -32,7 +32,7 @@ const TutorProfile = () => {
             <PageTitleShow currentPage="Tutor Profile |" />
             <div className="md:pb-3">
                 {/* Search and filter section */}
-                <div className=" contain-content mx-auto gap-5 rounded-lg md:py-2 py-3 md:pl-4 px-2">
+                <div className="contain-content mx-auto gap-5 rounded-lg md:py-2 py-3 md:pl-4 px-2">
                     <div className="md:px-6 px-3 md:py-5 py-2 rounded-xl md:shadow-xl shadow-md flex items-center justify-center gap-2">
                         <input
                             onChange={(e) => setSearchText(e.target.value)}
@@ -49,19 +49,19 @@ const TutorProfile = () => {
                     </div>
                 </div>
             </div>
-            <div className="md:max-w-5xl mx-auto md:py-12 py-6">
+            <div className="md:max-w-7xl mx-auto md:py-12 py-6">
                 <div className="grid md:grid-cols-3 grid-cols-1 md:gap-8 gap-5 mx-3 md:mx-0">
                     {tutor.map((tutor) => (
                         <div
                             key={tutor._id}
-                            className="col-span-1 flex flex-col items-center justify-center space-y-4 rounded-xl bg-white p-6 shadow-lg hover:shadow-2xl hover:shadow-sky-300 transition-all duration-200 shadow-blue-400 dark:bg-[#18181B]"
+                            className="col-span-1 flex flex-col items-center justify-center space-y-4 rounded-xl bg-white p-6 shadow-lg hover:shadow-2xl hover:shadow-sky-300 transition-all duration-200 shadow-blue-200 dark:bg-[#18181B]"
                         >
                             <div className="group relative" title={tutor?.name}>
                                 <img
                                     width={110}
                                     height={110}
                                     className="h-[110px] w-[110px] rounded-full bg-slate-500 object-cover"
-                                    src={tutor.image || "https://via.placeholder.com/110"} 
+                                    src={tutor.image || "https://via.placeholder.com/110"}
                                     alt={tutor.name || "Tutor"}
                                 />
                                 <span className="absolute bottom-3 right-0 h-5 w-5 rounded-full border-[3px] border-white bg-green-500 dark:border-[#18181B]"></span>

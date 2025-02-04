@@ -12,6 +12,8 @@ export const AuthProvider = ({ children }) => {
     //     localStorage.setItem("user", JSON.stringify(userData));
     // };
 
+
+
     useEffect(() => {
         setLoading(true)
         const token = localStorage.getItem('accessToken')
@@ -26,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         setUser(null);
-        localStorage.removeItem("user");
+        localStorage.removeItem("accessToken");
     };
 
     return (

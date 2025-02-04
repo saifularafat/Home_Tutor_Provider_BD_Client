@@ -37,6 +37,7 @@ const Login = () => {
             if (response.status === 200) {
                 console.log("accessToken  3888888======>>>>>", response?.data?.payload?.token)
                 localStorage.setItem('accessToken', response?.data?.payload?.token)
+
                 // On successful login, the server will set the cookies (accessToken and refreshToken)
                 Swal.fire({
                     position: "top-center",

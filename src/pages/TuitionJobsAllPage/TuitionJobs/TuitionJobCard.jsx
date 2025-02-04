@@ -44,7 +44,7 @@ const TuitionJobCard = () => {
                             className="md:px-9 px-2 md:py-[10px] py-2 placeholder:text-slate-300 text-slate-500 border border-blue-200 rounded-tl-md rounded-bl-md focus:outline-none focus:outline-blue-400 focus:outline-double"
                         />
                         <button
-                            onClick={handlerSearch} 
+                            onClick={handlerSearch}
                             className="py-[9px] md:px-3 px-2 bg-sky-600 text-white rounded-br-md rounded-tr-md text-lg tracking-wider"
                         >
                             Search
@@ -59,7 +59,7 @@ const TuitionJobCard = () => {
             </div>
 
             {/* Tuition job cards */}
-            <div className="grid md:grid-cols-4 grid-cols-1 md:gap-5 md:space-y-0 space-y-5 md:mx-0 mx-2 md:py-12 py-5">
+            <div className="md:px-8 grid md:grid-cols-4 grid-cols-1 md:gap-7 md:space-y-0 space-y-5 md:mx-0 mx-2 md:py-12 py-5">
                 {jobs?.map((job) => (
                     <div key={job._id} className="md:col-span-2 col-span-1 md:max-h-[500px] shadow-md hover:shadow-xl hover:shadow-sky-100 border border-slate-100 rounded-md md:p-5 p-2">
                         <h5 className="md:text-xl text-lg font-semibold md:pb-3 pb-1">{job?.jobLocation}</h5>

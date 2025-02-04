@@ -43,26 +43,33 @@ const ActivateUser = () => {
     };
 
     return (
-        <div className="container mx-auto py-5">
-            <h3 className="text-2xl font-bold text-center">Activate User</h3>
-            <div className="p-6">
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    <div className="space-y-2">
-                        <label className="block font-medium">Enter Token*</label>
-                        <input
-                            {...register("token", { required: "Token is required" })}
-                            type="text"
-                            placeholder="Enter the token sent to your email"
-                            className="input border border-sky-300 rounded-lg px-4 py-3 w-full"
-                        />
-                        {errors.token && (
-                            <span className="text-red-500">{errors.token.message}</span>
-                        )}
-                    </div>
-                    <div className="text-center">
-                        <button type="submit" className="btn btn-primary">Activate</button>
-                    </div>
-                </form>
+        <div
+            className="hero min-h-screen"
+            style={{
+                backgroundImage: "url(https://i.ibb.co.com/F4DSWMH0/welcome-photo.webp)",
+            }}>
+            <div className="hero-overlay bg-opacity-60"></div>
+            <div className="max-w-6xl mx-auto text-neutral-content text-center">
+                <h3 className="md:text-3xl text-2xl font-bold text-center text-slate-100 md:pb-4 pb-2">Activate User</h3>
+                <div className="max-w-5xl">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full">
+                        <div className="space-y-2">
+                            <label className="block font-medium text-slate-100">Enter Token*</label>
+                            <input
+                                {...register("token", { required: "Token is required" })}
+                                type="text"
+                                placeholder="Enter the token sent to your email"
+                                className="input border border-sky-300 rounded-lg px-4 py-3 md:w-[500px] w-full"
+                            />
+                            {errors.token && (
+                                <p className="text-red-300">{errors.token.message}</p>
+                            )}
+                        </div>
+                        <div className="text-center">
+                            <button type="submit" className="btn btn-primary">Activate</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );
