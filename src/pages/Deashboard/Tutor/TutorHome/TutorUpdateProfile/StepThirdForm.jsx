@@ -5,6 +5,11 @@ import PreferableClassOptions from "../../../../../Helpers/PreferableClass";
 import AllSubjects from "../../../../../Helpers/subjectData";
 import SubAreaOptionsData from "../../../../../Helpers/SubAreaOptionsData";
 import DistrictAreas from "../../../../../Helpers/DistrictAreas";
+import { useParams } from "react-router-dom";
+import { useSingleUser } from "../../../../../api/useAllUsers";
+import Loading from "../../../../../Components/Loading/Loading";
+import SearchDropDownField from "../../../../../Components/SearchDropDownFiled/SearchDropDownField";
+import { JobSalary } from "../../../../../Helpers/TuitionJobCreate";
 
 const StepThirdForm = ({ completeStep }) => {
     const [selectedValue, setSelectedValue] = useState("");
@@ -13,16 +18,19 @@ const StepThirdForm = ({ completeStep }) => {
     // State to store selected area and multiple selected sub-areas
     const [selectedArea, setSelectedArea] = useState("");
     const [selectedSubAreas, setSelectedSubAreas] = useState([]);
-    const [searchQuery, setSearchQuery] = useState(""); // State for search query
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Track dropdown state
+    const [searchQuery, setSearchQuery] = useState("");
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+
+    const { id } = useParams();
+    const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
+    // console.log("useSingleUser", user?.user);
 
     const filteredAreas = DistrictAreas.filter(area =>
         area.toLowerCase()
             .includes(searchQuery
                 .toLowerCase())
     );
-
 
 
     // Handle dropdown selection for preferable class
@@ -53,8 +61,15 @@ const StepThirdForm = ({ completeStep }) => {
         );
     };
 
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+        setValue,
+        watch,
+    } = useForm();
 
+    const expectedSalary = watch("expectedSalary");
     // Function to handle form submission
     const onSubmit = async (data) => {
         // if (!selectedArea || !selectedValue) {
@@ -67,15 +82,12 @@ const StepThirdForm = ({ completeStep }) => {
             ...data,
             preferableClass: selectedValue,
             preferableArea: selectedArea,
-            preferableSubAreas: selectedSubAreas 
+            preferableSubAreas: selectedSubAreas,
+            progressBar: 90,
         };
         completeStep(formData);
 
         console.log("Form data to submit >>>>>>>>", formData);
-
-        // Proceed to next step if submission is successful
-
-
         // try {
         //     const response = await fetch("https://your-api-url.com/submit", {
         //         method: "POST",
@@ -98,6 +110,16 @@ const StepThirdForm = ({ completeStep }) => {
 
     };
 
+
+    if (isLoading) {
+        return <Loading />;
+    }
+    if (isError) {
+        return <p className="text-red-500">Error fetching user data</p>;
+    }
+    if (!user?.user) {
+        return <p>No user data found</p>;
+    }
     return (
         <div className='bg-white rounded-2xl shadow-xl'>
             <h3 className='text-center text-2xl font-semibold pt-4'>অন্যান্য ইনফর্মেশন</h3>
@@ -109,30 +131,44 @@ const StepThirdForm = ({ completeStep }) => {
                 </div>
                 {/* Your Experience fields for the form */}
                 <div className='grid md:grid-cols-2 gap-5 w-full'>
-                    <div className="col-span-1 space-y-1">
+                    <div className="col-span-1 space-y-2">
                         <label className="block text-slate-700 font-medium">
-                            <span className="font-bold text-sm text-slate-600 tracking-wider">Your Experience </span>
+                            <span className="font-bold text-slate-500 tracking-wider">Your Experience </span>
                         </label>
                         <input
-                            {...register("experience", { required: true })}
-                            type="number"
+                            {...register("experience", {
+                                required: "This field is required",
+                                pattern: {
+                                    value: /^[1-9]?\d$/, // This allows one or two digits, but the first digit can't be 0
+                                    message: "Enter Your Experience in Years (1-99)",
+                                },
+                            })}
+                            type="text"
                             placeholder="Enter Your Experience Year"
-                            className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
+                            className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full 
+        placeholder:text-sm placeholder:tracking-wider text-sm"
+                            maxLength={2}
+                            onKeyDown={(e) => {
+                                const allowedKeys = ["Backspace", "Tab", "ArrowLeft", "ArrowRight", "Delete"];
+                                if (!/^[0-9]$/.test(e.key) && !allowedKeys.includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
                         />
+                        {errors.experience && (
+                            <span className="mt-1 text-red-500">
+                                {errors.experience.message}
+                            </span>
+                        )}
                     </div>
 
                     {/* Your Expected Salary fields for the form */}
-                    <div className="col-span-1 space-y-1">
-                        <label className="block text-slate-700 font-medium">
-                            <span className="font-bold text-sm text-slate-600 tracking-wider">Your Expected Salary </span>
-                        </label>
-                        <input
-                            {...register("expectedSalary", { required: true })}
-                            type="text"
-                            placeholder="Enter Your Expected Salary"
-                            className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
-                        />
-                    </div>
+                    <SearchDropDownField
+                        label="Your Expected Salary *"
+                        options={JobSalary}
+                        selectedValue={expectedSalary}
+                        setValue={(value) => setValue("expectedSalary", value)}
+                    />
                 </div>
 
                 {/* Preferable Class/Subject section */}
@@ -178,10 +214,10 @@ const StepThirdForm = ({ completeStep }) => {
                             <span className="font-semibold text-slate-600 text-sm">Medium</span>
                         </label>
                         <select {...register("medium")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full text-sm">
-                            <option value="banglaMedium">Bangla Medium</option>
-                            <option value="englishMedium">English Medium</option>
-                            <option value="englishVersion">English Version</option>
-                            <option value="arabicMedium">Arabic Medium</option>
+                            <option value="bangla">Bangla Medium</option>
+                            <option value="english">English Medium</option>
+                            <option value="english">English Version</option>
+                            <option value="arabic">Arabic Medium</option>
                         </select>
                     </div>
 

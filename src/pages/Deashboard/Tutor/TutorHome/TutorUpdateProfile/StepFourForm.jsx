@@ -3,7 +3,7 @@ import AllSubjects from "../../../../../Helpers/subjectData";
 import { useNavigate } from "react-router-dom";
 
 const StepFourForm = ({ handleFinalSubmit }) => {
-    
+
     const navigate = useNavigate();
 
     const {
@@ -14,8 +14,12 @@ const StepFourForm = ({ handleFinalSubmit }) => {
 
     // Function to handle form submission
     const onSubmit = (data) => {
-        console.log("Form data:", data);
-        handleFinalSubmit(data); // Move to the next step on successful submission
+        const updateComplete = {
+            ...data,
+            progressBar: 100,
+        }
+        console.log("Form data:", updateComplete);
+        handleFinalSubmit(data);
         navigate('/dashboard/profile')
     };
 
@@ -74,7 +78,7 @@ const StepFourForm = ({ handleFinalSubmit }) => {
                 <div className="bg-white shadow-md rounded-md py-10 px-3 w-full">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                         {/* Profile Picture */}
-                        <div className="space-y-2 w-full max-w-xs mx-auto">
+                        {/* <div className="space-y-2 w-full max-w-xs mx-auto">
                             <label className="block text-slate-700 font-medium">
                                 <span className="font-medium text-sm text-slate-700 tracking-wider">Profile Picture (সর্বোচ্চ 200kb এর ছবি দিন) </span>
                             </label>
@@ -93,10 +97,10 @@ const StepFourForm = ({ handleFinalSubmit }) => {
                                 accept=".png, .jpg, .jpeg"
                             />
                             {errors.profilePhoto && <p className="text-red-500 text-sm">{errors.profilePhoto.message}</p>}
-                        </div>
+                        </div> */}
 
                         {/* NID Picture */}
-                        <div className="space-y-2 w-full max-w-xs mx-auto">
+                        {/* <div className="space-y-2 w-full max-w-xs mx-auto">
                             <label className="block text-slate-700 font-medium">
                                 <span className="font-medium text-sm text-slate-700 tracking-wider">NID Picture (সর্বোচ্চ 200kb এর ছবি দিন)</span>
                             </label>
@@ -115,10 +119,10 @@ const StepFourForm = ({ handleFinalSubmit }) => {
                                 accept=".png, .jpg, .jpeg"
                             />
                             {errors.nidPhoto && <p className="text-red-500 text-sm">{errors.nidPhoto.message}</p>}
-                        </div>
+                        </div> */}
 
                         {/* Student ID Card Picture */}
-                        <div className="space-y-2 w-full max-w-xs mx-auto">
+                        <div className="md:col-span-3 col-span-1 space-y-2 w-full max-w-sm mx-auto">
                             <label className="block text-slate-700 font-medium">
                                 <span className="font-medium text-sm text-slate-700 tracking-wider">Student ID Card Picture (সর্বোচ্চ 200kb)</span>
                             </label>

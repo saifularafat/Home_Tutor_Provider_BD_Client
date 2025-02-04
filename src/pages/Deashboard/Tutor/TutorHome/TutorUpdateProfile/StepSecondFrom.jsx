@@ -90,31 +90,31 @@ const StepSecondForm = ({ completeStep }) => {
 
         <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
           {/* Class Input */}
-          <SearchDropDownField
+          {/* <SearchDropDownField
             label="Your Education Level *"
             options={EducationLevels}
             selectedValue={educationLevels}
             setValue={(value) => setValue("educationLevels", value)}
-          />
+          /> */}
 
           {/* Group/Subject Input */}
-          <SearchDropDownField
+          {/* <SearchDropDownField
             label="Group/Subject *"
             options={UniversityGroupSubjects}
             selectedValue={universitySubjects}
             setValue={(value) => setValue("universitySubjects", value)}
-          />
+          /> */}
           {/* Result */}
-          <SearchDropDownField
+          {/* <SearchDropDownField
             label="University Result *"
             options={universityResults}
             selectedValue={universityResult}
             setValue={(value) => setValue("universityResult", value)}
-          />
+          /> */}
 
           {/* Collage information */}
           <div className='md:col-span-3 col-span-1 space-y-2'>
-            <div className="md:col-span-3 col-span-1 space-y-2">
+            {/* <div className="md:col-span-3 col-span-1 space-y-2">
               <label className="block text-slate-700 font-medium">
                 <span className="text-slate-700 font-semibold">Your College Name*</span>
               </label>
@@ -124,18 +124,18 @@ const StepSecondForm = ({ completeStep }) => {
                 placeholder="Enter Your College Name"
                 className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
               />
-            </div>
+            </div> */}
 
             <div className='grid md:grid-cols-3 grid-cols-1 gap-5 '>
               {/*Collage Group/Subject Input */}
-              <SearchDropDownField
+              {/* <SearchDropDownField
                 label="Group Subject *"
                 options={PolytechnicSubjects}
                 selectedValue={collageSubject}
                 setValue={(value) => setValue("collageSubject", value)}
-              />
+              /> */}
               {/* Result Input */}
-              <div className="col-span-1 space-y-2">
+              {/* <div className="col-span-1 space-y-2">
                 <label className="block text-slate-700 font-medium">
                   <span className="font-bold text-slate-500 tracking-wider">Result</span>
                 </label>
@@ -164,21 +164,21 @@ const StepSecondForm = ({ completeStep }) => {
                     {errors.collageResult.message}
                   </span>
                 )}
-              </div>
+              </div> */}
               {/*Pass Years Input */}
-              <SearchDropDownField
+              {/* <SearchDropDownField
                 label="Pass Year *"
                 options={YearRange}
                 selectedValue={collagePassYear}
                 setValue={(value) => setValue("collagePassYear", value)}
-              />
+              /> */}
             </div>
           </div>
         </div>
 
         {/* School section */}
         <div className='space-y-2'>
-          <div className="space-y-1">
+          {/* <div className="space-y-1">
             <label className="block text-slate-700 font-medium">
               <span className="font-bold text-slate-500 tracking-wider">Your School Name*</span>
             </label>
@@ -193,11 +193,11 @@ const StepSecondForm = ({ completeStep }) => {
                 school name is required!
               </span>
             )}
-          </div>
+          </div> */}
 
           <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
             {/* Class Input */}
-            <div className="col-span-1 space-y-1">
+            {/* <div className="col-span-1 space-y-1">
               <label className="block text-slate-700 font-medium">
                 <span className="font-bold text-slate-500 tracking-wider">Group</span>
               </label>
@@ -208,9 +208,9 @@ const StepSecondForm = ({ completeStep }) => {
                 <option value="Humanities">Humanities</option>
                 <option value="Others">Others</option>
               </select>
-            </div>
+            </div> */}
             {/* Result Input */}
-            <div className="col-span-1 space-y-2">
+            {/* <div className="col-span-1 space-y-2">
               <label className="block text-slate-700 font-medium">
                 <span className="font-bold text-slate-500 tracking-wider">SSC Result</span>
               </label>
@@ -239,14 +239,14 @@ const StepSecondForm = ({ completeStep }) => {
                   {errors.schoolResult.message}
                 </span>
               )}
-            </div>
+            </div> */}
             {/*Pass Years Input */}
-            <SearchDropDownField
+            {/* <SearchDropDownField
               label="Pass Year *"
               options={YearRange}
               selectedValue={schoolPassYears}
               setValue={(value) => setValue("schoolPassYears", value)}
-            />
+            /> */}
           </div>
         </div>
 

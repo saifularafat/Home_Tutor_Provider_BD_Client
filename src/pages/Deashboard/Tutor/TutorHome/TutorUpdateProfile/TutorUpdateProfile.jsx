@@ -7,7 +7,7 @@ import StepFourForm from './StepFourForm';
 const TutorUpdateProfile = () => {
   // State for the current step, progress, and message
   const [currentStep, setCurrentStep] = useState(1);
-  const [progress, setProgress] = useState(10); // Start at 20%
+  const [progress, setProgress] = useState(25);
   const [progressMessage, setProgressMessage] = useState('আপনার প্রথম ধাপ সম্পন্ন করুন।');
   const [formData, setFormData] = useState({});
 
@@ -21,16 +21,16 @@ const TutorUpdateProfile = () => {
     let newMessage = '';
 
     if (currentStep === 1) {
-      newProgress = 30;
+      newProgress = 50;
       newMessage = 'আপনার প্রথম ধাপ সম্পন্ন হয়েছে, দ্বিতীয় ধাপ সম্পন্ন করুন।';
     } else if (currentStep === 2) {
-      newProgress = 60;
+      newProgress = 65;
       newMessage = 'আপনার দ্বিতীয় ধাপ সম্পন্ন হয়েছে, তৃতীয় ধাপ সম্পন্ন করুন।';
     } else if (currentStep === 3) {
-      newProgress = 100;
+      newProgress = 90;
       newMessage = 'আপনার প্রোফাইলের শেষ ধাপটি সম্পূর্ণ করুন';
     } else {
-      return;
+      return newProgress = 100;
     }
 
     setProgress(newProgress);
