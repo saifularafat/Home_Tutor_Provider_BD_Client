@@ -5,7 +5,7 @@ import { useState } from "react";
 import BangladeshAllUniversitiesName from "../../../../Helpers/BDAllUniversityName";
 import DistrictAreas from "../../../../Helpers/DistrictAreas";
 
-const ProfileUpdate = () => {
+const ParentProfileUpdate = () => {
     const [allProfessions, setAllProfessions] = useState("");
     const [selectedUniversity, setSelectedUniversity] = useState('');
     const [selectPreferableArea, setSelectPreferableArea] = useState('');
@@ -55,7 +55,7 @@ const ProfileUpdate = () => {
                     <div className="md:flex items-center gap-3">
                         <div className="w-full">
                             <label className="label">
-                                <span className="label-text text-sm text-slate-600 font-semibold">Name</span>
+                                <span className="label-text text-sm text-slate-600 font-semibold">Name *</span>
                             </label>
                             <input
                                 type="text"
@@ -127,8 +127,8 @@ const ProfileUpdate = () => {
                                 <span className="label-text text-sm text-slate-600 font-semibold">Gender</span>
                             </label>
                             <select {...register("gender")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
-                                <option value="male">Male</option>
                                 <option value="female">Female</option>
+                                <option value="male">Male</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
@@ -157,7 +157,7 @@ const ProfileUpdate = () => {
                             <SearchDropdown
                                 options={BangladeshAllUniversitiesName}
                                 selectedValue={selectedUniversity}
-                                onSelect={handleUniversitySelect} 
+                                onSelect={handleUniversitySelect}
                             />
                         </div>
                         <div className="md:w-1/2 space-y-1">
@@ -167,10 +167,10 @@ const ProfileUpdate = () => {
                             <SearchDropdown
                                 options={DistrictAreas}
                                 selectedValue={selectPreferableArea}
-                                onSelect={handlePreferableArea} 
+                                onSelect={handlePreferableArea}
                             />
                         </div>
-                       
+
                     </div>
                     <div className="flex items-center gap-3 pt-1">
                         <div className="form-control w-full ">
@@ -200,4 +200,4 @@ const ProfileUpdate = () => {
     );
 };
 
-export default ProfileUpdate;
+export default ParentProfileUpdate;

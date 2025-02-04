@@ -221,7 +221,7 @@ const NavTest = () => {
                                 {notices ? notices?.length : ''}
                             </span>
                             <button>
-                                <Link to='notice' className='text-2xl'>
+                                <Link to='/dashboard/noticeBoard' className='text-2xl'>
                                     {' '}
                                     <AiFillBell></AiFillBell>
                                 </Link>

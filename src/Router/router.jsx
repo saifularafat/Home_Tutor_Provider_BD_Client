@@ -23,7 +23,7 @@ import Notice from "../pages/Deashboard/Notice/Notice";
 // parent page
 import ParentHome from "../pages/Deashboard/Parent/ParentHome/ParentHome";
 import ApplyJobs from "../pages/Deashboard/Parent/ApplyJobs/ApplyJobs";
-import ProfileUpdate from "../pages/Deashboard/Parent/ProfileUpdate/ProfileUpdate";
+import ParentProfileUpdate from "../pages/Deashboard/Parent/ParentProfileUpdate/ParentProfileUpdate";
 import ParentNoticeBoard from "../pages/Deashboard/Parent/ParentNoiceBoard/ParentNoticeBoard";
 import JobRequestHistory from "../pages/Deashboard/Parent/JobRequestHistory/JobRequestHistory";
 import EnrolPremiumHistory from "../pages/Deashboard/Parent/EnrolPremiumHistory/EnrolPremiumHistory";
@@ -258,7 +258,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/dashboard/parent-profile-update/:id",
-				element: <ProfileUpdate />,
+				element: <ParentProfileUpdate />,
 			},
 			{
 				path: "/dashboard/parent-notice-board",
