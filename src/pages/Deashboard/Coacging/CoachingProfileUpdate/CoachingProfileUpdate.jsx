@@ -1,59 +1,26 @@
 import { useForm } from "react-hook-form";
-import SearchDropdown from "../../../../Components/SearchInputFuntion/SearchDropdown";
-import BangladeshProfessions from "../../../../Helpers/BangladeshAllProfessions ";
-import { useState } from "react";
-import BangladeshAllUniversitiesName from "../../../../Helpers/BDAllUniversityName";
-import DistrictAreas from "../../../../Helpers/DistrictAreas";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSingleUser } from "../../../../api/useAllUsers";
 import Loading from "../../../../Components/Loading/Loading";
 
 const CoachingProfileUpdate = () => {
-    const [allProfessions, setAllProfessions] = useState("");
-    const [selectedUniversity, setSelectedUniversity] = useState('');
-    const [selectPreferableArea, setSelectPreferableArea] = useState('');
 
     const { id } = useParams();
     const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
     console.log("useSingleUser", user?.user);
 
-    const { register,
+    const {
+        register,
         formState: { errors },
         handleSubmit,
-        setValue,
         reset } = useForm();
 
     const onSubmit = (data) => {
         const formData = {
-            name: data.name,
-            email: data.email,
-            guardianNumber: data.guardianNumber,
-            address: data.address,
-            livingAddress: data.livingAddress,
-            gender: data.gender,
-            image: data.image,
-            allProfessions: allProfessions,
-            universityName: selectedUniversity,
-            PreferableArea: selectPreferableArea,
-            ParentBio: data.ParentBio,
-        };
+            ...data,
+        }
         console.log(formData);
     }
-
-    // Function to update the selected Education Levels
-    const handleProfessions = (option) => {
-        setAllProfessions(option);
-        setValue('polytechnicSubjects', option);
-    };
-    const handleUniversitySelect = (option) => {
-        setSelectedUniversity(option);
-        setValue('selectedUniversity', option);
-    };
-    const handlePreferableArea = (option) => {
-        setSelectPreferableArea(option);
-        setValue('selectPreferableArea', option);
-    };
-
 
     if (isLoading) {
         return <Loading />;
@@ -77,6 +44,7 @@ const CoachingProfileUpdate = () => {
                             type="text"
                             placeholder="Enter Your coaching center Name"
                             {...register("name")}
+                            defaultValue={user?.user?.name}
                             className="bg-transparent input bg-slate-300 border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full text-sm"
                         />
                     </div>
@@ -128,17 +96,42 @@ const CoachingProfileUpdate = () => {
                     </div>
                 </div>
 
-                <div className='grid md:grid-cols-2 gap-5'>
+                <div className='grid md:grid-cols-3 col-span-1 gap-5'>
                     <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
-                            <span className="font-bold text-slate-500 tracking-wider">Coaching Center Address *</span>
+                            <span className="font-bold text-slate-500 tracking-wider">Website/Social Media Links*</span>
                         </label>
-                        <SearchDropdown
-                            options={BangladeshProfessions}
-                            selectedValue={allProfessions}
-                            onSelect={handleProfessions}
+                        <input
+                            type="text"
+                            placeholder="Coaching Center Website or Social Media Link"
+                            {...register("websiteSocialLink", {
+                                required: "This field is required",
+                                pattern: {
+                                    value: /^(https?:\/\/)?(www\.)?[\w\-]+(\.[\w\-]+)+[/#?]?.*$/,
+                                    message: "Please enter a valid URL (e.g., https://example.com)"
+                                }
+                            })}
+                            defaultValue={user?.user?.websiteSocialLink || ''}
+                            className="bg-transparent input bg-slate-300 border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full text-sm"
+                        />
+                        {errors.websiteSocialLink && (
+                            <p className="text-red-500 text-sm mt-1">{errors.websiteSocialLink.message}</p>
+                        )}
+                    </div>
+                    {/* Achievements */}
+                    <div className="col-span-1 space-y-1">
+                        <label className="block text-slate-700 font-medium">
+                            <span className="font-bold text-slate-500 tracking-wider">Achievements (optional)</span>
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Enter Your Coaching Center Achievements"
+                            {...register("achievements")}
+                            defaultValue={user?.user?.achievements || ''}
+                            className="bg-transparent input bg-slate-300 border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full text-sm"
                         />
                     </div>
+
                     {/* License Picture */}
                     <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
@@ -161,59 +154,58 @@ const CoachingProfileUpdate = () => {
                         {errors.nidPhoto && <p className="text-red-500 text-sm">{errors.nidPhoto.message}</p>}
                     </div>
                 </div>
-
-                {/* second section */}
-                <div className="bg-white px-4 rounded-md py-8 mt-2">
-                    <h2 className="text-2xl font-semibold text-slate-700">Others Information</h2>
-
-                    <div className="md:flex items-center gap-5 mt-3">
-                        <div className="md:w-1/2 space-y-1">
-                            <label className="block text-slate-700 font-medium">
-                                <span className="font-bold text-slate-500 tracking-wider">University Name</span>
-                            </label>
-                            <SearchDropdown
-                                options={BangladeshAllUniversitiesName}
-                                selectedValue={selectedUniversity}
-                                onSelect={handleUniversitySelect}
-                            />
-                        </div>
-                        <div className="md:w-1/2 space-y-1">
-                            <label className="block text-slate-700 font-medium">
-                                <span className="font-bold text-slate-500 tracking-wider">Preferable Area</span>
-                            </label>
-                            <SearchDropdown
-                                options={DistrictAreas}
-                                selectedValue={selectPreferableArea}
-                                onSelect={handlePreferableArea}
-                            />
-                        </div>
-
-                    </div>
-                    <div className="flex items-center gap-3 pt-1">
-                        <div className="form-control w-full ">
-                            <label className="label">
-                                <span className="font-bold text-lg text-slate-500 tracking-wider">Bio</span>
-                            </label>
-                            <textarea
-                                name=""
-                                id=""
-                                cols="20"
-                                rows="3"
-                                placeholder="Please Type Your Coaching Center Bio"
-                                {...register("Bio")}
-                                className="border border-sky-300 rounded-lg outline-sky-600 placeholder:text-sm overflow-hidden w-full p-2"
-                            >
-                            </textarea>
-                        </div>
-                    </div>
-                    <div className="mt-9 w-1/4 mx-auto">
+                {/* BIO */}
+                <div className="form-control w-full">
+                    <label className="label">
+                        <span className="font-bold text-lg text-slate-500 tracking-wider">Bio</span>
+                    </label>
+                    <textarea
+                        id="bio"
+                        cols="20"
+                        rows="2"
+                        placeholder="Please Type Your Coaching Center Bio"
+                        defaultValue={user?.user?.bio || ''}
+                        {...register("bio", {
+                            required: "Bio is required",
+                            validate: (value) => {
+                                const words = value.trim().split(/\s+/).length;
+                                if (words < 6) return "Bio must be at least 6 words";
+                                if (words > 15) return "Bio cannot exceed 15 words";
+                                return true;
+                            }
+                        })}
+                        className="border border-sky-300 rounded-lg outline-sky-600 placeholder:text-sm overflow-hidden w-full p-2"
+                    />
+                    {errors.bio && (
+                        <p className="text-red-500 text-sm mt-1">{errors.bio.message}</p>
+                    )}
+                </div>
+                <div className="md:flex-1 flex-col-reverse items-center">
+                    {/* SUBMIT BUTTON */}
+                    <div className="md:mt-5 mt-1 w-1/4 mx-auto">
                         <button className="flex items-center justify-center w-full bg-blue-400 hover:bg-blue-500 transition-all duration-200 rounded-md py-[6px] text-white text-xl font-semibold tracking-wide">
                             Update
                         </button>
                     </div>
+                    {/* TODO UPDATE USER PHOTO */}
+                    {/* PHOTO UPDATE */}
+                    <div className="text-end">
+                        <Link
+                            to={`/dashboard/photo-update/${user?.user?._id}`}
+                            className="text-sm font-semibold underline italic hover:not-italic hover:text-green-700 transition-all duration-200"
+                        >
+                            Photo update now
+                        </Link>
+                        <div className="flex items-end  justify-end">
+                            <img
+                                src={user?.user?.image}
+                                className="w-20 h-20 bg-cover rounded-md"
+                                alt="coaching logo" />
+                        </div>
+                    </div>
                 </div>
             </form >
-        </div>
+        </div >
     );
 };
 
