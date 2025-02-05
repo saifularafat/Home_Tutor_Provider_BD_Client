@@ -3,6 +3,7 @@ import IsTutorInfo from "./IsTutorInfo";
 import IsParentInfo from "./IsParentInfo";
 import { useAllUsers } from "../../../api/useAllUsers";
 import Loading from "../../../Components/Loading/Loading";
+import IsCoachingInfo from "./IsCoachingInfo";
 
 const Profile = () => {
     // const isParent = true;
@@ -84,8 +85,8 @@ const Profile = () => {
                             </div>
                             :
                             user?.isCoaching == true ?
-                                <div className="overflow-x-auto">
-                                    <h2>This Coaching Center</h2>
+                                <div className="overflow-x-auto rounded-lg shadow-xl">
+                                    <IsCoachingInfo user={user} />
                                 </div>
                                 :
                                 <div></div>
