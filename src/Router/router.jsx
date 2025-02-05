@@ -58,6 +58,8 @@ import TuitionJobApplyDetails from "../pages/TuitionJobApplyDetails/TuitionJobAp
 import HireTutorApplyDetails from "../pages/HireTutorApplyDetails/HireTutorApplyDetails";
 import LeaderBoardWithTutor from "../pages/Deashboard/LeaderBoardWithTutor/LeaderBoardWithTutor";
 import CoachingHome from "../pages/Deashboard/Coacging/CoachingHome/CoachingHome";
+import TuitionAllJobsParentCoaching from "../pages/Deashboard/TuitionAllJobsParentCoaching/TuitionAllJobsParentCoaching";
+import CoachingProfileUpdate from "../pages/Deashboard/Coacging/CoachingProfileUpdate/CoachingProfileUpdate";
 
 const router = createBrowserRouter([
 	{
@@ -289,6 +291,14 @@ const router = createBrowserRouter([
 			{
 				path: "/dashboard/coaching-center-home",
 				element: <CoachingHome />,
+			},
+			{
+				path: "/dashboard/tuition-your-jobs",
+				element: <TuitionAllJobsParentCoaching />,
+			},
+			{
+				path: "/dashboard/coaching-center-profile-update/:id",
+				element: <CoachingProfileUpdate />,
 			},
 		],
 	},
