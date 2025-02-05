@@ -40,14 +40,22 @@ const NavTest = () => {
 
 
     const [users, refetch, isLoading] = useAllUsers();
+    // console.log("USERS ALL 43 ===>>", users);
 
-    const { users: allUsers } = users || {};
-    // console.log("object");
+    if (isLoading) {
+        return <Loading />
+    }
+    const allUsers = users?.users || [];
 
-    const isAdmin = true;
+    // console.log("object allUsers allUsers", allUsers);
+    const singleUser = allUsers.length > 0 ? allUsers.find(user => user?.isCoaching === true) : null;
+    console.log("object singleUser singleUser", singleUser);
+
+    const isAdmin = false;
     const isTutor = false;
-    const isParent = false
-    const user = false;
+    const isParent = false;
+    const isCoaching = true;
+    const user = true;
 
     const notices = [1, 2, 3, 4,];
 
@@ -81,9 +89,7 @@ const NavTest = () => {
     };
 
     //   const [notices] = useLiveExam()
-    if (isLoading) {
-        return <Loading />
-    }
+
     return (
         <Headroom
             style={{
@@ -143,21 +149,27 @@ const NavTest = () => {
                                         Contact Us
                                     </NavLink>
                                 </li>
-                                {isAdmin && (
+                                {user && (
                                     <li>
                                         {isAdmin ? (
                                             ''
                                         ) : isTutor ? (
-                                            <NavLink to='/createParentMeeting'
+                                            <NavLink to='/createMeeting'
                                                 className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
                                                 Create Parent Meet
                                             </NavLink>
-                                        ) : (
-                                            <NavLink to='/joinTutorMeeting'
+                                        ) : isCoaching ? (
+                                            <NavLink to='/createMeeting'
                                                 className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
-                                                Join Meeting
+                                                Create Meeting
                                             </NavLink>
-                                        )}
+                                        )
+                                            : (
+                                                <NavLink to='/joinTutorMeeting'
+                                                    className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
+                                                    Join Meeting
+                                                </NavLink>
+                                            )}
                                     </li>
                                 )}
                             </ul>
@@ -194,14 +206,25 @@ const NavTest = () => {
                                     Contact Us
                                 </NavLink>
                             </li>
-                            {isAdmin && (
+                            {user && (
                                 <li>
                                     {isAdmin ? (
                                         ''
                                     ) : isTutor ? (
-                                        <Link to='/createLiveExam'>Create Live Meeting</Link>
+                                        <NavLink to='/createMeeting'
+                                            className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                            Join Meeting
+                                        </NavLink>
+                                    ) : isCoaching ? (
+                                        <NavLink to='/createMeeting'
+                                            className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                            Create Meeting
+                                        </NavLink>
                                     ) : isParent ? (
-                                        <Link to='/joinLiveExam'>Join Live Meeting</Link>
+                                        <NavLink to='/joinMeting'
+                                            className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                            Join Meeting
+                                        </NavLink>
                                     ) : (
                                         <Link to='/leader-board-with-tutor'>leader Board</Link>
                                     )
@@ -230,8 +253,9 @@ const NavTest = () => {
                         {
                             // user
                             // isTutor
-                            isAdmin
-                                // isParent
+                            // isAdmin
+                            // isParent
+                            isCoaching
                                 ? (
                                     <div className='ml-5 dropdown dropdown-end'>
                                         <div
@@ -244,7 +268,7 @@ const NavTest = () => {
                                                 className='btn btn-ghost btn-circle avatar'
                                             >
                                                 <div className='w-10 rounded-full'>
-                                                    <img src={user?.photoURL} />
+                                                    <img src={singleUser?.image || ""} />
                                                 </div>
                                             </label>
                                         </div>
@@ -257,8 +281,8 @@ const NavTest = () => {
                                                 {
                                                     // user
                                                     // isTutor
-                                                    isAdmin
-                                                    // isCoaching
+                                                    // isAdmin
+                                                    isCoaching
                                                     && (
                                                         <li>
                                                             {isAdmin ? (
@@ -271,12 +295,9 @@ const NavTest = () => {
                                                                 </>
                                                             ) : isParent ? (
                                                                 <Link to='/dashboard/parent-Home'>Dashboard</Link>
-                                                            ) : (
-                                                                <>
-                                                                    <Link to='/dashboard/coaching-home'>Dashboard</Link>
-                                                                    <Link to='/dashboard/coaching'>Coaching</Link>
-                                                                </>
-                                                            )}
+                                                            ) : isCoaching ? (
+                                                                <Link to='/dashboard/coaching-center-home'>Dashboard</Link>
+                                                            ) : ('')}
                                                         </li>
                                                     )}
                                                 <li>
@@ -317,7 +338,7 @@ const NavTest = () => {
                     </div>
                 </div>
             </nav>
-        </Headroom>
+        </Headroom >
     )
 }
 

@@ -71,13 +71,21 @@ const Profile = () => {
             <div className=" py-10">
                 {
                     user?.isTutor == true ?
-                        <IsTutorInfo /> :
+                        <div className="overflow-x-auto bg-slate-50 py-8 px-5 rounded-md">
+                            <IsTutorInfo />
+                        </div>
+                        :
                         user?.isParent == true ?
                             <div className="overflow-x-auto">
                                 <IsParentInfo />
                             </div>
                             :
-                            <div></div>
+                            user?.isCoaching == true ?
+                                <div className="overflow-x-auto">
+                                    <h2>This Coaching Center</h2>
+                                </div>
+                                :
+                                <div></div>
                 }
             </div>
         </div>

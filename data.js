@@ -1,11 +1,11 @@
 import { FaBlog, FaCalendarAlt, FaCartArrowDown, FaChartBar, FaCog, FaHome, FaUser } from 'react-icons/fa';
-import { MdCastForEducation, MdHomeWork, MdWorkHistory } from 'react-icons/md';
+import { MdCastForEducation, MdHomeWork, MdWork, MdWorkHistory } from 'react-icons/md';
 import { FaClipboardQuestion, FaMessage, FaSchoolCircleCheck, FaUserPen, FaUsersViewfinder } from 'react-icons/fa6';
 import { RiApps2AddFill, RiLiveFill, RiParentFill } from 'react-icons/ri';
 import { AiFillNotification } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
 import { IoBagAdd } from 'react-icons/io5';
-import { SiFampay } from 'react-icons/si';
+import { SiFampay, SiLivejournal } from 'react-icons/si';
 import { PiHandshakeFill } from 'react-icons/pi';
 import { TbMessage2Question } from 'react-icons/tb';
 
@@ -20,7 +20,7 @@ const iconMappings = {
     Payment: SiFampay,
     Live: RiLiveFill,
     Blog: FaBlog,
-    AddBlog: RiApps2AddFill,
+    AddBlog: SiLivejournal,
     ParentApply: RiParentFill,
     AddTuitionJob: IoBagAdd,
     Notice: AiFillNotification,
@@ -36,6 +36,7 @@ const iconMappings = {
     TermsMessage: TbMessage2Question,
     AllTutor: MdCastForEducation,
     CoachingCenter: FaSchoolCircleCheck,
+    TuitionAllYourJob: MdWorkHistory,
 }
 export const Menus = [
     {
@@ -223,15 +224,21 @@ export const Menus = [
     // coaching router START
     {
         title: 'Coaching Home',
-        path: '/dashboard/parent-home',
+        path: '/dashboard/coaching-center-home',
         icon: iconMappings.RoleHome,
         role: 'isCoaching',
         gap: true
     },
     {
-        title: 'Coaching Job',
-        path: '/dashboard/job-request-history',
-        icon: iconMappings.Payment,
+        title: 'Create Tuition Job',
+        path: '/dashboard/create-tuition-job',
+        icon: iconMappings.AddTuitionJob,
+        role: 'isCoaching'
+    },
+    {
+        title: 'All Tuition Jobs',
+        path: '/dashboard/tuition-your-jobs',
+        icon: iconMappings.TuitionAllYourJob,
         role: 'isCoaching'
     },
     {
@@ -259,8 +266,14 @@ export const Menus = [
         role: 'isCoaching'
     },
     {
-        title: 'Student Analytics',
-        path: '/dashboard/student-analytics',
+        title: 'Add Blog',
+        path: '/dashboard/add-Blog',
+        icon: iconMappings.AddBlog,
+        role: 'isCoaching'
+    },
+    {
+        title: 'Coaching Analytics',
+        path: '/dashboard/coaching-analytics',
         icon: iconMappings.Analytics,
         role: 'isCoaching'
     },

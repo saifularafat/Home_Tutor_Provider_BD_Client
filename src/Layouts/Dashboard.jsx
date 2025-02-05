@@ -13,7 +13,7 @@ const Dashboard = () => {
     const [open, setOpen] = useState(true);
 
     const [users] = useAllUsers();
-    const allUsers = users.users || []; 
+    const allUsers = users.users || [];
     console.log("Users ====>", users);
     const tutors = allUsers.filter((data) => data.isTutor === true)
     const coaching = allUsers.filter((data) => data.isCoaching === true)
@@ -23,10 +23,10 @@ const Dashboard = () => {
     // console.log('parents', parents);
 
     // user identity
-    const isAdmin = true;
+    const isAdmin = false;
     const isTutor = false;
     const isParent = false;
-    // const isCoaching = true;
+    const isCoaching = true;
 
     const isAdminMenus = Menus.filter(menu => menu.role === 'admin')
     const isTutorMenus = Menus.filter(menu => menu.role === 'isTutor')
@@ -47,36 +47,9 @@ const Dashboard = () => {
                 {/* dashboard Nav Ber */}
                 <ul
                     className={`${open ? '' : ''}  flex flex-col text-center`}>
-                    {isAdmin
-                        ? isAdminMenus.map((Menu, index) => (
-                            <NavLink
-                                to={Menu.path}
-                                key={index}
-                                title={Menu.title}
-                                className={({ isActive }) => (isActive ?
-                                    `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
-                                    } ${index === 0 && ' hover:bg-slate-700'}` :
-                                    `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
-                                    } ${index === 0 && ' hover:bg-primary'}`
-                                )}>
-                                <li
-                                    className='flex items-center md:gap-x-4 gap-1'>
-                                    <IconContext.Provider value={{ className: 'react-icon md:text-lg text-sm' }}>
-                                        <Menu.icon />
-                                    </IconContext.Provider>
-                                    <span
-                                        className={`${!open && 'hidden'
-                                            } origin-left duration-200`}
-                                    >
-                                        {Menu.title}
-                                    </span>
-
-                                </li>
-                            </NavLink>
-                        ))
-                        : //  Tutor menus
-                        isTutor
-                            ? isTutorMenus.map((Menu, index) => (
+                    {
+                        isAdmin
+                            ? isAdminMenus.map((Menu, index) => (
                                 <NavLink
                                     to={Menu.path}
                                     key={index}
@@ -88,10 +61,8 @@ const Dashboard = () => {
                                         } ${index === 0 && ' hover:bg-primary'}`
                                     )}>
                                     <li
-                                        className='flex items-center md:gap-x-4 gap-1'
-                                    >
-
-                                        <IconContext.Provider value={{ className: 'react-icon text-lg' }}>
+                                        className='flex items-center md:gap-x-4 gap-1'>
+                                        <IconContext.Provider value={{ className: 'react-icon md:text-lg text-sm' }}>
                                             <Menu.icon />
                                         </IconContext.Provider>
                                         <span
@@ -104,9 +75,9 @@ const Dashboard = () => {
                                     </li>
                                 </NavLink>
                             ))
-                            : //  Parent menus
-                            isParent
-                                ? isParentMenus.map((Menu, index) => (
+                            : //  Tutor menus
+                            isTutor
+                                ? isTutorMenus.map((Menu, index) => (
                                     <NavLink
                                         to={Menu.path}
                                         key={index}
@@ -134,35 +105,71 @@ const Dashboard = () => {
                                         </li>
                                     </NavLink>
                                 ))
-                                : // coaching menus
-                                isCoachingMenus.map((Menu, index) => (
-                                    <NavLink
-                                        to={Menu.path}
-                                        key={index}
-                                        title={Menu.title}
-                                        className={({ isActive }) => (isActive ?
-                                            `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
-                                            } ${index === 0 && ' hover:bg-slate-700'}` :
-                                            `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
-                                            } ${index === 0 && ' hover:bg-primary'}`
-                                        )}>
-                                        <li
-                                            className='flex items-center gap-x-3'
-                                        >
-
-                                            <IconContext.Provider value={{ className: 'react-icon text-lg' }}>
-                                                <Menu.icon />
-                                            </IconContext.Provider>
-                                            <span
-                                                className={`${!open && 'hidden'
-                                                    } origin-left duration-200`}
+                                : //  Parent menus
+                                isParent
+                                    ? isParentMenus.map((Menu, index) => (
+                                        <NavLink
+                                            to={Menu.path}
+                                            key={index}
+                                            title={Menu.title}
+                                            className={({ isActive }) => (isActive ?
+                                                `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
+                                                } ${index === 0 && ' hover:bg-slate-700'}` :
+                                                `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
+                                                } ${index === 0 && ' hover:bg-primary'}`
+                                            )}>
+                                            <li
+                                                className='flex items-center md:gap-x-4 gap-1'
                                             >
-                                                {Menu.title}
-                                            </span>
 
-                                        </li>
-                                    </NavLink>
-                                ))}
+                                                <IconContext.Provider value={{ className: 'react-icon text-lg' }}>
+                                                    <Menu.icon />
+                                                </IconContext.Provider>
+                                                <span
+                                                    className={`${!open && 'hidden'
+                                                        } origin-left duration-200`}
+                                                >
+                                                    {Menu.title}
+                                                </span>
+
+                                            </li>
+                                        </NavLink>
+                                    ))
+                                    : // coaching menus
+                                    isCoaching ?
+                                        isCoachingMenus.map((Menu, index) => (
+                                            <NavLink
+                                                to={Menu.path}
+                                                key={index}
+                                                title={Menu.title}
+                                                className={({ isActive }) => (isActive ?
+                                                    `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer text-white bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
+                                                    } ${index === 0 && ' hover:bg-slate-700'}` :
+                                                    `flex rounded-md md:px-2 px-1 md:py-[6px] py-1 ${open ? '' : 'mx-auto'} cursor-pointer hover:text-white hover:bg-slate-800 text-sm items-center md:gap-x-4 ${Menu.gap ? 'md:mt-3' : 'md:mt-1'
+                                                    } ${index === 0 && ' hover:bg-primary'}`
+                                                )}>
+                                                <li
+                                                    className='flex items-center gap-x-3'
+                                                >
+
+                                                    <IconContext.Provider value={{ className: 'react-icon text-lg' }}>
+                                                        <Menu.icon />
+                                                    </IconContext.Provider>
+                                                    <span
+                                                        className={`${!open && 'hidden'
+                                                            } origin-left duration-200`}
+                                                    >
+                                                        {Menu.title}
+                                                    </span>
+
+                                                </li>
+                                            </NavLink>
+                                        ))
+                                        :
+                                        (
+                                            ""
+                                        )
+                    }
                     {generalMenus.map((Menu, index) => (
                         <Link
                             to={Menu.path}
