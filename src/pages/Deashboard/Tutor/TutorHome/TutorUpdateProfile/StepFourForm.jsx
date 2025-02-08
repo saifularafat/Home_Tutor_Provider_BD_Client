@@ -35,9 +35,9 @@ const StepFourForm = ({ handleFinalSubmit }) => {
                                 <span className="font-bold text-slate-500 tracking-wider">Institute Name*</span>
                             </label>
                             <input
-                                {...register("presentInstituteName", { required: true })}
+                                {...register("tutorRunningInstituteName", { required: true })}
                                 type="text"
-                                placeholder="Enter Your Present Institute Name"
+                                placeholder="Enter Your Tutor Institute Name"
                                 className="bg-transparent input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                             />
                         </div>
@@ -59,7 +59,7 @@ const StepFourForm = ({ handleFinalSubmit }) => {
                                 <span className="font-bold text-slate-500 tracking-wider">Department/Subject</span>
                             </label>
                             <select
-                                {...register("preferableSubject")}
+                                {...register("runningSubject")}
                                 className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                                 style={{ height: 'auto', maxHeight: '100px', overflowY: 'auto' }}
                             >
@@ -77,50 +77,6 @@ const StepFourForm = ({ handleFinalSubmit }) => {
                 {/* PHOTO SECTION */}
                 <div className="bg-white shadow-md rounded-md py-10 px-3 w-full">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                        {/* Profile Picture */}
-                        {/* <div className="space-y-2 w-full max-w-xs mx-auto">
-                            <label className="block text-slate-700 font-medium">
-                                <span className="font-medium text-sm text-slate-700 tracking-wider">Profile Picture (সর্বোচ্চ 200kb এর ছবি দিন) </span>
-                            </label>
-                            <input
-                                type="file"
-                                className="file-input file-input-bordered file-input-info w-full"
-                                {...register("profilePhoto", {
-                                    required: "File is required",
-                                    validate: {
-                                        fileType: (value) =>
-                                            ["image/png", "image/jpg", "image/jpeg"].includes(value[0]?.type) || "Only PNG, JPG, and JPEG files are allowed.",
-                                        fileSize: (value) =>
-                                            value[0]?.size <= 200 * 1024 || "File size should be less than or equal to 200KB.",
-                                    },
-                                })}
-                                accept=".png, .jpg, .jpeg"
-                            />
-                            {errors.profilePhoto && <p className="text-red-500 text-sm">{errors.profilePhoto.message}</p>}
-                        </div> */}
-
-                        {/* NID Picture */}
-                        {/* <div className="space-y-2 w-full max-w-xs mx-auto">
-                            <label className="block text-slate-700 font-medium">
-                                <span className="font-medium text-sm text-slate-700 tracking-wider">NID Picture (সর্বোচ্চ 200kb এর ছবি দিন)</span>
-                            </label>
-                            <input
-                                type="file"
-                                className="file-input file-input-bordered file-input-primary w-full"
-                                {...register("nidPhoto", {
-                                    required: "File is required",
-                                    validate: {
-                                        fileType: (value) =>
-                                            ["image/png", "image/jpg", "image/jpeg"].includes(value[0]?.type) || "Only PNG, JPG, and JPEG files are allowed.",
-                                        fileSize: (value) =>
-                                            value[0]?.size <= 200 * 1024 || "File size should be less than or equal to 200KB.",
-                                    },
-                                })}
-                                accept=".png, .jpg, .jpeg"
-                            />
-                            {errors.nidPhoto && <p className="text-red-500 text-sm">{errors.nidPhoto.message}</p>}
-                        </div> */}
-
                         {/* Student ID Card Picture */}
                         <div className="md:col-span-3 col-span-1 space-y-2 w-full max-w-sm mx-auto">
                             <label className="block text-slate-700 font-medium">

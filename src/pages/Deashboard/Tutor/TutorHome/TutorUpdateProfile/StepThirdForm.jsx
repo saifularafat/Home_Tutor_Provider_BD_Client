@@ -139,7 +139,7 @@ const StepThirdForm = ({ completeStep }) => {
                             {...register("experience", {
                                 required: "This field is required",
                                 pattern: {
-                                    value: /^[1-9]?\d$/, // This allows one or two digits, but the first digit can't be 0
+                                    value: /^[1-9]?\d$/,
                                     message: "Enter Your Experience in Years (1-99)",
                                 },
                             })}
@@ -251,7 +251,6 @@ const StepThirdForm = ({ completeStep }) => {
                             ))}
                         </select>
                     </div>
-
                 </div>
 
                 {/* Additional qualification */}

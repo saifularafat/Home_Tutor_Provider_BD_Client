@@ -193,14 +193,15 @@ const CoachingProfileUpdate = () => {
                     <div className="text-end">
                         <Link
                             to={`/dashboard/photo-update/${user?.user?._id}`}
-                            className="text-sm font-semibold underline italic hover:not-italic hover:text-green-700 transition-all duration-200"
+                            className="text-sm font-semibold underline italic hover:not-italic hover:tracking-wider hover:text-green-700 transition-all duration-200"
                         >
-                            Photo update now
+                            Your Logo Change Now
                         </Link>
                         <div className="flex items-end  justify-end">
                             <img
                                 src={user?.user?.image}
-                                className="w-20 h-20 bg-cover rounded-md"
+                                title={user?.user?.name}
+                                className="w-20 h-20 md:mr-3 mr-1 bg-cover rounded-md"
                                 alt="coaching logo" />
                         </div>
                     </div>

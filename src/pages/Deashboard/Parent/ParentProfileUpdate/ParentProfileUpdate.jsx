@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import BangladeshProfessions from "../../../../Helpers/BangladeshAllProfessions ";
 import BangladeshAllUniversitiesName from "../../../../Helpers/BDAllUniversityName";
 import DistrictAreas from "../../../../Helpers/DistrictAreas";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSingleUser } from "../../../../api/useAllUsers";
 import Loading from "../../../../Components/Loading/Loading";
 import SearchDropDownField from "../../../../Components/SearchDropDownFiled/SearchDropDownField";
@@ -18,13 +18,12 @@ const ParentProfileUpdate = () => {
     } = useForm();
 
     const { id } = useParams();
-    console.log("useSingleUser PARENT IDDDDDD=>", id);
+    // console.log("useSingleUser PARENT IDDDDDD=>", id);
     const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
-    console.log("useSingleUser PARENT", user?.user);
+    // console.log("useSingleUser PARENT", user?.user);
 
 
     const Professions = watch("Professions");
-    const parentGender = watch("parentGender");
     const universityName = watch("universityName");
     const PreferableArea = watch("PreferableArea");
 
@@ -34,7 +33,7 @@ const ParentProfileUpdate = () => {
             phone: data.phone,
             address: data.address,
             livingAddress: data.livingAddress,
-            parentGender: parentGender,
+            gender: data.gender,
             nidBirth: data.nidBirth,
             professions: Professions,
             universityName: universityName,
@@ -86,7 +85,7 @@ const ParentProfileUpdate = () => {
                     <div className="md:flex items-center gap-3">
                         <div className="w-full">
                             <label className="label">
-                                <span className="label-text text-sm text-slate-600 font-semibold">Guardian Number</span>
+                                <span className="label-text text-sm text-slate-600 font-semibold">Parent Number</span>
                             </label>
                             <input
                                 {...register("phone", {
@@ -133,25 +132,31 @@ const ParentProfileUpdate = () => {
                     <div className="grid md:grid-cols-3 grid-cols-1 items-center justify-center gap-3">
                         <div className="col-span-1 space-y-2">
                             <SearchDropDownField
-                                label="Professions *"
+                                label="Professions "
                                 options={BangladeshProfessions}
                                 selectedValue={Professions}
                                 setValue={(value) => setValue("Professions", value)}
                             />
                             {errors.Professions && <p className="text-red-500 text-sm">Please Select Parent Gender</p>}
                         </div>
-                        <div className="col-span-1 space-y-2">
-                            <SearchDropDownField
-                                label="Gender *"
-                                options={TuitionGender}
-                                selectedValue={parentGender}
-                                setValue={(value) => setValue("parentGender", value)}
-                            />
-                            {errors.parentGender && <p className="text-red-500 text-sm">Please Select Parent Gender</p>}
+                        <div className="col-span-1 space-y-1">
+                            <label className='block text-slate-700 font-medium pb-1'>
+                                <span className="font-bold text-slate-500 tracking-wider">Gender</span>
+                            </label>
+                            <select
+                                {...register("gender", { required: "Gender is required" })}
+                                defaultValue={user?.user?.gender || "male"}
+                                className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
+                            >
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                            {errors.gender && <span className="mt-1 text-red-500">{errors.gender.message}</span>}
                         </div>
                         <div className="col-span-1 space-y-1">
                             <label className="block text-slate-700 font-medium">
-                                <span className="font-medium text-sm text-slate-700 tracking-wider">Nid/Birth Image *(সর্বোচ্চ 200kb এর ছবি দিন)</span>
+                                <span className="font-medium text-sm text-slate-700 tracking-wider">Nid/Birth Photo *(সর্বোচ্চ 200kb এর ছবি দিন)</span>
                             </label>
                             <input
                                 type="file"
@@ -219,10 +224,30 @@ const ParentProfileUpdate = () => {
                             <p className="text-red-500 text-sm mt-1">{errors.bio.message}</p>
                         )}
                     </div>
-                    <div className="mt-9 w-1/4 mx-auto">
-                        <button className="flex items-center justify-center w-full bg-blue-400 hover:bg-blue-500 transition-all duration-200 rounded-md py-[6px] text-white text-xl font-semibold tracking-wide">
-                            Update
-                        </button>
+                    <div className="md:flex-1 flex-col-reverse items-center">
+                        {/* SUBMIT BUTTON */}
+                        <div className="md:mt-5 mt-1 w-1/4 mx-auto">
+                            <button className="flex items-center justify-center w-full bg-blue-400 hover:bg-blue-500 transition-all duration-200 rounded-md py-[6px] text-white text-xl font-semibold tracking-wide">
+                                Update
+                            </button>
+                        </div>
+                        {/* TODO UPDATE USER PHOTO */}
+                        {/* PHOTO UPDATE */}
+                        <div className="text-end">
+                            <Link
+                                to={`/dashboard/photo-update/${user?.user?._id}`}
+                                className="text-sm font-semibold underline italic hover:not-italic hover:tracking-wider hover:text-green-700 transition-all duration-200"
+                            >
+                                Your Photo Change Now
+                            </Link>
+                            <div className="flex items-end  justify-end">
+                                <img
+                                    src={user?.user?.image}
+                                    title={user?.user?.name}
+                                    className="w-20 h-20 md:mr-3 mr-1 bg-cover rounded-md"
+                                    alt="coaching logo" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form >

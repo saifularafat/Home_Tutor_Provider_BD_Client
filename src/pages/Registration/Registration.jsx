@@ -113,6 +113,7 @@ const Registration = () => {
                 password: data.password,
                 gender: data.gender,
                 image: imgURL,
+                progressBar: 25,
                 ...roleFlags,
             };
 
