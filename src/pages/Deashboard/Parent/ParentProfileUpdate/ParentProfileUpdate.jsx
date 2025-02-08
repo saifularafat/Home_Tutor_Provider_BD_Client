@@ -1,19 +1,14 @@
 import { useForm } from "react-hook-form";
-import SearchDropdown from "../../../../Components/SearchInputFuntion/SearchDropdown";
 import BangladeshProfessions from "../../../../Helpers/BangladeshAllProfessions ";
-import { useState } from "react";
 import BangladeshAllUniversitiesName from "../../../../Helpers/BDAllUniversityName";
 import DistrictAreas from "../../../../Helpers/DistrictAreas";
 import { useParams } from "react-router-dom";
 import { useSingleUser } from "../../../../api/useAllUsers";
 import Loading from "../../../../Components/Loading/Loading";
 import SearchDropDownField from "../../../../Components/SearchDropDownFiled/SearchDropDownField";
+import { TuitionGender } from "../../../../Helpers/TuitionJobCreate";
 
 const ParentProfileUpdate = () => {
-    const [allProfessions, setAllProfessions] = useState("");
-    const [selectedUniversity, setSelectedUniversity] = useState('');
-    const [selectPreferableArea, setSelectPreferableArea] = useState('');
-
     const { register,
         formState: { errors },
         handleSubmit,
@@ -29,33 +24,26 @@ const ParentProfileUpdate = () => {
 
 
     const Professions = watch("Professions");
+    const parentGender = watch("parentGender");
+    const universityName = watch("universityName");
+    const PreferableArea = watch("PreferableArea");
+
     const onSubmit = (data) => {
         const formData = {
             name: data.name,
-            guardianNumber: data.guardianNumber,
+            phone: data.phone,
             address: data.address,
             livingAddress: data.livingAddress,
-            gender: data.gender,
-            image: data.image,
+            parentGender: parentGender,
+            nidBirth: data.nidBirth,
             professions: Professions,
-            universityName: selectedUniversity,
-            PreferableArea: selectPreferableArea,
+            universityName: universityName,
+            PreferableArea: PreferableArea,
             ParentBio: data.ParentBio,
             progressBar: 100,
         };
-        console.log(formData);
+        console.log(' parent info', formData);
     }
-
-
-    const handleUniversitySelect = (option) => {
-        setSelectedUniversity(option);
-        setValue('selectedUniversity', option);
-    };
-    const handlePreferableArea = (option) => {
-        setSelectPreferableArea(option);
-        setValue('selectPreferableArea', option);
-    };
-
 
     if (isLoading) {
         return <Loading />;
@@ -150,22 +138,24 @@ const ParentProfileUpdate = () => {
                                 selectedValue={Professions}
                                 setValue={(value) => setValue("Professions", value)}
                             />
-                        </div>
-                        <div className="columns-1 space-y-2">
-                            <label className="label">
-                                <span className="label-text text-sm text-slate-600 font-semibold">Gender</span>
-                            </label>
-                            <select {...register("gender")} className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm">
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
-                                <option value="other">Other</option>
-                            </select>
+                            {errors.Professions && <p className="text-red-500 text-sm">Please Select Parent Gender</p>}
                         </div>
                         <div className="col-span-1 space-y-2">
-                            <label className="label">
-                                <span className="label-text text-sm text-slate-600 font-semibold">Nid/Birth Image </span>
+                            <SearchDropDownField
+                                label="Gender *"
+                                options={TuitionGender}
+                                selectedValue={parentGender}
+                                setValue={(value) => setValue("parentGender", value)}
+                            />
+                            {errors.parentGender && <p className="text-red-500 text-sm">Please Select Parent Gender</p>}
+                        </div>
+                        <div className="col-span-1 space-y-1">
+                            <label className="block text-slate-700 font-medium">
+                                <span className="font-medium text-sm text-slate-700 tracking-wider">Nid/Birth Image *(সর্বোচ্চ 200kb এর ছবি দিন)</span>
                             </label>
                             <input
+                                type="file"
+                                className="file-input file-input-bordered file-input-primary w-full"
                                 {...register("nidBirth", {
                                     required: "Nid Birth Photo is required",
                                     validate: {
@@ -176,57 +166,58 @@ const ParentProfileUpdate = () => {
                                     },
                                 })}
                                 accept=".png, .jpg, .jpeg"
-                                className="file-input file-input-bordered w-full "
                             />
                             {errors.nidBirth && <p className="text-red-500 text-sm">{errors.nidBirth.message}</p>}
                         </div>
                     </div>
-
                 </div>
 
                 {/* second section */}
                 <div className="bg-white px-4 rounded-md py-8 mt-2">
                     <h2 className="text-2xl font-semibold text-slate-700">Others Information</h2>
 
-                    <div className="md:flex items-center gap-5 mt-3">
-                        <div className="md:w-1/2 space-y-1">
-                            <label className="block text-slate-700 font-medium">
-                                <span className="font-bold text-slate-500 tracking-wider">University Name</span>
-                            </label>
-                            <SearchDropdown
+                    <div className="grid md:grid-cols-2 grid-cols-1 gap-5 mt-3">
+                        <div className="col-span-1 space-y-2">
+                            <SearchDropDownField
+                                label="University Name"
                                 options={BangladeshAllUniversitiesName}
-                                selectedValue={selectedUniversity}
-                                onSelect={handleUniversitySelect}
+                                selectedValue={universityName}
+                                setValue={(value) => setValue("universityName", value)}
                             />
                         </div>
-                        <div className="md:w-1/2 space-y-1">
-                            <label className="block text-slate-700 font-medium">
-                                <span className="font-bold text-slate-500 tracking-wider">Preferable Area</span>
-                            </label>
-                            <SearchDropdown
+                        <div className="col-span-1 space-y-2">
+                            <SearchDropDownField
+                                label="Preferable Area"
                                 options={DistrictAreas}
-                                selectedValue={selectPreferableArea}
-                                onSelect={handlePreferableArea}
+                                selectedValue={PreferableArea}
+                                setValue={(value) => setValue("PreferableArea", value)}
                             />
                         </div>
-
                     </div>
-                    <div className="flex items-center gap-3 pt-1">
-                        <div className="form-control w-full ">
-                            <label className="label">
-                                <span className="font-bold text-lg text-slate-500 tracking-wider">Bio</span>
-                            </label>
-                            <textarea
-                                name=""
-                                id=""
-                                cols="20"
-                                rows="3"
-                                placeholder="Please Type Your Bio"
-                                {...register("ParentBio")}
-                                className="border border-sky-300 rounded-lg outline-sky-600 placeholder:text-sm overflow-hidden w-full p-2"
-                            >
-                            </textarea>
-                        </div>
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="font-bold text-lg text-slate-500 tracking-wider">Bio</span>
+                        </label>
+                        <textarea
+                            id="bio"
+                            cols="20"
+                            rows="2"
+                            placeholder="Please Type Your Coaching Center Bio"
+                            defaultValue={user?.user?.bio || ''}
+                            {...register("bio", {
+                                required: "Bio is required",
+                                validate: (value) => {
+                                    const words = value.trim().split(/\s+/).length;
+                                    if (words < 6) return "Bio must be at least 6 words";
+                                    if (words > 15) return "Bio cannot exceed 15 words";
+                                    return true;
+                                }
+                            })}
+                            className="border border-sky-300 rounded-lg outline-sky-600 placeholder:text-sm overflow-hidden w-full p-2"
+                        />
+                        {errors.bio && (
+                            <p className="text-red-500 text-sm mt-1">{errors.bio.message}</p>
+                        )}
                     </div>
                     <div className="mt-9 w-1/4 mx-auto">
                         <button className="flex items-center justify-center w-full bg-blue-400 hover:bg-blue-500 transition-all duration-200 rounded-md py-[6px] text-white text-xl font-semibold tracking-wide">
