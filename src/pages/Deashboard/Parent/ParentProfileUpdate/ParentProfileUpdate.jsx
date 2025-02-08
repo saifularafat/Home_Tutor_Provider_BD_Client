@@ -4,6 +4,10 @@ import BangladeshProfessions from "../../../../Helpers/BangladeshAllProfessions 
 import { useState } from "react";
 import BangladeshAllUniversitiesName from "../../../../Helpers/BDAllUniversityName";
 import DistrictAreas from "../../../../Helpers/DistrictAreas";
+import { useParams } from "react-router-dom";
+import { useSingleUser } from "../../../../api/useAllUsers";
+import Loading from "../../../../Components/Loading/Loading";
+import SearchDropDownField from "../../../../Components/SearchDropDownFiled/SearchDropDownField";
 
 const ParentProfileUpdate = () => {
     const [allProfessions, setAllProfessions] = useState("");
@@ -13,31 +17,36 @@ const ParentProfileUpdate = () => {
     const { register,
         formState: { errors },
         handleSubmit,
+        reset,
         setValue,
-        reset } = useForm();
+        watch,
+    } = useForm();
 
+    const { id } = useParams();
+    console.log("useSingleUser PARENT IDDDDDD=>", id);
+    const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
+    console.log("useSingleUser PARENT", user?.user);
+
+
+    const Professions = watch("Professions");
     const onSubmit = (data) => {
         const formData = {
             name: data.name,
-            email: data.email,
             guardianNumber: data.guardianNumber,
             address: data.address,
             livingAddress: data.livingAddress,
             gender: data.gender,
             image: data.image,
-            allProfessions: allProfessions,
+            professions: Professions,
             universityName: selectedUniversity,
             PreferableArea: selectPreferableArea,
             ParentBio: data.ParentBio,
+            progressBar: 100,
         };
         console.log(formData);
     }
 
-    // Function to update the selected Education Levels
-    const handleProfessions = (option) => {
-        setAllProfessions(option);
-        setValue('polytechnicSubjects', option);
-    };
+
     const handleUniversitySelect = (option) => {
         setSelectedUniversity(option);
         setValue('selectedUniversity', option);
@@ -47,20 +56,31 @@ const ParentProfileUpdate = () => {
         setValue('selectPreferableArea', option);
     };
 
+
+    if (isLoading) {
+        return <Loading />;
+    }
+    if (isError) {
+        return <p className="text-red-500">Error fetching user data</p>;
+    }
+    if (!user?.user) {
+        return <p>No user data found</p>;
+    }
     return (
         <div className="px-2">
             <form onSubmit={handleSubmit(onSubmit)} className="py-5">
                 <div className=" bg-white px-4 rounded-md py-8 space-y-2">
-                    <h2 className="text-xl font-semibold text-slate-600">Update Profile</h2>
+                    <h2 className="text-xl font-semibold text-slate-600">Update Parent Profile</h2>
                     <div className="md:flex items-center gap-3">
                         <div className="w-full">
                             <label className="label">
-                                <span className="label-text text-sm text-slate-600 font-semibold">Name *</span>
+                                <span className="label-text text-sm text-slate-600 font-semibold">Name </span>
                             </label>
                             <input
                                 type="text"
                                 placeholder="Enter Your Name"
                                 {...register("name")}
+                                defaultValue={user?.user?.name}
                                 className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                             />
                         </div>
@@ -68,12 +88,11 @@ const ParentProfileUpdate = () => {
                             <label className="label">
                                 <span className="label-text text-sm text-slate-600 font-semibold">Email</span>
                             </label>
-                            <input
-                                type="email"
-                                placeholder="Your Email"
-                                {...register("email")}
-                                className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
-                            />
+                            <p
+                                className="bg-transparent lowercase input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
+                            >
+                                {user?.user?.email}
+                            </p>
                         </div>
                     </div>
                     <div className="md:flex items-center gap-3">
@@ -82,9 +101,16 @@ const ParentProfileUpdate = () => {
                                 <span className="label-text text-sm text-slate-600 font-semibold">Guardian Number</span>
                             </label>
                             <input
-                                type="number"
-                                placeholder="Your Guardian Number"
-                                {...register("guardianNumber", { maxLength: 14 })}
+                                {...register("phone", {
+                                    required: "Parent Phone Number field is required",
+                                    pattern: {
+                                        value: /^(\+8801|8801|01)[3-9]\d{8}$/,
+                                        message: "Enter a valid phone number (+8801XXXXXXXXX)",
+                                    },
+                                })}
+                                type="text"
+                                placeholder="Enter Parent Phone Number (e.g., +8801XXXXXXXXX)"
+                                defaultValue={user?.user?.phone}
                                 className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                             />
                         </div>
@@ -93,9 +119,10 @@ const ParentProfileUpdate = () => {
                                 <span className="label-text text-sm text-slate-600 font-semibold">Address</span>
                             </label>
                             <input
+                                {...register("address", { required: "Address is required" })}
                                 type="text"
-                                placeholder="Your Address"
-                                {...register("address")}
+                                placeholder="Enter Your Address"
+                                defaultValue={user?.user?.address}
                                 className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                             />
                         </div>
@@ -106,23 +133,25 @@ const ParentProfileUpdate = () => {
                             <input
                                 type="text"
                                 placeholder="Your Living Address"
-                                {...register("livingAddress")}
+                                {...register("livingAddress", { required: "Address is required" })}
+                                defaultValue={user?.user?.livingAddress}
                                 className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                             />
+                            {errors.livingAddress && (
+                                <p className="text-red-500 text-sm mt-1">{errors.livingAddress.message}</p>
+                            )}
                         </div>
                     </div>
-                    <div className="md:flex items-center justify-center gap-3">
-                        <div className="w-full">
-                            <label className="label">
-                                <span className="label-text text-sm text-slate-600 font-semibold">Profession</span>
-                            </label>
-                            <SearchDropdown
+                    <div className="grid md:grid-cols-3 grid-cols-1 items-center justify-center gap-3">
+                        <div className="col-span-1 space-y-2">
+                            <SearchDropDownField
+                                label="Professions *"
                                 options={BangladeshProfessions}
-                                selectedValue={allProfessions}
-                                onSelect={handleProfessions}
+                                selectedValue={Professions}
+                                setValue={(value) => setValue("Professions", value)}
                             />
                         </div>
-                        <div className="w-full">
+                        <div className="columns-1 space-y-2">
                             <label className="label">
                                 <span className="label-text text-sm text-slate-600 font-semibold">Gender</span>
                             </label>
@@ -132,14 +161,24 @@ const ParentProfileUpdate = () => {
                                 <option value="other">Other</option>
                             </select>
                         </div>
-                        <div className="w-full">
+                        <div className="col-span-1 space-y-2">
                             <label className="label">
-                                <span className="label-text text-sm text-slate-600 font-semibold">Image </span>
+                                <span className="label-text text-sm text-slate-600 font-semibold">Nid/Birth Image </span>
                             </label>
                             <input
-                                {...register("image")}
-                                type="file"
-                                className="file-input file-input-bordered w-full " />
+                                {...register("nidBirth", {
+                                    required: "Nid Birth Photo is required",
+                                    validate: {
+                                        fileType: (value) =>
+                                            ["image/png", "image/jpg", "image/jpeg"].includes(value[0]?.type) || "Only PNG, JPG, and JPEG files are allowed.",
+                                        fileSize: (value) =>
+                                            value[0]?.size <= 200 * 1024 || "File size should be less than or equal to 200KB.",
+                                    },
+                                })}
+                                accept=".png, .jpg, .jpeg"
+                                className="file-input file-input-bordered w-full "
+                            />
+                            {errors.nidBirth && <p className="text-red-500 text-sm">{errors.nidBirth.message}</p>}
                         </div>
                     </div>
 

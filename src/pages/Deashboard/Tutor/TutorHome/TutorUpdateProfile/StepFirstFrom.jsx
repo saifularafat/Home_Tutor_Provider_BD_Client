@@ -16,6 +16,11 @@ const StepFirstFrom = ({ completeStep }) => {
 
     const onSubmit = (data) => {
         console.log("Form data:", data);
+        const firstStepUpdate = {
+            ...data,
+            progressBar: 50,
+        }
+        console.log("first step update profile", firstStepUpdate);
         completeStep(data);
     };
 

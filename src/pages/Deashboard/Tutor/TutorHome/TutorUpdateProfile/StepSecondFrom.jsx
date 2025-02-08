@@ -59,7 +59,7 @@ const StepSecondForm = ({ completeStep }) => {
       programmingLanguages: programmingLanguages || "N/A",
       programmingLanguagesStartYear: programmingLanguagesStartYears || "N/A",
       programmingCertificate: data.programmingCertificate || "N/A",
-      progressBar: 50,
+      progressBar: 65,
     };
     console.log('Submitted Form Data:', formData);
     completeStep(formData);

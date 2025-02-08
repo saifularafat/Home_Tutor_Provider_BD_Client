@@ -16,10 +16,11 @@ const CoachingProfileUpdate = () => {
         reset } = useForm();
 
     const onSubmit = (data) => {
-        const formData = {
+        const coachingProfileUpdate = {
             ...data,
+            progressBar: 100,
         }
-        console.log(formData);
+        console.log("coaching update profile", coachingProfileUpdate);
     }
 
     if (isLoading) {
@@ -135,7 +136,7 @@ const CoachingProfileUpdate = () => {
                     {/* License Picture */}
                     <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
-                            <span className="font-medium text-sm text-slate-700 tracking-wider">License Photo (সর্বোচ্চ 200kb এর ছবি দিন)</span>
+                            <span className="font-medium text-sm text-slate-700 tracking-wider">License Photo *(সর্বোচ্চ 200kb এর ছবি দিন)</span>
                         </label>
                         <input
                             type="file"
@@ -151,7 +152,7 @@ const CoachingProfileUpdate = () => {
                             })}
                             accept=".png, .jpg, .jpeg"
                         />
-                        {errors.nidPhoto && <p className="text-red-500 text-sm">{errors.nidPhoto.message}</p>}
+                        {errors.licensePhoto && <p className="text-red-500 text-sm">{errors.licensePhoto.message}</p>}
                     </div>
                 </div>
                 {/* BIO */}
