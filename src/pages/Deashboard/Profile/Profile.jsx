@@ -27,6 +27,9 @@ const Profile = () => {
                         className="h-full w-full md:scale-105 transform md:rounded-lg "
                         src={user?.image || "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop"}
                         alt="parent photo" />
+                    <div className="text-center">
+                        <Link to={`/dashboard/user-photo-update/${user?._id}`} className="text-center text-xs font-mono font-medium underline italic hover:not-italic hover:text-blue-700 hover:font-semibold hover:tracking-wide transition-all duration-200">Profile Photo Change Now!</Link>
+                    </div>
                 </div>
                 <div className="min-w-[250px] max-w-[350px] space-y-2 md:rounded-br-lg rounded-tr-lg bg-white md:p-8 p-4 text-center shadow-[0px_7px_30px_2px_rgba(100,100,111,0.2)] dark:bg-[#18181B] md:w-[350px] dark:shadow-[0px_2px_8px_0px_rgba(0,0,0,0.8)]">
                     <div className="space-y-1 py-2">

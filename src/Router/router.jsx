@@ -60,6 +60,7 @@ import LeaderBoardWithTutor from "../pages/Deashboard/LeaderBoardWithTutor/Leade
 import CoachingHome from "../pages/Deashboard/Coacging/CoachingHome/CoachingHome";
 import TuitionAllJobsParentCoaching from "../pages/Deashboard/TuitionAllJobsParentCoaching/TuitionAllJobsParentCoaching";
 import CoachingProfileUpdate from "../pages/Deashboard/Coacging/CoachingProfileUpdate/CoachingProfileUpdate";
+import OnlyImageUpdate from "../pages/Deashboard/Profile/OnlyImageUpdate";
 
 const router = createBrowserRouter([
 	{
@@ -299,6 +300,10 @@ const router = createBrowserRouter([
 			{
 				path: "/dashboard/coaching-center-profile-update/:id",
 				element: <CoachingProfileUpdate />,
+			},
+			{
+				path: "/dashboard/user-photo-update/:id",
+				element: <OnlyImageUpdate />,
 			},
 		],
 	},

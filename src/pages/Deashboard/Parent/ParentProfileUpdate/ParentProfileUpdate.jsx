@@ -235,7 +235,7 @@ const ParentProfileUpdate = () => {
                         {/* PHOTO UPDATE */}
                         <div className="text-end">
                             <Link
-                                to={`/dashboard/photo-update/${user?.user?._id}`}
+                                to={`/dashboard/user-photo-update/${user?.user?._id}`}
                                 className="text-sm font-semibold underline italic hover:not-italic hover:tracking-wider hover:text-green-700 transition-all duration-200"
                             >
                                 Your Photo Change Now
