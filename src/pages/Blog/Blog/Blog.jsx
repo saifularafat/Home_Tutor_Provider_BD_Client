@@ -3,6 +3,8 @@ import { useAllBlogs } from "../../../api/useAllBlog";
 import EmptyDataUiShow from "../../../Components/EmptyDataUiShow/EmptyDataUiShow";
 import { Link } from "react-router-dom";
 import Pagination from "../../../Components/Pagination/Pagination";
+import Loading from "../../../Components/Loading/Loading";
+import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
 
 const Blog = () => {
     const [page, setPage] = useState(1);
@@ -13,11 +15,15 @@ const Blog = () => {
     const { blogs: blogList = [] } = blogs || {};
 
     const approveBlog = blogList?.filter((singleBlog) => singleBlog?.isBlog === true) || [];
-    console.log("blog section  1222===>>", blogs?.pagination);
-    console.log("blog section  ===>>", approveBlog);
+    // console.log("blog section  1222===>>", blogs?.pagination);
+    // console.log("blog section  ===>>", approveBlog);
 
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div className="md:max-w-7xl mx-auto md:py-12 py-5">
+            <PageTitleShow currentPage="Blogs |" />
             {
                 approveBlog?.length > 0 ? (
                     <div className="grid md:grid-cols-3 grid-cols-1 gap-5 pb-5">
@@ -26,10 +32,10 @@ const Blog = () => {
                                 key={blog?._id}
                                 className="w-full bg-white rounded-xl shadow-md hover:shadow-xl hover:shadow-sky-200 flex flex-col transition-all duration-300"
                             >
-                                <div>
+                                <div className="h-[240px] object-cover">
                                     <img
-                                        className="h-[250px] w-full rounded-t-lg object-cover"
-                                        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                        className="md:h-[240px] h-[200px] w-full rounded-t-lg object-cover"
+                                        src={blog?.image || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                                         alt=""
                                     />
                                 </div>
