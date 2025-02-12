@@ -61,6 +61,8 @@ import CoachingHome from "../pages/Deashboard/Coacging/CoachingHome/CoachingHome
 import TuitionAllJobsParentCoaching from "../pages/Deashboard/TuitionAllJobsParentCoaching/TuitionAllJobsParentCoaching";
 import CoachingProfileUpdate from "../pages/Deashboard/Coacging/CoachingProfileUpdate/CoachingProfileUpdate";
 import OnlyImageUpdate from "../pages/Deashboard/Profile/OnlyImageUpdate";
+import Blog from "../pages/Blog/Blog/Blog";
+import BlogDetails from "../pages/Blog/BlogDetails/BlogDetails";
 
 const router = createBrowserRouter([
 	{
@@ -107,6 +109,16 @@ const router = createBrowserRouter([
 			{
 				path: "/hire-tutor-apply/details/:id",
 				element: <HireTutorApplyDetails />,
+			},
+			// TODO PROTOCOL WITH ROUTER
+			{
+				path: "/blogs",
+				element: <Blog />,
+			},
+			// TODO PROTOCOL WITH ROUTER
+			{
+				path: "/blogs-details/:id",
+				element: <BlogDetails />,
 			},
 			{
 				path: "/contact-us",

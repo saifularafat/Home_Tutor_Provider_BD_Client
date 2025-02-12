@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSingleUser } from "../../../api/useAllUsers";
 import Loading from "../../../Components/Loading/Loading";
 
@@ -14,11 +14,14 @@ const OnlyImageUpdate = () => {
     const { id } = useParams();
     const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
 
+    const navigate = useNavigate();
+
     const onSubmit = (data) => {
         const formData = {
             image: data.image
         };
         console.log(' image info', formData);
+        navigate('/dashboard/profile')
     }
 
     if (isLoading) {

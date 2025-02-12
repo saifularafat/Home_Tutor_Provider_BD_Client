@@ -159,10 +159,16 @@ const NavTest = () => {
                                                 Create Parent Meet
                                             </NavLink>
                                         ) : isCoaching ? (
-                                            <NavLink to='/createMeeting'
-                                                className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
-                                                Create Meeting
-                                            </NavLink>
+                                            <>
+                                                <NavLink to='/createMeeting'
+                                                    className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
+                                                    Create Meeting
+                                                </NavLink>
+                                                <NavLink to='/createMeeting'
+                                                    className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
+                                                    Blogs
+                                                </NavLink>
+                                            </>
                                         )
                                             : (
                                                 <NavLink to='/joinTutorMeeting'
@@ -179,6 +185,8 @@ const NavTest = () => {
                         {/* Logo Component */}
                         <Logo />
                     </div>
+
+
                     {/* Desktop middle nav Ber*/}
                     <div className='hidden navbar-center lg:flex'>
                         <ul className=' flex items-center gap-x-1 tracking-wide'>
@@ -216,10 +224,16 @@ const NavTest = () => {
                                             Join Meeting
                                         </NavLink>
                                     ) : isCoaching ? (
-                                        <NavLink to='/createMeeting'
-                                            className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
-                                            Create Meeting
-                                        </NavLink>
+                                        <>
+                                            <NavLink to='/blogs'
+                                                className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                                Blogs
+                                            </NavLink>
+                                            <NavLink to='/createMeeting'
+                                                className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                                Create Meeting
+                                            </NavLink>
+                                        </>
                                     ) : isParent ? (
                                         <NavLink to='/joinMeting'
                                             className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
