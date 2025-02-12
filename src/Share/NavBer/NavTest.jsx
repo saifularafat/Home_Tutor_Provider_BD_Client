@@ -154,27 +154,39 @@ const NavTest = () => {
                                         {isAdmin ? (
                                             ''
                                         ) : isTutor ? (
-                                            <NavLink to='/createMeeting'
-                                                className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
-                                                Create Parent Meet
-                                            </NavLink>
+                                            <>
+                                                <NavLink to='/blogs'
+                                                    className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                                    Blogs
+                                                </NavLink>
+                                                <NavLink to='/createMeeting'
+                                                    className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
+                                                    Create Parent Meet
+                                                </NavLink>
+                                            </>
                                         ) : isCoaching ? (
                                             <>
                                                 <NavLink to='/createMeeting'
                                                     className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
-                                                    Create Meeting
+                                                    Blogs
                                                 </NavLink>
                                                 <NavLink to='/createMeeting'
                                                     className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
-                                                    Blogs
+                                                    Create Meeting
                                                 </NavLink>
                                             </>
                                         )
                                             : (
-                                                <NavLink to='/joinTutorMeeting'
-                                                    className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
-                                                    Join Meeting
-                                                </NavLink>
+                                                <>
+                                                    <NavLink to='/blogs'
+                                                        className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                                        Blogs
+                                                    </NavLink>
+                                                    <NavLink to='/joinTutorMeeting'
+                                                        className={({ isActive }) => (isActive ? "mobileActiveNav" : "mobileDefaultNav")}>
+                                                        Join Meeting
+                                                    </NavLink>
+                                                </>
                                             )}
                                     </li>
                                 )}
@@ -219,10 +231,16 @@ const NavTest = () => {
                                     {isAdmin ? (
                                         ''
                                     ) : isTutor ? (
-                                        <NavLink to='/createMeeting'
-                                            className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
-                                            Join Meeting
-                                        </NavLink>
+                                        <>
+                                            <NavLink to='/blogs'
+                                                className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                                Blogs
+                                            </NavLink>
+                                            <NavLink to='/createMeeting'
+                                                className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                                Join Meeting
+                                            </NavLink>
+                                        </>
                                     ) : isCoaching ? (
                                         <>
                                             <NavLink to='/blogs'
@@ -235,10 +253,16 @@ const NavTest = () => {
                                             </NavLink>
                                         </>
                                     ) : isParent ? (
-                                        <NavLink to='/joinMeting'
-                                            className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
-                                            Join Meeting
-                                        </NavLink>
+                                        <>
+                                            <NavLink to='/blogs'
+                                                className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                                Blogs
+                                            </NavLink>
+                                            <NavLink to='/joinMeting'
+                                                className={({ isActive }) => (isActive ? "activeNav" : "defaultNav")}>
+                                                Join Meeting
+                                            </NavLink>
+                                        </>
                                     ) : (
                                         <Link to='/leader-board-with-tutor'>leader Board</Link>
                                     )

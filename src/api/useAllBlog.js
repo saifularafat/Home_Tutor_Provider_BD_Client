@@ -15,13 +15,13 @@ export const useAllBlogs = (page = 1, searchText = "") => {
     return [blogs, refetch, isLoading];
 };
 
-export const singleTuitionJobs = (id) => {
+export const useSingleBlog = (id) => {
     const { data: responseData, refetch, isLoading, isError } = useQuery({
         queryKey: ['singleBlog', id],
         queryFn: async () => {
-            if (!id) throw new Error("ID must be provided"); 
+            if (!id) throw new Error("ID must be provided");
             const res = await axios.get(`${serverApiUrl}/api/blog/${id}`);
-            return res.data; 
+            return res.data;
         },
         keepPreviousData: true,
         enabled: !!id,
