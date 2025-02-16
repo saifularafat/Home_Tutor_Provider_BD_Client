@@ -52,6 +52,18 @@ const IsCoachingInfo = ({ user }) => {
                             {user?.bio || "Please give your Coaching center Bio "}
                         </span>
                     </h2>
+                    <h2 className="text-base font-medium text-slate-700">Create Date :
+                        <span className="text-slate-600 font-normal bg-slate-100 px-2 rounded">
+                            {new Date(user?.createdAt).toLocaleDateString()}{" "}
+                            {new Date(user?.createdAt).toLocaleTimeString()}
+                        </span>
+                    </h2>
+                    <h2 className="text-base font-medium text-slate-700">Updated Date :
+                        <span className="text-slate-600 font-normal bg-slate-100 px-2 rounded text-sm">
+                            {new Date(user?.updatedAt).toLocaleDateString()}{" "}
+                            {new Date(user?.updatedAt).toLocaleTimeString()}
+                        </span>
+                    </h2>
                 </div>
 
                 <div className="md:col-span-1 col-span-1">
