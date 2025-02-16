@@ -6,11 +6,11 @@ const IsCoachingInfo = ({ user }) => {
             <div className="grid md:grid-cols-4 col-span-1 gap-3 py-3">
                 <div className="md:col-span-1 col-span-1">
                     <div className="group relative sm:w-[200px]">
-                        <h4 className="text-sm font-medium text-slate-700 text-center">Coaching Center logo</h4>
+                        <h4 className="text-sm font-medium text-slate-700 text-center pb-3">Coaching Center logo</h4>
                         <img
                             width={350}
                             height={350}
-                            className="h-full w-full object-cover md:scale-105 transform md:rounded-lg "
+                            className="h-full w-full object-cover hover:scale-105 transform transition-all duration-200 md:rounded-lg "
                             src={user?.image || "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop"}
                             alt="parent photo" />
                     </div>
@@ -49,7 +49,7 @@ const IsCoachingInfo = ({ user }) => {
                     </h2>
                     <h2 className="text-base font-medium text-slate-700">Bio :
                         <span className="text-slate-600 font-normal bg-slate-100 px-2 rounded">
-                            {user?.Bio || "Please give your Coaching center Bio "}
+                            {user?.bio || "Please give your Coaching center Bio "}
                         </span>
                     </h2>
                 </div>

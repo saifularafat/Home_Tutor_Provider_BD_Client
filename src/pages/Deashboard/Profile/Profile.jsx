@@ -20,15 +20,15 @@ const Profile = () => {
     return (
         <div className="md:py-12 py-5">
             <div className="md:overflow-hidden flex flex-col items-center justify-center md:flex-row">
-                <div className="group relative sm:w-[320px]">
+                <div className="group relative sm:w-[320px] space-y-0">
                     <img
                         width={350}
                         height={350}
-                        className="h-full w-full md:scale-105 transform md:rounded-lg "
+                        className="h-full w-full md:scale-105 md:rounded-lg"
                         src={user?.image || "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop"}
                         alt="parent photo" />
                     <div className="text-center">
-                        <Link to={`/dashboard/user-photo-update/${user?._id}`} className="text-center text-xs font-mono font-medium underline italic hover:not-italic hover:text-blue-700 hover:font-semibold hover:tracking-wide transition-all duration-200">Profile Photo Change Now!</Link>
+                        <Link to={`/dashboard/user-photo-update/${user?._id}`} className="text-center text-xs mt-5 font-mono font-medium underline italic hover:not-italic hover:text-blue-700 hover:font-semibold hover:tracking-wide transition-all duration-200">Profile Photo Change Now!</Link>
                     </div>
                 </div>
                 <div className="min-w-[250px] max-w-[350px] space-y-2 md:rounded-br-lg rounded-tr-lg bg-white md:p-8 p-4 text-center shadow-[0px_7px_30px_2px_rgba(100,100,111,0.2)] dark:bg-[#18181B] md:w-[350px] dark:shadow-[0px_2px_8px_0px_rgba(0,0,0,0.8)]">

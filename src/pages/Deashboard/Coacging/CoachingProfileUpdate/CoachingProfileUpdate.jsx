@@ -13,7 +13,7 @@ const CoachingProfileUpdate = () => {
 
     const { id } = useParams();
     const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
-    // console.log("useSingleUser", user?.user);
+    console.log("useSingleUser", user?.user);
 
     const {
         register,
@@ -25,41 +25,61 @@ const CoachingProfileUpdate = () => {
 
     const onSubmit = async (data) => {
         try {
-            const imageFile = data.image[0];
             setImageError(null);
 
-            if (imageFile.size > 1 * 1024 * 1024) {
-                setImageError("License Image size should not exceed 1MB.");
+            // Check if a new file is uploaded
+            const imageFile = data.licensePhoto?.[0];
+
+            // If a new file is uploaded, validate it
+            if (imageFile) {
+                if (imageFile.size > 500 * 1024) {
+                    setImageError("License Image size should not exceed 500KB.");
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append("image", imageFile);
+
+                const imageResponse = await fetch(imageURL, {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const imageData = await imageResponse.json();
+                if (!imageData.success) {
+                    throw new Error("Failed to upload image");
+                }
+
+                data.licensePhoto = imageData.data.display_url; // Set uploaded image URL
+            } else {
+                // If no new image, keep the existing one
+                data.licensePhoto = user?.user?.licensePhoto;
+            }
+
+            const userID = user?.user?._id;
+            if (!userID) {
+                Swal.fire({
+                    title: "Error",
+                    text: "User ID is missing. Please try again later.",
+                    icon: "error",
+                });
                 return;
             }
 
-            const formData = new FormData();
-            formData.append("licensePhoto", imageFile);
-
-            const imageResponse = await fetch(imageURL, {
-                method: "POST",
-                body: formData,
-            });
-            const imageData = await imageResponse.json();
-
-            if (!imageData.success) {
-                throw new Error("Failed to upload image");
-            }
-
-            const imgURL = imageData.data.display_url;
-
             const coachingProfileUpdate = {
-                name: data.name,
-                phone: data.phone,
-                address: data.address,
-                gender: data.gender,
-                licensePhoto: imgURL,
+                name: data.name || user?.user?.name,
+                phone: data.phone || user?.user?.phone,
+                address: data.address || user?.user?.address,
+                websiteSocialLink: data.websiteSocialLink || user?.user?.websiteSocialLink,
+                achievements: data.achievements || user?.user?.achievements,
+                bio: data.bio || user?.user?.bio,
+                licensePhoto: data.licensePhoto, // Either new image URL or existing one
                 progressBar: 100,
             };
 
-            console.log("UPdate coaching center data:", coachingProfileUpdate);
+            console.log("Sending data:", JSON.stringify(coachingProfileUpdate, null, 2));
 
-            const response = await axios.put(`${serverApiUrl}/api/users/${user?.user?._id}`, coachingProfileUpdate);
+            const response = await axios.put(`${serverApiUrl}/api/users/${userID}`, coachingProfileUpdate);
 
             if (response.status === 200) {
                 console.log("Response data:", response?.data);
@@ -71,24 +91,15 @@ const CoachingProfileUpdate = () => {
                     showConfirmButton: false,
                     timer: 1500,
                 });
+                navigate("/dashboard/profile");
             }
         } catch (error) {
-            if (error.response?.status === 422) {
-                const errorMessages = error.response.data?.errors || [];
-                Swal.fire({
-                    title: "Validation Error",
-                    icon: "error",
-                    html: errorMessages
-                        .map((err) => `<p>${err.field}: ${err.message}</p>`)
-                        .join(""),
-                });
-            } else {
-                Swal.fire({
-                    title: "Error",
-                    text: error.message || "Something went wrong",
-                    icon: "error",
-                });
-            }
+            console.error("Error updating profile:", error);
+            Swal.fire({
+                title: "Error",
+                text: error.response?.data?.message || "Something went wrong",
+                icon: "error",
+            });
         }
     };
 
@@ -202,22 +213,30 @@ const CoachingProfileUpdate = () => {
                         />
                     </div>
 
-                    {/* License Picture */}
+                    {/* License Picture (Only required if missing) */}
                     <div className="col-span-1 space-y-1">
                         <label className="block text-slate-700 font-medium">
-                            <span className="font-medium text-sm text-slate-700 tracking-wider">License Photo *(সর্বোচ্চ 200kb এর ছবি দিন)</span>
+                            <span className="font-medium text-sm text-slate-700 tracking-wider">
+                                License Photo *(Max 500KB, PNG/JPG/JPEG)
+                            </span>
                         </label>
                         <input
                             type="file"
                             className="file-input file-input-bordered file-input-primary w-full"
                             {...register("licensePhoto", {
-                                required: "license Photo is required",
-                                validate: {
-                                    fileType: (value) =>
-                                        ["image/png", "image/jpg", "image/jpeg"].includes(value[0]?.type) || "Only PNG, JPG, and JPEG files are allowed.",
-                                    fileSize: (value) =>
-                                        value[0]?.size <= 200 * 1024 || "File size should be less than or equal to 200KB.",
-                                },
+                                validate: user?.user?.licensePhoto
+                                    ? undefined // Skip validation if image exists
+                                    : {
+                                        required: (value) =>
+                                            value?.length > 0 || "License Photo is required",
+                                        fileType: (value) =>
+                                            value?.length === 0 ||
+                                            ["image/png", "image/jpg", "image/jpeg"].includes(value[0]?.type) ||
+                                            "Only PNG, JPG, and JPEG files are allowed.",
+                                        fileSize: (value) =>
+                                            value?.length === 0 || value[0]?.size <= 500 * 1024 ||
+                                            "File size should be ≤ 500KB.",
+                                    },
                             })}
                             accept=".png, .jpg, .jpeg"
                         />

@@ -2,6 +2,10 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSingleUser } from "../../../api/useAllUsers";
 import Loading from "../../../Components/Loading/Loading";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { imageURLKey, serverApiUrl } from "../../../../ApiSecret";
+import { useState } from "react";
 
 const OnlyImageUpdate = () => {
     const {
@@ -11,18 +15,85 @@ const OnlyImageUpdate = () => {
         reset,
     } = useForm();
 
+    const [imageError, setImageError] = useState(null);
     const { id } = useParams();
     const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
 
+    const imageURL = `https://api.imgbb.com/1/upload?key=${imageURLKey}`;
+
     const navigate = useNavigate();
 
-    const onSubmit = (data) => {
-        const formData = {
-            image: data.image
-        };
-        console.log(' image info', formData);
-        navigate('/dashboard/profile')
-    }
+    const onSubmit = async (data) => {
+        try {
+            setImageError(null);
+            // Check if a new file is uploaded
+            const imageFile = data.image?.[0];
+
+            // If a new file is uploaded, validate it
+            if (imageFile) {
+                if (imageFile.size > 500 * 1024) {
+                    setImageError("License Image size should not exceed 500KB.");
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append("image", imageFile);
+
+                const imageResponse = await fetch(imageURL, {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const imageData = await imageResponse.json();
+                if (!imageData.success) {
+                    throw new Error("Failed to upload image");
+                }
+
+                data.image = imageData.data.display_url;
+            } else {
+                data.image = user?.user?.image;
+            }
+
+            const userID = user?.user?._id;
+            if (!userID) {
+                Swal.fire({
+                    title: "Error",
+                    text: "User ID is missing. Please try again later.",
+                    icon: "error",
+                });
+                return;
+            }
+
+            const imageUpdate = {
+                image: data.image || user?.user?.image,
+            };
+
+            console.log("Sending data:", JSON.stringify(imageUpdate, null, 2));
+
+            const response = await axios.put(`${serverApiUrl}/api/users/${userID}`, imageUpdate);
+
+            if (response.status === 200) {
+                console.log("Response data:", response?.data);
+                refetch()
+                reset();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: response.data.message || "Please Check Your Information",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                navigate("/dashboard/profile");
+            }
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            Swal.fire({
+                title: "Error",
+                text: error.response?.data?.message || "Something went wrong",
+                icon: "error",
+            });
+        }
+    };
 
     if (isLoading) {
         return <Loading />;
@@ -43,7 +114,7 @@ const OnlyImageUpdate = () => {
                     <div className="w-1/2 space-y-1 mx-auto">
                         <label className="block text-slate-700 font-medium text-center">
                             <span className="font-medium text-sm text-slate-700 tracking-wider">
-                                IMAGE *(সর্বোচ্চ 200kb এর ছবি দিন)
+                                IMAGE *(সর্বোচ্চ 500kb এর ছবি দিন)
                             </span>
                         </label>
                         <input
@@ -61,6 +132,7 @@ const OnlyImageUpdate = () => {
                             accept=".png, .jpg, .jpeg"
                         />
                         {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
+                        {imageError && <p className="text-red-500 text-sm">Please Select Your Image</p>}
 
                         {/* SUBMIT BUTTON */}
                         <div className="md:mt-5 mt-1 w-1/4 mx-auto pt-4">
