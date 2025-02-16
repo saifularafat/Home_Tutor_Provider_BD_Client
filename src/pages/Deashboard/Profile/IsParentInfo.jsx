@@ -1,4 +1,5 @@
-const IsParentInfo = () => {
+const IsParentInfo = ({ user }) => {
+    console.log('parent  info', user);
     return (
         <div className="overflow-x-auto md:overflow-hidden mx-auto max-w-3xl bg-white shadow-lg rounded-lg p-5 space-y-4">
             <div className="hidden md:block">
@@ -10,7 +11,7 @@ const IsParentInfo = () => {
                         </div>
                     </div>
                     <div className="col-span-2 w-full py-2 pl-5">
-                        <h4 className="inline-block">North South University (NSU)</h4>
+                        <h4 className="inline-block">{user?.universityName || 'University Name'}</h4>
                     </div>
                     <div className="col-span-1 py-2">
                         <div className="flex items-center justify-between gap-5">
@@ -19,7 +20,7 @@ const IsParentInfo = () => {
                         </div>
                     </div>
                     <div className="col-span-2 py-2 pl-5">
-                        <h4>Mirpur-10, Dhaka</h4>
+                        <h4>{user?.address || "Mirpur-10, Dhaka"}</h4>
                     </div>
                     <div className="col-span-1 py-2">
                         <div className="flex items-center justify-between gap-5">
@@ -28,7 +29,7 @@ const IsParentInfo = () => {
                         </div>
                     </div>
                     <div className="col-span-2 py-2 pl-5">
-                        <h4>Mirpur-10, Dhaka</h4>
+                        <h4>{user?.livingAddress || "Mirpur-10, Dhaka"}</h4>
                     </div>
                     <div className="col-span-1 py-2">
                         <div className="flex items-center justify-between gap-5">
@@ -37,7 +38,26 @@ const IsParentInfo = () => {
                         </div>
                     </div>
                     <div className="col-span-2 py-2 pl-5">
-                        <h4 className="text-slate-800">Teacher</h4>
+                        <h4>{user?.Professions || "Professions"}</h4>
+                    </div>
+                    <div className="col-span-1 py-2">
+                        <div className="flex items-center justify-between gap-5">
+                            <h2 className="text-lg font-medium text-slate-700">Bio</h2>
+                            <p>:</p>
+                        </div>
+                    </div>
+                    <div className="col-span-2 py-2 pl-5">
+                        <h4 className="text-sm font-normal">{user?.bio || "bio"}</h4>
+                    </div>
+                    <div className="col-span-1 py-2">
+                        <div className="flex items-center justify-between gap-5">
+                            <h2 className="text-lg font-medium text-slate-700">Update Date </h2>
+                            <p>:</p>
+                        </div>
+                    </div>
+                    <div className="col-span-2 py-2 pl-5 text-sm font-normal">
+                        {new Date(user?.createdAt).toLocaleDateString()}{" "}
+                        {new Date(user?.createdAt).toLocaleTimeString()}
                     </div>
                 </div>
             </div>
@@ -68,7 +88,7 @@ const IsParentInfo = () => {
                             <td className=" text-sm py-4 px-6 border-b">Mirpur 15, Dhaka</td>
                             <td className="text-sm py-4 px-6 border-b">Teacher</td>
                         </tr>
-                      
+
                     </tbody>
                 </table>
             </div>

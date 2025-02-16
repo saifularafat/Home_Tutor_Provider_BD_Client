@@ -25,8 +25,8 @@ const Dashboard = () => {
     // user identity
     const isAdmin = false;
     const isTutor = false;
-    const isParent = false;
-    const isCoaching = true;
+    const isParent = true;
+    const isCoaching = false;
 
     const isAdminMenus = Menus.filter(menu => menu.role === 'admin')
     const isTutorMenus = Menus.filter(menu => menu.role === 'isTutor')

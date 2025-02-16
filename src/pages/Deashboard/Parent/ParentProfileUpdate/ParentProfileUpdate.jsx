@@ -2,13 +2,21 @@ import { useForm } from "react-hook-form";
 import BangladeshProfessions from "../../../../Helpers/BangladeshAllProfessions ";
 import BangladeshAllUniversitiesName from "../../../../Helpers/BDAllUniversityName";
 import DistrictAreas from "../../../../Helpers/DistrictAreas";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSingleUser } from "../../../../api/useAllUsers";
 import Loading from "../../../../Components/Loading/Loading";
 import SearchDropDownField from "../../../../Components/SearchDropDownFiled/SearchDropDownField";
-import { TuitionGender } from "../../../../Helpers/TuitionJobCreate";
+import { useState } from "react";
+import { imageURLKey, serverApiUrl } from "../../../../../ApiSecret";
+import Swal from "sweetalert2";
+import axios from "axios";
+import PageTitleShow from "../../../../Components/PageTitleShow/PageTitleShow";
 
 const ParentProfileUpdate = () => {
+    const [imageError, setImageError] = useState(null);
+    const navigate = useNavigate();
+    const { id } = useParams();
+
     const { register,
         formState: { errors },
         handleSubmit,
@@ -17,32 +25,98 @@ const ParentProfileUpdate = () => {
         watch,
     } = useForm();
 
-    const { id } = useParams();
-    // console.log("useSingleUser PARENT IDDDDDD=>", id);
     const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
-    // console.log("useSingleUser PARENT", user?.user);
+    console.log("useSingleUser PARENT", user?.user);
 
 
     const Professions = watch("Professions");
     const universityName = watch("universityName");
     const PreferableArea = watch("PreferableArea");
 
-    const onSubmit = (data) => {
-        const formData = {
-            name: data.name,
-            phone: data.phone,
-            address: data.address,
-            livingAddress: data.livingAddress,
-            gender: data.gender,
-            nidBirth: data.nidBirth,
-            professions: Professions,
-            universityName: universityName,
-            PreferableArea: PreferableArea,
-            ParentBio: data.ParentBio,
-            progressBar: 100,
-        };
-        console.log(' parent info', formData);
-    }
+    const imageURL = `https://api.imgbb.com/1/upload?key=${imageURLKey}`;
+
+    const onSubmit = async (data) => {
+        try {
+            setImageError(null);
+
+            // Check if a new file is uploaded
+            const imageFile = data.nidBirth?.[0];
+
+            // If a new file is uploaded, validate it
+            if (imageFile) {
+                if (imageFile.size > 500 * 1024) {
+                    setImageError("License Image size should not exceed 500KB.");
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append("image", imageFile);
+
+                const imageResponse = await fetch(imageURL, {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const imageData = await imageResponse.json();
+                if (!imageData.success) {
+                    throw new Error("Failed to upload image");
+                }
+
+                data.nidBirth = imageData.data.display_url;
+            } else {
+                // If no new image, keep the existing one
+                data.nidBirth = user?.user?.nidBirth;
+            }
+
+            const userID = user?.user?._id;
+            if (!userID) {
+                Swal.fire({
+                    title: "Error",
+                    text: "User ID is missing. Please try again later.",
+                    icon: "error",
+                });
+                return;
+            }
+
+            const parentProfileUpdate = {
+                name: data.name || user?.user?.name,
+                phone: data.phone || user?.user?.phone,
+                address: data.address || user?.user?.address,
+                gender: data.gender || user?.user?.gender,
+                livingAddress: data.livingAddress || user?.user?.livingAddress,
+                Professions: data.Professions || user?.user?.Professions,
+                nidBirth: data.nidBirth,
+                universityName: data.universityName || user?.user?.universityName,
+                PreferableArea: data.PreferableArea || user?.user?.PreferableArea,
+                bio: data.bio || user?.user?.bio,
+                progressBar: 100,
+            };
+
+            console.log("Sending data:", JSON.stringify(parentProfileUpdate, null, 2));
+
+            const response = await axios.put(`${serverApiUrl}/api/users/${userID}`, parentProfileUpdate);
+
+            if (response.status === 200) {
+                console.log("Response data:", response?.data);
+                reset();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: response.data.message || "Please Check Your Information",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                navigate("/dashboard/profile");
+            }
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            Swal.fire({
+                title: "Error",
+                text: error.response?.data?.message || "Something went wrong",
+                icon: "error",
+            });
+        }
+    };
 
     if (isLoading) {
         return <Loading />;
@@ -55,6 +129,7 @@ const ParentProfileUpdate = () => {
     }
     return (
         <div className="px-2">
+            <PageTitleShow currentPage="Parent Profile Update |" />
             <form onSubmit={handleSubmit(onSubmit)} className="py-5">
                 <div className=" bg-white px-4 rounded-md py-8 space-y-2">
                     <h2 className="text-xl font-semibold text-slate-600">Update Parent Profile</h2>
@@ -132,7 +207,7 @@ const ParentProfileUpdate = () => {
                     <div className="grid md:grid-cols-3 grid-cols-1 items-center justify-center gap-3">
                         <div className="col-span-1 space-y-2">
                             <SearchDropDownField
-                                label="Professions "
+                                label="Professions"
                                 options={BangladeshProfessions}
                                 selectedValue={Professions}
                                 setValue={(value) => setValue("Professions", value)}
@@ -148,13 +223,46 @@ const ParentProfileUpdate = () => {
                                 defaultValue={user?.user?.gender || "male"}
                                 className="bg-transparent capitalize input border border-sky-300 rounded-lg outline-sky-600 px-4 py-3 w-full placeholder:text-sm placeholder:tracking-wider text-sm"
                             >
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
                             </select>
                             {errors.gender && <span className="mt-1 text-red-500">{errors.gender.message}</span>}
                         </div>
+
+
+                        {/* License Picture (Only required if missing) */}
                         <div className="col-span-1 space-y-1">
+                            <label className="block text-slate-700 font-medium">
+                                <span className="font-medium text-sm text-slate-700 tracking-wider">
+                                    Nid/Birth Photo *(Max 500KB, PNG/JPG/JPEG)
+                                </span>
+                            </label>
+                            <input
+                                type="file"
+                                className="file-input file-input-bordered file-input-primary w-full"
+                                {...register("nidBirth", {
+                                    validate: user?.user?.nidBirth
+                                        ? undefined // Skip validation if image exists
+                                        : {
+                                            required: (value) =>
+                                                value?.length > 0 || "Nid Birth Photo is required",
+                                            fileType: (value) =>
+                                                value?.length === 0 ||
+                                                ["image/png", "image/jpg", "image/jpeg"].includes(value[0]?.type) ||
+                                                "Only PNG, JPG, and JPEG files are allowed.",
+                                            fileSize: (value) =>
+                                                value?.length === 0 || value[0]?.size <= 500 * 1024 ||
+                                                "File size should be ≤ 500KB.",
+                                        },
+                                })}
+                                accept=".png, .jpg, .jpeg"
+                            />
+                            {errors.nidBirth && <p className="text-red-500 text-sm">{errors.nidBirth.message}</p>}
+                            {imageError && <p className="text-red-500 text-sm">Please Select Your nid/birth Image</p>}
+                        </div>
+
+                        {/* <div className="col-span-1 space-y-1">
                             <label className="block text-slate-700 font-medium">
                                 <span className="font-medium text-sm text-slate-700 tracking-wider">Nid/Birth Photo *(সর্বোচ্চ 200kb এর ছবি দিন)</span>
                             </label>
@@ -173,7 +281,8 @@ const ParentProfileUpdate = () => {
                                 accept=".png, .jpg, .jpeg"
                             />
                             {errors.nidBirth && <p className="text-red-500 text-sm">{errors.nidBirth.message}</p>}
-                        </div>
+                        </div> */}
+
                     </div>
                 </div>
 

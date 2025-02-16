@@ -6,6 +6,7 @@ import axios from "axios";
 import { imageURLKey, serverApiUrl } from "../../../../../ApiSecret";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import PageTitleShow from "../../../../Components/PageTitleShow/PageTitleShow";
 
 const CoachingProfileUpdate = () => {
     const [imageError, setImageError] = useState(null);
@@ -114,6 +115,7 @@ const CoachingProfileUpdate = () => {
     }
     return (
         <div className="p-6 my-10 rounded-md bg-slate-50">
+            <PageTitleShow currentPage="Coaching Profile Update |" />
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <h2 className="text-2xl font-bold text-slate-600 text-center tracking-wider">Update Your Profile</h2>
                 <div className='grid md:grid-cols-2 gap-5'>
@@ -241,6 +243,7 @@ const CoachingProfileUpdate = () => {
                             accept=".png, .jpg, .jpeg"
                         />
                         {errors.licensePhoto && <p className="text-red-500 text-sm">{errors.licensePhoto.message}</p>}
+                        {imageError && <p className="text-red-500 text-sm">Please Select Your Image</p>}
                     </div>
                 </div>
                 {/* BIO */}

@@ -4,13 +4,16 @@ import IsParentInfo from "./IsParentInfo";
 import { useAllUsers } from "../../../api/useAllUsers";
 import Loading from "../../../Components/Loading/Loading";
 import IsCoachingInfo from "./IsCoachingInfo";
+import PageTitleShow from "../../../Components/PageTitleShow/PageTitleShow";
 
 const Profile = () => {
     // const isParent = true;
     const [users, refetch, isLoading] = useAllUsers();
 
     const { users: allUsers = [] } = users || {};
-    const user = allUsers.find((user) => user?.isCoaching === true) || {};
+    // const user = allUsers.find((user) => user?.isCoaching === true) || {};
+    const user = allUsers.find((user) => user?.isParent === true) || {};
+    // const user = allUsers.find((user) => user?.isTutor === true) || {};
 
     console.log("user ====>>>>", user);
 
@@ -19,6 +22,7 @@ const Profile = () => {
     }
     return (
         <div className="md:py-12 py-5">
+            <PageTitleShow currentPage="Profile |" />
             <div className="md:overflow-hidden flex flex-col items-center justify-center md:flex-row">
                 <div className="group relative sm:w-[320px] space-y-0">
                     <img
@@ -39,7 +43,7 @@ const Profile = () => {
 
                     <div className="md:flex items-center gap-5">
                         <p className="text-sm text-gray-500 font-medium">Email</p>
-                        <p className="text-gray-500 text-sm font-medium ">{user?.userId || 'hometutorprovider@gmail.com'}
+                        <p className="text-gray-500 text-sm font-medium ">{user?.email || 'hometutorprovider@gmail.com'}
                         </p>
                     </div>
                     <div className="flex items-center gap-5">
@@ -79,12 +83,12 @@ const Profile = () => {
                 {
                     user?.isTutor == true ?
                         <div className="overflow-x-auto bg-slate-50 py-8 px-5 rounded-md">
-                            <IsTutorInfo />
+                            <IsTutorInfo user={user} />
                         </div>
                         :
                         user?.isParent == true ?
                             <div className="overflow-x-auto">
-                                <IsParentInfo />
+                                <IsParentInfo user={user} />
                             </div>
                             :
                             user?.isCoaching == true ?

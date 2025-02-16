@@ -48,13 +48,14 @@ const NavTest = () => {
     const allUsers = users?.users || [];
 
     // console.log("object allUsers allUsers", allUsers);
-    const singleUser = allUsers.length > 0 ? allUsers.find(user => user?.isCoaching === true) : null;
+    // const singleUser = allUsers.length > 0 ? allUsers.find(user => user?.isCoaching === true) : null;
+    const singleUser = allUsers.length > 0 ? allUsers.find(user => user?.isParent === true) : null;
     console.log("object singleUser singleUser", singleUser);
 
     const isAdmin = false;
     const isTutor = false;
-    const isParent = false;
-    const isCoaching = true;
+    const isParent = true;
+    const isCoaching = false;
     const user = true;
 
     const notices = [1, 2, 3, 4,];
@@ -292,8 +293,8 @@ const NavTest = () => {
                             // user
                             // isTutor
                             // isAdmin
-                            // isParent
-                            isCoaching
+                            isParent
+                                // isCoaching
                                 ? (
                                     <div className='ml-5 dropdown dropdown-end'>
                                         <div
@@ -320,7 +321,8 @@ const NavTest = () => {
                                                     // user
                                                     // isTutor
                                                     // isAdmin
-                                                    isCoaching
+                                                    isParent
+                                                    // isCoaching
                                                     && (
                                                         <li>
                                                             {isAdmin ? (
