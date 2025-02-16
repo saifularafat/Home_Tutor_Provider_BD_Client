@@ -1,13 +1,19 @@
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSingleUser } from "../../../../api/useAllUsers";
 import Loading from "../../../../Components/Loading/Loading";
+import axios from "axios";
+import { imageURLKey, serverApiUrl } from "../../../../../ApiSecret";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const CoachingProfileUpdate = () => {
+    const [imageError, setImageError] = useState(null);
+    const navigate = useNavigate();
 
     const { id } = useParams();
     const { user = { user: {} }, refetch, isLoading, isError } = useSingleUser(id);
-    console.log("useSingleUser", user?.user);
+    // console.log("useSingleUser", user?.user);
 
     const {
         register,
@@ -15,13 +21,76 @@ const CoachingProfileUpdate = () => {
         handleSubmit,
         reset } = useForm();
 
-    const onSubmit = (data) => {
-        const coachingProfileUpdate = {
-            ...data,
-            progressBar: 100,
+    const imageURL = `https://api.imgbb.com/1/upload?key=${imageURLKey}`;
+
+    const onSubmit = async (data) => {
+        try {
+            const imageFile = data.image[0];
+            setImageError(null);
+
+            if (imageFile.size > 1 * 1024 * 1024) {
+                setImageError("License Image size should not exceed 1MB.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("licensePhoto", imageFile);
+
+            const imageResponse = await fetch(imageURL, {
+                method: "POST",
+                body: formData,
+            });
+            const imageData = await imageResponse.json();
+
+            if (!imageData.success) {
+                throw new Error("Failed to upload image");
+            }
+
+            const imgURL = imageData.data.display_url;
+
+            const coachingProfileUpdate = {
+                name: data.name,
+                phone: data.phone,
+                address: data.address,
+                gender: data.gender,
+                licensePhoto: imgURL,
+                progressBar: 100,
+            };
+
+            console.log("UPdate coaching center data:", coachingProfileUpdate);
+
+            const response = await axios.put(`${serverApiUrl}/api/users/${user?.user?._id}`, coachingProfileUpdate);
+
+            if (response.status === 200) {
+                console.log("Response data:", response?.data);
+                reset();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: response.data.message || "Please Check Your Information",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
+        } catch (error) {
+            if (error.response?.status === 422) {
+                const errorMessages = error.response.data?.errors || [];
+                Swal.fire({
+                    title: "Validation Error",
+                    icon: "error",
+                    html: errorMessages
+                        .map((err) => `<p>${err.field}: ${err.message}</p>`)
+                        .join(""),
+                });
+            } else {
+                Swal.fire({
+                    title: "Error",
+                    text: error.message || "Something went wrong",
+                    icon: "error",
+                });
+            }
         }
-        console.log("coaching update profile", coachingProfileUpdate);
-    }
+    };
 
     if (isLoading) {
         return <Loading />;
